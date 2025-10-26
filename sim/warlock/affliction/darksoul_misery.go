@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/wowsims/mop/sim/core"
+	"github.com/wowsims/mop/sim/core/stats"
 	"github.com/wowsims/mop/sim/warlock"
 )
 
@@ -43,5 +44,10 @@ func (affliction *AfflictionWarlock) registerDarkSoulMisery() {
 		Spell:    spell,
 		Priority: core.CooldownPriorityDefault,
 		Type:     core.CooldownTypeDPS,
+		BuffAura: &core.StatBuffAura{
+			Aura:            buff,
+			BuffedStatTypes: []stats.Stat{stats.HasteRating},
+			IsSwapped:       false,
+		},
 	})
 }

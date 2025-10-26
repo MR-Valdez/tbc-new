@@ -340,6 +340,11 @@ func applyRaceEffects(agent Agent) {
 		character.AddMajorCooldown(MajorCooldown{
 			Spell: berserkingSpell,
 			Type:  CooldownTypeDPS,
+			BuffAura: &StatBuffAura{
+				Aura:            berserkingAura,
+				BuffedStatTypes: []stats.Stat{stats.HasteRating},
+				IsSwapped:       false,
+			},
 		})
 	case proto.Race_RaceUndead:
 		character.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexShadow] *= 0.99
