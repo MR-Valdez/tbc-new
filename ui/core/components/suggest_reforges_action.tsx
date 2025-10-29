@@ -1818,8 +1818,8 @@ export class ReforgeOptimizer {
 			}
 		}
 
-		if (this.includeGems && this.previousGear) {
-			updatedGear = ReforgeOptimizer.minimizeRegems(updatedGear, this.previousGear, this.player.isBlacksmithing());
+		if (this.includeGems) {
+			updatedGear = this.minimizeRegems(updatedGear);
 		}
 
 		await this.updateGear(updatedGear);
@@ -1915,7 +1915,14 @@ export class ReforgeOptimizer {
 		return [anyCapsExceeded, updatedConstraints, updatedWeights];
 	}
 
-	static minimizeRegems(newGear: Gear, originalGear: Gear, isBlacksmithing: boolean): Gear {
+	minimizeRegems(newGear: Gear): Gear {
+		const originalGear = this.previousGear;
+
+		if (!originalGear) {
+			return newGear;
+		}
+
+		const isBlacksmithing = this.player.isBlacksmithing();
 		const finalizedSocketKeys: string[] = [];
 
 		for (const slot of newGear.getItemSlots()) {
@@ -1947,6 +1954,10 @@ export class ReforgeOptimizer {
 				}
 
 				for (const [matchedSlot, matchedSocketIdx] of newGear.findGem(originalGems[socketIdx]!, isBlacksmithing)) {
+					if (this.frozenItemSlots.get(matchedSlot)) {
+						continue;
+					}
+
 					const matchedSocketKey = `${matchedSlot}_${matchedSocketIdx}`;
 
 					if (finalizedSocketKeys.includes(matchedSocketKey)) {

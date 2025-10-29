@@ -553,6 +553,14 @@
 			"blessings": {
 				"title": "Blessings",
 				"tooltip": "Specify Paladin Blessings for each role, in order of priority. Blessings in the 1st column will be used if there is at least 1 Paladin in the raid, 2nd column if at least 2, etc."
+			},
+			"shaman_disable_immolate" : {
+				"label": "Disable Immolate during Unleash WF",
+				"tooltip": "When talented into Primal Elementalist and with Immolate autocast on, this will disallow casting Immolate when the Unleash Wind buff is active on the player."
+			},
+			"shaman_disable_immolate_duration" : {
+				"label": "Extend disable by",
+				"tooltip": "Time in seconds for which Immolate won't be cast after the end of the Unleash Wind buff on the player. Set 0 for disabling casting Immolate only while the buff is up."
 			}
 		},
 		"consumables": {
@@ -2141,7 +2149,7 @@
 			"unspent_talent_points": "Missing required talent selections in row {{rowNumbers}}.",
 			"armor_specialization": "Equip {{armorType}} gear in each slot for the Armor Specialization (5% primary stat) effect.",
 			"dual_wield_2h_without_titans_grip": "Dual wielding two-handed weapon(s) without Titan's Grip spec.",
-			"shaman_fele_autocast": "Your Fire Elemental spell autocast setup is not optimal with the use of the Primal Elementalist talent. If you know what you're doing, please ignore this."
+			"shaman_fele_autocast": "Your Fire Elemental spell autocast setup is not optimal with the use of the Primal Elementalist talent (everything ON but Empower). If you know what you're doing, please ignore this."
 		},
 		"buttons": {
 			"simulate": "Simulate",

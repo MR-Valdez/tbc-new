@@ -553,6 +553,14 @@
 			"blessings": {
 				"title": "Bénédictions",
 				"tooltip": "Spécifiez les Bénédictions de Paladin pour chaque rôle, par ordre de priorité. Les Bénédictions dans la 1ère colonne seront utilisées s'il y a au moins 1 Paladin dans le raid, 2ème colonne s'il y en a au moins 2, etc."
+			},
+			"shaman_disable_immolate" : {
+				"label": "Désactiver Immolation pendant Déchaînement du vent",
+				"tooltip": "Lorsque que le talent Elémentaliste primordial est selectionné et que le lancement automatiquue de Immolation est activé, cette option permet d'empêcher le lancement d'Immolation lorsque le buff est actif sur le joueur."
+			},
+			"shaman_disable_immolate_duration" : {
+				"label": "Etendre la désactivation de",
+				"tooltip": "Durée en secondes pour laquel Immolation ne sera toujours pas lancé àpres la fin du buff Déchaînement du vent sur le joueur. Mettre 0 pour désactiver Immolation seulement pendant que le buff est actif."
 			}
 		},
 		"consumables": {
@@ -2141,7 +2149,7 @@
 			"unspent_talent_points": "Points de talent manquants dans les rangées {{rowNumbers}}.",
 			"armor_specialization": "Équipez de l'équipement {{armorType}} dans chaque emplacement pour l'effet de spécialisation d'armure (5% de statistique primaire).",
 			"dual_wield_2h_without_titans_grip": "Manier deux armes à deux mains sans la spécialisation Poigne du titan.",
-			"shaman_fele_autocast": "La configuration des sorts de l'Élémentaire de feu n'est pas optimale avec l'utilisation du talent Élémentaliste primordial. Ignorez ce message si vous savez ce que vous faites."
+			"shaman_fele_autocast": "La configuration des sorts de l'Élémentaire de feu n'est pas optimale avec l'utilisation du talent Élémentaliste primordial (Tous activés sauf Ardeur). Ignorez ce message si vous savez ce que vous faites."
 		},
 		"buttons": {
 			"simulate": "Simuler",

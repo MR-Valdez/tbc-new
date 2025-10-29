@@ -76,6 +76,8 @@ export const DefaultOptions = EnhancementShamanOptions.create({
 			autocastFirenova: true,
 			autocastImmolate: true,
 			autocastEmpower: false,
+			noImmolateWfunleash: false,
+			noImmolateDuration: 0,
 		}),
 	},
 	imbueOh: ShamanImbue.FlametongueWeapon,

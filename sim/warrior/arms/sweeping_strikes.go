@@ -53,7 +53,7 @@ func (war *ArmsWarrior) registerSweepingStrikes() {
 		ProcMask:        core.ProcMaskMelee,
 		Outcome:         core.OutcomeLanded,
 		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if war.Env.ActiveTargetCount() < 2 || result.PreOutcomeDamage <= 0 ||
+			if war.Env.ActiveTargetCount() < 2 || result.PostArmorDamage <= 0 ||
 				spell.Matches(warrior.SpellMaskSweepingStrikesHit|
 					warrior.SpellMaskSweepingStrikesNormalizedHit|
 					warrior.SpellMaskSweepingSlam|

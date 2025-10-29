@@ -1914,19 +1914,19 @@ dps_results: {
 dps_results: {
  key: "TestProtection-AllItems-PlateofWingedTriumph"
  value: {
-  dps: 114013.67386
-  tps: 748215.72573
-  dtps: 12949.4384
-  hps: 20692.98845
+  dps: 113954.60625
+  tps: 747903.69969
+  dtps: 12949.60661
+  hps: 21440.21838
  }
 }
 dps_results: {
  key: "TestProtection-AllItems-PlateoftheLightningEmperor"
  value: {
-  dps: 113376.83526
-  tps: 743076.97811
-  dtps: 13068.74078
-  hps: 18938.3972
+  dps: 113256.57452
+  tps: 742419.52363
+  dtps: 13435.81691
+  hps: 18903.85516
  }
 }
 dps_results: {
