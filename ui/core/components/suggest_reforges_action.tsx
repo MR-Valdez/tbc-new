@@ -1954,7 +1954,7 @@ export class ReforgeOptimizer {
 				}
 
 				for (const [matchedSlot, matchedSocketIdx] of newGear.findGem(originalGems[socketIdx]!, isBlacksmithing)) {
-					if (this.frozenItemSlots.get(matchedSlot)) {
+					if (this.frozenItemSlots.has(matchedSlot)) {
 						continue;
 					}
 
