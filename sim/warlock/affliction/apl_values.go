@@ -101,12 +101,11 @@ type APLValueCurrentSnapshot struct {
 }
 
 func (warlock *AfflictionWarlock) newDotCurrentSnapshot(rot *core.APLRotation, config *proto.APLValueCurrentSnapshot, _ *proto.UUID) *APLValueCurrentSnapshot {
-	spell := warlock.GetSpell(core.ActionID{SpellID: config.SpellId.GetSpellId()})
+	spell := rot.GetAPLSpell(config.SpellId)
 	if spell == nil {
 		return nil
 	}
 
-	//targetRef := core.NewUnitReference(config.TargetUnit, &warlock.Unit)
 	targetRef := rot.GetTargetUnit(config.TargetUnit)
 
 	baseValueDummyAura := core.MakePermanent(warlock.GetOrRegisterAura(core.Aura{
