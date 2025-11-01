@@ -2657,8 +2657,8 @@ dps_results: {
 dps_results: {
  key: "TestDemonology-AllItems-Xing-Ho,BreathofYu'lon-102246"
  value: {
-  dps: 130941.66451
-  tps: 91878.69071
+  dps: 130914.34362
+  tps: 91851.36982
   hps: 1396.58752
  }
 }
@@ -2689,8 +2689,8 @@ dps_results: {
 dps_results: {
  key: "TestDemonology-Settings-Goblin-preraid-Demonology Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 321262.89417
-  tps: 221315.50049
+  dps: 321266.96152
+  tps: 221223.62781
   hps: 1279.10275
  }
 }
@@ -2737,8 +2737,8 @@ dps_results: {
 dps_results: {
  key: "TestDemonology-Settings-Human-preraid-Demonology Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 311351.95252
-  tps: 208203.1102
+  dps: 311356.01928
+  tps: 208111.24558
   hps: 1270.5531
  }
 }
@@ -2785,8 +2785,8 @@ dps_results: {
 dps_results: {
  key: "TestDemonology-Settings-Orc-preraid-Demonology Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 321999.3803
-  tps: 212262.59961
+  dps: 322003.84156
+  tps: 212165.24573
   hps: 1270.60617
  }
 }
@@ -2833,8 +2833,8 @@ dps_results: {
 dps_results: {
  key: "TestDemonology-Settings-Troll-preraid-Demonology Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 323822.38213
-  tps: 218788.15877
+  dps: 323829.60457
+  tps: 218680.99591
   hps: 1288.02413
  }
 }
