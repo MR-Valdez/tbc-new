@@ -52,11 +52,11 @@ type Mage struct {
 
 	ArcanePowerDamageMod *core.SpellMod
 
-	T15_4PC_ArcaneChargesAura   *core.Aura
 	T15_4PC_FrostboltProcChance float64
 	Icicles                     []float64
 
 	// Item sets
+	T15_4PC *core.Aura
 	T16_4pc *core.Aura
 }
 

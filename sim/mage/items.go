@@ -98,7 +98,7 @@ var ItemSetRegaliaOfTheChromaticHydra = core.NewItemSet(core.ItemSet{
 		4: func(agent core.Agent, setBonusAura *core.Aura) {
 			mage := agent.(MageAgent).GetMage()
 
-			mage.T15_4PC_ArcaneChargesAura = setBonusAura
+			mage.T15_4PC = setBonusAura
 
 			setBonusAura.AttachSpellMod(core.SpellModConfig{
 				Kind:       core.SpellMod_BonusCrit_Percent,
