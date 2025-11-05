@@ -933,7 +933,10 @@ export class ReforgeOptimizer {
 								return this.toVisualUnitStatPercentage(this.statCaps.getUnitStat(unitStat), unitStat);
 							},
 							setValue: (_eventID, _player, newValue) => {
-								this.setStatCaps(TypedEvent.nextEventID(), this.statCaps.withUnitStat(unitStat, newValue));
+								this.setStatCaps(
+									TypedEvent.nextEventID(),
+									this.statCaps.withUnitStat(unitStat, this.toDefaultUnitStatValue(newValue, unitStat)),
+								);
 							},
 						};
 
