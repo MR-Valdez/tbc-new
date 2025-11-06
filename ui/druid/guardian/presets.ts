@@ -38,6 +38,7 @@ import DefaultApl from './apls/default.apl.json';
 import OffensiveHotwApl from './apls/offensiveHotw.apl.json';
 import EmpressApl from './apls/empress.apl.json';
 import ShaApl from './apls/sha.apl.json';
+import HorridonApl from './apls/horridon.apl.json';
 import DefaultBuild from './builds/sha_default.build.json';
 import GarajalBuild from './builds/garajal_encounter_only.build.json';
 import EmpressBuild from './builds/empress_encounter_only.build.json';
@@ -46,6 +47,7 @@ export const ROTATION_DEFAULT = PresetUtils.makePresetAPLRotation("Gara'jal Defa
 export const ROTATION_HOTW = PresetUtils.makePresetAPLRotation("Gara'jal Offensive HotW", OffensiveHotwApl);
 export const ROTATION_EMPRESS = PresetUtils.makePresetAPLRotation("Empress Adds", EmpressApl);
 export const ROTATION_SHA = PresetUtils.makePresetAPLRotation("Sha Hybrid HotW", ShaApl);
+export const ROTATION_HORRIDON = PresetUtils.makePresetAPLRotation("Horridon Tank 2", HorridonApl);
 
 //export const ROTATION_PRESET_SIMPLE = PresetUtils.makePresetSimpleRotation('Simple Default', Spec.SpecGuardianDruid, DefaultSimpleRotation);
 
