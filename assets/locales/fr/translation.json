@@ -596,6 +596,14 @@
 					"label": "Fréquence d'Etreinte spirituelle",
 					"tooltip": "Temps moyen (en secondes) entre les coups d'Etreinte spirituelle, suivant une distribution exponentielle"
 				},
+				"jalak_death_time": {
+					"label": "Temps de mort de Jalak",
+					"tooltip": "Temps de simulation (en secondes) auquel désactiver War-God Jalak et déclencher le buff Rampage sur Horridon. Si défini plus longtemps que la durée de combat simulée, alors Jalak sera tanké tout le temps et Rampage ne sera jamais déclenché."
+				},
+				"taunt_swap_for_triple_puncture": {
+					"label": "Échange de provocation pour Triple perforation",
+					"tooltip": "Si coché, échange de provocation à la mort de Jalak et à chaque autre application de Triple perforation par la suite afin de limiter l'accumulation de charges sur un seul tank."
+				},
 				"movement_interval": {
 					"label": "Intervalle de mouvement",
 					"tooltip": "À quelle fréquence le joueur se déplacera en secondes"

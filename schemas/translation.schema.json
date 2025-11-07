@@ -2465,6 +2465,38 @@
                     "tooltip"
                   ]
                 },
+                "jalak_death_time": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "tooltip": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "tooltip"
+                  ]
+                },
+                "taunt_swap_for_triple_puncture": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "tooltip": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "tooltip"
+                  ]
+                },
                 "movement_interval": {
                   "type": "object",
                   "properties": {
@@ -2519,6 +2551,8 @@
                 "label",
                 "frenzy_time",
                 "spiritual_grasp_frequency",
+                "jalak_death_time",
+                "taunt_swap_for_triple_puncture",
                 "movement_interval",
                 "reaction_time",
                 "yards"
