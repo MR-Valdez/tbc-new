@@ -23,6 +23,15 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBeastMasteryHunter, {
 	warnings: [],
 	// All stats for which EP should be calculated.
 	epStats: [
+		Stat.StatAgility,
+		Stat.StatRangedAttackPower,
+		Stat.StatHitRating,
+		Stat.StatCritRating,
+		Stat.StatHasteRating,
+		Stat.StatMasteryRating,
+		Stat.StatExpertiseRating,
+	],
+	gemStats: [
 		Stat.StatStamina,
 		Stat.StatAgility,
 		Stat.StatRangedAttackPower,
@@ -46,9 +55,9 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBeastMasteryHunter, {
 	itemSwapSlots: [ItemSlot.ItemSlotMainHand, ItemSlot.ItemSlotTrinket1, ItemSlot.ItemSlotTrinket2],
 	defaults: {
 		// Default equipped gear.
-		gear: Presets.P1_PRESET_GEAR.gear,
+		gear: Presets.P2_PRESET_GEAR.gear,
 		// Default EP weights for sorting gear in the gear picker.
-		epWeights: Presets.P1_EP_PRESET.epWeights,
+		epWeights: Presets.P2_EP_PRESET.epWeights,
 		// Default stat caps for the Reforge Optimizer
 		statCaps: (() => {
 			return new Stats()
@@ -114,14 +123,14 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBeastMasteryHunter, {
 	},
 
 	presets: {
-		epWeights: [Presets.P1_EP_PRESET],
+		epWeights: [Presets.P2_EP_PRESET],
 		// Preset talents that the user can quickly select.
 		talents: [Presets.DefaultTalents],
 		// Preset rotations that the user can quickly select.
 		rotations: [Presets.ROTATION_PRESET_BM, Presets.ROTATION_PRESET_AOE],
 		// Preset gear configurations that the user can quickly select.
-		builds: [Presets.PRERAID_PRESET, Presets.PRERAID_PRESET_CELESTIAL, Presets.P1_PRESET],
-		gear: [Presets.PRERAID_PRESET_GEAR, Presets.PRERAID_CELESTIAL_PRESET_GEAR, Presets.P1_PRESET_GEAR],
+		builds: [Presets.PRERAID_PRESET, Presets.PRERAID_PRESET_CELESTIAL, Presets.P2_PRESET],
+		gear: [Presets.PRERAID_PRESET_GEAR, Presets.PRERAID_CELESTIAL_PRESET_GEAR, Presets.P2_PRESET_GEAR],
 	},
 
 	autoRotation: (_: Player<Spec.SpecBeastMasteryHunter>): APLRotation => {
@@ -144,9 +153,11 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBeastMasteryHunter, {
 				[Faction.Unknown]: {},
 				[Faction.Alliance]: {
 					1: Presets.PRERAID_CELESTIAL_PRESET_GEAR.gear,
+					2: Presets.P2_PRESET_GEAR.gear,
 				},
 				[Faction.Horde]: {
 					1: Presets.PRERAID_CELESTIAL_PRESET_GEAR.gear,
+					2: Presets.P2_PRESET_GEAR.gear,
 				},
 			},
 			otherDefaults: Presets.OtherDefaults,
@@ -161,15 +172,14 @@ export class BeastMasteryHunterSimUI extends IndividualSimUI<Spec.SpecBeastMaste
 		this.reforger = new ReforgeOptimizer(this, {
 			updateSoftCaps: softCaps => {
 				// Implement stepped EP reduction for haste breakpoints
-				this.individualConfig.defaults.softCapBreakpoints!.forEach(softCap => {
-					const softCapToModify = softCaps.find(sc => sc.unitStat.equals(softCap.unitStat));
-					if (softCap.unitStat.equalsStat(Stat.StatHasteRating) && softCapToModify) {
-						// Set stepped EP values: 0.39 -> 0.36 -> 0.33 -> 0.30 -> 0.27
-						const baseEP = 0.35;
-						const reduction = 0.03;
-						softCapToModify.postCapEPs = softCap.breakpoints.map((_, index) => Math.max(0, baseEP - reduction * (index + 1)));
-					}
-				});
+				const hasteCap = softCaps.find(v => v.unitStat.equalsPseudoStat(PseudoStat.PseudoStatRangedHastePercent));
+				if (hasteCap) {
+					const hasteWeights = player.getEpWeights().getStat(Stat.StatHasteRating);
+					// Set stepped EP values: 0.27 -> 0.24 -> 0.21 -> 0.18 -> 0.15
+					const baseEP = hasteWeights * Mechanics.HASTE_RATING_PER_HASTE_PERCENT;
+					const reduction = 0.03 * Mechanics.HASTE_RATING_PER_HASTE_PERCENT;
+					hasteCap.postCapEPs = hasteCap.breakpoints.map((_, index) => Math.max(0, baseEP - reduction * (index + 1)));
+				}
 				return softCaps;
 			},
 		});

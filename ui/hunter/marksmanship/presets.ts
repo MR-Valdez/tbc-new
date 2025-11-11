@@ -4,7 +4,7 @@ import { ConsumesSpec, Glyphs, Profession, PseudoStat, Stat } from '../../core/p
 import { HunterMajorGlyph as MajorGlyph, HunterOptions_PetType as PetType, SurvivalHunter_Options as HunterOptions } from '../../core/proto/hunter';
 import { SavedTalents } from '../../core/proto/ui';
 import { Stats } from '../../core/proto_utils/stats';
-import P1Gear from '../presets/p1.gear.json';
+import P2Gear from '../presets/p2.gear.json';
 import PreRaidGear from '../presets/preraid.gear.json';
 import PreRaidGearCelestial from '../presets/preraid_celestial.gear.json';
 import AoeApl from './apls/aoe.apl.json';
@@ -16,7 +16,7 @@ import Apl from './apls/mm.apl.json';
 
 export const PRERAID_PRESET_GEAR = PresetUtils.makePresetGear('Pre-raid', PreRaidGear);
 export const PRERAID_CELESTIAL_PRESET_GEAR = PresetUtils.makePresetGear('Pre-raid (Celestial)', PreRaidGearCelestial);
-export const P1_PRESET_GEAR = PresetUtils.makePresetGear('P1', P1Gear);
+export const P2_PRESET_GEAR = PresetUtils.makePresetGear('P2', P2Gear);
 export const ROTATION_PRESET_MM = PresetUtils.makePresetAPLRotation('Single Target', Apl);
 export const ROTATION_PRESET_AOE = PresetUtils.makePresetAPLRotation('AOE', AoeApl);
 export const DefaultTalents = {
@@ -31,8 +31,8 @@ export const DefaultTalents = {
 	}),
 };
 // Preset options for EP weights
-export const P1_EP_PRESET = PresetUtils.makePresetEpWeights(
-	'P1',
+export const P2_EP_PRESET = PresetUtils.makePresetEpWeights(
+	'P2',
 	Stats.fromMap(
 		{
 			[Stat.StatStamina]: 0.0,
@@ -51,19 +51,19 @@ export const P1_EP_PRESET = PresetUtils.makePresetEpWeights(
 
 export const PRERAID_PRESET = PresetUtils.makePresetBuild('Pre-raid', {
 	gear: PRERAID_PRESET_GEAR,
-	epWeights: P1_EP_PRESET,
+	epWeights: P2_EP_PRESET,
 	talents: DefaultTalents,
 	rotationType: APLRotationType.TypeAuto,
 });
 export const PRERAID_PRESET_CELESTIAL = PresetUtils.makePresetBuild('Pre-raid (Celestial)', {
 	gear: PRERAID_CELESTIAL_PRESET_GEAR,
-	epWeights: P1_EP_PRESET,
+	epWeights: P2_EP_PRESET,
 	talents: DefaultTalents,
 	rotationType: APLRotationType.TypeAuto,
 });
-export const P1_PRESET = PresetUtils.makePresetBuild('P1', {
-	gear: P1_PRESET_GEAR,
-	epWeights: P1_EP_PRESET as PresetUtils.PresetEpWeights,
+export const P2_PRESET = PresetUtils.makePresetBuild('P2', {
+	gear: P2_PRESET_GEAR,
+	epWeights: P2_EP_PRESET as PresetUtils.PresetEpWeights,
 	talents: DefaultTalents,
 	rotationType: APLRotationType.TypeAuto,
 });
@@ -84,7 +84,6 @@ export const DefaultConsumables = ConsumesSpec.create({
 	foodId: 74648, // Seafood Magnifique Feast
 	potId: 76089, // Potion of the Tol'vir
 	prepotId: 76089, // Potion of the Tol'vir
-	conjuredId: 5512, // Conjured Healthstone
 });
 export const OtherDefaults = {
 	distanceFromTarget: 24,

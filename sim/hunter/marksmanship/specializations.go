@@ -91,7 +91,7 @@ func (mm *MarksmanshipHunter) MasterMarksmanAura() {
 	counter = mm.RegisterAura(core.Aura{
 		Label:     "Master Marksman",
 		Duration:  time.Second * 30,
-		ActionID:  core.ActionID{SpellID: 34486},
+		ActionID:  core.ActionID{SpellID: 34487},
 		MaxStacks: 2,
 	})
 

@@ -37,13 +37,16 @@ func (rot *APLRotation) newActionGroupReference(config *proto.APLActionGroupRefe
 }
 
 func (action *APLActionGroupReference) GetInnerActions() []*APLAction {
-	if action.group == nil {
+	if action.group == nil || len(action.group.actions) == 0 {
 		return nil
 	}
 
-	actions := make([]*APLAction, len(action.group.actions))
-	for i, groupAction := range action.group.actions {
-		actions[i] = groupAction
+	var actions []*APLAction
+	for _, groupAction := range action.group.actions {
+		if groupAction == nil {
+			continue
+		}
+		actions = append(actions, groupAction.GetAllActions()...)
 	}
 	return actions
 }
