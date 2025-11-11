@@ -48,7 +48,7 @@ import {
 	APLValueDotPercentIncrease,
 	APLValueDotRemainingTime,
 	APLValueDotTickFrequency,
-	APLValueCurrentSnapshot,
+	APLValueAfflictionCurrentSnapshot,
 	APLValueEnergyRegenPerSecond,
 	APLValueEnergyTimeToTarget,
 	APLValueFocusRegenPerSecond,
@@ -1569,11 +1569,11 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecAfflictionWarlock,
 		fields: [],
 	}),
-	dotCurrentSnapshot: inputBuilder({
-		label: i18n.t('rotation_tab.apl.values.dot_current_snapshot.label'),
+	afflictionCurrentSnapshot: inputBuilder({
+		label: i18n.t('rotation_tab.apl.values.affliction_current_snapshot.label'),
 		submenu: ['warlock'],
-		shortDescription: i18n.t('rotation_tab.apl.values.dot_current_snapshot.tooltip'),
-		newValue: APLValueCurrentSnapshot.create,
+		shortDescription: i18n.t('rotation_tab.apl.values.affliction_current_snapshot.tooltip'),
+		newValue: APLValueAfflictionCurrentSnapshot.create,
 		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecAfflictionWarlock,
 		fields: [
 			AplHelpers.unitFieldConfig('targetUnit', 'targets'),

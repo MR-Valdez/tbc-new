@@ -16,8 +16,8 @@ func (warlock *AfflictionWarlock) NewAPLValue(rot *core.APLRotation, config *pro
 			SpellId: core.Spell{ActionID: core.ActionID{SpellID: 48181}}.ToProto(),
 		}
 		return rot.NewValueSpellInFlight(&spellInFlight, nil)
-	case *proto.APLValue_DotCurrentSnapshot:
-		return warlock.newDotCurrentSnapshot(rot, config.GetDotCurrentSnapshot(), config.Uuid)
+	case *proto.APLValue_AfflictionCurrentSnapshot:
+		return warlock.newAfflictionCurrentSnapshot(rot, config.GetAfflictionCurrentSnapshot(), config.Uuid)
 	case *proto.APLValue_AfflictionExhaleWindow:
 		return warlock.newValueExhaleWindow(config.GetAfflictionExhaleWindow(), config.Uuid)
 	default:
@@ -83,7 +83,7 @@ func (action *APLActionNextExhaleTarget) String() string {
 	return "Changing to Next Exhale Target"
 }
 
-func (warlock *AfflictionWarlock) newActionNextExhaleTarget(config *proto.APLActionWarlockNextExhaleTarget) core.APLActionImpl {
+func (warlock *AfflictionWarlock) newActionNextExhaleTarget(_ *proto.APLActionWarlockNextExhaleTarget) core.APLActionImpl {
 	return &APLActionNextExhaleTarget{
 		warlock:        warlock,
 		lastExecutedAt: core.NeverExpires,
@@ -93,7 +93,7 @@ func (warlock *AfflictionWarlock) newActionNextExhaleTarget(config *proto.APLAct
 // modified snapshot tracker, designed to be affliction specific.
 // checks the snapshotted magnitude of existing dots relative to baseline.
 // ignores crit and haste factors, since malefic effect ignores these
-type APLValueCurrentSnapshot struct {
+type APLValueAfflictionCurrentSnapshot struct {
 	core.DefaultAPLValueImpl
 	warlock            *AfflictionWarlock
 	spell              *core.Spell
@@ -102,7 +102,7 @@ type APLValueCurrentSnapshot struct {
 	baseValueDummyAura *core.Aura // Used to get the base value at encounter start
 }
 
-func (warlock *AfflictionWarlock) newDotCurrentSnapshot(rot *core.APLRotation, config *proto.APLValueCurrentSnapshot, _ *proto.UUID) *APLValueCurrentSnapshot {
+func (warlock *AfflictionWarlock) newAfflictionCurrentSnapshot(rot *core.APLRotation, config *proto.APLValueAfflictionCurrentSnapshot, _ *proto.UUID) *APLValueAfflictionCurrentSnapshot {
 	spell := rot.GetAPLSpell(config.SpellId)
 	if spell == nil {
 		return nil
@@ -115,7 +115,7 @@ func (warlock *AfflictionWarlock) newDotCurrentSnapshot(rot *core.APLRotation, c
 		Duration: core.NeverExpires,
 	}))
 
-	return &APLValueCurrentSnapshot{
+	return &APLValueAfflictionCurrentSnapshot{
 		warlock:            warlock,
 		spell:              spell,
 		targetRef:          targetRef,
@@ -123,7 +123,7 @@ func (warlock *AfflictionWarlock) newDotCurrentSnapshot(rot *core.APLRotation, c
 	}
 }
 
-func (value *APLValueCurrentSnapshot) Finalize(rot *core.APLRotation) {
+func (value *APLValueAfflictionCurrentSnapshot) Finalize(rot *core.APLRotation) {
 	if value.baseValueDummyAura != nil {
 		sbssDotRefs := []*core.Spell{value.warlock.GetSpell(core.ActionID{SpellID: 172}), value.warlock.GetSpell(core.ActionID{SpellID: 980}), value.warlock.GetSpell(core.ActionID{SpellID: 30108})}
 		value.baseValueDummyAura.ApplyOnInit(func(aura *core.Aura, sim *core.Simulation) {
@@ -146,15 +146,15 @@ func (value *APLValueCurrentSnapshot) Finalize(rot *core.APLRotation) {
 	}
 }
 
-func (value *APLValueCurrentSnapshot) Type() proto.APLValueType {
+func (value *APLValueAfflictionCurrentSnapshot) Type() proto.APLValueType {
 	return proto.APLValueType_ValueTypeFloat
 }
 
-func (value *APLValueCurrentSnapshot) String() string {
+func (value *APLValueAfflictionCurrentSnapshot) String() string {
 	return fmt.Sprintf("Current Snapshot on %s", value.spell.ActionID)
 }
 
-func (value *APLValueCurrentSnapshot) GetFloat(sim *core.Simulation) float64 {
+func (value *APLValueAfflictionCurrentSnapshot) GetFloat(sim *core.Simulation) float64 {
 	target := value.targetRef.Get()
 	snapshotDamage := 0.0
 	//Soulburn: Soul Swap
@@ -185,7 +185,7 @@ type APLValueExhaleWindow struct {
 	aff *AfflictionWarlock
 }
 
-func (aff *AfflictionWarlock) newValueExhaleWindow(config *proto.APLValueAfflictionExhaleWindow, _ *proto.UUID) core.APLValue {
+func (aff *AfflictionWarlock) newValueExhaleWindow(_ *proto.APLValueAfflictionExhaleWindow, _ *proto.UUID) core.APLValue {
 	return &APLValueExhaleWindow{
 		aff: aff,
 	}

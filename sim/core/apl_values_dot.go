@@ -322,9 +322,6 @@ func (value *APLValueDotPercentIncrease) GetFloat(sim *Simulation) float64 {
 	if expectedDamage == 0 {
 		return 1
 	}
-	// if value.spell.ActionID.SpellID == 86121 && value.spell.ActionID.Tag == 1 && sim.CurrentTime > 60*time.Second && sim.CurrentTime < 80*time.Second {
-	// 	fmt.Println(sim.CurrentTime, math.Round((value.spell.ExpectedTickDamage(sim, target)/expectedDamage)*100000)/100000-1)
-	// }
 
 	// Rounding this to effectively 3 decimal places as a percentage to avoid floating point errors
 	return math.Round((value.spell.ExpectedTickDamage(sim, target)/expectedDamage)*100000)/100000 - 1

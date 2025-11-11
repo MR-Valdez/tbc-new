@@ -6149,22 +6149,6 @@
                     "tooltip"
                   ]
                 },
-                "dot_current_snapshot": {
-                  "type": "object",
-                  "properties": {
-                    "label": {
-                      "type": "string"
-                    },
-                    "tooltip": {
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false,
-                  "required": [
-                    "label",
-                    "tooltip"
-                  ]
-                },
                 "sequence_is_complete": {
                   "type": "object",
                   "properties": {
@@ -6294,6 +6278,22 @@
                   ]
                 },
                 "warlock_haunt_in_flight": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "tooltip": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "tooltip"
+                  ]
+                },
+				"affliction_current_snapshot": {
                   "type": "object",
                   "properties": {
                     "label": {

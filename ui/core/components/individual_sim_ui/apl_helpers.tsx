@@ -1246,12 +1246,6 @@ export function useRuneRegenBaseValueCheckbox(): APLPickerBuilderFieldConfig<any
 	});
 }
 
-export function useDotIgnoreHasteCheckbox(): APLPickerBuilderFieldConfig<any, any> {
-	return booleanFieldConfig('ignoreHaste', 'Ignore Haste', {
-		labelTooltip: 'If checked, will compare the current DoTs magnitude to the base value (on encounter start) of the DoT, ignoring haste effects.',
-	});
-}
-
 export function itemSwapSetFieldConfig(field: string): APLPickerBuilderFieldConfig<any, any> {
 	return {
 		field: field,

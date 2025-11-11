@@ -223,7 +223,6 @@ message APLValue {
 		APLValueDotPercentIncrease dot_percent_increase = 101;
 		APLValueDotPercentIncrease dot_crit_percent_increase = 109;
         APLValueDotPercentIncrease dot_tick_rate_percent_increase = 110;
-		APLValueCurrentSnapshot dot_current_snapshot = 122;
 
         // Sequence values
         APLValueSequenceIsComplete sequence_is_complete = 44;
@@ -248,6 +247,7 @@ message APLValue {
 		APLValueMonkMaxChi monk_max_chi = 95;
 		APLValueBrewmasterMonkCurrentStaggerPercent brewmaster_monk_current_stagger_percent = 99;
 		APLValueProtectionPaladinDamageTakenLastGlobal protection_paladin_damage_taken_last_global = 100;
+		APLValueAfflictionCurrentSnapshot affliction_current_snapshot = 122;
 		APLValueAfflictionExhaleWindow affliction_exhale_window = 123;
 
 		// Variable reference
@@ -807,7 +807,7 @@ message APLValueDotPercentIncrease {
 	bool use_base_value = 3;
 }
 
-message APLValueCurrentSnapshot {
+message APLValueAfflictionCurrentSnapshot {
 	ActionID spell_id = 1;
 	UnitReference target_unit = 2;
 }
