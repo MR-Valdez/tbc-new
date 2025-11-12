@@ -97,6 +97,7 @@ type APLValueAfflictionCurrentSnapshot struct {
 	core.DefaultAPLValueImpl
 	warlock            *AfflictionWarlock
 	spell              *core.Spell
+	sbssDotRefs        []**core.Spell
 	targetRef          core.UnitReference
 	baseValue          float64
 	baseValueDummyAura *core.Aura // Used to get the base value at encounter start
@@ -124,16 +125,17 @@ func (warlock *AfflictionWarlock) newAfflictionCurrentSnapshot(rot *core.APLRota
 }
 
 func (value *APLValueAfflictionCurrentSnapshot) Finalize(rot *core.APLRotation) {
+	value.sbssDotRefs = []**core.Spell{&value.warlock.Agony, &value.warlock.Corruption, &value.warlock.UnstableAffliction}
 	if value.baseValueDummyAura != nil {
-		sbssDotRefs := []*core.Spell{value.warlock.GetSpell(core.ActionID{SpellID: 172}), value.warlock.GetSpell(core.ActionID{SpellID: 980}), value.warlock.GetSpell(core.ActionID{SpellID: 30108})}
 		value.baseValueDummyAura.ApplyOnInit(func(aura *core.Aura, sim *core.Simulation) {
 			// Soulburn: Soul Swap
 			if value.spell.ActionID.SpellID == 86121 && value.spell.ActionID.Tag == 1 {
 				total := 0.0
 				target := value.targetRef.Get()
 
-				for _, spellRef := range sbssDotRefs {
-					total += (spellRef.ExpectedTickDamage(sim, target) * spellRef.Dot(target).CalcTickPeriod().Seconds()) / (1 + (spellRef.SpellCritChance(target) * (spellRef.CritDamageMultiplier() - 1)))
+				for _, spellRef := range value.sbssDotRefs {
+					spell := (*spellRef)
+					total += (spell.ExpectedTickDamage(sim, target) * spell.Dot(target).CalcTickPeriod().Seconds()) / (1 + (spell.SpellCritChance(target) * (spell.CritDamageMultiplier() - 1)))
 				}
 				value.baseValue = total
 
@@ -159,11 +161,10 @@ func (value *APLValueAfflictionCurrentSnapshot) GetFloat(sim *core.Simulation) f
 	snapshotDamage := 0.0
 	//Soulburn: Soul Swap
 	if value.spell.ActionID.SpellID == 86121 && value.spell.ActionID.Tag == 1 {
-		sbssDotRefs := []*core.Spell{value.warlock.GetSpell(core.ActionID{SpellID: 172}), value.warlock.GetSpell(core.ActionID{SpellID: 980}), value.warlock.GetSpell(core.ActionID{SpellID: 30108})}
 		target := value.targetRef.Get()
 
-		for _, spellRef := range sbssDotRefs {
-			dot := spellRef.Dot(target)
+		for _, spellRef := range value.sbssDotRefs {
+			dot := (*spellRef).Dot(target)
 
 			snapshotDamage += (dot.Spell.ExpectedTickDamageFromCurrentSnapshot(sim, target) * dot.TickPeriod().Seconds()) / (1 + (dot.SnapshotCritChance * (dot.Spell.CritDamageMultiplier() - 1)))
 		}
