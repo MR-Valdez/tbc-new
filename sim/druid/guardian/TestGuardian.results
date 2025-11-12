@@ -2164,24 +2164,6 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestGuardian-AllItems-RegaliaoftheEternalBlossom"
- value: {
-  dps: 237974.98789
-  tps: 1.46014188835e+06
-  dtps: 70554.95697
-  hps: 36174.13181
- }
-}
-dps_results: {
- key: "TestGuardian-AllItems-RegaliaoftheHauntedForest"
- value: {
-  dps: 246592.7355
-  tps: 1.50378095913e+06
-  dtps: 64596.03948
-  hps: 34995.94178
- }
-}
-dps_results: {
  key: "TestGuardian-AllItems-RegaliaoftheShatteredVale"
  value: {
   dps: 253763.84999

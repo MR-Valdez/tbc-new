@@ -1919,22 +1919,6 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestFeral-AllItems-RegaliaoftheEternalBlossom"
- value: {
-  dps: 103323.72898
-  tps: 161883.80041
-  hps: 11027.96549
- }
-}
-dps_results: {
- key: "TestFeral-AllItems-RegaliaoftheHauntedForest"
- value: {
-  dps: 105061.04238
-  tps: 162601.27481
-  hps: 11930.99315
- }
-}
-dps_results: {
  key: "TestFeral-AllItems-RegaliaoftheShatteredVale"
  value: {
   dps: 108494.3585
