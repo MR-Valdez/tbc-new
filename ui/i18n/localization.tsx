@@ -60,6 +60,7 @@ export const translatePseudoStat = (pseudoStat: PseudoStat): string => {
 // Currently it is TBD if we will translate Golang texts, let's keep it for now
 
 export const translateTargetInputLabel = (label: string): string => {
+	console.log(label, getTargetInputI18nKey(label));
 	return i18n.t(`settings_tab.encounter.target_inputs.${getTargetInputI18nKey(label)}.label`, {
 		defaultValue: label,
 	});
@@ -72,7 +73,7 @@ export const translateTargetInputTooltip = (label: string, tooltip: string): str
 };
 
 export const translateSpellSchool = (spellSchool: SpellSchool): string => {
-	return i18n.t(`common.spell_schools.${spellSchoolI18nKeys[spellSchool] || SpellSchool[spellSchool].toLowerCase()}.label`, {
+	return i18n.t(`common.spell_schools.${spellSchoolI18nKeys[spellSchool] || SpellSchool[spellSchool].toLowerCase()}`, {
 		defaultValue: SpellSchool[spellSchool],
 	});
 };
