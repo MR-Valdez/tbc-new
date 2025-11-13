@@ -138,7 +138,27 @@ func (moonkin *BalanceDruid) registerNaturalInsight() {
 	moonkin.MultiplyStat(stats.Mana, 5)
 }
 
-func (moonkin *BalanceDruid) registerTotalEclipse() {}
+func (moonkin *BalanceDruid) registerTotalEclipse() {
+	moonkin.AddOnMasteryStatChanged(func(sim *core.Simulation, oldMastery float64, newMastery float64) {
+		if !moonkin.IsInEclipse() && !moonkin.CelestialAlignment.RelatedSelfBuff.IsActive() {
+			return
+		}
+
+		masteryBonusDiff := core.MasteryRatingToMasteryPoints(newMastery - oldMastery)
+
+		if moonkin.SolarEclipseSpellMod.IsActive {
+			moonkin.SolarEclipseSpellMod.UpdateFloatValue(moonkin.SolarEclipseSpellMod.GetFloatValue() + calculateEclipseMasteryBonus(masteryBonusDiff, false))
+		}
+
+		if moonkin.LunarEclipseSpellMod.IsActive {
+			moonkin.SolarEclipseSpellMod.UpdateFloatValue(moonkin.SolarEclipseSpellMod.GetFloatValue() + calculateEclipseMasteryBonus(masteryBonusDiff, false))
+		}
+
+		if moonkin.CelestialAlignmentSpellMod.IsActive {
+			moonkin.SolarEclipseSpellMod.UpdateFloatValue(moonkin.SolarEclipseSpellMod.GetFloatValue() + calculateEclipseMasteryBonus(masteryBonusDiff, false))
+		}
+	})
+}
 
 func (moonkin *BalanceDruid) registerLunarShower() {
 	lunarShowerDmgMod := moonkin.AddDynamicMod(core.SpellModConfig{

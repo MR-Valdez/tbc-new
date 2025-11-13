@@ -83,28 +83,28 @@ export const OtherDefaults = {
 	profession2: Profession.Tailoring,
 };
 
-export const PresetPreraidBuild = PresetUtils.makePresetBuild('Balance Pre-raid', {
+export const PresetPreraidBuild = PresetUtils.makePresetBuild('Pre-raid', {
 	gear: PreraidPresetGear,
 	talents: StandardTalents,
 	rotation: StandardRotation,
 	epWeights: StandardEPWeights,
 });
 
-export const T14PresetBuild = PresetUtils.makePresetBuild('Balance T14', {
+export const T14PresetBuild = PresetUtils.makePresetBuild('T14', {
 	gear: T14UpgradedPresetGear,
 	talents: StandardTalents,
 	rotation: StandardRotation,
 	epWeights: StandardEPWeights,
 });
 
-export const T15PresetBuild = PresetUtils.makePresetBuild('Balance T15', {
+export const T15PresetBuild = PresetUtils.makePresetBuild('T15', {
 	gear: T15PresetGear,
 	talents: StandardTalents,
 	rotation: StandardRotation,
 	epWeights: StandardEPWeights,
 });
 
-export const T16PresetBuild = PresetUtils.makePresetBuild('Balance T16', {
+export const T16PresetBuild = PresetUtils.makePresetBuild('T16', {
 	gear: T16PresetGear,
 	talents: StandardTalents,
 	rotation: StandardRotation,

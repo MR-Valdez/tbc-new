@@ -20,7 +20,7 @@ func (moonkin *BalanceDruid) registerIncarnation() {
 
 	actionID := core.ActionID{SpellID: 102560}
 
-	incarnationSpellMod := moonkin.AddDynamicMod(core.SpellModConfig{
+	moonkin.IncarnationSpellMod = moonkin.AddDynamicMod(core.SpellModConfig{
 		School:     core.SpellSchoolArcane | core.SpellSchoolNature,
 		Kind:       core.SpellMod_DamageDone_Pct,
 		FloatValue: 0.25,
@@ -31,13 +31,13 @@ func (moonkin *BalanceDruid) registerIncarnation() {
 		ActionID: actionID,
 		Duration: time.Second * 30,
 		OnGain: func(_ *core.Aura, _ *core.Simulation) {
-			// Only apply the damage bonus when in Eclipse
-			if moonkin.IsInEclipse() {
-				incarnationSpellMod.Activate()
+			// Only apply the damage bonus when in Eclipse or during Celestial Alignment
+			if moonkin.IsInEclipse() || moonkin.CelestialAlignment.RelatedSelfBuff.IsActive() {
+				moonkin.IncarnationSpellMod.Activate()
 			}
 		},
 		OnExpire: func(_ *core.Aura, _ *core.Simulation) {
-			incarnationSpellMod.Deactivate()
+			moonkin.IncarnationSpellMod.Deactivate()
 		},
 	})
 
@@ -45,16 +45,17 @@ func (moonkin *BalanceDruid) registerIncarnation() {
 	moonkin.AddEclipseCallback(func(_ Eclipse, gained bool, _ *core.Simulation) {
 		if incarnationAura.IsActive() {
 			if gained {
-				incarnationSpellMod.Activate()
+				moonkin.IncarnationSpellMod.Activate()
 			} else {
-				incarnationSpellMod.Deactivate()
+				moonkin.IncarnationSpellMod.Deactivate()
 			}
 		}
 	})
 
 	moonkin.ChosenOfElune = moonkin.RegisterSpell(druid.Humanoid|druid.Moonkin, core.SpellConfig{
-		ActionID: actionID,
-		Flags:    core.SpellFlagAPL,
+		ActionID:        actionID,
+		Flags:           core.SpellFlagAPL,
+		RelatedSelfBuff: incarnationAura,
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
@@ -66,8 +67,8 @@ func (moonkin *BalanceDruid) registerIncarnation() {
 			},
 		},
 
-		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
-			incarnationAura.Activate(sim)
+		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
+			spell.RelatedSelfBuff.Activate(sim)
 		},
 	})
 
