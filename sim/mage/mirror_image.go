@@ -128,10 +128,9 @@ func (mi *MirrorImage) ExecuteCustomRotation(sim *core.Simulation) {
 }
 
 func (mi *MirrorImage) registerFrostboltSpell() {
-
-	frostBoltCoefficient := 1.65
-	frostBoltScaling := 1.65
-	frostBoltVariance := 0.1
+	frostBoltCoefficient := 1.64999997616
+	frostBoltScaling := 1.64999997616
+	frostBoltVariance := 0.10000000149
 
 	mi.Frostbolt = mi.RegisterSpell(core.SpellConfig{
 		ActionID:     core.ActionID{SpellID: 59638},
@@ -169,9 +168,9 @@ func (mi *MirrorImage) registerFrostboltSpell() {
 // *******************************************************
 func (mi *MirrorImage) registerFireballSpell() {
 
-	fireBallCoefficient := 1.8
-	fireBallScaling := 1.8
-	fireBallVariance := 0.2
+	fireBallCoefficient := 1.79999995232
+	fireBallScaling := 1.79999995232
+	fireBallVariance := 0.20000000298
 
 	mi.Fireball = mi.RegisterSpell(core.SpellConfig{
 		ActionID:     core.ActionID{SpellID: 88082}, // confirmed via logs
@@ -209,9 +208,9 @@ func (mi *MirrorImage) registerFireballSpell() {
 // *******************************************************
 func (mi *MirrorImage) registerArcaneBlastSpell() {
 
-	arcaneBlastCoefficient := .9
-	arcaneBlastScaling := .9
-	arcaneBlastVariance := 0.15
+	arcaneBlastCoefficient := 0.89999997616
+	arcaneBlastScaling := 0.89999997616
+	arcaneBlastVariance := 0.15000000596
 
 	mi.ArcaneBlast = mi.RegisterSpell(core.SpellConfig{
 		ActionID:       core.ActionID{SpellID: 88084}, //Confirmed via logs

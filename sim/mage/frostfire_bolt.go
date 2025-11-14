@@ -7,9 +7,9 @@ import (
 	"github.com/wowsims/mop/sim/core/proto"
 )
 
-const frostfireBoltCoefficient = 1.5 // Per https://wago.tools/db2/SpellEffect?build=5.5.0.60802&filter%5BSpellID%5D=44614 Field "EffetBonusCoefficient"
-const frostfireBoltScaling = 1.5     // Per https://wago.tools/db2/SpellEffect?build=5.5.0.60802&filter%5BSpellID%5D=44614 Field "Coefficient"
-const frostfireBoltVariance = 0.24   // Per https://wago.tools/db2/SpellEffect?build=5.5.0.60802&filter%5BSpellID%5D=44614 Field "Variance"
+const frostfireBoltCoefficient = 1.5        // Per https://wago.tools/db2/SpellEffect?build=5.5.0.60802&filter%5BSpellID%5D=44614 Field "EffetBonusCoefficient"
+const frostfireBoltScaling = 1.5            // Per https://wago.tools/db2/SpellEffect?build=5.5.0.60802&filter%5BSpellID%5D=44614 Field "Coefficient"
+const frostfireBoltVariance = 0.23999999464 // Per https://wago.tools/db2/SpellEffect?build=5.5.0.60802&filter%5BSpellID%5D=44614 Field "Variance"
 
 func (mage *Mage) frostfireBoltConfig(config core.SpellConfig) core.SpellConfig {
 	return core.SpellConfig{

@@ -8,8 +8,8 @@ import (
 func (mage *Mage) registerIceLanceSpell() {
 	actionID := core.ActionID{SpellID: 30455}
 	// Values found at https://wago.tools/db2/SpellEffect?build=5.5.0.60802&filter%5BSpellID%5D=30455
-	iceLanceScaling := 0.335
-	iceLanceCoefficient := 0.335
+	iceLanceScaling := 0.33500000834
+	iceLanceCoefficient := 0.33500000834
 	iceLanceVariance := 0.25
 	hasGlyphIcyVeins := mage.HasMajorGlyph(proto.MageMajorGlyph_GlyphOfIcyVeins)
 	hasGlyphSplittingIce := mage.HasMajorGlyph(proto.MageMajorGlyph_GlyphOfSplittingIce)

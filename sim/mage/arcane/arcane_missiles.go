@@ -28,8 +28,8 @@ func (arcane *ArcaneMage) OutcomeArcaneMissiles(sim *core.Simulation, result *co
 func (arcane *ArcaneMage) registerArcaneMissilesSpell() {
 
 	// Values found at https://wago.tools/db2/SpellEffect?build=5.5.0.60802&filter%5BSpellID%5D=exact%253A7268
-	arcaneMissilesScaling := 0.22
-	arcaneMissilesCoefficient := 0.22
+	arcaneMissilesScaling := 0.22200000286
+	arcaneMissilesCoefficient := 0.22200000286
 	actionID := core.ActionID{SpellID: 7268}
 	arcane.arcaneMissilesTickSpell = arcane.GetOrRegisterSpell(core.SpellConfig{
 		ActionID:       actionID.WithTag(1),
