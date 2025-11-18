@@ -83,7 +83,7 @@ var ItemSetRegaliaOfTheWitchDoctor = core.NewItemSet(core.ItemSet{
 				ClassSpellMask:     SpellMaskLavaBurst | SpellMaskLavaBurstOverload,
 				TriggerImmediately: true,
 				Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-					//TODO simc says 1.5s, tooltip says 1s, SpellEffect in the db is a dummy. Maybe the tooltip can't show decimals. I guess we need to wait for the bonus to be available to be sure.
+					// Confirmed on 5.5.3 ptr to be 1.5s despite what the tooltip state
 					shaman.Ascendance.CD.Reduce(time.Millisecond * 1500)
 					shaman.UpdateMajorCooldowns()
 				},
