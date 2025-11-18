@@ -162,9 +162,10 @@ func (moonkin *BalanceDruid) RegisterEclipseAuras() {
 	})
 
 	moonkin.MakeProcTriggerAura(core.ProcTrigger{
-		Name:           "Celestial Alignment Trigger" + moonkin.Label,
-		Callback:       core.CallbackOnCastComplete,
-		ClassSpellMask: druid.DruidSpellCelestialAlignment,
+		Name:               "Celestial Alignment Trigger" + moonkin.Label,
+		Callback:           core.CallbackOnCastComplete,
+		ClassSpellMask:     druid.DruidSpellCelestialAlignment,
+		TriggerImmediately: true,
 		Handler: func(sim *core.Simulation, _ *core.Spell, _ *core.SpellResult) {
 			lunarEclipse.Deactivate(sim)
 			solarEclipse.Deactivate(sim)
