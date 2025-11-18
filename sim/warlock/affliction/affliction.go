@@ -126,7 +126,8 @@ func (affliction *AfflictionWarlock) OnEncounterStart(sim *core.Simulation) {
 	affliction.Warlock.OnEncounterStart(sim)
 }
 
-func calculateDoTBaseTickDamage(dot *core.Dot) float64 {
+func calculateDoTBaseTickDamage(dot *core.Dot, target *core.Unit) float64 {
 	stacks := math.Max(float64(dot.Aura.GetStacks()), 1)
-	return dot.SnapshotBaseDamage * dot.SnapshotAttackerMultiplier * stacks
+	attackTable := dot.Spell.Unit.AttackTables[target.UnitIndex]
+	return dot.SnapshotBaseDamage * dot.Spell.AttackerDamageMultiplier(attackTable, true) * stacks
 }
