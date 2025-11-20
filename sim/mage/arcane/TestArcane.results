@@ -369,8 +369,8 @@ dps_results: {
 dps_results: {
  key: "TestArcane-AllItems-RuneofRe-Origination-96918"
  value: {
-  dps: 143252.45662
-  tps: 139355.08689
+  dps: 140831.52856
+  tps: 137992.99848
  }
 }
 dps_results: {

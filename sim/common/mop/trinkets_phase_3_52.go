@@ -565,6 +565,8 @@ func init() {
 		core.NewItemEffect(itemID, func(agent core.Agent, state proto.ItemLevelState) {
 			character := agent.GetCharacter()
 			// @TODO: Old posts say that only Agility users can proc this effect
+			//For now added the 0.1 coeff which is the reduced proc chance
+			rppmCoeff := 1.0
 			switch {
 			case character.Class == proto.Class_ClassRogue,
 				character.Class == proto.Class_ClassHunter,
@@ -575,7 +577,7 @@ func init() {
 				character.Spec == proto.Spec_SpecBrewmasterMonk:
 				// These are valid
 			default:
-				return
+				rppmCoeff *= 0.1
 			}
 
 			duration := time.Second * 10
@@ -617,7 +619,7 @@ func init() {
 			triggerAura := character.MakeProcTriggerAura(core.ProcTrigger{
 				Name: fmt.Sprintf("%s (%s)", label, versionLabel),
 				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
-					PPM: 1.10000002384,
+					PPM: 1.10000002384 * rppmCoeff,
 				}.WithApproximateIlvlMod(1.0, 528)),
 				ICD:      duration,
 				Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,

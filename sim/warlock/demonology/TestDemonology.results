@@ -1985,9 +1985,9 @@ dps_results: {
 dps_results: {
  key: "TestDemonology-AllItems-RuneofRe-Origination-96918"
  value: {
-  dps: 90804.71008
-  tps: 55782.1055
-  hps: 1261.31268
+  dps: 91189.34724
+  tps: 55898.1658
+  hps: 1246.81484
  }
 }
 dps_results: {

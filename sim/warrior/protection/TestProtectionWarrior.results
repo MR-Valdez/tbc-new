@@ -2025,9 +2025,9 @@ dps_results: {
 dps_results: {
  key: "TestProtectionWarrior-AllItems-RuneofRe-Origination-96918"
  value: {
-  dps: 189973.97893
-  tps: 1.08625233016e+06
-  dtps: 19035.33966
+  dps: 191043.30412
+  tps: 1.09306463916e+06
+  dtps: 18952.89139
  }
 }
 dps_results: {

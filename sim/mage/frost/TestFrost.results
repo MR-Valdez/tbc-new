@@ -369,8 +369,8 @@ dps_results: {
 dps_results: {
  key: "TestFrost-AllItems-RuneofRe-Origination-96918"
  value: {
-  dps: 148438.74216
-  tps: 109580.67778
+  dps: 148244.66292
+  tps: 109470.0633
  }
 }
 dps_results: {

@@ -2030,9 +2030,9 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-RuneofRe-Origination-96918"
  value: {
-  dps: 166742.69981
-  tps: 153507.21886
-  hps: 1723.92544
+  dps: 168473.77301
+  tps: 154640.87951
+  hps: 1731.32289
  }
 }
 dps_results: {
