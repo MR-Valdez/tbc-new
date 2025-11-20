@@ -13,7 +13,7 @@ import * as WarriorInputs from '../inputs';
 import * as FuryInputs from './inputs';
 import * as Presets from './presets';
 
-const P2HitPostCapEPs = [0];
+const P2HitPostCapEPs = [0, 0];
 const P3HitPostCapEPs = [0.42 * Mechanics.PHYSICAL_HIT_RATING_PER_HIT_PERCENT];
 
 const SPEC_CONFIG = registerSpecConfig(Spec.SpecFuryWarrior, {
