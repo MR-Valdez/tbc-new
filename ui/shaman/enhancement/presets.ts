@@ -63,7 +63,7 @@ export const P3_EP_PRESET = PresetUtils.makePresetEpWeights(
 			[Stat.StatAgility]: 1.0,
 			[Stat.StatHitRating]: 0.89,
 			[Stat.StatCritRating]: 0.44,
-			[Stat.StatHasteRating]: 0.52,	
+			[Stat.StatHasteRating]: 0.52,
 			[Stat.StatAttackPower]: 0.4,
 			[Stat.StatExpertiseRating]: 1.02,
 			[Stat.StatMasteryRating]: 0.54,
@@ -102,7 +102,6 @@ export const P3Talents = {
 		}),
 	}),
 };
-
 
 export const DefaultOptions = EnhancementShamanOptions.create({
 	classOptions: {
