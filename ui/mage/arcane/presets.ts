@@ -6,6 +6,7 @@ import { SavedTalents } from '../../core/proto/ui';
 import { Stats } from '../../core/proto_utils/stats';
 import ArcaneApl from './apls/default.apl.json';
 import ArcaneCleaveApl from './apls/arcane_cleave.apl.json';
+import P3APL from './apls/T15_4pc.apl.json';
 import P1PreBISGear from './gear_sets/p1_prebis.gear.json';
 import P1BISGear from './gear_sets/p1_bis.gear.json';
 import P2BISGear from './gear_sets/p2_bis.gear.json';
@@ -20,6 +21,7 @@ export const P2_BIS = PresetUtils.makePresetGear('P2 - BIS', P2BISGear);
 export const P3_BIS = PresetUtils.makePresetGear('P3 - BIS', P3BISGear);
 
 export const ROTATION_PRESET_DEFAULT = PresetUtils.makePresetAPLRotation('Default', ArcaneApl);
+export const ROTATION_PRESET_P3_4PC = PresetUtils.makePresetAPLRotation('P3 - 4pc T15', P3APL);
 // export const ROTATION_PRESET_CLEAVE = PresetUtils.makePresetAPLRotation('Cleave', ArcaneCleaveApl);
 
 // Preset options for EP weights
