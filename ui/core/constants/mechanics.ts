@@ -21,9 +21,6 @@ export const masteryPercentPerPoint: Map<Spec, number> = new Map([
 	[Spec.SpecAssassinationRogue, 3.5],
 	[Spec.SpecCombatRogue, 2.0],
 	[Spec.SpecSubtletyRogue, 2.5],
-	[Spec.SpecBloodDeathKnight, 6.25],
-	[Spec.SpecFrostDeathKnight, 2.0],
-	[Spec.SpecUnholyDeathKnight, 2.5],
 	[Spec.SpecBalanceDruid, 1.875],
 	[Spec.SpecFeralDruid, 3.13], // TODO: We expect 3.125, possibly bugged?
 	[Spec.SpecGuardianDruid, 2.0],
@@ -49,6 +46,4 @@ export const masteryPercentPerPoint: Map<Spec, number> = new Map([
 	[Spec.SpecAfflictionWarlock, 3.1],
 	[Spec.SpecDemonologyWarlock, 3],
 	[Spec.SpecDestructionWarlock, 3],
-	[Spec.SpecWindwalkerMonk, 0.2],
-	[Spec.SpecBrewmasterMonk, 0.625],
 ]);

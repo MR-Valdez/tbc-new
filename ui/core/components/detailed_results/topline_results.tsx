@@ -1,4 +1,3 @@
-import { DeathKnight } from '../../player_classes/death_knight';
 import { Hunter } from '../../player_classes/hunter';
 import { Rogue } from '../../player_classes/rogue';
 import { Warrior } from '../../player_classes/warrior';
@@ -15,7 +14,7 @@ export class ToplineResults extends ResultComponent {
 	}
 
 	onSimResult(resultData: SimResultData) {
-		const noManaClasses = [DeathKnight, Rogue, Warrior, Hunter];
+		const noManaClasses = [Rogue, Warrior, Hunter];
 		const players = resultData.result.getRaidIndexedPlayers(resultData.filter);
 
 		const content = RaidSimResultsManager.makeToplineResultsContent(resultData.result, resultData.filter, {

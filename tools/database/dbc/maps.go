@@ -267,21 +267,14 @@ var consumableClassToProto = map[ConsumableClass]proto.ConsumableType{
 }
 
 var MapPowerTypeEnumToResourceType = map[int32]proto.ResourceType{
-	0:  proto.ResourceType_ResourceTypeMana,
-	1:  proto.ResourceType_ResourceTypeRage,
-	2:  proto.ResourceType_ResourceTypeFocus,
-	3:  proto.ResourceType_ResourceTypeEnergy,
-	4:  proto.ResourceType_ResourceTypeComboPoints,
-	5:  proto.ResourceType_ResourceTypeDeathRune | proto.ResourceType_ResourceTypeBloodRune,
-	6:  proto.ResourceType_ResourceTypeRunicPower,
-	7:  proto.ResourceType_ResourceTypeNone, // Soulshards
-	8:  proto.ResourceType_ResourceTypeLunarEnergy,
-	9:  proto.ResourceType_ResourceTypeNone, // Holy Power
-	12: proto.ResourceType_ResourceTypeChi,
-	20: proto.ResourceType_ResourceTypeBloodRune,
-	21: proto.ResourceType_ResourceTypeFrostRune,
-	22: proto.ResourceType_ResourceTypeUnholyRune,
-	29: proto.ResourceType_ResourceTypeDeathRune,
+	0: proto.ResourceType_ResourceTypeMana,
+	1: proto.ResourceType_ResourceTypeRage,
+	2: proto.ResourceType_ResourceTypeFocus,
+	3: proto.ResourceType_ResourceTypeEnergy,
+	4: proto.ResourceType_ResourceTypeComboPoints,
+	7: proto.ResourceType_ResourceTypeNone, // Soulshards
+	8: proto.ResourceType_ResourceTypeLunarEnergy,
+	9: proto.ResourceType_ResourceTypeNone, // Holy Power
 }
 
 func ClassNameFromDBC(dbc DbcClass) string {
@@ -296,16 +289,12 @@ func ClassNameFromDBC(dbc DbcClass) string {
 		return "Rogue"
 	case 5:
 		return "Priest"
-	case 6:
-		return "Death_Knight"
 	case 7:
 		return "Shaman"
 	case 8:
 		return "Mage"
 	case 9:
 		return "Warlock"
-	case 10:
-		return "Monk"
 	case 11:
 		return "Druid"
 	default:
@@ -386,21 +375,14 @@ var Classes = []DbcClass{
 	{proto.Class_ClassHunter, 3},
 	{proto.Class_ClassRogue, 4},
 	{proto.Class_ClassPriest, 5},
-	{proto.Class_ClassDeathKnight, 6},
 	{proto.Class_ClassShaman, 7},
 	{proto.Class_ClassMage, 8},
 	{proto.Class_ClassWarlock, 9},
-	{proto.Class_ClassMonk, 10},
 	{proto.Class_ClassDruid, 11},
 }
 
 // SpecByID maps the ChrSpecialization.DB2 ID to proto.Spec
 var SpecByID = map[int32]proto.Spec{
-	// Death Knight
-	250: proto.Spec_SpecBloodDeathKnight,
-	251: proto.Spec_SpecFrostDeathKnight,
-	252: proto.Spec_SpecUnholyDeathKnight,
-
 	// Druid
 	102: proto.Spec_SpecBalanceDruid,
 	103: proto.Spec_SpecFeralDruid,
@@ -446,11 +428,6 @@ var SpecByID = map[int32]proto.Spec{
 	71: proto.Spec_SpecArmsWarrior,
 	72: proto.Spec_SpecFuryWarrior,
 	73: proto.Spec_SpecProtectionWarrior,
-
-	// Monk
-	268: proto.Spec_SpecBrewmasterMonk,
-	269: proto.Spec_SpecWindwalkerMonk,
-	270: proto.Spec_SpecMistweaverMonk,
 }
 
 func SpecFromID(id int32) proto.Spec {

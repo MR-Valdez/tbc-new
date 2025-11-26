@@ -7,11 +7,9 @@ import "common.proto";
 import "apl.proto";
 import "db.proto";
 import "spell.proto";
-import "death_knight.proto";
 import "druid.proto";
 import "hunter.proto";
 import "mage.proto";
-import "monk.proto";
 import "paladin.proto";
 import "priest.proto";
 import "rogue.proto";
@@ -45,10 +43,6 @@ message Player {
 	IndividualBuffs buffs = 8;
 
 	oneof spec {
-		BloodDeathKnight blood_death_knight = 9;
-		FrostDeathKnight frost_death_knight = 10;
-		UnholyDeathKnight unholy_death_knight = 11;
-
 		BalanceDruid balance_druid = 12;
 		FeralDruid feral_druid = 13;
 		GuardianDruid guardian_druid = 53;
@@ -61,10 +55,6 @@ message Player {
 		ArcaneMage arcane_mage = 18;
 		FireMage fire_mage = 19;
 		FrostMage frost_mage = 20;
-
-		BrewmasterMonk brewmaster_monk = 55;
-		MistweaverMonk mistweaver_monk = 56;
-		WindwalkerMonk windwalker_monk = 57;
 
 		HolyPaladin holy_paladin = 21;
 		ProtectionPaladin protection_paladin = 22;

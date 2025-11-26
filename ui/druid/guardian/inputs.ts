@@ -10,8 +10,6 @@ export const SymbiosisSelection = InputHelpers.makeSpecOptionsEnumInput<Spec.Spe
 	label: 'Symbiosis Target',
 	labelTooltip: 'Class from which to receive a Symbiosis spell',
 	values: [
-		{ name: 'Death Knight', value: Class.ClassDeathKnight, tooltip: 'Bone Shield' },
-		{ name: 'Monk', value: Class.ClassMonk, tooltip: 'Elusive Brew' },
 	],
 });
 

@@ -33,12 +33,7 @@ import {
 	APLValueCurrentLunarEnergy,
 	APLValueCurrentMana,
 	APLValueCurrentManaPercent,
-	APLValueCurrentNonDeathRuneCount,
 	APLValueCurrentRage,
-	APLValueCurrentRuneActive,
-	APLValueCurrentRuneCount,
-	APLValueCurrentRuneDeath,
-	APLValueCurrentRunicPower,
 	APLValueCurrentSolarEnergy,
 	APLValueCurrentTime,
 	APLValueCurrentTimePercent,
@@ -68,12 +63,7 @@ import {
 	APLValueMaxFocus,
 	APLValueMaxHealth,
 	APLValueMaxRage,
-	APLValueMaxRunicPower,
 	APLValueMin,
-	APLValueMonkCurrentChi,
-	APLValueMonkMaxChi,
-	APLValueNextRuneCooldown,
-	APLValueFullRuneCooldown,
 	APLValueNot,
 	APLValueNumberTargets,
 	APLValueNumEquippedStatProcTrinkets,
@@ -82,8 +72,6 @@ import {
 	APLValueProtectionPaladinDamageTakenLastGlobal,
 	APLValueRemainingTime,
 	APLValueRemainingTimePercent,
-	APLValueRuneCooldown,
-	APLValueRuneSlotCooldown,
 	APLValueSequenceIsComplete,
 	APLValueSequenceIsReady,
 	APLValueSequenceTimeToReady,
@@ -722,7 +710,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		newValue: APLValueCurrentMana.create,
 		includeIf(player: Player<any>, _isPrepull: boolean) {
 			const clss = player.getClass();
-			return clss !== Class.ClassDeathKnight && clss !== Class.ClassHunter && clss !== Class.ClassRogue && clss !== Class.ClassWarrior;
+			return clss !== Class.ClassHunter && clss !== Class.ClassRogue && clss !== Class.ClassWarrior;
 		},
 		fields: [],
 	}),
@@ -733,7 +721,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		newValue: APLValueCurrentManaPercent.create,
 		includeIf(player: Player<any>, _isPrepull: boolean) {
 			const clss = player.getClass();
-			return clss !== Class.ClassDeathKnight && clss !== Class.ClassHunter && clss !== Class.ClassRogue && clss !== Class.ClassWarrior;
+			return clss !== Class.ClassHunter && clss !== Class.ClassRogue && clss !== Class.ClassWarrior;
 		},
 		fields: [],
 	}),
@@ -801,7 +789,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		includeIf(player: Player<any>, _isPrepull: boolean) {
 			const clss = player.getClass();
 			const spec = player.getSpec();
-			return spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue || clss === Class.ClassMonk;
+			return spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue;
 		},
 		fields: [],
 	}),
@@ -813,7 +801,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		includeIf(player: Player<any>, _isPrepull: boolean) {
 			const clss = player.getClass();
 			const spec = player.getSpec();
-			return spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue || clss === Class.ClassMonk;
+			return spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue;
 		},
 		fields: [],
 	}),
@@ -825,7 +813,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		includeIf(player: Player<any>, _isPrepull: boolean) {
 			const clss = player.getClass();
 			const spec = player.getSpec();
-			return spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue || clss === Class.ClassMonk;
+			return spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue;
 		},
 		fields: [],
 	}),
@@ -837,7 +825,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		includeIf(player: Player<any>, _isPrepull: boolean) {
 			const clss = player.getClass();
 			const spec = player.getSpec();
-			return spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue || clss === Class.ClassMonk;
+			return spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue;
 		},
 		fields: [valueFieldConfig('targetEnergy')],
 	}),
@@ -863,38 +851,6 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 			const spec = player.getSpec();
 			return spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue;
 		},
-		fields: [],
-	}),
-	monkCurrentChi: inputBuilder({
-		label: i18n.t('rotation_tab.apl.values.current_chi.label'),
-		submenu: ['resources', 'chi'],
-		shortDescription: i18n.t('rotation_tab.apl.values.current_chi.tooltip'),
-		newValue: APLValueMonkCurrentChi.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() === Class.ClassMonk,
-		fields: [],
-	}),
-	monkMaxChi: inputBuilder({
-		label: i18n.t('rotation_tab.apl.values.max_chi.label'),
-		submenu: ['resources', 'chi'],
-		shortDescription: i18n.t('rotation_tab.apl.values.max_chi.tooltip'),
-		newValue: APLValueMonkMaxChi.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() === Class.ClassMonk,
-		fields: [],
-	}),
-	currentRunicPower: inputBuilder({
-		label: i18n.t('rotation_tab.apl.values.current_runic_power.label'),
-		submenu: ['resources', 'runic_power'],
-		shortDescription: i18n.t('rotation_tab.apl.values.current_runic_power.tooltip'),
-		newValue: APLValueCurrentRunicPower.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
-		fields: [],
-	}),
-	maxRunicPower: inputBuilder({
-		label: i18n.t('rotation_tab.apl.values.max_runic_power.label'),
-		submenu: ['resources', 'runic_power'],
-		shortDescription: i18n.t('rotation_tab.apl.values.max_runic_power.tooltip'),
-		newValue: APLValueMaxRunicPower.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
 		fields: [],
 	}),
 	currentSolarEnergy: inputBuilder({
@@ -929,72 +885,6 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		includeIf: (player: Player<any>, _isPrepull: boolean) => SecondaryResource.hasSecondaryResource(player.getSpec()),
 		fields: [],
 		dynamicStringResolver: (value: string, player: Player<any>) => player.secondaryResource?.replaceResourceName(value) || '',
-	}),
-
-	// Resources Rune
-	currentRuneCount: inputBuilder({
-		label: i18n.t('rotation_tab.apl.values.num_runes.label'),
-		submenu: ['resources', 'runes'],
-		shortDescription: i18n.t('rotation_tab.apl.values.num_runes.tooltip'),
-		newValue: APLValueCurrentRuneCount.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
-		fields: [AplHelpers.runeTypeFieldConfig('runeType', true)],
-	}),
-	currentNonDeathRuneCount: inputBuilder({
-		label: i18n.t('rotation_tab.apl.values.num_non_death_runes.label'),
-		submenu: ['resources', 'runes'],
-		shortDescription: i18n.t('rotation_tab.apl.values.num_non_death_runes.tooltip'),
-		newValue: APLValueCurrentNonDeathRuneCount.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
-		fields: [AplHelpers.runeTypeFieldConfig('runeType', false)],
-	}),
-	currentRuneActive: inputBuilder({
-		label: i18n.t('rotation_tab.apl.values.rune_is_ready.label'),
-		submenu: ['resources', 'runes'],
-		shortDescription: i18n.t('rotation_tab.apl.values.rune_is_ready.tooltip'),
-		newValue: APLValueCurrentRuneActive.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
-		fields: [AplHelpers.runeSlotFieldConfig('runeSlot')],
-	}),
-	currentRuneDeath: inputBuilder({
-		label: i18n.t('rotation_tab.apl.values.rune_is_death.label'),
-		submenu: ['resources', 'runes'],
-		shortDescription: i18n.t('rotation_tab.apl.values.rune_is_death.tooltip'),
-		newValue: APLValueCurrentRuneDeath.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
-		fields: [AplHelpers.runeSlotFieldConfig('runeSlot')],
-	}),
-	runeCooldown: inputBuilder({
-		label: i18n.t('rotation_tab.apl.values.rune_cooldown.label'),
-		submenu: ['resources', 'runes'],
-		shortDescription: i18n.t('rotation_tab.apl.values.rune_cooldown.tooltip'),
-		newValue: APLValueRuneCooldown.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
-		fields: [AplHelpers.runeTypeFieldConfig('runeType', false)],
-	}),
-	nextRuneCooldown: inputBuilder({
-		label: i18n.t('rotation_tab.apl.values.next_rune_cooldown.label'),
-		submenu: ['resources', 'runes'],
-		shortDescription: i18n.t('rotation_tab.apl.values.next_rune_cooldown.tooltip'),
-		newValue: APLValueNextRuneCooldown.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
-		fields: [AplHelpers.runeTypeFieldConfig('runeType', false)],
-	}),
-	runeSlotCooldown: inputBuilder({
-		label: i18n.t('rotation_tab.apl.values.rune_slot_cooldown.label'),
-		submenu: ['resources', 'runes'],
-		shortDescription: i18n.t('rotation_tab.apl.values.rune_slot_cooldown.tooltip'),
-		newValue: APLValueRuneSlotCooldown.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
-		fields: [AplHelpers.runeSlotFieldConfig('runeSlot')],
-	}),
-	fullRuneCooldown: inputBuilder({
-		label: i18n.t('rotation_tab.apl.values.full_rune_cooldown.label'),
-		submenu: ['resources', 'runes'],
-		shortDescription: i18n.t('rotation_tab.apl.values.full_rune_cooldown.tooltip'),
-		newValue: APLValueFullRuneCooldown.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
-		fields: [AplHelpers.useRuneRegenBaseValueCheckbox()],
 	}),
 
 	// GCD
@@ -1594,14 +1484,6 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		shortDescription: i18n.t('rotation_tab.apl.values.mage_current_combustion_dot_estimate.tooltip'),
 		newValue: APLValueMageCurrentCombustionDotEstimate.create,
 		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecFireMage,
-		fields: [],
-	}),
-	brewmasterMonkCurrentStaggerPercent: inputBuilder({
-		label: i18n.t('rotation_tab.apl.values.brewmaster_monk_current_stagger_percent.label'),
-		submenu: ['tank'],
-		shortDescription: i18n.t('rotation_tab.apl.values.brewmaster_monk_current_stagger_percent.tooltip'),
-		newValue: APLValueMonkCurrentChi.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() === Spec.SpecBrewmasterMonk,
 		fields: [],
 	}),
 	protectionPaladinDamageTakenLastGlobal: inputBuilder({

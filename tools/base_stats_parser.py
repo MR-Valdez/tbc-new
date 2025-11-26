@@ -25,15 +25,13 @@ Offs = {
     "Hunter": 2,
     "Rogue": 3,
     "Priest": 4,
-    "Death Knight": 5,
     "Shaman": 6,
     "Mage": 7,
     "Warlock": 8,
-    "Monk": 9,
     "Druid": 10,
 }
 
-#Warrior	Paladin	Hunter	Rogue	Priest	Death Knight	Shaman	Mage	Warlock	Monk	Druid
+#Warrior	Paladin	Hunter	Rogue	Priest	Shaman	Mage	Warlock	Druid
 def GenIndexedDb(file : str):
     db = {}
     with open(file) as tsv:
@@ -90,7 +88,7 @@ import (
 
     output += '''var CritPerAgiMaxLevel = map[proto.Class]float64{
 proto.Class_ClassUnknown: 0.0,'''
-    for c in ["Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Death Knight", "Shaman", "Mage", "Warlock", "Monk", "Druid"]:
+    for c in ["Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid"]:
         cName = c.split()
         cName = ''.join(cName)
         mc = 1/float(cs.MCrit[str(BASE_LEVEL)][Offs[c]])
@@ -99,7 +97,7 @@ proto.Class_ClassUnknown: 0.0,'''
 
     output += '''var CritPerIntMaxLevel = map[proto.Class]float64{
 proto.Class_ClassUnknown: 0.0,'''
-    for c in ["Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Death Knight", "Shaman", "Mage", "Warlock", "Monk", "Druid"]:
+    for c in ["Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid"]:
         cName = c.split()
         cName = ''.join(cName)
         mc = 1/float(cs.SCrit[str(BASE_LEVEL)][Offs[c]])
@@ -108,7 +106,7 @@ proto.Class_ClassUnknown: 0.0,'''
 
     output += '''var ExtraClassBaseStats = map[proto.Class]stats.Stats{
 proto.Class_ClassUnknown: {},'''
-    for c in ["Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Death Knight", "Shaman", "Mage", "Warlock", "Monk", "Druid"]:
+    for c in ["Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid"]:
         cName = c.split()
         cName = ''.join(cName)
         output += f"\nproto.Class_Class{cName}: {{"

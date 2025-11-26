@@ -169,15 +169,6 @@ var ClassBaseStats = map[proto.Class]stats.Stats{
 		stats.Spirit:    216,
 		stats.Stamina:   77,
 	},
-	proto.Class_ClassDeathKnight: {
-		stats.Health:      146663,
-		stats.Agility:     131,
-		stats.Strength:    209,
-		stats.Intellect:   38,
-		stats.Spirit:      69,
-		stats.Stamina:     190,
-		stats.AttackPower: float64(CharacterLevel)*3.0 - 20,
-	},
 	proto.Class_ClassShaman: {
 		stats.Health:      146663,
 		stats.Agility:     86,
@@ -213,30 +204,19 @@ var ClassBaseStats = map[proto.Class]stats.Stats{
 		stats.Stamina:     114,
 		stats.AttackPower: float64(CharacterLevel)*3.0 - 10,
 	},
-	proto.Class_ClassMonk: {
-		stats.Health:      146663,
-		stats.Agility:     113,
-		stats.Strength:    94,
-		stats.Intellect:   169,
-		stats.Spirit:      190,
-		stats.Stamina:     113,
-		stats.AttackPower: float64(CharacterLevel)*2.0 - 30,
-	},
 }
 
 var ClassBaseScaling = map[proto.Class]float64{
-	proto.Class_ClassUnknown:     1710.000000,
-	proto.Class_ClassWarrior:     1246.298600,
-	proto.Class_ClassPaladin:     1141.926000,
-	proto.Class_ClassHunter:      1246.298600,
-	proto.Class_ClassRogue:       1246.298600,
-	proto.Class_ClassPriest:      1049.328400,
-	proto.Class_ClassDeathKnight: 1246.298600,
-	proto.Class_ClassShaman:      1114.501700,
-	proto.Class_ClassMage:        1040.778600,
-	proto.Class_ClassWarlock:     1068.202900,
-	proto.Class_ClassMonk:        1094.739700,
-	proto.Class_ClassDruid:       1094.739700,
+	proto.Class_ClassUnknown: 1710.000000,
+	proto.Class_ClassWarrior: 1246.298600,
+	proto.Class_ClassPaladin: 1141.926000,
+	proto.Class_ClassHunter:  1246.298600,
+	proto.Class_ClassRogue:   1246.298600,
+	proto.Class_ClassPriest:  1049.328400,
+	proto.Class_ClassShaman:  1114.501700,
+	proto.Class_ClassMage:    1040.778600,
+	proto.Class_ClassWarlock: 1068.202900,
+	proto.Class_ClassDruid:   1094.739700,
 }
 
 func AddBaseStatsCombo(r proto.Race, c proto.Class) {
@@ -248,19 +228,6 @@ func init() {
 	AddBaseStatsCombo(proto.Race_RaceNightElf, proto.Class_ClassDruid)
 	AddBaseStatsCombo(proto.Race_RaceTroll, proto.Class_ClassDruid)
 	AddBaseStatsCombo(proto.Race_RaceWorgen, proto.Class_ClassDruid)
-
-	AddBaseStatsCombo(proto.Race_RaceDraenei, proto.Class_ClassDeathKnight)
-	AddBaseStatsCombo(proto.Race_RaceDwarf, proto.Class_ClassDeathKnight)
-	AddBaseStatsCombo(proto.Race_RaceGnome, proto.Class_ClassDeathKnight)
-	AddBaseStatsCombo(proto.Race_RaceHuman, proto.Class_ClassDeathKnight)
-	AddBaseStatsCombo(proto.Race_RaceNightElf, proto.Class_ClassDeathKnight)
-	AddBaseStatsCombo(proto.Race_RaceOrc, proto.Class_ClassDeathKnight)
-	AddBaseStatsCombo(proto.Race_RaceTauren, proto.Class_ClassDeathKnight)
-	AddBaseStatsCombo(proto.Race_RaceTroll, proto.Class_ClassDeathKnight)
-	AddBaseStatsCombo(proto.Race_RaceUndead, proto.Class_ClassDeathKnight)
-	AddBaseStatsCombo(proto.Race_RaceBloodElf, proto.Class_ClassDeathKnight)
-	AddBaseStatsCombo(proto.Race_RaceGoblin, proto.Class_ClassDeathKnight)
-	AddBaseStatsCombo(proto.Race_RaceWorgen, proto.Class_ClassDeathKnight)
 
 	AddBaseStatsCombo(proto.Race_RaceBloodElf, proto.Class_ClassHunter)
 	AddBaseStatsCombo(proto.Race_RaceDraenei, proto.Class_ClassHunter)
@@ -356,19 +323,4 @@ func init() {
 	AddBaseStatsCombo(proto.Race_RaceGoblin, proto.Class_ClassWarrior)
 	AddBaseStatsCombo(proto.Race_RaceBloodElf, proto.Class_ClassWarrior)
 	AddBaseStatsCombo(proto.Race_RaceHordePandaren, proto.Class_ClassWarrior)
-
-	AddBaseStatsCombo(proto.Race_RaceDraenei, proto.Class_ClassMonk)
-	AddBaseStatsCombo(proto.Race_RaceDwarf, proto.Class_ClassMonk)
-	AddBaseStatsCombo(proto.Race_RaceGnome, proto.Class_ClassMonk)
-	AddBaseStatsCombo(proto.Race_RaceHuman, proto.Class_ClassMonk)
-	AddBaseStatsCombo(proto.Race_RaceNightElf, proto.Class_ClassMonk)
-	AddBaseStatsCombo(proto.Race_RaceWorgen, proto.Class_ClassMonk)
-	AddBaseStatsCombo(proto.Race_RaceAlliancePandaren, proto.Class_ClassMonk)
-	AddBaseStatsCombo(proto.Race_RaceBloodElf, proto.Class_ClassMonk)
-	AddBaseStatsCombo(proto.Race_RaceOrc, proto.Class_ClassMonk)
-	AddBaseStatsCombo(proto.Race_RaceTauren, proto.Class_ClassMonk)
-	AddBaseStatsCombo(proto.Race_RaceTroll, proto.Class_ClassMonk)
-	AddBaseStatsCombo(proto.Race_RaceUndead, proto.Class_ClassMonk)
-	AddBaseStatsCombo(proto.Race_RaceGoblin, proto.Class_ClassMonk)
-	AddBaseStatsCombo(proto.Race_RaceHordePandaren, proto.Class_ClassMonk)
 }

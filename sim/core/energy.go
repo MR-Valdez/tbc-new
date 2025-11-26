@@ -29,10 +29,9 @@ type energyBar struct {
 	EncounterStartMetrics *ResourceMetrics
 	EnergyRefundMetrics   *ResourceMetrics
 
-	ownerClass              proto.Class
-	comboPointsResourceName string // "chi" or "combo points"
-	hasNoRegen              bool   // some units have an energy bar but do not require regen ticks
-	hasHasteRatingScaling   bool
+	ownerClass            proto.Class
+	hasNoRegen            bool // some units have an energy bar but do not require regen ticks
+	hasHasteRatingScaling bool
 }
 type EnergyBarOptions struct {
 	MaxComboPoints        int32
@@ -46,30 +45,25 @@ func (unit *Unit) EnableEnergyBar(options EnergyBarOptions) {
 	unit.SetCurrentPowerBar(EnergyBar)
 
 	unit.energyBar = energyBar{
-		unit:                    unit,
-		maxEnergy:               max(10, options.MaxEnergy),
-		maxComboPoints:          options.MaxComboPoints,
-		EnergyTickDuration:      unit.ReactionTime,
-		EnergyPerTick:           10.0 * unit.ReactionTime.Seconds(),
-		energyRegenMultiplier:   1,
-		hasteRatingMultiplier:   1,
-		regenMetrics:            unit.NewEnergyMetrics(ActionID{OtherID: proto.OtherAction_OtherActionEnergyRegen}),
-		EncounterStartMetrics:   unit.getEncounterStartComboMetrics(options.UnitClass),
-		EnergyRefundMetrics:     unit.NewEnergyMetrics(ActionID{OtherID: proto.OtherAction_OtherActionRefund}),
-		ownerClass:              options.UnitClass,
-		comboPointsResourceName: Ternary(options.UnitClass == proto.Class_ClassMonk, "chi", "combo points"),
-		hasNoRegen:              options.HasNoRegen,
-		hasHasteRatingScaling:   options.HasHasteRatingScaling,
+		unit:                  unit,
+		maxEnergy:             max(10, options.MaxEnergy),
+		maxComboPoints:        options.MaxComboPoints,
+		EnergyTickDuration:    unit.ReactionTime,
+		EnergyPerTick:         10.0 * unit.ReactionTime.Seconds(),
+		energyRegenMultiplier: 1,
+		hasteRatingMultiplier: 1,
+		regenMetrics:          unit.NewEnergyMetrics(ActionID{OtherID: proto.OtherAction_OtherActionEnergyRegen}),
+		EncounterStartMetrics: unit.getEncounterStartComboMetrics(options.UnitClass),
+		EnergyRefundMetrics:   unit.NewEnergyMetrics(ActionID{OtherID: proto.OtherAction_OtherActionRefund}),
+		ownerClass:            options.UnitClass,
+		hasNoRegen:            options.HasNoRegen,
+		hasHasteRatingScaling: options.HasHasteRatingScaling,
 	}
 
 }
 
 func (unit *Unit) getEncounterStartComboMetrics(unitClass proto.Class) *ResourceMetrics {
-	if unitClass == proto.Class_ClassMonk {
-		return unit.NewChiMetrics(encounterStartActionID)
-	} else {
-		return unit.NewComboPointMetrics(encounterStartActionID)
-	}
+	return unit.NewComboPointMetrics(encounterStartActionID)
 }
 
 func (unit *Unit) HasEnergyBar() bool {
@@ -216,7 +210,7 @@ func (eb *energyBar) AddComboPoints(sim *Simulation, pointsToAdd int32, metrics 
 	metrics.AddEvent(float64(pointsToAdd), float64(newComboPoints-eb.comboPoints))
 
 	if sim.Log != nil {
-		eb.unit.Log(sim, "Gained %d %s from %s (%d --> %d) of %0.0f total.", pointsToAdd, eb.comboPointsResourceName, metrics.ActionID, eb.comboPoints, newComboPoints, eb.maxComboPoints)
+		eb.unit.Log(sim, "Gained %d combo points from %s (%d --> %d) of %0.0f total.", pointsToAdd, metrics.ActionID, eb.comboPoints, newComboPoints, eb.maxComboPoints)
 	}
 
 	eb.comboPoints = newComboPoints
@@ -234,7 +228,7 @@ func (eb *energyBar) spendComboPointsInternal(sim *Simulation, pointsToSpend int
 	pointsToSpend = min(pointsToSpend, eb.comboPoints)
 	newComboPoints := eb.comboPoints - pointsToSpend
 	if sim.Log != nil {
-		eb.unit.Log(sim, "Spent %d %s from %s (%d --> %d) of %0.0f total.", pointsToSpend, eb.comboPointsResourceName, metrics.ActionID, eb.comboPoints, newComboPoints, eb.maxComboPoints)
+		eb.unit.Log(sim, "Spent %d combo points from %s (%d --> %d) of %0.0f total.", pointsToSpend, metrics.ActionID, eb.comboPoints, newComboPoints, eb.maxComboPoints)
 	}
 	metrics.AddEvent(float64(-pointsToSpend), float64(-pointsToSpend))
 	eb.comboPoints = newComboPoints
@@ -320,7 +314,7 @@ func newEnergyCost(spell *Spell, options EnergyCostOptions, energyBar *energyBar
 			Refund:            options.Refund,
 			RefundMetrics:     options.RefundMetrics,
 			ResourceMetrics:   spell.Unit.NewEnergyMetrics(spell.ActionID),
-			ComboPointMetrics: Ternary(energyBar.ownerClass == proto.Class_ClassMonk, spell.Unit.NewChiMetrics(spell.ActionID), spell.Unit.NewComboPointMetrics(spell.ActionID)),
+			ComboPointMetrics: spell.Unit.NewComboPointMetrics(spell.ActionID),
 		},
 	}
 }

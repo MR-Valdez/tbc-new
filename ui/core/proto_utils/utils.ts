@@ -21,19 +21,6 @@ import {
 	WeaponType,
 } from '../proto/common.js';
 import {
-	BloodDeathKnight,
-	BloodDeathKnight_Options,
-	BloodDeathKnight_Rotation,
-	DeathKnightOptions,
-	DeathKnightTalents,
-	FrostDeathKnight,
-	FrostDeathKnight_Options,
-	FrostDeathKnight_Rotation,
-	UnholyDeathKnight,
-	UnholyDeathKnight_Options,
-	UnholyDeathKnight_Rotation,
-} from '../proto/death_knight.js';
-import {
 	BalanceDruid,
 	BalanceDruid_Options,
 	BalanceDruid_Rotation,
@@ -75,19 +62,6 @@ import {
 	MageOptions,
 	MageTalents,
 } from '../proto/mage.js';
-import {
-	BrewmasterMonk,
-	BrewmasterMonk_Options,
-	BrewmasterMonk_Rotation,
-	MistweaverMonk,
-	MistweaverMonk_Options,
-	MistweaverMonk_Rotation,
-	MonkOptions,
-	MonkTalents,
-	WindwalkerMonk,
-	WindwalkerMonk_Options,
-	WindwalkerMonk_Rotation,
-} from '../proto/monk.js';
 import {
 	Blessings,
 	HolyPaladin,
@@ -223,7 +197,6 @@ class UnknownSpecOptions {
 	}
 }
 
-export type DeathKnightSpecs = Spec.SpecBloodDeathKnight | Spec.SpecFrostDeathKnight | Spec.SpecUnholyDeathKnight;
 export type DruidSpecs = Spec.SpecBalanceDruid | Spec.SpecFeralDruid | Spec.SpecGuardianDruid | Spec.SpecRestorationDruid;
 export type HunterSpecs = Spec.SpecBeastMasteryHunter | Spec.SpecMarksmanshipHunter | Spec.SpecSurvivalHunter;
 export type MageSpecs = Spec.SpecArcaneMage | Spec.SpecFireMage | Spec.SpecFrostMage;
@@ -233,37 +206,31 @@ export type RogueSpecs = Spec.SpecAssassinationRogue | Spec.SpecCombatRogue | Sp
 export type ShamanSpecs = Spec.SpecElementalShaman | Spec.SpecEnhancementShaman | Spec.SpecRestorationShaman;
 export type WarlockSpecs = Spec.SpecAfflictionWarlock | Spec.SpecDemonologyWarlock | Spec.SpecDestructionWarlock;
 export type WarriorSpecs = Spec.SpecArmsWarrior | Spec.SpecFuryWarrior | Spec.SpecProtectionWarrior;
-export type MonkSpecs = Spec.SpecBrewmasterMonk | Spec.SpecMistweaverMonk | Spec.SpecWindwalkerMonk;
 
-export type ClassSpecs<T extends Class> = T extends Class.ClassDeathKnight
-	? DeathKnightSpecs
-	: T extends Class.ClassDruid
-		? DruidSpecs
-		: T extends Class.ClassHunter
-			? HunterSpecs
-			: T extends Class.ClassMage
-				? MageSpecs
-				: T extends Class.ClassMonk
-					? MonkSpecs
-					: T extends Class.ClassPaladin
-						? PaladinSpecs
-						: T extends Class.ClassPriest
-							? PriestSpecs
-							: T extends Class.ClassRogue
-								? RogueSpecs
-								: T extends Class.ClassShaman
-									? ShamanSpecs
-									: T extends Class.ClassWarlock
-										? WarlockSpecs
-										: T extends Class.ClassWarrior
-											? WarriorSpecs
-											: // Should never reach this case
-												UnknownSpecs;
+export type ClassSpecs<T extends Class> = T extends Class.ClassDruid
+	? DruidSpecs
+	: T extends Class.ClassHunter
+		? HunterSpecs
+		: T extends Class.ClassMage
+			? MageSpecs
+			: T extends Class.ClassPaladin
+				? PaladinSpecs
+				: T extends Class.ClassPriest
+					? PriestSpecs
+					: T extends Class.ClassRogue
+						? RogueSpecs
+						: T extends Class.ClassShaman
+							? ShamanSpecs
+							: T extends Class.ClassWarlock
+								? WarlockSpecs
+								: T extends Class.ClassWarrior
+									? WarriorSpecs
+									: // Should never reach this case
+										UnknownSpecs;
 
-export type SpecClasses<T extends Spec> = T extends DeathKnightSpecs
-	? Class.ClassDeathKnight
-	: // Druid
-		T extends DruidSpecs
+export type SpecClasses<T extends Spec> =
+	// Druid
+	T extends DruidSpecs
 		? Class.ClassDruid
 		: // Hunter
 			T extends HunterSpecs
@@ -271,352 +238,295 @@ export type SpecClasses<T extends Spec> = T extends DeathKnightSpecs
 			: // Mage
 				T extends MageSpecs
 				? Class.ClassMage
-				: // Monk
-					T extends MonkSpecs
-					? Class.ClassMonk
-					: // Paladin
-						T extends PaladinSpecs
-						? Class.ClassPaladin
-						: // Priest
-							T extends PriestSpecs
-							? Class.ClassPriest
-							: // Rogue
-								T extends RogueSpecs
-								? Class.ClassRogue
-								: // Shaman
-									T extends ShamanSpecs
-									? Class.ClassShaman
-									: // Warlock
-										T extends WarlockSpecs
-										? Class.ClassWarlock
-										: // Warrior
-											T extends WarriorSpecs
-											? Class.ClassWarrior
-											: // Should never reach this case
-												Class.ClassUnknown;
+				: // Paladin
+					T extends PaladinSpecs
+					? Class.ClassPaladin
+					: // Priest
+						T extends PriestSpecs
+						? Class.ClassPriest
+						: // Rogue
+							T extends RogueSpecs
+							? Class.ClassRogue
+							: // Shaman
+								T extends ShamanSpecs
+								? Class.ClassShaman
+								: // Warlock
+									T extends WarlockSpecs
+									? Class.ClassWarlock
+									: // Warrior
+										T extends WarriorSpecs
+										? Class.ClassWarrior
+										: // Should never reach this case
+											Class.ClassUnknown;
 
 export type SpecRotation<T extends Spec> =
-	// Death Knight
-	T extends Spec.SpecBloodDeathKnight
-		? BloodDeathKnight_Rotation
-		: T extends Spec.SpecFrostDeathKnight
-			? FrostDeathKnight_Rotation
-			: T extends Spec.SpecUnholyDeathKnight
-				? UnholyDeathKnight_Rotation
-				: // Druid
-					T extends Spec.SpecBalanceDruid
-					? BalanceDruid_Rotation
-					: T extends Spec.SpecFeralDruid
-						? FeralDruid_Rotation
-						: T extends Spec.SpecGuardianDruid
-							? GuardianDruid_Rotation
-							: T extends Spec.SpecRestorationDruid
-								? RestorationDruid_Rotation
-								: // Hunter
-									T extends Spec.SpecBeastMasteryHunter
-									? BeastMasteryHunter_Rotation
-									: T extends Spec.SpecMarksmanshipHunter
-										? MarksmanshipHunter_Rotation
-										: T extends Spec.SpecSurvivalHunter
-											? SurvivalHunter_Rotation
-											: // Mage
-												T extends Spec.SpecArcaneMage
-												? ArcaneMage_Rotation
-												: T extends Spec.SpecFireMage
-													? FireMage_Rotation
-													: T extends Spec.SpecFrostMage
-														? FrostMage_Rotation
-														: // Monk
-															T extends Spec.SpecBrewmasterMonk
-															? BrewmasterMonk_Rotation
-															: T extends Spec.SpecMistweaverMonk
-																? MistweaverMonk_Rotation
-																: T extends Spec.SpecWindwalkerMonk
-																	? WindwalkerMonk_Rotation
-																	: // Paladin
-																		T extends Spec.SpecHolyPaladin
-																		? HolyPaladin_Rotation
-																		: T extends Spec.SpecProtectionPaladin
-																			? ProtectionPaladin_Rotation
-																			: T extends Spec.SpecRetributionPaladin
-																				? RetributionPaladin_Rotation
-																				: // Priest
-																					T extends Spec.SpecDisciplinePriest
-																					? DisciplinePriest_Rotation
-																					: T extends Spec.SpecHolyPriest
-																						? HolyPriest_Rotation
-																						: T extends Spec.SpecShadowPriest
-																							? ShadowPriest_Rotation
-																							: // Rogue
-																								T extends Spec.SpecAssassinationRogue
-																								? AssassinationRogue_Rotation
-																								: T extends Spec.SpecCombatRogue
-																									? CombatRogue_Rotation
-																									: T extends Spec.SpecSubtletyRogue
-																										? SubtletyRogue_Rotation
-																										: // Shaman
-																											T extends Spec.SpecElementalShaman
-																											? ElementalShaman_Rotation
-																											: T extends Spec.SpecEnhancementShaman
-																												? EnhancementShaman_Rotation
-																												: T extends Spec.SpecRestorationShaman
-																													? RestorationShaman_Rotation
-																													: // Warlock
-																														T extends Spec.SpecAfflictionWarlock
-																														? AfflictionWarlock_Rotation
-																														: T extends Spec.SpecDemonologyWarlock
-																															? DemonologyWarlock_Rotation
-																															: T extends Spec.SpecDestructionWarlock
-																																? DestructionWarlock_Rotation
-																																: // Warrior
-																																	T extends Spec.SpecArmsWarrior
-																																	? ArmsWarrior_Rotation
-																																	: T extends Spec.SpecFuryWarrior
-																																		? FuryWarrior_Rotation
-																																		: T extends Spec.SpecProtectionWarrior
-																																			? ProtectionWarrior_Rotation
-																																			: // Should never reach this case
-																																				UnknownRotation;
+	// Druid
+	T extends Spec.SpecBalanceDruid
+	? BalanceDruid_Rotation
+	: T extends Spec.SpecFeralDruid
+		? FeralDruid_Rotation
+		: T extends Spec.SpecGuardianDruid
+			? GuardianDruid_Rotation
+			: T extends Spec.SpecRestorationDruid
+				? RestorationDruid_Rotation
+				: // Hunter
+					T extends Spec.SpecBeastMasteryHunter
+					? BeastMasteryHunter_Rotation
+					: T extends Spec.SpecMarksmanshipHunter
+						? MarksmanshipHunter_Rotation
+						: T extends Spec.SpecSurvivalHunter
+							? SurvivalHunter_Rotation
+							: // Mage
+								T extends Spec.SpecArcaneMage
+								? ArcaneMage_Rotation
+								: T extends Spec.SpecFireMage
+									? FireMage_Rotation
+									: T extends Spec.SpecFrostMage
+										? FrostMage_Rotation
+										: // Paladin
+											T extends Spec.SpecHolyPaladin
+											? HolyPaladin_Rotation
+											: T extends Spec.SpecProtectionPaladin
+												? ProtectionPaladin_Rotation
+												: T extends Spec.SpecRetributionPaladin
+													? RetributionPaladin_Rotation
+													: // Priest
+														T extends Spec.SpecDisciplinePriest
+														? DisciplinePriest_Rotation
+														: T extends Spec.SpecHolyPriest
+															? HolyPriest_Rotation
+															: T extends Spec.SpecShadowPriest
+																? ShadowPriest_Rotation
+																: // Rogue
+																	T extends Spec.SpecAssassinationRogue
+																	? AssassinationRogue_Rotation
+																	: T extends Spec.SpecCombatRogue
+																		? CombatRogue_Rotation
+																		: T extends Spec.SpecSubtletyRogue
+																			? SubtletyRogue_Rotation
+																			: // Shaman
+																				T extends Spec.SpecElementalShaman
+																				? ElementalShaman_Rotation
+																				: T extends Spec.SpecEnhancementShaman
+																					? EnhancementShaman_Rotation
+																					: T extends Spec.SpecRestorationShaman
+																						? RestorationShaman_Rotation
+																						: // Warlock
+																							T extends Spec.SpecAfflictionWarlock
+																							? AfflictionWarlock_Rotation
+																							: T extends Spec.SpecDemonologyWarlock
+																								? DemonologyWarlock_Rotation
+																								: T extends Spec.SpecDestructionWarlock
+																									? DestructionWarlock_Rotation
+																									: // Warrior
+																										T extends Spec.SpecArmsWarrior
+																										? ArmsWarrior_Rotation
+																										: T extends Spec.SpecFuryWarrior
+																											? FuryWarrior_Rotation
+																											: T extends Spec.SpecProtectionWarrior
+																												? ProtectionWarrior_Rotation
+																												: // Should never reach this case
+																													UnknownRotation;
 
 export type SpecTalents<T extends Spec> =
-	// Death Knight
-	T extends DeathKnightSpecs
-		? DeathKnightTalents
-		: // Druid
-			T extends DruidSpecs
-			? DruidTalents
-			: // Hunter
-				T extends HunterSpecs
-				? HunterTalents
-				: // Mage
-					T extends MageSpecs
-					? MageTalents
-					: // Monk
-						T extends MonkSpecs
-						? MonkTalents
-						: // Paladin
-							T extends PaladinSpecs
-							? PaladinTalents
-							: // Priest
-								T extends PriestSpecs
-								? PriestTalents
-								: // Rogue
-									T extends RogueSpecs
-									? RogueTalents
-									: // Shaman
-										T extends ShamanSpecs
-										? ShamanTalents
-										: // Warlock
-											T extends WarlockSpecs
-											? WarlockTalents
-											: // Warrior
-												T extends WarriorSpecs
-												? WarriorTalents
-												: // Should never reach this case
-													UnknownTalents;
+	// Druid
+	T extends DruidSpecs
+	? DruidTalents
+	: // Hunter
+		T extends HunterSpecs
+		? HunterTalents
+		: // Mage
+			T extends MageSpecs
+			? MageTalents
+			: // Paladin
+				T extends PaladinSpecs
+				? PaladinTalents
+				: // Priest
+					T extends PriestSpecs
+					? PriestTalents
+					: // Rogue
+						T extends RogueSpecs
+						? RogueTalents
+						: // Shaman
+							T extends ShamanSpecs
+							? ShamanTalents
+							: // Warlock
+								T extends WarlockSpecs
+								? WarlockTalents
+								: // Warrior
+									T extends WarriorSpecs
+									? WarriorTalents
+									: // Should never reach this case
+										UnknownTalents;
 
 export type ClassOptions<T extends Spec> =
-	// Death Knight
-	T extends DeathKnightSpecs
-		? DeathKnightOptions
-		: // Druid
-			T extends DruidSpecs
-			? DruidOptions
-			: // Hunter
-				T extends HunterSpecs
-				? HunterOptions
-				: // Mage
-					T extends MageSpecs
-					? MageOptions
-					: // Monk
-						T extends MonkSpecs
-						? MonkOptions
-						: // Paladin
-							T extends PaladinSpecs
-							? PaladinOptions
-							: // Priest
-								T extends PriestSpecs
-								? PriestOptions
-								: // Rogue
-									T extends RogueSpecs
-									? RogueOptions
-									: // Shaman
-										T extends ShamanSpecs
-										? ShamanOptions
-										: // Warlock
-											T extends WarlockSpecs
-											? WarlockOptions
-											: // Warrior
-												T extends WarriorSpecs
-												? WarriorOptions
-												: // Should never reach this case
-													UnknownClassOptions;
+	// Druid
+	T extends DruidSpecs
+	? DruidOptions
+	: // Hunter
+		T extends HunterSpecs
+		? HunterOptions
+		: // Mage
+			T extends MageSpecs
+			? MageOptions
+				: // Paladin
+					T extends PaladinSpecs
+					? PaladinOptions
+					: // Priest
+						T extends PriestSpecs
+						? PriestOptions
+						: // Rogue
+							T extends RogueSpecs
+							? RogueOptions
+							: // Shaman
+								T extends ShamanSpecs
+								? ShamanOptions
+								: // Warlock
+									T extends WarlockSpecs
+									? WarlockOptions
+									: // Warrior
+										T extends WarriorSpecs
+										? WarriorOptions
+										: // Should never reach this case
+											UnknownClassOptions;
 
 export type SpecOptions<T extends Spec> =
-	// Death Knight
-	T extends Spec.SpecBloodDeathKnight
-		? BloodDeathKnight_Options
-		: T extends Spec.SpecFrostDeathKnight
-			? FrostDeathKnight_Options
-			: T extends Spec.SpecUnholyDeathKnight
-				? UnholyDeathKnight_Options
-				: // Druid
-					T extends Spec.SpecBalanceDruid
-					? BalanceDruid_Options
-					: T extends Spec.SpecFeralDruid
-						? FeralDruid_Options
-						: T extends Spec.SpecGuardianDruid
-							? GuardianDruid_Options
-							: T extends Spec.SpecRestorationDruid
-								? RestorationDruid_Options
-								: // Hunter
-									T extends Spec.SpecBeastMasteryHunter
-									? BeastMasteryHunter_Options
-									: T extends Spec.SpecMarksmanshipHunter
-										? MarksmanshipHunter_Options
-										: T extends Spec.SpecSurvivalHunter
-											? SurvivalHunter_Options
-											: // Mage
-												T extends Spec.SpecArcaneMage
-												? ArcaneMage_Options
-												: T extends Spec.SpecFireMage
-													? FireMage_Options
-													: T extends Spec.SpecFrostMage
-														? FrostMage_Options
-														: // Monk
-															T extends Spec.SpecBrewmasterMonk
-															? BrewmasterMonk_Options
-															: T extends Spec.SpecMistweaverMonk
-																? MistweaverMonk_Options
-																: T extends Spec.SpecWindwalkerMonk
-																	? WindwalkerMonk_Options
-																	: // Paladin
-																		T extends Spec.SpecHolyPaladin
-																		? HolyPaladin_Options
-																		: T extends Spec.SpecProtectionPaladin
-																			? ProtectionPaladin_Options
-																			: T extends Spec.SpecRetributionPaladin
-																				? RetributionPaladin_Options
-																				: // Priest
-																					T extends Spec.SpecDisciplinePriest
-																					? DisciplinePriest_Options
-																					: T extends Spec.SpecHolyPriest
-																						? HolyPriest_Options
-																						: T extends Spec.SpecShadowPriest
-																							? ShadowPriest_Options
-																							: // Rogue
-																								T extends Spec.SpecAssassinationRogue
-																								? AssassinationRogue_Options
-																								: T extends Spec.SpecCombatRogue
-																									? CombatRogue_Options
-																									: T extends Spec.SpecSubtletyRogue
-																										? SubtletyRogue_Options
-																										: // Shaman
-																											T extends Spec.SpecElementalShaman
-																											? ElementalShaman_Options
-																											: T extends Spec.SpecEnhancementShaman
-																												? EnhancementShaman_Options
-																												: T extends Spec.SpecRestorationShaman
-																													? RestorationShaman_Options
-																													: // Warlock
-																														T extends Spec.SpecAfflictionWarlock
-																														? AfflictionWarlock_Options
-																														: T extends Spec.SpecDemonologyWarlock
-																															? DemonologyWarlock_Options
-																															: T extends Spec.SpecDestructionWarlock
-																																? DestructionWarlock_Options
-																																: // Warrior
-																																	T extends Spec.SpecArmsWarrior
-																																	? ArmsWarrior_Options
-																																	: T extends Spec.SpecFuryWarrior
-																																		? FuryWarrior_Options
-																																		: T extends Spec.SpecProtectionWarrior
-																																			? ProtectionWarrior_Options
-																																			: // Should never reach this case
-																																				UnknownSpecOptions;
+	// Druid
+	T extends Spec.SpecBalanceDruid
+	? BalanceDruid_Options
+	: T extends Spec.SpecFeralDruid
+		? FeralDruid_Options
+		: T extends Spec.SpecGuardianDruid
+			? GuardianDruid_Options
+			: T extends Spec.SpecRestorationDruid
+				? RestorationDruid_Options
+				: // Hunter
+					T extends Spec.SpecBeastMasteryHunter
+					? BeastMasteryHunter_Options
+					: T extends Spec.SpecMarksmanshipHunter
+						? MarksmanshipHunter_Options
+						: T extends Spec.SpecSurvivalHunter
+							? SurvivalHunter_Options
+							: // Mage
+								T extends Spec.SpecArcaneMage
+								? ArcaneMage_Options
+								: T extends Spec.SpecFireMage
+									? FireMage_Options
+									: T extends Spec.SpecFrostMage
+										? FrostMage_Options
+										: // Paladin
+											T extends Spec.SpecHolyPaladin
+											? HolyPaladin_Options
+											: T extends Spec.SpecProtectionPaladin
+												? ProtectionPaladin_Options
+												: T extends Spec.SpecRetributionPaladin
+													? RetributionPaladin_Options
+													: // Priest
+														T extends Spec.SpecDisciplinePriest
+														? DisciplinePriest_Options
+														: T extends Spec.SpecHolyPriest
+															? HolyPriest_Options
+															: T extends Spec.SpecShadowPriest
+																? ShadowPriest_Options
+																: // Rogue
+																	T extends Spec.SpecAssassinationRogue
+																	? AssassinationRogue_Options
+																	: T extends Spec.SpecCombatRogue
+																		? CombatRogue_Options
+																		: T extends Spec.SpecSubtletyRogue
+																			? SubtletyRogue_Options
+																			: // Shaman
+																				T extends Spec.SpecElementalShaman
+																				? ElementalShaman_Options
+																				: T extends Spec.SpecEnhancementShaman
+																					? EnhancementShaman_Options
+																					: T extends Spec.SpecRestorationShaman
+																						? RestorationShaman_Options
+																						: // Warlock
+																							T extends Spec.SpecAfflictionWarlock
+																							? AfflictionWarlock_Options
+																							: T extends Spec.SpecDemonologyWarlock
+																								? DemonologyWarlock_Options
+																								: T extends Spec.SpecDestructionWarlock
+																									? DestructionWarlock_Options
+																									: // Warrior
+																										T extends Spec.SpecArmsWarrior
+																										? ArmsWarrior_Options
+																										: T extends Spec.SpecFuryWarrior
+																											? FuryWarrior_Options
+																											: T extends Spec.SpecProtectionWarrior
+																												? ProtectionWarrior_Options
+																												: // Should never reach this case
+																													UnknownSpecOptions;
 
 export type SpecType<T extends Spec> =
-	// Death Knight
-	T extends Spec.SpecBloodDeathKnight
-		? BloodDeathKnight
-		: T extends Spec.SpecFrostDeathKnight
-			? FrostDeathKnight
-			: T extends Spec.SpecUnholyDeathKnight
-				? UnholyDeathKnight
-				: // Druid
-					T extends Spec.SpecBalanceDruid
-					? BalanceDruid
-					: T extends Spec.SpecFeralDruid
-						? FeralDruid
-						: T extends Spec.SpecGuardianDruid
-							? GuardianDruid
-							: T extends Spec.SpecRestorationDruid
-								? RestorationDruid
-								: // Hunter
-									T extends Spec.SpecBeastMasteryHunter
-									? BeastMasteryHunter
-									: T extends Spec.SpecMarksmanshipHunter
-										? MarksmanshipHunter
-										: T extends Spec.SpecSurvivalHunter
-											? SurvivalHunter
-											: // Mage
-												T extends Spec.SpecArcaneMage
-												? ArcaneMage
-												: T extends Spec.SpecFireMage
-													? FireMage
-													: T extends Spec.SpecFrostMage
-														? FrostMage
-														: // Monk
-															T extends Spec.SpecBrewmasterMonk
-															? BrewmasterMonk
-															: T extends Spec.SpecMistweaverMonk
-																? MistweaverMonk
-																: T extends Spec.SpecWindwalkerMonk
-																	? WindwalkerMonk
-																	: // Paladin
-																		T extends Spec.SpecHolyPaladin
-																		? HolyPaladin
-																		: T extends Spec.SpecProtectionPaladin
-																			? ProtectionPaladin
-																			: T extends Spec.SpecRetributionPaladin
-																				? RetributionPaladin
-																				: // Priest
-																					T extends Spec.SpecDisciplinePriest
-																					? DisciplinePriest
-																					: T extends Spec.SpecHolyPriest
-																						? HolyPriest
-																						: T extends Spec.SpecShadowPriest
-																							? ShadowPriest
-																							: // Rogue
-																								T extends Spec.SpecAssassinationRogue
-																								? AssassinationRogue
-																								: T extends Spec.SpecCombatRogue
-																									? CombatRogue
-																									: T extends Spec.SpecSubtletyRogue
-																										? SubtletyRogue
-																										: // Shaman
-																											T extends Spec.SpecElementalShaman
-																											? ElementalShaman
-																											: T extends Spec.SpecEnhancementShaman
-																												? EnhancementShaman
-																												: T extends Spec.SpecRestorationShaman
-																													? RestorationShaman
-																													: // Warlock
-																														T extends Spec.SpecAfflictionWarlock
-																														? AfflictionWarlock
-																														: T extends Spec.SpecDemonologyWarlock
-																															? DemonologyWarlock
-																															: T extends Spec.SpecDestructionWarlock
-																																? DestructionWarlock
-																																: // Warrior
-																																	T extends Spec.SpecArmsWarrior
-																																	? ArmsWarrior
-																																	: T extends Spec.SpecFuryWarrior
-																																		? FuryWarrior
-																																		: T extends Spec.SpecProtectionWarrior
-																																			? ProtectionWarrior
-																																			: // Should never reach this case
-																																				Spec.SpecUnknown;
+	// Druid
+	T extends Spec.SpecBalanceDruid
+	? BalanceDruid
+	: T extends Spec.SpecFeralDruid
+		? FeralDruid
+		: T extends Spec.SpecGuardianDruid
+			? GuardianDruid
+			: T extends Spec.SpecRestorationDruid
+				? RestorationDruid
+				: // Hunter
+					T extends Spec.SpecBeastMasteryHunter
+					? BeastMasteryHunter
+					: T extends Spec.SpecMarksmanshipHunter
+						? MarksmanshipHunter
+						: T extends Spec.SpecSurvivalHunter
+							? SurvivalHunter
+							: // Mage
+								T extends Spec.SpecArcaneMage
+								? ArcaneMage
+								: T extends Spec.SpecFireMage
+									? FireMage
+									: T extends Spec.SpecFrostMage
+										? FrostMage
+										: // Paladin
+											T extends Spec.SpecHolyPaladin
+											? HolyPaladin
+											: T extends Spec.SpecProtectionPaladin
+												? ProtectionPaladin
+												: T extends Spec.SpecRetributionPaladin
+													? RetributionPaladin
+													: // Priest
+														T extends Spec.SpecDisciplinePriest
+														? DisciplinePriest
+														: T extends Spec.SpecHolyPriest
+															? HolyPriest
+															: T extends Spec.SpecShadowPriest
+																? ShadowPriest
+																: // Rogue
+																	T extends Spec.SpecAssassinationRogue
+																	? AssassinationRogue
+																	: T extends Spec.SpecCombatRogue
+																		? CombatRogue
+																		: T extends Spec.SpecSubtletyRogue
+																			? SubtletyRogue
+																			: // Shaman
+																				T extends Spec.SpecElementalShaman
+																				? ElementalShaman
+																				: T extends Spec.SpecEnhancementShaman
+																					? EnhancementShaman
+																					: T extends Spec.SpecRestorationShaman
+																						? RestorationShaman
+																						: // Warlock
+																							T extends Spec.SpecAfflictionWarlock
+																							? AfflictionWarlock
+																							: T extends Spec.SpecDemonologyWarlock
+																								? DemonologyWarlock
+																								: T extends Spec.SpecDestructionWarlock
+																									? DestructionWarlock
+																									: // Warrior
+																										T extends Spec.SpecArmsWarrior
+																										? ArmsWarrior
+																										: T extends Spec.SpecFuryWarrior
+																											? FuryWarrior
+																											: T extends Spec.SpecProtectionWarrior
+																												? ProtectionWarrior
+																												: // Should never reach this case
+																													Spec.SpecUnknown;
 
 export type SpecTypeFunctions<SpecType extends Spec> = {
 	rotationCreate: () => SpecRotation<SpecType>;
@@ -661,76 +571,6 @@ export const specTypeFunctions: Record<Spec, SpecTypeFunctions<any>> = {
 		optionsFromPlayer: _player => new UnknownSpecOptions(),
 	},
 
-	// Death Knight
-	[Spec.SpecBloodDeathKnight]: {
-		rotationCreate: () => BloodDeathKnight_Rotation.create(),
-		rotationEquals: (a, b) => BloodDeathKnight_Rotation.equals(a as BloodDeathKnight_Rotation, b as BloodDeathKnight_Rotation),
-		rotationCopy: a => BloodDeathKnight_Rotation.clone(a as BloodDeathKnight_Rotation),
-		rotationToJson: a => BloodDeathKnight_Rotation.toJson(a as BloodDeathKnight_Rotation),
-		rotationFromJson: obj => BloodDeathKnight_Rotation.fromJson(obj),
-
-		talentsCreate: () => DeathKnightTalents.create(),
-		talentsEquals: (a, b) => DeathKnightTalents.equals(a as DeathKnightTalents, b as DeathKnightTalents),
-		talentsCopy: a => DeathKnightTalents.clone(a as DeathKnightTalents),
-		talentsToJson: a => DeathKnightTalents.toJson(a as DeathKnightTalents),
-		talentsFromJson: obj => DeathKnightTalents.fromJson(obj),
-
-		optionsCreate: () => BloodDeathKnight_Options.create({ classOptions: {} }),
-		optionsEquals: (a, b) => BloodDeathKnight_Options.equals(a as BloodDeathKnight_Options, b as BloodDeathKnight_Options),
-		optionsCopy: a => BloodDeathKnight_Options.clone(a as BloodDeathKnight_Options),
-		optionsToJson: a => BloodDeathKnight_Options.toJson(a as BloodDeathKnight_Options),
-		optionsFromJson: obj => BloodDeathKnight_Options.fromJson(obj),
-		optionsFromPlayer: player =>
-			player.spec.oneofKind == 'bloodDeathKnight'
-				? player.spec.bloodDeathKnight.options || BloodDeathKnight_Options.create()
-				: BloodDeathKnight_Options.create({ classOptions: {} }),
-	},
-	[Spec.SpecFrostDeathKnight]: {
-		rotationCreate: () => FrostDeathKnight_Rotation.create(),
-		rotationEquals: (a, b) => FrostDeathKnight_Rotation.equals(a as FrostDeathKnight_Rotation, b as FrostDeathKnight_Rotation),
-		rotationCopy: a => FrostDeathKnight_Rotation.clone(a as FrostDeathKnight_Rotation),
-		rotationToJson: a => FrostDeathKnight_Rotation.toJson(a as FrostDeathKnight_Rotation),
-		rotationFromJson: obj => FrostDeathKnight_Rotation.fromJson(obj),
-
-		talentsCreate: () => DeathKnightTalents.create(),
-		talentsEquals: (a, b) => DeathKnightTalents.equals(a as DeathKnightTalents, b as DeathKnightTalents),
-		talentsCopy: a => DeathKnightTalents.clone(a as DeathKnightTalents),
-		talentsToJson: a => DeathKnightTalents.toJson(a as DeathKnightTalents),
-		talentsFromJson: obj => DeathKnightTalents.fromJson(obj),
-
-		optionsCreate: () => FrostDeathKnight_Options.create({ classOptions: {} }),
-		optionsEquals: (a, b) => FrostDeathKnight_Options.equals(a as FrostDeathKnight_Options, b as FrostDeathKnight_Options),
-		optionsCopy: a => FrostDeathKnight_Options.clone(a as FrostDeathKnight_Options),
-		optionsToJson: a => FrostDeathKnight_Options.toJson(a as FrostDeathKnight_Options),
-		optionsFromJson: obj => FrostDeathKnight_Options.fromJson(obj),
-		optionsFromPlayer: player =>
-			player.spec.oneofKind == 'frostDeathKnight'
-				? player.spec.frostDeathKnight.options || FrostDeathKnight_Options.create()
-				: FrostDeathKnight_Options.create({ classOptions: {} }),
-	},
-	[Spec.SpecUnholyDeathKnight]: {
-		rotationCreate: () => UnholyDeathKnight_Rotation.create(),
-		rotationEquals: (a, b) => UnholyDeathKnight_Rotation.equals(a as UnholyDeathKnight_Rotation, b as UnholyDeathKnight_Rotation),
-		rotationCopy: a => UnholyDeathKnight_Rotation.clone(a as UnholyDeathKnight_Rotation),
-		rotationToJson: a => UnholyDeathKnight_Rotation.toJson(a as UnholyDeathKnight_Rotation),
-		rotationFromJson: obj => UnholyDeathKnight_Rotation.fromJson(obj),
-
-		talentsCreate: () => DeathKnightTalents.create(),
-		talentsEquals: (a, b) => DeathKnightTalents.equals(a as DeathKnightTalents, b as DeathKnightTalents),
-		talentsCopy: a => DeathKnightTalents.clone(a as DeathKnightTalents),
-		talentsToJson: a => DeathKnightTalents.toJson(a as DeathKnightTalents),
-		talentsFromJson: obj => DeathKnightTalents.fromJson(obj),
-
-		optionsCreate: () => UnholyDeathKnight_Options.create({ classOptions: {} }),
-		optionsEquals: (a, b) => UnholyDeathKnight_Options.equals(a as UnholyDeathKnight_Options, b as UnholyDeathKnight_Options),
-		optionsCopy: a => UnholyDeathKnight_Options.clone(a as UnholyDeathKnight_Options),
-		optionsToJson: a => UnholyDeathKnight_Options.toJson(a as UnholyDeathKnight_Options),
-		optionsFromJson: obj => UnholyDeathKnight_Options.fromJson(obj),
-		optionsFromPlayer: player =>
-			player.spec.oneofKind == 'unholyDeathKnight'
-				? player.spec.unholyDeathKnight.options || UnholyDeathKnight_Options.create()
-				: UnholyDeathKnight_Options.create({ classOptions: {} }),
-	},
 	// Druid
 	[Spec.SpecBalanceDruid]: {
 		rotationCreate: () => BalanceDruid_Rotation.create(),
@@ -959,76 +799,6 @@ export const specTypeFunctions: Record<Spec, SpecTypeFunctions<any>> = {
 		optionsFromJson: obj => FrostMage_Options.fromJson(obj),
 		optionsFromPlayer: player =>
 			player.spec.oneofKind == 'frostMage' ? player.spec.frostMage.options || FrostMage_Options.create() : FrostMage_Options.create({ classOptions: {} }),
-	},
-	// Monk
-	[Spec.SpecBrewmasterMonk]: {
-		rotationCreate: () => BrewmasterMonk_Rotation.create(),
-		rotationEquals: (a, b) => BrewmasterMonk_Rotation.equals(a as BrewmasterMonk_Rotation, b as BrewmasterMonk_Rotation),
-		rotationCopy: a => BrewmasterMonk_Rotation.clone(a as BrewmasterMonk_Rotation),
-		rotationToJson: a => BrewmasterMonk_Rotation.toJson(a as BrewmasterMonk_Rotation),
-		rotationFromJson: obj => BrewmasterMonk_Rotation.fromJson(obj),
-
-		talentsCreate: () => MonkTalents.create(),
-		talentsEquals: (a, b) => MonkTalents.equals(a as MonkTalents, b as MonkTalents),
-		talentsCopy: a => MonkTalents.clone(a as MonkTalents),
-		talentsToJson: a => MonkTalents.toJson(a as MonkTalents),
-		talentsFromJson: obj => MonkTalents.fromJson(obj),
-
-		optionsCreate: () => BrewmasterMonk_Options.create({ classOptions: {} }),
-		optionsEquals: (a, b) => BrewmasterMonk_Options.equals(a as BrewmasterMonk_Options, b as BrewmasterMonk_Options),
-		optionsCopy: a => BrewmasterMonk_Options.clone(a as BrewmasterMonk_Options),
-		optionsToJson: a => BrewmasterMonk_Options.toJson(a as BrewmasterMonk_Options),
-		optionsFromJson: obj => BrewmasterMonk_Options.fromJson(obj),
-		optionsFromPlayer: player =>
-			player.spec.oneofKind == 'brewmasterMonk'
-				? player.spec.brewmasterMonk.options || BrewmasterMonk_Options.create()
-				: BrewmasterMonk_Options.create({ classOptions: {} }),
-	},
-	[Spec.SpecMistweaverMonk]: {
-		rotationCreate: () => MistweaverMonk_Rotation.create(),
-		rotationEquals: (a, b) => MistweaverMonk_Rotation.equals(a as MistweaverMonk_Rotation, b as MistweaverMonk_Rotation),
-		rotationCopy: a => MistweaverMonk_Rotation.clone(a as MistweaverMonk_Rotation),
-		rotationToJson: a => MistweaverMonk_Rotation.toJson(a as MistweaverMonk_Rotation),
-		rotationFromJson: obj => MistweaverMonk_Rotation.fromJson(obj),
-
-		talentsCreate: () => MonkTalents.create(),
-		talentsEquals: (a, b) => MonkTalents.equals(a as MonkTalents, b as MonkTalents),
-		talentsCopy: a => MonkTalents.clone(a as MonkTalents),
-		talentsToJson: a => MonkTalents.toJson(a as MonkTalents),
-		talentsFromJson: obj => MonkTalents.fromJson(obj),
-
-		optionsCreate: () => MistweaverMonk_Options.create({ classOptions: {} }),
-		optionsEquals: (a, b) => MistweaverMonk_Options.equals(a as MistweaverMonk_Options, b as MistweaverMonk_Options),
-		optionsCopy: a => MistweaverMonk_Options.clone(a as MistweaverMonk_Options),
-		optionsToJson: a => MistweaverMonk_Options.toJson(a as MistweaverMonk_Options),
-		optionsFromJson: obj => MistweaverMonk_Options.fromJson(obj),
-		optionsFromPlayer: player =>
-			player.spec.oneofKind == 'mistweaverMonk'
-				? player.spec.mistweaverMonk.options || MistweaverMonk_Options.create()
-				: MistweaverMonk_Options.create({ classOptions: {} }),
-	},
-	[Spec.SpecWindwalkerMonk]: {
-		rotationCreate: () => WindwalkerMonk_Rotation.create(),
-		rotationEquals: (a, b) => WindwalkerMonk_Rotation.equals(a as WindwalkerMonk_Rotation, b as WindwalkerMonk_Rotation),
-		rotationCopy: a => WindwalkerMonk_Rotation.clone(a as WindwalkerMonk_Rotation),
-		rotationToJson: a => WindwalkerMonk_Rotation.toJson(a as WindwalkerMonk_Rotation),
-		rotationFromJson: obj => WindwalkerMonk_Rotation.fromJson(obj),
-
-		talentsCreate: () => MonkTalents.create(),
-		talentsEquals: (a, b) => MonkTalents.equals(a as MonkTalents, b as MonkTalents),
-		talentsCopy: a => MonkTalents.clone(a as MonkTalents),
-		talentsToJson: a => MonkTalents.toJson(a as MonkTalents),
-		talentsFromJson: obj => MonkTalents.fromJson(obj),
-
-		optionsCreate: () => WindwalkerMonk_Options.create({ classOptions: {} }),
-		optionsEquals: (a, b) => WindwalkerMonk_Options.equals(a as WindwalkerMonk_Options, b as WindwalkerMonk_Options),
-		optionsCopy: a => WindwalkerMonk_Options.clone(a as WindwalkerMonk_Options),
-		optionsToJson: a => WindwalkerMonk_Options.toJson(a as WindwalkerMonk_Options),
-		optionsFromJson: obj => WindwalkerMonk_Options.fromJson(obj),
-		optionsFromPlayer: player =>
-			player.spec.oneofKind == 'windwalkerMonk'
-				? player.spec.windwalkerMonk.options || WindwalkerMonk_Options.create()
-				: WindwalkerMonk_Options.create({ classOptions: {} }),
 	},
 	// Paladin
 	[Spec.SpecHolyPaladin]: {
@@ -1477,31 +1247,6 @@ export function withSpec<SpecType extends Spec>(spec: Spec, player: Player, spec
 	const copy = Player.clone(player);
 
 	switch (spec) {
-		// Death Knight
-		case Spec.SpecBloodDeathKnight:
-			copy.spec = {
-				oneofKind: 'bloodDeathKnight',
-				bloodDeathKnight: BloodDeathKnight.create({
-					options: specOptions as BloodDeathKnight_Options,
-				}),
-			};
-			return copy;
-		case Spec.SpecFrostDeathKnight:
-			copy.spec = {
-				oneofKind: 'frostDeathKnight',
-				frostDeathKnight: FrostDeathKnight.create({
-					options: specOptions as FrostDeathKnight_Options,
-				}),
-			};
-			return copy;
-		case Spec.SpecUnholyDeathKnight:
-			copy.spec = {
-				oneofKind: 'unholyDeathKnight',
-				unholyDeathKnight: UnholyDeathKnight.create({
-					options: specOptions as UnholyDeathKnight_Options,
-				}),
-			};
-			return copy;
 		// Druid
 		case Spec.SpecBalanceDruid:
 			copy.spec = {
@@ -1582,31 +1327,6 @@ export function withSpec<SpecType extends Spec>(spec: Spec, player: Player, spec
 				oneofKind: 'frostMage',
 				frostMage: FrostMage.create({
 					options: specOptions as FrostMage_Options,
-				}),
-			};
-			return copy;
-		// Monk
-		case Spec.SpecBrewmasterMonk:
-			copy.spec = {
-				oneofKind: 'brewmasterMonk',
-				brewmasterMonk: BrewmasterMonk.create({
-					options: specOptions as BrewmasterMonk_Options,
-				}),
-			};
-			return copy;
-		case Spec.SpecMistweaverMonk:
-			copy.spec = {
-				oneofKind: 'mistweaverMonk',
-				mistweaverMonk: MistweaverMonk.create({
-					options: specOptions as MistweaverMonk_Options,
-				}),
-			};
-			return copy;
-		case Spec.SpecWindwalkerMonk:
-			copy.spec = {
-				oneofKind: 'windwalkerMonk',
-				windwalkerMonk: WindwalkerMonk.create({
-					options: specOptions as WindwalkerMonk_Options,
 				}),
 			};
 			return copy;
@@ -2037,14 +1757,8 @@ export const orderedResourceTypes: Array<ResourceType> = [
 	ResourceType.ResourceTypeMana,
 	ResourceType.ResourceTypeEnergy,
 	ResourceType.ResourceTypeRage,
-	ResourceType.ResourceTypeChi,
 	ResourceType.ResourceTypeComboPoints,
 	ResourceType.ResourceTypeFocus,
-	ResourceType.ResourceTypeRunicPower,
-	ResourceType.ResourceTypeBloodRune,
-	ResourceType.ResourceTypeFrostRune,
-	ResourceType.ResourceTypeUnholyRune,
-	ResourceType.ResourceTypeDeathRune,
 	ResourceType.ResourceTypeLunarEnergy,
 	ResourceType.ResourceTypeSolarEnergy,
 	ResourceType.ResourceTypeGenericResource,

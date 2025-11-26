@@ -364,15 +364,6 @@ func GetTestBuildFromJSON(class proto.Class, dir string, file string, itemFilter
 }
 
 func getPlayerSpecOptions(player *proto.Player) interface{} {
-	if playerSpec, ok := player.Spec.(*proto.Player_BloodDeathKnight); ok {
-		return playerSpec
-	}
-	if playerSpec, ok := player.Spec.(*proto.Player_FrostDeathKnight); ok {
-		return playerSpec
-	}
-	if playerSpec, ok := player.Spec.(*proto.Player_UnholyDeathKnight); ok {
-		return playerSpec
-	}
 	if playerSpec, ok := player.Spec.(*proto.Player_BalanceDruid); ok {
 		return playerSpec
 	}
@@ -401,15 +392,6 @@ func getPlayerSpecOptions(player *proto.Player) interface{} {
 		return playerSpec
 	}
 	if playerSpec, ok := player.Spec.(*proto.Player_FrostMage); ok {
-		return playerSpec
-	}
-	if playerSpec, ok := player.Spec.(*proto.Player_BrewmasterMonk); ok {
-		return playerSpec
-	}
-	if playerSpec, ok := player.Spec.(*proto.Player_MistweaverMonk); ok {
-		return playerSpec
-	}
-	if playerSpec, ok := player.Spec.(*proto.Player_WindwalkerMonk); ok {
 		return playerSpec
 	}
 	if playerSpec, ok := player.Spec.(*proto.Player_HolyPaladin); ok {

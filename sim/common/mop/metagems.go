@@ -85,18 +85,13 @@ func init() {
 				WithSpecMod(-0.40000000596, proto.Spec_SpecProtectionWarrior).
 				WithSpecMod(0.72100001574, proto.Spec_SpecFeralDruid).
 				WithSpecMod(-0.40000000596, proto.Spec_SpecGuardianDruid).
-				WithSpecMod(-0.40000000596, proto.Spec_SpecBloodDeathKnight).
-				WithSpecMod(0.53200000525, proto.Spec_SpecFrostDeathKnight).
-				WithSpecMod(-0.16200000048, proto.Spec_SpecUnholyDeathKnight).
 				WithSpecMod(-0.05000000075, proto.Spec_SpecBeastMasteryHunter).
 				WithSpecMod(0.10700000077, proto.Spec_SpecMarksmanshipHunter).
 				WithSpecMod(-0.05000000075, proto.Spec_SpecSurvivalHunter).
 				WithSpecMod(0.78899997473, proto.Spec_SpecAssassinationRogue).
 				WithSpecMod(0.13600000739, proto.Spec_SpecCombatRogue).
 				WithSpecMod(0.11400000006, proto.Spec_SpecSubtletyRogue).
-				WithSpecMod(-0.19099999964, proto.Spec_SpecEnhancementShaman).
-				WithSpecMod(-0.40000000596, proto.Spec_SpecBrewmasterMonk).
-				WithSpecMod(0.0869999975, proto.Spec_SpecWindwalkerMonk),
+				WithSpecMod(-0.19099999964, proto.Spec_SpecEnhancementShaman),
 			),
 			Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 				target = result.Target

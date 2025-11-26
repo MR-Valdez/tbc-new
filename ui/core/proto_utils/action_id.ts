@@ -117,22 +117,6 @@ export class ActionId {
 				baseName = 'Incoming HPS';
 				iconUrl = 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_renew.jpg';
 				break;
-			case OtherAction.OtherActionBloodRuneGain:
-				baseName = 'Blood Rune Gain';
-				iconUrl = 'https://wow.zamimg.com/images/wow/icons/medium/spell_deathknight_deathstrike.jpg';
-				break;
-			case OtherAction.OtherActionFrostRuneGain:
-				baseName = 'Frost Rune Gain';
-				iconUrl = 'https://wow.zamimg.com/images/wow/icons/medium/spell_deathknight_deathstrike2.jpg';
-				break;
-			case OtherAction.OtherActionUnholyRuneGain:
-				baseName = 'Unholy Rune Gain';
-				iconUrl = 'https://wow.zamimg.com/images/wow/icons/medium/spell_deathknight_empowerruneblade.jpg';
-				break;
-			case OtherAction.OtherActionDeathRuneGain:
-				baseName = 'Death Rune Gain';
-				iconUrl = 'https://wow.zamimg.com/images/wow/icons/medium/spell_deathknight_empowerruneblade.jpg';
-				break;
 			case OtherAction.OtherActionPotion:
 				baseName = 'Potion';
 				iconUrl = 'https://wow.zamimg.com/images/wow/icons/large/inv_alchemy_elixir_04.jpg';
@@ -281,15 +265,6 @@ export class ActionId {
 		let name = baseName;
 
 		let tag = this.tag;
-		// Handle Monk's Storm, Earth and Fire
-		if (tag >= 138228) {
-			tag -= 138228;
-		}
-		// Handle DTR
-		else if (tag >= 71086 && tag <= 71096) {
-			name = 'Dragonwrath - ' + name;
-			tag -= 71086;
-		}
 
 		switch (baseName) {
 			case 'Minor Speed':
@@ -614,14 +589,6 @@ export class ActionId {
 				break;
 			case 'Whirlwind':
 			case 'Storm Bolt':
-			case 'Frost Strike':
-			case 'Plague Strike':
-			case 'Blood Strike':
-			case 'Obliterate':
-			case 'Rune of Razorice':
-			case 'Blood-Caked Strike':
-			case 'Festering Strike':
-			case 'Razor Frost':
 			case 'Lightning Speed':
 			case 'Windfury Weapon':
 			case 'Berserk':
@@ -629,15 +596,6 @@ export class ActionId {
 					name += ' (Main Hand)';
 				} else if (tag == 2) {
 					name += ' (Off Hand)';
-				}
-				break;
-			case 'Death Strike':
-				if (tag == 1) {
-					name += ' (Main Hand)';
-				} else if (tag == 2) {
-					name += ' (Off Hand)';
-				} else if (this.spellId === 45470) {
-					name += ' (Heal)';
 				}
 				break;
 			case 'Battle Shout':
@@ -794,74 +752,6 @@ export class ActionId {
 				}
 				break;
 
-			// Monk
-			case 'Tiger Strikes':
-				if (this.spellId === 120274) {
-					name += ' (Main Hand)';
-				} else {
-					name += ' (Off Hand)';
-				}
-				break;
-			case 'Blackout Kick':
-				if (tag === 2) {
-					name += ' (DoT)';
-				}
-				break;
-			case 'Expel Harm':
-				if (this.spellId === 115072) {
-					name += ' (Heal)';
-				} else {
-					name += ' (Damage)';
-				}
-				break;
-			case 'Chi Wave':
-				if (this.spellId === 132463) {
-					name += ' (Heal)';
-				} else if (this.spellId === 132467) {
-					name += ' (Damage)';
-				}
-				break;
-			case 'Zen Sphere':
-			case 'Zen Sphere: Detonate':
-				if (this.spellId === 124081) {
-					if ([4, 5].includes(this.tag)) {
-						name += ': Detonate';
-					}
-					if (this.tag === 1) {
-						name += ' (# of Spheres)';
-					} else if ([0, 2, 4].includes(this.tag)) {
-						name += ' (Heal)';
-					} else if ([3, 5].includes(this.tag)) {
-						name += ' (Damage)';
-					}
-				}
-				break;
-			case 'Chi Burst':
-				if (this.spellId === 130654) {
-					name += ' (Heal)';
-				} else if (this.spellId === 148135) {
-					name += ' (Damage)';
-				}
-				break;
-			case 'Stagger':
-				if (this.tag === 1) {
-					name += ' (Dot)';
-				}
-				break;
-			case 'Dampen Harm':
-				break;
-			case 'Healing Sphere':
-				if (this.spellId === 115460) {
-					if (tag === 1) {
-						name += ' (Stacks)';
-					} else {
-						name += ' (Cast)';
-					}
-				}
-				if (this.spellId === 115464) {
-					name += ' (Heal)';
-				}
-				break;
 			case 'Vampiric Touch':
 			case 'Shadow Word: Pain':
 				if (tag == 77486) {
@@ -1176,10 +1066,6 @@ const spellIdIconOverrides: Map<string, ActionIdOverride> = new Map([
 ]);
 
 const spellIdTooltipOverrides: Map<string, ActionIdOverride> = new Map([
-	[JSON.stringify({ spellId: 55090, tag: 2 }), { spellId: 70890 }], // Death Knight - Scourge Strike (Shadow)
-	[JSON.stringify({ spellId: 114867, tag: 1 }), { spellId: 114866 }], // Death Knight - Soul Reaper (Blood)
-	[JSON.stringify({ spellId: 114867, tag: 2 }), { spellId: 130735 }], // Death Knight - Soul Reaper (Frost)
-	[JSON.stringify({ spellId: 114867, tag: 3 }), { spellId: 130736 }], // Death Knight - Soul Reaper (Unholy)
 	[JSON.stringify({ spellId: 85256, tag: 2 }), { spellId: 138165 }], // Paladin - T15 4P Ret Templar's Verdict
 	[JSON.stringify({ spellId: 879, tag: 2 }), { spellId: 122032 }], // Paladin - Glyph of Mass Exorcism
 	[JSON.stringify({ spellId: 2818, tag: 2 }), { spellId: 113780 }], // Rogue - Deadly Poison - Hit
@@ -1190,10 +1076,6 @@ const spellIdTooltipOverrides: Map<string, ActionIdOverride> = new Map([
 	[JSON.stringify({ spellId: 1978, tag: 1 }), { spellId: 82834 }], // Hunter - Serpent Sting
 
 	// Off-Hand attacks
-	[JSON.stringify({ spellId: 49998, tag: 2 }), { spellId: 66188 }], // Death Knight - Death Strike Off-Hand
-	[JSON.stringify({ spellId: 49143, tag: 2 }), { spellId: 66196 }], // Death Knight - Frost Strike Off-Hand
-	[JSON.stringify({ spellId: 49020, tag: 2 }), { spellId: 66198 }], // Death Knight - Obliterate Off-Hand
-	[JSON.stringify({ spellId: 45462, tag: 2 }), { spellId: 66216 }], // Death Knight - Plague Strike Off-Hand
 	[JSON.stringify({ spellId: 1329, tag: 2 }), { spellId: 27576 }], // Rogue - Mutilate Off-Hand
 	[JSON.stringify({ spellId: 121471, tag: 2 }), { spellId: 121474 }], // Rogue - Shadow Blade Off-Hand
 	[JSON.stringify({ spellId: 17364, tag: 2 }), { spellId: 32176 }], // Shaman - Stormstrike Off-Hand
@@ -1204,11 +1086,6 @@ const spellIdTooltipOverrides: Map<string, ActionIdOverride> = new Map([
 
 	// Shadow
 	[JSON.stringify({ spellId: 2944, tag: 2 }), { spellId: 127626 }], // Devouring Plague (Heal)
-
-	// Monk - Zen Sphere
-	[JSON.stringify({ spellId: 124081, tag: 3 }), { spellId: 124098 }],
-	[JSON.stringify({ spellId: 124081, tag: 4 }), { spellId: 124101 }],
-	[JSON.stringify({ spellId: 124081, tag: 5 }), { spellId: 125033 }],
 
 	// Mage - Living Bomb
 	[JSON.stringify({ spellId: 44457, tag: 2 }), { spellId: 44461 }], // Living Bomb Explosion
@@ -1244,7 +1121,6 @@ const petNameToActionId: Record<string, ActionId> = {
 	'Primal Earth Elemental': ActionId.fromSpellId(2062),
 	'Primal Fire Elemental': ActionId.fromSpellId(2894),
 	'Mirror Image': ActionId.fromSpellId(55342),
-	'Rune Weapon': ActionId.fromSpellId(49028),
 	Shadowfiend: ActionId.fromSpellId(34433),
 	Mindbender: ActionId.fromSpellId(123040),
 	'Spirit Wolf 1': ActionId.fromSpellId(51533),
@@ -1339,14 +1215,8 @@ export const resourceTypeToIcon: Record<ResourceType, string> = {
 	[ResourceType.ResourceTypeMana]: 'https://wow.zamimg.com/images/wow/icons/medium/inv_elemental_mote_mana.jpg',
 	[ResourceType.ResourceTypeEnergy]: 'https://wow.zamimg.com/images/wow/icons/medium/spell_shadow_shadowworddominate.jpg',
 	[ResourceType.ResourceTypeRage]: 'https://wow.zamimg.com/images/wow/icons/medium/spell_misc_emotionangry.jpg',
-	[ResourceType.ResourceTypeChi]: 'https://wow.zamimg.com/images/wow/icons/medium/ability_monk_healthsphere.jpg',
 	[ResourceType.ResourceTypeComboPoints]: 'https://wow.zamimg.com/images/wow/icons/medium/inv_mace_2h_pvp410_c_01.jpg',
 	[ResourceType.ResourceTypeFocus]: 'https://wow.zamimg.com/images/wow/icons/medium/ability_hunter_focusfire.jpg',
-	[ResourceType.ResourceTypeRunicPower]: 'https://wow.zamimg.com/images/wow/icons/medium/inv_sword_62.jpg',
-	[ResourceType.ResourceTypeBloodRune]: 'https://wow.zamimg.com/images/wow/icons/medium/spell_deathknight_bloodpresence.jpg',
-	[ResourceType.ResourceTypeFrostRune]: 'https://wow.zamimg.com/images/wow/icons/medium/spell_deathknight_frostpresence.jpg',
-	[ResourceType.ResourceTypeUnholyRune]: 'https://wow.zamimg.com/images/wow/icons/medium/spell_deathknight_unholypresence.jpg',
-	[ResourceType.ResourceTypeDeathRune]: '/mop/assets/img/death_rune.png',
 	[ResourceType.ResourceTypeSolarEnergy]: 'https://wow.zamimg.com/images/wow/icons/large/ability_druid_eclipseorange.jpg',
 	[ResourceType.ResourceTypeLunarEnergy]: 'https://wow.zamimg.com/images/wow/icons/large/ability_druid_eclipse.jpg',
 	[ResourceType.ResourceTypeGenericResource]: 'https://wow.zamimg.com/images/wow/icons/medium/spell_holy_holybolt.jpg',

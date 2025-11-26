@@ -148,9 +148,6 @@ class WCLSimPlayer {
 }
 
 const fullTypeToSpec: Record<string, Spec> = {
-	DeathKnightBlood: Spec.SpecBloodDeathKnight,
-	DeathKnightFrost: Spec.SpecFrostDeathKnight,
-	DeathKnightUnholy: Spec.SpecUnholyDeathKnight,
 	DruidBalance: Spec.SpecBalanceDruid,
 	DruidFeral: Spec.SpecFeralDruid,
 	// TOCO: Cata - Verify tank druid
@@ -192,7 +189,6 @@ const fullTypeToSpec: Record<string, Spec> = {
 const racialSpells: Array<{ id: number; name: string; race: Race }> = [
 	{ id: 25046, name: 'Arcane Torrent (Energy)', race: Race.RaceBloodElf },
 	{ id: 28730, name: 'Arcane Torrent (Mana)', race: Race.RaceBloodElf },
-	{ id: 50613, name: 'Arcane Torrent (Runic Power)', race: Race.RaceBloodElf },
 	{ id: 26297, name: 'Berserking', race: Race.RaceTroll },
 	{ id: 20572, name: 'Blood Fury (AP)', race: Race.RaceOrc },
 	{ id: 33697, name: 'Blood Fury (AP+SP)', race: Race.RaceOrc },
@@ -228,16 +224,6 @@ const externalCDSpells: Array<{ id: number; name: string; class: Class; applyFun
 		applyFunc: (player: Player<any>, raidTarget: UnitReference) => {
 			const options = player.getSpecOptions() as SpecOptions<RogueSpecs>;
 			options.classOptions!.tricksOfTheTradeTarget = raidTarget;
-			return options;
-		},
-	},
-	{
-		id: 49016,
-		name: 'Unholy Frenzy',
-		class: Class.ClassDeathKnight,
-		applyFunc: (player: Player<any>, raidTarget: UnitReference) => {
-			const options = player.getSpecOptions() as SpecOptions<Spec.SpecUnholyDeathKnight>;
-			options.unholyFrenzyTarget = raidTarget;
 			return options;
 		},
 	},

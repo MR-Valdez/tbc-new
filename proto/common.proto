@@ -25,7 +25,7 @@ message ProtoVersion {
 	// protos need to define an api_version field so that the UI code knows
 	// to up-convert these protos to the new format whenever api_version is
 	// missing (0) or lower than current_version_number.
-	option (current_version_number) = 2;
+	option (current_version_number) = 1;
 
 	// The actual field value is only used within unit tests.
 	int32 saved_version_number = 1;
@@ -50,10 +50,6 @@ message ScalingItemProperties {
 
 enum Spec {
 	SpecUnknown = 0;
-
-	SpecBloodDeathKnight = 1;
-	SpecFrostDeathKnight = 2;
-	SpecUnholyDeathKnight = 3;
 
 	SpecBalanceDruid = 4;
 	SpecFeralDruid = 5;
@@ -91,10 +87,6 @@ enum Spec {
 	SpecArmsWarrior = 28;
 	SpecFuryWarrior = 29;
 	SpecProtectionWarrior = 30;
-
-	SpecBrewmasterMonk = 32;
-	SpecMistweaverMonk = 33;
-	SpecWindwalkerMonk = 34;
 }
 
 enum Race {
@@ -130,11 +122,9 @@ enum Class {
 	ClassHunter = 3;
 	ClassRogue = 4;
 	ClassPriest = 5;
-	ClassDeathKnight = 6;
 	ClassShaman = 7;
 	ClassMage = 8;
 	ClassWarlock = 9;
-	ClassMonk = 10;
 	ClassDruid = 11;
 	ClassExtra1 = 12;
 	ClassExtra2 = 13;
@@ -440,7 +430,6 @@ enum TristateEffect {
 // Next index: 36
 message RaidBuffs {
 	// +10% Attack Power
-	bool horn_of_winter           = 1;  // Death Knights
 	bool trueshot_aura            = 2;  // Hunters
 	bool battle_shout             = 3;  // Warriors
 
@@ -467,7 +456,6 @@ message RaidBuffs {
 	bool leader_of_the_pack       = 18; // Feral/Guardian Druids
 	bool terrifying_roar          = 19; // Devilsaur Pets
 	bool furious_howl             = 20; // Wolf Pets
-	bool legacy_of_the_white_tiger= 21; // Windwalker Monks
 
 	// +3000 Mastery Rating
 	bool roar_of_courage          = 22; // Cat Pets
@@ -478,7 +466,6 @@ message RaidBuffs {
 	// +5% Strength, Agility, Intellect
 	bool mark_of_the_wild         = 26; // Druids
 	bool embrace_of_the_shale_spider = 27; // Shale Spider Pets
-	bool legacy_of_the_emperor    = 28; // Monks
 	bool blessing_of_kings        = 29; // Paladins
 
 	// +10% Stamina
@@ -763,10 +750,6 @@ enum OtherAction {
 	OtherActionRefund = 8; // Refund of a resource like Energy or Rage, when the ability didn't land.
 	OtherActionDamageTaken = 9; // Indicates damage taken; used for rage gen.
 	OtherActionHealingModel = 12; // Indicates healing received from healing model.
-	OtherActionBloodRuneGain = 13; // Indicates healing received from healing model.
-	OtherActionFrostRuneGain  = 14; // Indicates healing received from healing model.
-	OtherActionUnholyRuneGain  = 15; // Indicates healing received from healing model.
-	OtherActionDeathRuneGain  = 16; // Indicates healing received from healing model.
 	OtherActionPotion = 17; // Used by APL to generically refer to either the prepull or combat potion.
 	OtherActionSolarEnergyGain = 18; // For balance druid solar energy
 	OtherActionLunarEnergyGain = 19; // For balance druid lunar energy

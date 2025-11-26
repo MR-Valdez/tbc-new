@@ -2,9 +2,6 @@ package sim
 
 import (
 	"github.com/wowsims/mop/sim/common"
-	"github.com/wowsims/mop/sim/death_knight/blood"
-	frostDeathKnight "github.com/wowsims/mop/sim/death_knight/frost"
-	"github.com/wowsims/mop/sim/death_knight/unholy"
 	"github.com/wowsims/mop/sim/druid/balance"
 	"github.com/wowsims/mop/sim/druid/feral"
 	"github.com/wowsims/mop/sim/druid/guardian"
@@ -16,9 +13,6 @@ import (
 	"github.com/wowsims/mop/sim/mage/arcane"
 	"github.com/wowsims/mop/sim/mage/fire"
 	frostMage "github.com/wowsims/mop/sim/mage/frost"
-	"github.com/wowsims/mop/sim/monk/brewmaster"
-	"github.com/wowsims/mop/sim/monk/mistweaver"
-	"github.com/wowsims/mop/sim/monk/windwalker"
 	holyPaladin "github.com/wowsims/mop/sim/paladin/holy"
 	protPaladin "github.com/wowsims/mop/sim/paladin/protection"
 	"github.com/wowsims/mop/sim/paladin/retribution"
@@ -46,10 +40,6 @@ func RegisterAll() {
 		return
 	}
 	registered = true
-
-	blood.RegisterBloodDeathKnight()
-	frostDeathKnight.RegisterFrostDeathKnight()
-	unholy.RegisterUnholyDeathKnight()
 
 	balance.RegisterBalanceDruid()
 	feral.RegisterFeralDruid()
@@ -87,10 +77,6 @@ func RegisterAll() {
 	arms.RegisterArmsWarrior()
 	fury.RegisterFuryWarrior()
 	protWarrior.RegisterProtectionWarrior()
-
-	brewmaster.RegisterBrewmasterMonk()
-	mistweaver.RegisterMistweaverMonk()
-	windwalker.RegisterWindwalkerMonk()
 
 	common.RegisterAllEffects()
 }

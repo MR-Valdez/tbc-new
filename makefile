@@ -6,10 +6,7 @@ ASSETS := $(patsubst assets/%,$(OUT_DIR)/assets/%,$(ASSETS_INPUT))
 rwildcard = $(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(subst *,%,$2),$d))
 GOROOT := $(shell go env GOROOT)
 UI_SRC := $(shell find ui -name '*.ts' -o -name '*.tsx' -o -name '*.scss' -o -name '*.html')
-PAGE_INDECES := ui/death_knight/blood/index.html \
-				ui/death_knight/frost/index.html \
-				ui/death_knight/unholy/index.html \
-				ui/druid/balance/index.html \
+PAGE_INDECES := ui/druid/balance/index.html \
 				ui/druid/feral/index.html \
 				ui/druid/guardian/index.html \
 				ui/druid/restoration/index.html \
@@ -19,9 +16,6 @@ PAGE_INDECES := ui/death_knight/blood/index.html \
 				ui/mage/arcane/index.html \
 				ui/mage/fire/index.html \
 				ui/mage/frost/index.html \
-				ui/monk/brewmaster/index.html \
-				ui/monk/mistweaver/index.html \
-				ui/monk/windwalker/index.html \
 				ui/paladin/holy/index.html \
 				ui/paladin/protection/index.html \
 				ui/paladin/retribution/index.html \

@@ -278,10 +278,6 @@ const (
 	// Uses IntValue
 	SpellMod_PowerCost_Flat
 
-	// Increases or decreases RuneCost.RunicPowerCost by flat amount
-	// Uses FloatValue
-	SpellMod_RunicPowerCost_Flat
-
 	// Will add time.Duration to spell.CD.Duration
 	// Uses TimeValue
 	SpellMod_Cooldown_Flat
@@ -385,11 +381,6 @@ var spellModMap = map[SpellModType]*SpellModFunctions{
 	SpellMod_PowerCost_Flat: {
 		Apply:  applyPowerCostFlat,
 		Remove: removePowerCostFlat,
-	},
-
-	SpellMod_RunicPowerCost_Flat: {
-		Apply:  applyRunicPowerCostFlat,
-		Remove: removeRunicPowerCostFlat,
 	},
 
 	SpellMod_Cooldown_Flat: {
@@ -542,18 +533,6 @@ func removePowerCostFlat(mod *SpellMod, spell *Spell) {
 	if spell.Cost != nil {
 		spell.Cost.FlatModifier -= mod.intValue
 	}
-}
-
-func applyRunicPowerCostFlat(mod *SpellMod, spell *Spell) {
-	cost := spell.RuneCostImpl()
-	cost.RunicPowerCost += mod.floatValue
-	spell.Cost = newRuneCost(spell, cost.GetConfig())
-}
-
-func removeRunicPowerCostFlat(mod *SpellMod, spell *Spell) {
-	cost := spell.RuneCostImpl()
-	cost.RunicPowerCost -= mod.floatValue
-	spell.Cost = newRuneCost(spell, cost.GetConfig())
 }
 
 func applyCooldownFlat(mod *SpellMod, spell *Spell) {

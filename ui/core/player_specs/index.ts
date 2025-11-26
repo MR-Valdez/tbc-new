@@ -5,11 +5,9 @@ import { PlayerClasses } from '../player_classes';
 import { PlayerSpec } from '../player_spec';
 import { Spec } from '../proto/common';
 import { SpecClasses } from '../proto_utils/utils';
-import * as DeathKnightSpecs from './death_knight';
 import * as DruidSpecs from './druid';
 import * as HunterSpecs from './hunter';
 import * as MageSpecs from './mage';
-import * as MonkSpecs from './monk';
 import * as PaladinSpecs from './paladin';
 import * as PriestSpecs from './priest';
 import * as RogueSpecs from './rogue';
@@ -19,10 +17,6 @@ import * as WarriorSpecs from './warrior';
 
 const specToPlayerSpec: Record<Spec, PlayerSpec<any> | undefined> = {
 	[Spec.SpecUnknown]: undefined,
-	// Death Knight
-	[Spec.SpecBloodDeathKnight]: DeathKnightSpecs.BloodDeathKnight,
-	[Spec.SpecFrostDeathKnight]: DeathKnightSpecs.FrostDeathKnight,
-	[Spec.SpecUnholyDeathKnight]: DeathKnightSpecs.UnholyDeathKnight,
 	// Druid
 	[Spec.SpecBalanceDruid]: DruidSpecs.BalanceDruid,
 	[Spec.SpecFeralDruid]: DruidSpecs.FeralDruid,
@@ -36,10 +30,6 @@ const specToPlayerSpec: Record<Spec, PlayerSpec<any> | undefined> = {
 	[Spec.SpecArcaneMage]: MageSpecs.ArcaneMage,
 	[Spec.SpecFireMage]: MageSpecs.FireMage,
 	[Spec.SpecFrostMage]: MageSpecs.FrostMage,
-	// Monk
-	[Spec.SpecBrewmasterMonk]: MonkSpecs.BrewmasterMonk,
-	[Spec.SpecMistweaverMonk]: MonkSpecs.MistweaverMonk,
-	[Spec.SpecWindwalkerMonk]: MonkSpecs.WindwalkerMonk,
 	// Paladin
 	[Spec.SpecHolyPaladin]: PaladinSpecs.HolyPaladin,
 	[Spec.SpecProtectionPaladin]: PaladinSpecs.ProtectionPaladin,
@@ -75,11 +65,9 @@ const getPlayerClass = <SpecType extends Spec>(playerSpec: PlayerSpec<SpecType>)
 };
 
 export const PlayerSpecs = {
-	...DeathKnightSpecs,
 	...DruidSpecs,
 	...HunterSpecs,
 	...MageSpecs,
-	...MonkSpecs,
 	...PaladinSpecs,
 	...PriestSpecs,
 	...RogueSpecs,
