@@ -1,7 +1,7 @@
 import * as PresetUtils from '../../core/preset_utils';
-import { ConsumesSpec, Glyphs, Profession, PseudoStat, Race, Stat } from '../../core/proto/common';
+import { ConsumesSpec, Profession, PseudoStat, Race, Stat } from '../../core/proto/common';
 import { SavedTalents } from '../../core/proto/ui';
-import { ArmsWarrior_Options as WarriorOptions, WarriorMajorGlyph } from '../../core/proto/warrior';
+import { ArmsWarrior_Options as WarriorOptions } from '../../core/proto/warrior';
 import { Stats } from '../../core/proto_utils/stats';
 import ArmsApl from './apls/arms.apl.json';
 import P1ArmsBisGear from './gear_sets/p1_arms_bis.gear.json';
@@ -66,11 +66,6 @@ export const ArmsTalents = {
 	name: 'Default',
 	data: SavedTalents.create({
 		talentsString: '113132',
-		glyphs: Glyphs.create({
-			major1: WarriorMajorGlyph.GlyphOfBullRush,
-			major2: WarriorMajorGlyph.GlyphOfUnendingRage,
-			major3: WarriorMajorGlyph.GlyphOfDeathFromAbove,
-		}),
 	}),
 };
 

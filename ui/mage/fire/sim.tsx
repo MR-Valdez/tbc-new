@@ -15,7 +15,6 @@ import * as FireInputs from './inputs';
 
 const mageBombBreakpoints = MAGE_BREAKPOINTS.presets;
 // const combustBreakpoints = Presets.COMBUSTION_BREAKPOINT.presets;
-// const glyphedCombustBreakpoints = Presets.GLYPHED_COMBUSTION_BREAKPOINT.presets;
 
 const relevantMageBombBreakpoints = [
 	mageBombBreakpoints.get('5-tick - Living Bomb')!,
@@ -45,29 +44,6 @@ const relevantMageBombBreakpoints = [
 // 	combustBreakpoints.get('17-tick - Combust')!,
 // 	combustBreakpoints.get('18-tick - Combust')!,
 // 	combustBreakpoints.get('19-tick - Combust')!,
-// ].sort();
-
-// const relevantGlyphedCombustionBreakpoints = [
-// 	...relevantMageBombBreakpoints,
-// 	glyphedCombustBreakpoints.get('21-tick - Combust (Glyph)')!,
-// 	glyphedCombustBreakpoints.get('22-tick - Combust (Glyph)')!,
-// 	glyphedCombustBreakpoints.get('23-tick - Combust (Glyph)')!,
-// 	glyphedCombustBreakpoints.get('24-tick - Combust (Glyph)')!,
-// 	glyphedCombustBreakpoints.get('25-tick - Combust (Glyph)')!,
-// 	glyphedCombustBreakpoints.get('26-tick - Combust (Glyph)')!,
-// 	glyphedCombustBreakpoints.get('27-tick - Combust (Glyph)')!,
-// 	glyphedCombustBreakpoints.get('28-tick - Combust (Glyph)')!,
-// 	glyphedCombustBreakpoints.get('29-tick - Combust (Glyph)')!,
-// 	glyphedCombustBreakpoints.get('30-tick - Combust (Glyph)')!,
-// 	glyphedCombustBreakpoints.get('31-tick - Combust (Glyph)')!,
-// 	glyphedCombustBreakpoints.get('32-tick - Combust (Glyph)')!,
-// 	glyphedCombustBreakpoints.get('33-tick - Combust (Glyph)')!,
-// 	glyphedCombustBreakpoints.get('34-tick - Combust (Glyph)')!,
-// 	glyphedCombustBreakpoints.get('35-tick - Combust (Glyph)')!,
-// 	glyphedCombustBreakpoints.get('36-tick - Combust (Glyph)')!,
-// 	glyphedCombustBreakpoints.get('37-tick - Combust (Glyph)')!,
-// 	glyphedCombustBreakpoints.get('38-tick - Combust (Glyph)')!,
-// 	glyphedCombustBreakpoints.get('39-tick - Combust (Glyph)')!,
 // ].sort();
 
 const SPEC_CONFIG = registerSpecConfig(Spec.SpecFireMage, {
@@ -299,7 +275,7 @@ export class FireMageSimUI extends IndividualSimUI<Spec.SpecFireMage> {
 			{
 				unitStat: UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent),
 				presets: new Map(
-					[...MAGE_BREAKPOINTS.presets, ...Presets.COMBUSTION_BREAKPOINT.presets, ...Presets.GLYPHED_COMBUSTION_BREAKPOINT.presets].sort(
+					[...MAGE_BREAKPOINTS.presets, ...Presets.COMBUSTION_BREAKPOINT.presets].sort(
 						(a, b) => a[1] - b[1],
 					),
 				),
@@ -313,7 +289,6 @@ export class FireMageSimUI extends IndividualSimUI<Spec.SpecFireMage> {
 			// 	const raidBuffs = player.getRaid()?.getBuffs();
 			// 	const hasBL = !!raidBuffs?.bloodlust;
 			// 	const hasBerserking = player.getRace() === Race.RaceTroll;
-			// 	const hasGlyphOfCombustion = !!player.getMajorGlyphs().find(glyph => glyph === MageMajorGlyph.GlyphOfCombustion);
 
 			// 	const modifyHaste = (oldHastePercent: number, modifier: number) =>
 			// 		Number(formatToNumber(((oldHastePercent / 100 + 1) / modifier - 1) * 100, { maximumFractionDigits: 5 }));
@@ -321,8 +296,6 @@ export class FireMageSimUI extends IndividualSimUI<Spec.SpecFireMage> {
 			// 	this.individualConfig.defaults.softCapBreakpoints!.forEach(softCap => {
 			// 		const softCapToModify = softCaps.find(sc => sc.unitStat.equals(softCap.unitStat));
 			// 		if (softCap.unitStat.equalsPseudoStat(PseudoStat.PseudoStatSpellHastePercent) && softCapToModify) {
-			// 			if (hasGlyphOfCombustion) softCap.breakpoints = relevantMageBombBreakpoints;
-
 			// 			const adjustedHastedBreakpoints = new Set([...softCap.breakpoints]);
 			// 			const hasCloseMatchingValue = (value: number) =>
 			// 				[...adjustedHastedBreakpoints.values()].find(bp => bp.toFixed(2) === value.toFixed(2));

@@ -1,10 +1,8 @@
 import * as PresetUtils from '../../core/preset_utils';
-import { ConsumesSpec, Debuffs, Glyphs, IndividualBuffs, Profession, PseudoStat, Race, RaidBuffs, Stat } from '../../core/proto/common';
+import { ConsumesSpec, Debuffs, IndividualBuffs, Profession, Race, RaidBuffs, Stat } from '../../core/proto/common';
 import { SavedTalents } from '../../core/proto/ui';
 import {
 	DestructionWarlock_Options as WarlockOptions,
-	WarlockMajorGlyph as MajorGlyph,
-	WarlockMinorGlyph as MinorGlyph,
 	WarlockOptions_Summon as Summon,
 } from '../../core/proto/warlock';
 import { Stats } from '../../core/proto_utils/stats';
@@ -44,9 +42,6 @@ export const DestructionTalents = {
 	name: 'Destruction',
 	data: SavedTalents.create({
 		talentsString: '221211',
-		glyphs: Glyphs.create({
-			major1: MajorGlyph.GlyphOfSiphonLife,
-		}),
 	}),
 };
 

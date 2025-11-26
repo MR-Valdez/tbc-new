@@ -85,7 +85,6 @@ export class Individual60UImporter<SpecType extends Spec> extends IndividualImpo
 			race,
 			equipmentSpec,
 			talentsStr,
-			glyphs: null,
 			professions: [],
 		});
 

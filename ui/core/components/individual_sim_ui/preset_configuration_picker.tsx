@@ -157,7 +157,6 @@ export class PresetConfigurationPicker extends Component {
 			}
 			if (talents) {
 				simUI.player.setTalentsString(eventID, talents.data.talentsString);
-				if (talents.data.glyphs) simUI.player.setGlyphs(eventID, talents.data.glyphs);
 			}
 			if (rotationType) {
 				simUI.player.aplRotation.type = rotationType;
@@ -211,7 +210,6 @@ export class PresetConfigurationPicker extends Component {
 					talents.data,
 					SavedTalents.create({
 						talentsString: this.simUI.player.getTalentsString(),
-						glyphs: this.simUI.player.getGlyphs(),
 					}),
 				)
 			: true;

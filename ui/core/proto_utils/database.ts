@@ -17,7 +17,7 @@ import {
 } from '../proto/common.js';
 import { Consumable, ItemEffectRandPropPoints, SimDatabase } from '../proto/db';
 import { SpellEffect } from '../proto/spell';
-import { GlyphID, IconData, UIDatabase, UIEnchant as Enchant, UIGem as Gem, UIItem as Item, UINPC as Npc, UIZone as Zone } from '../proto/ui.js';
+import { IconData, UIDatabase, UIEnchant as Enchant, UIGem as Gem, UIItem as Item, UINPC as Npc, UIZone as Zone } from '../proto/ui.js';
 import { distinct } from '../utils.js';
 import { WOWHEAD_EXPANSION_ENV } from '../wowhead';
 import { EquippedItem } from './equipped_item.js';
@@ -106,7 +106,6 @@ export class Database {
 	private readonly presetTargets = new Map<string, PresetTarget>();
 	private readonly itemIcons: Record<number, IconData> = {};
 	private readonly spellIcons: Record<number, IconData> = {};
-	private readonly glyphIds: Array<GlyphID> = [];
 	private readonly consumables = new Map<number, Consumable>();
 	private readonly spellEffects = new Map<number, SpellEffect>();
 
@@ -171,7 +170,6 @@ export class Database {
 		);
 		db.itemIcons.forEach(data => (this.itemIcons[data.id] = data));
 		db.spellIcons.forEach(data => (this.spellIcons[data.id] = data));
-		db.glyphIds.forEach(id => this.glyphIds.push(id));
 		db.consumables.forEach(consumable => this.consumables.set(consumable.id, consumable));
 	}
 
@@ -349,13 +347,6 @@ export class Database {
 			.flat()
 			.find(enchant => enchant.spellId == enchantSpellId);
 		return enchant;
-	}
-
-	glyphItemToSpellId(itemId: number): number {
-		return this.glyphIds.find(gid => gid.itemId == itemId)?.spellId || 0;
-	}
-	glyphSpellToItemId(spellId: number): number {
-		return this.glyphIds.find(gid => gid.spellId == spellId)?.itemId || 0;
 	}
 
 	getPresetEncounter(path: string): PresetEncounter | null {

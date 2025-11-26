@@ -1,6 +1,6 @@
 import * as PresetUtils from '../../core/preset_utils';
-import { ConsumesSpec, Glyphs, PseudoStat, Stat } from '../../core/proto/common';
-import { RogueMajorGlyph, RogueOptions_PoisonOptions, SubtletyRogue_Options as RogueOptions } from '../../core/proto/rogue';
+import { ConsumesSpec, PseudoStat, Stat } from '../../core/proto/common';
+import { RogueOptions_PoisonOptions, SubtletyRogue_Options as RogueOptions } from '../../core/proto/rogue';
 import { SavedTalents } from '../../core/proto/ui';
 import { Stats } from '../../core/proto_utils/stats';
 import SubtletyApl from './apls/subtlety.apl.json';
@@ -44,9 +44,6 @@ export const SubtletyTalents = {
 	name: 'Subtlety',
 	data: SavedTalents.create({
 		talentsString: '321233',
-		glyphs: Glyphs.create({
-			major1: RogueMajorGlyph.GlyphOfHemorraghingVeins
-		}),
 	}),
 };
 

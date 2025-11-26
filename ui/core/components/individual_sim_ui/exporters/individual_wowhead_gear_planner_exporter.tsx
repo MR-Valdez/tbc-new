@@ -39,24 +39,6 @@ function writeTalents(talentStr: string): number[] {
 	return writeBits(t);
 }
 
-// Function to write glyphs (reverse of parseGlyphs)
-function writeGlyphs(glyphIds: number[]): string {
-	const e = [0];
-	Object.keys(glyphIds)
-		.sort((e, t) => Number(e) - Number(t))
-		.forEach(t => {
-			const glyphId = glyphIds[Number(t)];
-			if (!glyphId) return;
-			e.push(...writeBits(parseInt(t)));
-			e.push(...writeBits(glyphId));
-		});
-	let glyphStr = '';
-	for (let s = 0; s < e.length; s++) {
-		glyphStr += c.charAt(e[s]);
-	}
-	return glyphStr;
-}
-
 // Function to write the hash (reverse of readHash)
 function writeHash(data: WowheadGearPlannerData): string {
 	let hash = '';
@@ -79,14 +61,6 @@ function writeHash(data: WowheadGearPlannerData): string {
 	// Talents
 	const talentBits = writeTalents(data.talents);
 	bits.push(...talentBits);
-
-	// Glyphs
-	const glyphStr = [writeGlyphs(data.glyphs ?? [])];
-	bits.push(...writeBits(glyphStr.length));
-	glyphStr.forEach(e => {
-		bits.push(...writeBits(e.length));
-		bits.push(...e.split('').map(e => c.indexOf(e)));
-	});
 
 	// Items
 	const items = data.items ?? [];
@@ -133,7 +107,6 @@ export interface WowheadGearPlannerData {
 	specIndex?: number;
 	level: number;
 	talents: string;
-	glyphs: number[];
 	items: WowheadItemData[];
 }
 
@@ -172,28 +145,10 @@ export class IndividualWowheadGearPlannerExporter<SpecType extends Spec> extends
 		const raceStr = converWowheadRace(raceNames.get(player.getRace())!);
 		const url = `https://www.wowhead.com/tbc/gear-planner/${classStr}/${raceStr}/`;
 
-		const addGlyph = (glyphItemId: number): number => {
-			const spellId = this.simUI.sim.db.glyphItemToSpellId(glyphItemId);
-			if (!spellId) {
-				return 0;
-			}
-			return spellId;
-		};
-
-		const glyphs = player.getGlyphs();
-
 		const data: WowheadGearPlannerData = {
 			level: CHARACTER_LEVEL,
 			specIndex: player.getPlayerSpec().specIndex,
 			talents: player.getTalentsString(),
-			glyphs: [
-				addGlyph(glyphs.major1),
-				addGlyph(glyphs.major2),
-				addGlyph(glyphs.major3),
-				addGlyph(glyphs.minor1),
-				addGlyph(glyphs.minor2),
-				addGlyph(glyphs.minor3),
-			],
 			items: [],
 		};
 

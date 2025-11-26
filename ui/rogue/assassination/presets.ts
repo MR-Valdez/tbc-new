@@ -1,6 +1,6 @@
 import * as PresetUtils from '../../core/preset_utils';
-import { ConsumesSpec, Glyphs, PseudoStat, Stat } from '../../core/proto/common';
-import { AssassinationRogue_Options as RogueOptions, RogueMajorGlyph, RogueOptions_PoisonOptions } from '../../core/proto/rogue';
+import { ConsumesSpec, PseudoStat, Stat } from '../../core/proto/common';
+import { AssassinationRogue_Options as RogueOptions, RogueOptions_PoisonOptions } from '../../core/proto/rogue';
 import { SavedTalents } from '../../core/proto/ui';
 import { Stats } from '../../core/proto_utils/stats';
 import AssassinationApl from './apls/assassination.apl.json';
@@ -44,9 +44,6 @@ export const AssassinationTalentsDefault = {
 	name: 'Assassination',
 	data: SavedTalents.create({
 		talentsString: '321232',
-		glyphs: Glyphs.create({
-			major1: RogueMajorGlyph.GlyphOfVendetta,
-		}),
 	}),
 };
 

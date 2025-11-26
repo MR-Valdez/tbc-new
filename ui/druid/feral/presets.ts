@@ -1,8 +1,6 @@
 import * as PresetUtils from '../../core/preset_utils';
-import { ConsumesSpec, Glyphs, Profession, PseudoStat, Race, Spec, Stat } from '../../core/proto/common';
+import { ConsumesSpec, Profession, PseudoStat, Race, Spec, Stat } from '../../core/proto/common';
 import {
-	DruidMajorGlyph,
-	DruidMinorGlyph,
 	FeralDruid_Options as FeralDruidOptions,
 	FeralDruid_Rotation as FeralDruidRotation,
 	FeralDruid_Rotation_AplType,
@@ -145,11 +143,6 @@ export const StandardTalents = {
 	name: 'DoC',
 	data: SavedTalents.create({
 		talentsString: "100302",
-		glyphs: Glyphs.create({
-			major1: 40923,
-			major2: 40914,
-			major3: 40897,
-		}),
 	}),
 };
 
@@ -157,11 +150,6 @@ export const HotWTalents = {
 	name: 'HotW',
 	data: SavedTalents.create({
 		talentsString: "100301",
-		glyphs: Glyphs.create({
-			major1: 40923,
-			major2: 40914,
-			major3: 40897,
-		}),
 	}),
 };
 

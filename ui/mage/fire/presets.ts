@@ -1,17 +1,14 @@
 import { Encounter } from '../../core/encounter';
 import * as PresetUtils from '../../core/preset_utils';
-import { ConsumesSpec, Glyphs, Profession, PseudoStat, Race, Spec, Stat } from '../../core/proto/common';
+import { ConsumesSpec, Profession, PseudoStat, Race, Spec, Stat } from '../../core/proto/common';
 import {
 	FireMage_Rotation,
 	MageArmor,
 	FireMage_Options as MageOptions,
-	MageMajorGlyph as MajorGlyph,
-	MageMinorGlyph as MinorGlyph,
 } from '../../core/proto/mage';
 import { SavedTalents } from '../../core/proto/ui';
 import { Stats, UnitStat, UnitStatPresets } from '../../core/proto_utils/stats';
 import FireApl from './apls/fire.apl.json';
-import FireCleaveApl from './apls/fire_cleave.apl.json';
 import P1PreBISGear from './gear_sets/p1_prebis.gear.json';
 import P1BISGear from './gear_sets/p1_bis.gear.json';
 import P2BISGear from './gear_sets/p2_bis.gear.json';
@@ -107,14 +104,6 @@ export const FireTalents = {
 	name: 'Default',
 	data: SavedTalents.create({
 		talentsString: '111122',
-		glyphs: Glyphs.create({
-			major1: MajorGlyph.GlyphOfCombustion,
-			major2: MajorGlyph.GlyphOfInfernoBlast,
-			major3: MajorGlyph.GlyphOfRapidDisplacement,
-			minor1: MinorGlyph.GlyphOfMomentum,
-			minor2: MinorGlyph.GlyphOfLooseMana,
-			minor3: MinorGlyph.GlyphOfRapidTeleportation,
-		}),
 	}),
 };
 
@@ -122,9 +111,6 @@ export const FireTalentsCleave = {
 	name: 'Cleave',
 	data: SavedTalents.create({
 		talentsString: '111112',
-		glyphs: Glyphs.create({
-			...FireTalents.data.glyphs,
-		}),
 	}),
 };
 
@@ -201,30 +187,5 @@ export const COMBUSTION_BREAKPOINT: UnitStatPresets = {
 		['27-tick - Combust', 164.900732],
 		['28-tick - Combust', 175.103239],
 		['29-tick - Combust', 185.306786],
-	]),
-};
-
-export const GLYPHED_COMBUSTION_BREAKPOINT: UnitStatPresets = {
-	unitStat: UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent),
-	presets: new Map([
-		['21-tick - Combust (Glyph)', 2.511543],
-		['22-tick - Combust (Glyph)', 7.469114],
-		['23-tick - Combust (Glyph)', 12.549253],
-		['24-tick - Combust (Glyph)', 17.439826],
-		['25-tick - Combust (Glyph)', 22.473989],
-		['26-tick - Combust (Glyph)', 27.469742],
-		['27-tick - Combust (Glyph)', 32.538122],
-		['28-tick - Combust (Glyph)', 37.457064],
-		['29-tick - Combust (Glyph)', 42.551695],
-		['30-tick - Combust (Glyph)', 47.601498],
-		['31-tick - Combust (Glyph)', 52.555325],
-		['32-tick - Combust (Glyph)', 57.604438],
-		['33-tick - Combust (Glyph)', 62.469563],
-		['34-tick - Combust (Glyph)', 67.364045],
-		['35-tick - Combust (Glyph)', 72.562584],
-		['36-tick - Combust (Glyph)', 77.462321],
-		['37-tick - Combust (Glyph)', 82.648435],
-		['38-tick - Combust (Glyph)', 87.44146],
-		['39-tick - Combust (Glyph)', 92.492819],
 	]),
 };

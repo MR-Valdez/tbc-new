@@ -13,8 +13,6 @@ import { Class, Spec } from '../proto/common.js';
 import { ActionId } from '../proto_utils/action_id.js';
 import { TypedEvent } from '../typed_event.js';
 import { isRightClick } from '../utils.js';
-import { classGlyphsConfig } from './factory';
-import { GlyphsPicker } from './glyphs_picker';
 
 export interface TalentsPickerConfig<ModObject, TalentsProto> extends InputConfig<ModObject, string> {
 	playerClass: Class;
@@ -59,10 +57,6 @@ export class TalentsPicker<ModObject extends Player<any>, TalentsProto> extends 
 
 		this.tree = new TalentTreePicker(talentsListContainer, this.config.tree, this, config.playerSpec);
 		this.tree.rows.forEach(row => row.forEach(talent => talent.setSelected(false)));
-
-		if (this.isPlayer()) {
-			new GlyphsPicker(this.rootElem, this.modObject, classGlyphsConfig[this.modObject.getClass()]);
-		}
 
 		this.init();
 	}

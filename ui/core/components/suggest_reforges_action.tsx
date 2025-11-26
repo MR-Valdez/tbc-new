@@ -69,7 +69,7 @@ export type ReforgeOptimizerOptions = {
 	// Allows you to enable breakpoint limits for Treshold type caps
 	enableBreakpointLimits?: boolean;
 	// Allows you to modify the stats before they are returned for the calculations
-	// For example: Adding class specific Glyphs/Talents that are not added by the backend
+	// For example: Adding class specific Talents that are not added by the backend
 	updateGearStatsModifier?: (baseStats: Stats) => Stats;
 	// Allows you to get alternate default EPs
 	// For example for Fury where you have SMF and TG EPs

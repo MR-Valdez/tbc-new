@@ -46,7 +46,6 @@ import {
 	Encounter as EncounterProto,
 	EquipmentSpec,
 	Faction,
-	Glyphs,
 	HandType,
 	IndividualBuffs,
 	ItemSlot,
@@ -570,7 +569,6 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 			this.player.setConsumes(eventID, this.individualConfig.defaults.consumables);
 			this.applyDefaultRotation(eventID);
 			this.player.setTalentsString(eventID, this.individualConfig.defaults.talents.talentsString);
-			this.player.setGlyphs(eventID, this.individualConfig.defaults.talents.glyphs || Glyphs.create());
 			this.player.setSpecOptions(eventID, this.individualConfig.defaults.specOptions);
 			this.player.setBuffs(eventID, this.individualConfig.defaults.individualBuffs);
 			this.player.getParty()!.setBuffs(eventID, this.individualConfig.defaults.partyBuffs);

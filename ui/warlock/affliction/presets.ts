@@ -1,11 +1,9 @@
 import { Encounter } from '../../core/encounter';
 import * as PresetUtils from '../../core/preset_utils';
-import { ConsumesSpec, Debuffs, Glyphs, IndividualBuffs, PresetEncounter, Profession, PseudoStat, Race, RaidBuffs, Stat } from '../../core/proto/common';
+import { ConsumesSpec, Debuffs, IndividualBuffs, Profession, Race, RaidBuffs, Stat } from '../../core/proto/common';
 import { SavedTalents } from '../../core/proto/ui';
 import {
 	AfflictionWarlock_Options as WarlockOptions,
-	WarlockMajorGlyph as MajorGlyph,
-	WarlockMinorGlyph as MinorGlyph,
 	WarlockOptions_Summon as Summon,
 } from '../../core/proto/warlock';
 import { Stats } from '../../core/proto_utils/stats';
@@ -17,7 +15,6 @@ import P1Gear from './gear_sets/p1.gear.json';
 import P2Gear from './gear_sets/p2.gear.json';
 import P3Gear from './gear_sets/p3.gear.json';
 import PreraidGear from './gear_sets/preraid.gear.json';
-import { ExhaleWindow } from './inputs';
 
 // Preset options for this spec.
 // Eventually we will import these values for the raid sim too, so its good to
@@ -63,11 +60,6 @@ export const AfflictionTalents = {
 	name: 'Affliction',
 	data: SavedTalents.create({
 		talentsString: '231211',
-		glyphs: Glyphs.create({
-			major1: MajorGlyph.GlyphOfUnstableAffliction,
-			major2: MajorGlyph.GlyphOfSiphonLife,
-			minor3: MinorGlyph.GlyphOfUnendingBreath,
-		}),
 	}),
 };
 

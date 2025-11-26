@@ -1,11 +1,10 @@
 import { Encounter } from '../../core/encounter';
 import * as PresetUtils from '../../core/preset_utils';
-import { ConsumesSpec, Glyphs, Profession, Race, Stat } from '../../core/proto/common';
-import { ArcaneMage_Options as MageOptions, MageMajorGlyph as MajorGlyph, MageMinorGlyph, MageArmor } from '../../core/proto/mage';
+import { ConsumesSpec, Profession, Race, Stat } from '../../core/proto/common';
+import { ArcaneMage_Options as MageOptions, MageArmor } from '../../core/proto/mage';
 import { SavedTalents } from '../../core/proto/ui';
 import { Stats } from '../../core/proto_utils/stats';
 import ArcaneApl from './apls/default.apl.json';
-import ArcaneCleaveApl from './apls/arcane_cleave.apl.json';
 import ArcaneP3APL from './apls/Arcane_T15_4pc.apl.json';
 import P1PreBISGear from './gear_sets/p1_prebis.gear.json';
 import P1BISGear from './gear_sets/p1_bis.gear.json';
@@ -67,14 +66,6 @@ export const ArcaneTalents = {
 	name: 'Default',
 	data: SavedTalents.create({
 		talentsString: '311122',
-		glyphs: Glyphs.create({
-			major1: MajorGlyph.GlyphOfArcanePower,
-			major2: MajorGlyph.GlyphOfRapidDisplacement,
-			major3: MajorGlyph.GlyphOfManaGem,
-			minor1: MageMinorGlyph.GlyphOfMomentum,
-			minor2: MageMinorGlyph.GlyphOfRapidTeleportation,
-			minor3: MageMinorGlyph.GlyphOfLooseMana,
-		}),
 	}),
 };
 
@@ -82,14 +73,6 @@ export const ArcaneTalentsCleave = {
 	name: 'Cleave',
 	data: SavedTalents.create({
 		talentsString: '311112',
-		glyphs: Glyphs.create({
-			major1: MajorGlyph.GlyphOfArcanePower,
-			major2: MajorGlyph.GlyphOfRapidDisplacement,
-			major3: MajorGlyph.GlyphOfManaGem,
-			minor1: MageMinorGlyph.GlyphOfMomentum,
-			minor2: MageMinorGlyph.GlyphOfRapidTeleportation,
-			minor3: MageMinorGlyph.GlyphOfLooseMana,
-		}),
 	}),
 };
 

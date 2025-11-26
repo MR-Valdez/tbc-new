@@ -1,5 +1,5 @@
 import * as PresetUtils from '../../core/preset_utils';
-import { ConsumesSpec, Glyphs, PseudoStat, Stat } from '../../core/proto/common';
+import { ConsumesSpec, PseudoStat, Stat } from '../../core/proto/common';
 import { CombatRogue_Options as RogueOptions, RogueOptions_PoisonOptions } from '../../core/proto/rogue';
 import { SavedTalents } from '../../core/proto/ui';
 import { Stats } from '../../core/proto_utils/stats';
@@ -44,8 +44,6 @@ export const CombatTalents = {
 	name: 'Combat',
 	data: SavedTalents.create({
 		talentsString: '321233',
-		glyphs: Glyphs.create({
-		}),
 	}),
 };
 

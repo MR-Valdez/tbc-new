@@ -1,11 +1,9 @@
 import { Encounter } from '../../core/encounter';
 import * as PresetUtils from '../../core/preset_utils.js';
-import { Class, ConsumesSpec, Debuffs, Encounter as EncounterProto, Glyphs, Profession, Race, RaidBuffs, Stat } from '../../core/proto/common.js';
+import { Class, ConsumesSpec, Debuffs, Profession, Race, RaidBuffs, Stat } from '../../core/proto/common.js';
 import {
 	ElementalShaman_Options as ElementalShamanOptions,
 	FeleAutocastSettings,
-	ShamanImbue,
-	ShamanMajorGlyph,
 	ShamanShield,
 } from '../../core/proto/shaman.js';
 import { SavedTalents } from '../../core/proto/ui.js';
@@ -80,9 +78,6 @@ export const StandardTalents = {
 	name: 'Default',
 	data: SavedTalents.create({
 		talentsString: '333121',
-		glyphs: Glyphs.create({
-			major1: ShamanMajorGlyph.GlyphOfSpiritwalkersGrace,
-		}),
 	}),
 };
 
@@ -90,9 +85,6 @@ export const P3_TALENTS = {
 	name: 'P3 (WiP)',
 	data: SavedTalents.create({
 		talentsString: '333322',
-		glyphs: Glyphs.create({
-			major1: ShamanMajorGlyph.GlyphOfSpiritwalkersGrace,
-		}),
 	}),
 };
 
@@ -100,9 +92,6 @@ export const TalentsCleave = {
 	name: 'Cleave',
 	data: SavedTalents.create({
 		talentsString: '333322',
-		glyphs: Glyphs.create({
-			...StandardTalents.data.glyphs,
-		}),
 	}),
 };
 
@@ -110,10 +99,6 @@ export const TalentsAoE = {
 	name: 'AoE (4+)',
 	data: SavedTalents.create({
 		...TalentsCleave.data,
-		glyphs: Glyphs.create({
-			...StandardTalents.data.glyphs,
-			major2: ShamanMajorGlyph.GlyphOfChainLightning,
-		}),
 	}),
 };
 

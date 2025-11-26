@@ -24,7 +24,6 @@ import {
 	Cooldowns,
 	Faction,
 	GemColor,
-	Glyphs,
 	HandType,
 	HealingModel,
 	IndividualBuffs,
@@ -252,7 +251,6 @@ export class Player<SpecType extends Spec> {
 	private profession2: Profession = 0;
 	aplRotation: APLRotation = APLRotation.create();
 	private talentsString = '';
-	private glyphs: Glyphs = Glyphs.create();
 	private specOptions: SpecOptions<SpecType>;
 	private reactionTime = 0;
 	private channelClipDelay = 0;
@@ -292,7 +290,6 @@ export class Player<SpecType extends Spec> {
 	readonly raceChangeEmitter = new TypedEvent<void>('PlayerRace');
 	readonly rotationChangeEmitter = new TypedEvent<void>('PlayerRotation');
 	readonly talentsChangeEmitter = new TypedEvent<void>('PlayerTalents');
-	readonly glyphsChangeEmitter = new TypedEvent<void>('PlayerGlyphs');
 	readonly specOptionsChangeEmitter = new TypedEvent<void>('PlayerSpecOptions');
 	readonly inFrontOfTargetChangeEmitter = new TypedEvent<void>('PlayerInFrontOfTarget');
 	readonly distanceFromTargetChangeEmitter = new TypedEvent<void>('PlayerDistanceFromTarget');
@@ -350,7 +347,6 @@ export class Player<SpecType extends Spec> {
 				this.raceChangeEmitter,
 				this.rotationChangeEmitter,
 				this.talentsChangeEmitter,
-				this.glyphsChangeEmitter,
 				this.specOptionsChangeEmitter,
 				this.miscOptionsChangeEmitter,
 				this.inFrontOfTargetChangeEmitter,
@@ -906,31 +902,6 @@ export class Player<SpecType extends Spec> {
 		return this.playerSpec.getIcon('medium');
 	}
 
-	getGlyphs(): Glyphs {
-		// Make a defensive copy
-		return Glyphs.clone(this.glyphs);
-	}
-
-	setGlyphs(eventID: EventID, newGlyphs: Glyphs) {
-		if (Glyphs.equals(this.glyphs, newGlyphs)) return;
-
-		// Make a defensive copy
-		this.glyphs = Glyphs.clone(newGlyphs);
-		this.glyphsChangeEmitter.emit(eventID);
-	}
-
-	getMajorGlyphs(): Array<number> {
-		return [this.glyphs.major1, this.glyphs.major2, this.glyphs.major3].filter(glyph => glyph != 0);
-	}
-
-	getMinorGlyphs(): Array<number> {
-		return [this.glyphs.minor1, this.glyphs.minor2, this.glyphs.minor3].filter(glyph => glyph != 0);
-	}
-
-	getAllGlyphs(): Array<number> {
-		return this.getMajorGlyphs().concat(this.getMinorGlyphs());
-	}
-
 	getClassOptions(): ClassOptions<SpecType> {
 		return this.getSpecOptions().classOptions as ClassOptions<SpecType>;
 	}
@@ -1475,7 +1446,6 @@ export class Player<SpecType extends Spec> {
 		if (exportCategory(SimSettingCategories.Talents)) {
 			PlayerProto.mergePartial(player, {
 				talentsString: this.getTalentsString(),
-				glyphs: this.getGlyphs(),
 			});
 		}
 		if (exportCategory(SimSettingCategories.Rotation)) {
@@ -1533,7 +1503,6 @@ export class Player<SpecType extends Spec> {
 			}
 			if (loadCategory(SimSettingCategories.Talents)) {
 				this.setTalentsString(eventID, proto.talentsString);
-				this.setGlyphs(eventID, proto.glyphs || Glyphs.create());
 			}
 			if (loadCategory(SimSettingCategories.Rotation)) {
 				if (proto.rotation?.type == APLRotationType.TypeUnknown) {

@@ -1,8 +1,8 @@
 import { Player } from '../../core/player';
 import * as PresetUtils from '../../core/preset_utils';
-import { ConsumesSpec, Glyphs, HandType, ItemSlot, Profession, PseudoStat, Race, Spec, Stat } from '../../core/proto/common';
+import { ConsumesSpec, HandType, ItemSlot, Profession, PseudoStat, Race, Spec, Stat } from '../../core/proto/common';
 import { SavedTalents } from '../../core/proto/ui';
-import { FuryWarrior_Options as WarriorOptions, WarriorMajorGlyph } from '../../core/proto/warrior';
+import { FuryWarrior_Options as WarriorOptions } from '../../core/proto/warrior';
 import { Stats } from '../../core/proto_utils/stats';
 import DefaultFuryApl from './apls/default.apl.json';
 import P2FurySMFGear from './gear_sets/p2_fury_smf.gear.json';
@@ -128,11 +128,6 @@ export const FurySMFTalents = {
 	name: 'SMF',
 	data: SavedTalents.create({
 		talentsString: '133333',
-		glyphs: Glyphs.create({
-			major1: WarriorMajorGlyph.GlyphOfBullRush,
-			major2: WarriorMajorGlyph.GlyphOfDeathFromAbove,
-			major3: WarriorMajorGlyph.GlyphOfUnendingRage,
-		}),
 	}),
 	...FURY_SMF_PRESET_OPTIONS,
 };
@@ -141,11 +136,6 @@ export const FuryTGTalents = {
 	name: 'TG',
 	data: SavedTalents.create({
 		talentsString: '133133',
-		glyphs: Glyphs.create({
-			major1: WarriorMajorGlyph.GlyphOfBullRush,
-			major2: WarriorMajorGlyph.GlyphOfDeathFromAbove,
-			major3: WarriorMajorGlyph.GlyphOfUnendingRage,
-		}),
 	}),
 	...FURY_TG_PRESET_OPTIONS,
 };

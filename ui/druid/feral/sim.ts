@@ -183,7 +183,6 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFeralDruid, {
 			...([
 				player.getTalents().dreamOfCenarius ? healingTouch : null,
 				player.getTalents().dreamOfCenarius ? shiftCat : null,
-				player.getMajorGlyphs().includes(40923) ? preRoar : null,
 			].filter(a => a) as Array<APLPrepullAction>),
 		);
 
