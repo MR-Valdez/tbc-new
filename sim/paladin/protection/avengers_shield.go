@@ -4,26 +4,18 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 	"github.com/wowsims/tbc/sim/paladin"
 )
 
 /*
 Hurls your shield at an enemy target, dealing (<6058-7405> + 0.8175 * <AP> + 0.315 * <SP>) Holy damage,
 
--- Glyph of Dazing Shield --
-dazing,
--- /Glyph of Dazing Shield --
-
 silencing and interrupting spellcasting for 3 sec, and then jumping to additional nearby enemies.
 
 Affects 3 total targets.
 */
 func (prot *ProtectionPaladin) registerAvengersShieldSpell() {
-	hasGlyphOfFocusedShield := prot.HasMajorGlyph(proto.PaladinMajorGlyph_GlyphOfFocusedShield)
-
-	// Glyph to single target, OR apply to up to 3 targets
-	maxTargets := core.TernaryInt32(hasGlyphOfFocusedShield, 1, 3)
+	maxTargets := 3
 
 	prot.AvengersShield = prot.RegisterSpell(core.SpellConfig{
 		ActionID:       core.ActionID{SpellID: 31935},

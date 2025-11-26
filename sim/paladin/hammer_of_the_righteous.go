@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 )
 
 /*
@@ -18,7 +17,6 @@ func (paladin *Paladin) registerHammerOfTheRighteous() {
 	actionID := core.ActionID{SpellID: 53595}
 	paladin.CanTriggerHolyAvengerHpGain(actionID)
 	auraArray := paladin.NewEnemyAuraArray(core.WeakenedBlowsAura)
-	hasGlyphOfHammerOfTheRighteous := paladin.HasMajorGlyph(proto.PaladinMajorGlyph_GlyphOfHammerOfTheRighteous)
 
 	hammerOfTheRighteousAoe := paladin.RegisterSpell(core.SpellConfig{
 		ActionID:       core.ActionID{SpellID: 88263},
@@ -42,9 +40,6 @@ func (paladin *Paladin) registerHammerOfTheRighteous() {
 				for idx := range results {
 					spell.DealDamage(sim, results[idx])
 					aura := auraArray.Get(results[idx].Target)
-					if hasGlyphOfHammerOfTheRighteous && aura.Duration != core.NeverExpires {
-						aura.Duration = core.DurationFromSeconds(core.WeakenedBlowsDuration.Seconds() * 1.5)
-					}
 					aura.Activate(sim)
 				}
 			})

@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 	"github.com/wowsims/tbc/sim/core/stats"
 	"github.com/wowsims/tbc/sim/mage"
 )
@@ -45,7 +44,7 @@ type WaterElemental struct {
 
 func (frost *FrostMage) NewWaterElemental() *WaterElemental {
 	waterElementalStatInheritance := func(ownerStats stats.Stats) stats.Stats {
-		// Water elemental usually has about half the HP of the caster, with glyph this is bumped by an additional 40%
+		// Water elemental usually has about half the HP of the caster
 		return stats.Stats{
 			stats.Stamina:          ownerStats[stats.Stamina] * 0.5,
 			stats.SpellPower:       ownerStats[stats.SpellPower],
@@ -103,14 +102,6 @@ func (we *WaterElemental) registerWaterboltSpell() {
 	waterboltVariance := 0.25   // Per https://wago.tools/db2/SpellEffect?build=5.5.0.60802&filter%5BSpellID%5D=31707 Field: "Variance"
 	waterboltScale := 0.5       // Per https://wago.tools/db2/SpellEffect?build=5.5.0.60802&filter%5BSpellID%5D=31707 Field: "Coefficient"
 	waterboltCoefficient := 0.5 // Per https://wago.tools/db2/SpellEffect?build=5.5.0.60802&filter%5BSpellID%5D=31707 Field: "BonusCoefficient"
-	if we.mageOwner.HasMajorGlyph(proto.MageMajorGlyph_GlyphOfWaterElemental) {
-		we.AddStaticMod(core.SpellModConfig{
-			Kind:      core.SpellMod_AllowCastWhileMoving,
-			ClassMask: mage.MageWaterElementalSpellWaterBolt,
-		})
-	}
-
-	hasGlyph := we.mageOwner.HasMajorGlyph(proto.MageMajorGlyph_GlyphOfIcyVeins)
 
 	we.Waterbolt = we.RegisterSpell(core.SpellConfig{
 		ActionID:       core.ActionID{SpellID: 31707},
@@ -135,9 +126,8 @@ func (we *WaterElemental) registerWaterboltSpell() {
 		BonusCoefficient: waterboltCoefficient,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			hasSplitBolts := we.mageOwner.IcyVeinsAura.IsActive() && hasGlyph
-			numberOfBolts := core.TernaryInt32(hasSplitBolts, 3, 1)
-			damageMultiplier := core.TernaryFloat64(hasSplitBolts, 0.4, 1.0)
+			numberOfBolts := int32(1)
+			damageMultiplier := 1.0
 
 			spell.DamageMultiplier *= damageMultiplier
 			for range numberOfBolts {

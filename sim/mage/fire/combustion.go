@@ -4,18 +4,14 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 	"github.com/wowsims/tbc/sim/core/stats"
 	"github.com/wowsims/tbc/sim/mage"
 )
 
 func (fire *FireMage) registerCombustionSpell() {
-
-	hasGlyph := fire.HasMajorGlyph(proto.MageMajorGlyph_GlyphOfCombustion)
-
-	combustCD := core.Ternary(hasGlyph, time.Second*90, time.Second*45)
-	combustDamageMultiplier := core.Ternary(hasGlyph, 2.0, 1.0)
-	combustTickCount := core.Ternary(hasGlyph, 20, 10)
+	combustCD := time.Second * 45
+	combustDamageMultiplier := 1.0
+	combustTickCount := 10
 
 	actionID := core.ActionID{SpellID: 11129}
 

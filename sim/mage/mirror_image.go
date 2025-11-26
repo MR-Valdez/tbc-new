@@ -149,9 +149,6 @@ func (mi *MirrorImage) registerFrostboltSpell() {
 	})
 }
 
-// *******************************************************
-// If Fire spec with glyph, will chain cast Fireball
-// *******************************************************
 func (mi *MirrorImage) registerFireballSpell() {
 
 	fireBallCoefficient := 1.79999995232
@@ -189,9 +186,6 @@ func (mi *MirrorImage) registerFireballSpell() {
 	})
 }
 
-// *******************************************************
-// If Arcane spec with glyph, will chain cast Arcane Blast
-// *******************************************************
 func (mi *MirrorImage) registerArcaneBlastSpell() {
 
 	arcaneBlastCoefficient := 0.89999997616
