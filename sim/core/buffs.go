@@ -94,9 +94,6 @@ func applyBuffEffects(agent Agent, raidBuffs *proto.RaidBuffs, _ *proto.PartyBuf
 	u := &char.Unit
 
 	// +10% Attack Power
-	if raidBuffs.HornOfWinter {
-		HornOfWinterAura(u, true)
-	}
 	if raidBuffs.TrueshotAura {
 		TrueShotAura(u)
 	}
@@ -157,9 +154,6 @@ func applyBuffEffects(agent Agent, raidBuffs *proto.RaidBuffs, _ *proto.PartyBuf
 	if raidBuffs.FuriousHowl {
 		FuriousHowl(u)
 	}
-	if raidBuffs.LegacyOfTheWhiteTiger {
-		LegacyOfTheWhiteTiger(u)
-	}
 
 	// +3000 Mastery Rating
 	if raidBuffs.RoarOfCourage {
@@ -181,9 +175,6 @@ func applyBuffEffects(agent Agent, raidBuffs *proto.RaidBuffs, _ *proto.PartyBuf
 	}
 	if raidBuffs.EmbraceOfTheShaleSpider {
 		EmbraceOfTheShaleSpiderAura(u)
-	}
-	if raidBuffs.LegacyOfTheEmperor {
-		LegacyOfTheEmperorAura(u)
 	}
 	if raidBuffs.BlessingOfKings {
 		BlessingOfKingsAura(u)

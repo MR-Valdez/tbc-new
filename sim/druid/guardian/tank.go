@@ -178,11 +178,6 @@ func (bear *GuardianDruid) Initialize() {
 }
 
 func (bear *GuardianDruid) registerSymbiosis() {
-	if bear.Options.SymbiosisTarget == proto.Class_ClassDeathKnight {
-		bear.registerBoneShieldSpell()
-	} else if bear.Options.SymbiosisTarget == proto.Class_ClassMonk {
-		bear.registerElusiveBrewSpell()
-	}
 }
 
 func (bear *GuardianDruid) Reset(sim *core.Simulation) {

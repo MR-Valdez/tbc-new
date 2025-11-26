@@ -121,8 +121,6 @@
             "energy": "Énergie",
             "rage": "Rage",
             "focus": "Focalisation",
-            "runic_power": "Puissance Runique",
-            "chi": "Chi",
             "holy_power": "Puissance Sacrée",
             "shadow_orbs": "Orbes d'Ombre",
             "combo_points": "Points de Combo",
@@ -1269,14 +1267,6 @@
                     "label": "Chi Max",
                     "tooltip": "Quantité de chi maximum disponible."
                 },
-                "current_runic_power": {
-                    "label": "Puissance runique actuelle",
-                    "tooltip": "Quantité de puissance runique actuellement disponible."
-                },
-                "max_runic_power": {
-                    "label": "Puissance runique Max",
-                    "tooltip": "Quantité de puissance runique maximum disponible."
-                },
                 "solar_energy": {
                     "label": "Énergie solaire",
                     "tooltip": "Quantité d'énergie solaire actuellement disponible."
@@ -1292,38 +1282,6 @@
                 "generic_resource": {
                     "label": "{GENERIC_RESOURCE}",
                     "tooltip": "Quantité de {GENERIC_RESOURCE} actuellement disponible."
-                },
-                "num_runes": {
-                    "label": "Nombre de runes",
-                    "tooltip": "Quantité de runes d'un certain type actuellement disponibles incluant les runes de Mort."
-                },
-                "num_non_death_runes": {
-                    "label": "Nombre de runes non-Mort",
-                    "tooltip": "Quantité de runes d'un certain type actuellement disponibles en ignorant les runes de Mort."
-                },
-                "rune_is_ready": {
-                    "label": "Rune est prête",
-                    "tooltip": "La rune d'un certain emplacement est-elle actuellement disponible."
-                },
-                "rune_is_death": {
-                    "label": "Est rune de Mort",
-                    "tooltip": "La rune d'un certain emplacement est-elle actuellement convertie en rune de Mort."
-                },
-                "rune_cooldown": {
-                    "label": "Temps de eecharge de rune",
-                    "tooltip": "Quantité de temps jusqu'à ce qu'une rune d'un certain type soit prête à être utiliser.<br><b>NOTE:</b> Retourne 0 s'il y a une rune disponible"
-                },
-                "next_rune_cooldown": {
-                    "label": "Prochain temps de recharge de rune",
-                    "tooltip": "Quantité de temps jusqu'à ce qu'une 2ème rune d'un certain type soit prête à être utiliser.<br><b>NOTE:</b> Retourne 0 s'il y a 2 runes disponibles"
-                },
-                "rune_slot_cooldown": {
-                    "label": "Temps de recharge d'emplacement de rune",
-                    "tooltip": "Quantité de temps jusqu'à ce qu'une rune d'un certains emplacement soit prête à être utiliser.<br><b>NOTE:</b> Retourne 0 si la rune est prête"
-                },
-                "full_rune_cooldown": {
-                    "label": "Temps de recharge complet des runes",
-                    "tooltip": "Temps qu'il faudrait à une rune pour se recharger si vous l'utilisiez maintenant."
                 },
                 "gcd_is_ready": {
                     "label": "GCD est prêt",
@@ -1555,10 +1513,6 @@
                     "label": "Valeur DoT de Combustion",
                     "tooltip": "Retourne la taille estimée actuelle de votre DoT de Combustion."
                 },
-                "brewmaster_monk_current_stagger_percent": {
-                    "label": "Report actuel (%)",
-                    "tooltip": "Quantité de Report actuel, en pourcentage."
-                },
                 "protection_paladin_damage_taken_last_global": {
                     "label": "Dégâts reçus dernier global",
                     "tooltip": "Quantité de dégâts reçus dans les dernières 1.5s."
@@ -1634,10 +1588,7 @@
                 "focus": "Focalisation",
                 "energy": "Énergie",
                 "combo_points": "Points de Combo",
-                "chi": "Chi",
-                "runic_power": "Puissance Runique",
                 "eclipse": "Éclipse",
-                "runes": "Runes",
                 "cooldowns": "CDs",
                 "placeholders": "Espaces Réservés"
             },
@@ -1678,20 +1629,6 @@
                     "lunar": "Lunaire",
                     "solar": "Solaire",
                     "neutral": "Neutre"
-                },
-                "rune_types": {
-                    "blood": "Sang",
-                    "frost": "Givre",
-                    "unholy": "Impie",
-                    "death": "Mort"
-                },
-                "rune_slots": {
-                    "blood_left": "Sang Gauche",
-                    "blood_right": "Sang Droite",
-                    "frost_left": "Givre Gauche",
-                    "frost_right": "Givre Droite",
-                    "unholy_left": "Impie Gauche",
-                    "unholy_right": "Impie Droite"
                 },
                 "rotation_types": {
                     "single_target": "Cible unique",
@@ -1989,10 +1926,6 @@
                 "energy_cost": "Coût en Énergie",
                 "focus_gain": "Gain de Focalisation",
                 "focus_cost": "Coût en Focalisation",
-                "runic_power_gain": "Gain de Puissance Runique",
-                "runic_power_cost": "Coût en Puissance Runique",
-                "chi_gain": "Gain de Chi",
-                "chi_cost": "Coût en Chi",
                 "holy_power_gain": "Gain de Puissance Sacrée",
                 "holy_power_cost": "Coût en Puissance Sacrée",
                 "shadow_orbs_gain": "Gain d'Orbes d'Ombre",

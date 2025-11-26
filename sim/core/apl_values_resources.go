@@ -470,56 +470,6 @@ func (value *APLValueMaxComboPoints) String() string {
 	return fmt.Sprintf("Max Combo Points(%d)", value.maxComboPoints)
 }
 
-type APLValueCurrentRunicPower struct {
-	DefaultAPLValueImpl
-	unit *Unit
-}
-
-func (rot *APLRotation) newValueCurrentRunicPower(_ *proto.APLValueCurrentRunicPower, uuid *proto.UUID) APLValue {
-	unit := rot.unit
-	if !unit.HasRunicPowerBar() {
-		rot.ValidationMessageByUUID(uuid, proto.LogLevel_Warning, "%s does not use Runic Power", unit.Label)
-		return nil
-	}
-	return &APLValueCurrentRunicPower{
-		unit: unit,
-	}
-}
-func (value *APLValueCurrentRunicPower) Type() proto.APLValueType {
-	return proto.APLValueType_ValueTypeInt
-}
-func (value *APLValueCurrentRunicPower) GetInt(sim *Simulation) int32 {
-	return int32(value.unit.CurrentRunicPower())
-}
-func (value *APLValueCurrentRunicPower) String() string {
-	return "Current Runic Power"
-}
-
-type APLValueMaxRunicPower struct {
-	DefaultAPLValueImpl
-	maxRunicPower int32
-}
-
-func (rot *APLRotation) newValueMaxRunicPower(_ *proto.APLValueMaxRunicPower, uuid *proto.UUID) APLValue {
-	unit := rot.unit
-	if !unit.HasRunicPowerBar() {
-		rot.ValidationMessageByUUID(uuid, proto.LogLevel_Error, "%s does not use Runic Power", unit.Label)
-		return nil
-	}
-	return &APLValueMaxRunicPower{
-		maxRunicPower: int32(unit.MaximumRunicPower()),
-	}
-}
-func (value *APLValueMaxRunicPower) Type() proto.APLValueType {
-	return proto.APLValueType_ValueTypeInt
-}
-func (value *APLValueMaxRunicPower) GetInt(sim *Simulation) int32 {
-	return value.maxRunicPower
-}
-func (value *APLValueMaxRunicPower) String() string {
-	return fmt.Sprintf("Max Runic Power(%d)", value.maxRunicPower)
-}
-
 type APLValueCurrentGenericResource struct {
 	DefaultAPLValueImpl
 	unit *Unit

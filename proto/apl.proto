@@ -136,7 +136,6 @@ message APLValue {
         APLValueCurrentEnergy current_energy = 15;
         APLValueCurrentFocus current_focus = 66;
         APLValueCurrentComboPoints current_combo_points = 16;
-        APLValueCurrentRunicPower current_runic_power = 25;
         APLValueCurrentSolarEnergy current_solar_energy = 68;
         APLValueCurrentLunarEnergy current_lunar_energy = 69;
 		APLValueCurrentGenericResource current_generic_resource = 75;
@@ -145,7 +144,6 @@ message APLValue {
 		APLValueMaxEnergy max_energy = 87;
 		APLValueMaxFocus max_focus = 88;
 		APLValueMaxRage max_rage = 102;
-		APLValueMaxRunicPower max_runic_power = 86;
 		APLValueEnergyRegenPerSecond energy_regen_per_second = 89;
 		APLValueFocusRegenPerSecond focus_regen_per_second = 90;
 		APLValueEnergyTimeToTarget energy_time_to_target = 91;
@@ -154,16 +152,6 @@ message APLValue {
 		// Unit values
 		APLValueUnitIsMoving unit_is_moving = 72;
 		APLValueUnitDistance unit_distance = 105;
-
-        // Rune Resource values
-        APLValueCurrentRuneCount current_rune_count = 29;
-        APLValueCurrentNonDeathRuneCount current_non_death_rune_count = 34;
-        APLValueCurrentRuneDeath current_rune_death = 30;
-        APLValueCurrentRuneActive current_rune_active = 31;
-        APLValueRuneCooldown rune_cooldown = 32;
-        APLValueNextRuneCooldown next_rune_cooldown = 33;
-        APLValueRuneSlotCooldown rune_slot_cooldown = 53;
-		APLValueFullRuneCooldown full_rune_cooldown = 119;
 
         // GCD values
         APLValueGCDIsReady gcd_is_ready = 17;
@@ -244,9 +232,6 @@ message APLValue {
         APLValueCurrentEclipsePhase druid_current_eclipse_phase = 70;
 		APLValueMageCurrentCombustionDotEstimate mage_current_combustion_dot_estimate = 77;
         APLValueShamanFireElementalDuration shaman_fire_elemental_duration = 83;
-        APLValueMonkCurrentChi monk_current_chi = 94;
-		APLValueMonkMaxChi monk_max_chi = 95;
-		APLValueBrewmasterMonkCurrentStaggerPercent brewmaster_monk_current_stagger_percent = 99;
 		APLValueProtectionPaladinDamageTakenLastGlobal protection_paladin_damage_taken_last_global = 100;
 		APLValueAfflictionCurrentSnapshot affliction_current_snapshot = 123;
 		APLValueAfflictionExhaleWindow affliction_exhale_window = 124;
@@ -531,7 +516,6 @@ message APLValueCurrentRage {}
 message APLValueCurrentEnergy {}
 message APLValueCurrentFocus {}
 message APLValueCurrentComboPoints {}
-message APLValueCurrentRunicPower {}
 message APLValueCurrentSolarEnergy {}
 message APLValueCurrentLunarEnergy {}
 message APLValueCurrentGenericResource {}
@@ -540,7 +524,6 @@ message APLValueMaxComboPoints {}
 message APLValueMaxEnergy {}
 message APLValueMaxFocus {}
 message APLValueMaxRage {}
-message APLValueMaxRunicPower {}
 message APLValueEnergyRegenPerSecond {}
 message APLValueFocusRegenPerSecond {}
 message APLValueEnergyTimeToTarget {
@@ -548,48 +531,6 @@ message APLValueEnergyTimeToTarget {
 }
 message APLValueFocusTimeToTarget {
 	APLValue target_focus = 1;
-}
-
-enum APLValueRuneType {
-    RuneUnknown = 0;
-    RuneBlood = 1;
-    RuneFrost = 2;
-    RuneUnholy = 3;
-    RuneDeath = 4;
-}
-enum APLValueRuneSlot {
-    SlotUnknown = 0;
-    SlotLeftBlood = 1;
-    SlotRightBlood = 2;
-    SlotLeftFrost = 3;
-    SlotRightFrost = 4;
-    SlotLeftUnholy = 5;
-    SlotRightUnholy = 6;
-}
-
-message APLValueCurrentRuneCount{
-    APLValueRuneType rune_type = 1;
-}
-message APLValueCurrentNonDeathRuneCount{
-    APLValueRuneType rune_type = 1;
-}
-message APLValueCurrentRuneDeath{
-    APLValueRuneSlot rune_slot = 1;
-}
-message APLValueCurrentRuneActive{
-    APLValueRuneSlot rune_slot = 1;
-}
-message APLValueRuneCooldown{
-    APLValueRuneType rune_type = 1;
-}
-message APLValueNextRuneCooldown{
-    APLValueRuneType rune_type = 1;
-}
-message APLValueRuneSlotCooldown{
-    APLValueRuneSlot rune_slot = 1;
-}
-message APLValueFullRuneCooldown{
-	bool use_base_value = 1;
 }
 
 enum APLValueEclipsePhase {
@@ -799,9 +740,6 @@ message APLValueAfflictionCurrentSnapshot {
 message APLValueMageCurrentCombustionDotEstimate {}
 message APLValueShamanFireElementalDuration {}
 
-message APLValueMonkCurrentChi {}
-message APLValueMonkMaxChi {}
-message APLValueBrewmasterMonkCurrentStaggerPercent {}
 message APLValueProtectionPaladinDamageTakenLastGlobal {}
 
 message APLValueDotBaseDuration {

@@ -6408,22 +6408,6 @@
                     "tooltip"
                   ]
                 },
-                "brewmaster_monk_current_stagger_percent": {
-                  "type": "object",
-                  "properties": {
-                    "label": {
-                      "type": "string"
-                    },
-                    "tooltip": {
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false,
-                  "required": [
-                    "label",
-                    "tooltip"
-                  ]
-                },
                 "protection_paladin_damage_taken_last_global": {
                   "type": "object",
                   "properties": {
@@ -6621,7 +6605,6 @@
                 "affliction_current_snapshot",
                 "affliction_exhale_window",
                 "mage_current_combustion_dot_estimate",
-                "brewmaster_monk_current_stagger_percent",
                 "protection_paladin_damage_taken_last_global",
                 "aura_remaining_icd",
                 "aura_icd_is_ready",

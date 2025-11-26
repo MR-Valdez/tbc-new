@@ -1,10 +1,8 @@
 {
 	"classes": {
-		"death_knight": "Chevalier de la mort",
 		"druid": "Druide",
 		"hunter": "Chasseur",
 		"mage": "Mage",
-		"monk": "Moine",
 		"paladin": "Paladin",
 		"priest": "Prêtre",
 		"rogue": "Voleur",
@@ -13,11 +11,6 @@
 		"warrior": "Guerrier"
 	},
 	"specs": {
-		"death_knight": {
-			"blood": "Sang",
-			"frost": "Givre",
-			"unholy": "Impie"
-		},
 		"druid": {
 			"balance": "Équilibre",
 			"feral": "Farouche",
@@ -33,11 +26,6 @@
 			"arcane": "Arcane",
 			"fire": "Feu",
 			"frost": "Givre"
-		},
-		"monk": {
-			"brewmaster": "Maître brasseur",
-			"mistweaver": "Tisse-brume",
-			"windwalker": "Marche-vent"
 		},
 		"paladin": {
 			"holy": "Sacré",

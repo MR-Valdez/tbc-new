@@ -676,7 +676,6 @@ func getSpellIdsFromTalentJson(infile *string) []int32 {
 func GetAllTalentSpellIds(inputsDir *string) map[string][]int32 {
 	talentsDir := fmt.Sprintf("%s/../../ui/core/talents/trees", *inputsDir)
 	specFiles := []string{
-		"death_knight.json",
 		"druid.json",
 		"hunter.json",
 		"mage.json",
@@ -686,7 +685,6 @@ func GetAllTalentSpellIds(inputsDir *string) map[string][]int32 {
 		"shaman.json",
 		"warlock.json",
 		"warrior.json",
-		"monk.json",
 	}
 
 	ret_db := make(map[string][]int32, 0)
@@ -720,23 +718,6 @@ func GetAllRotationSpellIds() map[string][]int32 {
 	sim.RegisterAll()
 
 	rotMapping := []RotContainer{
-		// Death Knight
-		{Name: "bloodDeathKnight", Raid: core.SinglePlayerRaidProto(core.WithSpec(&proto.Player{
-			Class:         proto.Class_ClassDeathKnight,
-			Equipment:     &proto.EquipmentSpec{},
-			TalentsString: "000000",
-		}, &proto.Player_BloodDeathKnight{BloodDeathKnight: &proto.BloodDeathKnight{Options: &proto.BloodDeathKnight_Options{ClassOptions: &proto.DeathKnightOptions{}}}}), nil, nil, nil)},
-		{Name: "frostDeathKnight", Raid: core.SinglePlayerRaidProto(core.WithSpec(&proto.Player{
-			Class:         proto.Class_ClassDeathKnight,
-			Equipment:     &proto.EquipmentSpec{},
-			TalentsString: "000000",
-		}, &proto.Player_FrostDeathKnight{FrostDeathKnight: &proto.FrostDeathKnight{Options: &proto.FrostDeathKnight_Options{ClassOptions: &proto.DeathKnightOptions{}}}}), nil, nil, nil)},
-		{Name: "unholyDeathKnight", Raid: core.SinglePlayerRaidProto(core.WithSpec(&proto.Player{
-			Class:         proto.Class_ClassDeathKnight,
-			Equipment:     &proto.EquipmentSpec{},
-			TalentsString: "000000",
-		}, &proto.Player_UnholyDeathKnight{UnholyDeathKnight: &proto.UnholyDeathKnight{Options: &proto.UnholyDeathKnight_Options{ClassOptions: &proto.DeathKnightOptions{}}}}), nil, nil, nil)},
-
 		// Druid
 		{Name: "balanceDruid", Raid: core.SinglePlayerRaidProto(core.WithSpec(&proto.Player{
 			Class:         proto.Class_ClassDruid,
@@ -905,23 +886,6 @@ func GetAllRotationSpellIds() map[string][]int32 {
 			Equipment:     &proto.EquipmentSpec{},
 			TalentsString: "000000",
 		}, &proto.Player_ProtectionWarrior{ProtectionWarrior: &proto.ProtectionWarrior{Options: &proto.ProtectionWarrior_Options{ClassOptions: &proto.WarriorOptions{}}}}), nil, nil, nil)},
-
-		// Monk
-		{Name: "brewmasterMonk", Raid: core.SinglePlayerRaidProto(core.WithSpec(&proto.Player{
-			Class:         proto.Class_ClassMonk,
-			Equipment:     &proto.EquipmentSpec{},
-			TalentsString: "000000",
-		}, &proto.Player_BrewmasterMonk{BrewmasterMonk: &proto.BrewmasterMonk{Options: &proto.BrewmasterMonk_Options{ClassOptions: &proto.MonkOptions{}}}}), nil, nil, nil)},
-		{Name: "mistweaverMonk", Raid: core.SinglePlayerRaidProto(core.WithSpec(&proto.Player{
-			Class:         proto.Class_ClassMonk,
-			Equipment:     &proto.EquipmentSpec{},
-			TalentsString: "000000",
-		}, &proto.Player_MistweaverMonk{MistweaverMonk: &proto.MistweaverMonk{Options: &proto.MistweaverMonk_Options{ClassOptions: &proto.MonkOptions{}}}}), nil, nil, nil)},
-		{Name: "windwalkerMonk", Raid: core.SinglePlayerRaidProto(core.WithSpec(&proto.Player{
-			Class:         proto.Class_ClassMonk,
-			Equipment:     &proto.EquipmentSpec{},
-			TalentsString: "000000",
-		}, &proto.Player_WindwalkerMonk{WindwalkerMonk: &proto.WindwalkerMonk{Options: &proto.WindwalkerMonk_Options{ClassOptions: &proto.MonkOptions{}}}}), nil, nil, nil)},
 	}
 
 	ret_db := make(map[string][]int32, 0)

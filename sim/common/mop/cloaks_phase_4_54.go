@@ -68,13 +68,11 @@ func init() {
 				WithSpecMod(-0.75, proto.Spec_SpecProtectionWarrior).
 				WithSpecMod(0.10000000149, proto.Spec_SpecBalanceDruid).
 				WithSpecMod(-0.75, proto.Spec_SpecGuardianDruid).
-				WithSpecMod(-0.75, proto.Spec_SpecBloodDeathKnight).
 				WithSpecMod(0, proto.Spec_SpecShadowPriest).
 				WithSpecMod(0.05000000075, proto.Spec_SpecElementalShaman).
 				WithSpecMod(0.10000000149, proto.Spec_SpecAfflictionWarlock).
 				WithSpecMod(0.25, proto.Spec_SpecDemonologyWarlock).
-				WithSpecMod(0.15000000596, proto.Spec_SpecDestructionWarlock).
-				WithSpecMod(-0.75, proto.Spec_SpecBrewmasterMonk),
+				WithSpecMod(0.15000000596, proto.Spec_SpecDestructionWarlock),
 			),
 
 			Callback:           core.CallbackOnSpellHitDealt,
@@ -150,18 +148,13 @@ func init() {
 						WithSpecMod(-0.40000000596, proto.Spec_SpecProtectionWarrior).
 						WithSpecMod(0.30000001192, proto.Spec_SpecFeralDruid).
 						WithSpecMod(-0.40000000596, proto.Spec_SpecGuardianDruid).
-						WithSpecMod(-0.40000000596, proto.Spec_SpecBloodDeathKnight).
-						WithSpecMod(0.5, proto.Spec_SpecFrostDeathKnight).
-						WithSpecMod(0.05000000075, proto.Spec_SpecUnholyDeathKnight).
 						WithSpecMod(0, proto.Spec_SpecBeastMasteryHunter).
 						WithSpecMod(0.20000000298, proto.Spec_SpecMarksmanshipHunter).
 						WithSpecMod(0.15000000596, proto.Spec_SpecSurvivalHunter).
 						WithSpecMod(0.55000001192, proto.Spec_SpecAssassinationRogue).
 						WithSpecMod(0.15000000596, proto.Spec_SpecCombatRogue).
 						WithSpecMod(0, proto.Spec_SpecSubtletyRogue).
-						WithSpecMod(0.55000001192, proto.Spec_SpecEnhancementShaman).
-						WithSpecMod(-0.40000000596, proto.Spec_SpecBrewmasterMonk).
-						WithSpecMod(0.20000000298, proto.Spec_SpecWindwalkerMonk),
+						WithSpecMod(0.55000001192, proto.Spec_SpecEnhancementShaman),
 				),
 				Callback: core.CallbackOnSpellHitDealt,
 				Handler: func(sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {

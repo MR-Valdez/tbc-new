@@ -1315,15 +1315,6 @@ const auraAsResource = [
 	84840, // Druid
 	84839, // Paladin
 	93098, // Warrior
-	93099, // Death Knight
-	120267, // Monk
-
-	// Monk
-	124255, // Stagger
-	128938, // Elusive Brew - Stacks
-	115308, // Elusive Brew - Active
-	1247279, // Tiger Eye Brew - Stacks
-	1247275, // Tiger Eye Brew - Active
 
 	// Mage
 	148022, // Icicle
@@ -1527,70 +1518,6 @@ const idToCategoryMap: Record<number, number> = {
 	[2457]: DEFAULT_ACTION_CATEGORY + 0.1, // Battle Stance
 	[6673]: DEFAULT_ACTION_CATEGORY + 0.1, // Battle Shout
 	[469]: DEFAULT_ACTION_CATEGORY + 0.1, // Commanding Shout
-
-	// Death Knight
-	[49998]: MELEE_ACTION_CATEGORY + 0.01, // Death Strike
-	[45470]: MELEE_ACTION_CATEGORY + 0.02, // Death Strike (Heal)
-	[77535]: MELEE_ACTION_CATEGORY + 0.03, // Blood Shield
-	[49184]: MELEE_ACTION_CATEGORY + 0.04, // Howling Blast
-	[49020]: MELEE_ACTION_CATEGORY + 0.05, // Obliterate
-	[49143]: MELEE_ACTION_CATEGORY + 0.1, // Frost strike
-	[45902]: MELEE_ACTION_CATEGORY + 0.15, // Blood strike
-	[50842]: MELEE_ACTION_CATEGORY + 0.2, // Pestilence
-	[47541]: MELEE_ACTION_CATEGORY + 0.25, // Death Coil
-	[43265]: MELEE_ACTION_CATEGORY + 0.25, // Death and Decay
-	[63560]: MELEE_ACTION_CATEGORY + 0.25, // Dark Transformation
-	[50536]: MELEE_ACTION_CATEGORY + 0.25, // Unholy Blight
-	[57623]: MELEE_ACTION_CATEGORY + 0.25, // HoW
-	[45477]: MELEE_ACTION_CATEGORY + 0.3, // Icy touch
-	[45462]: MELEE_ACTION_CATEGORY + 0.3, // Plague strike
-	[114866]: MELEE_ACTION_CATEGORY + 0.31, // Soul Reaper
-	[130735]: MELEE_ACTION_CATEGORY + 0.31, // Soul Reaper
-	[130736]: MELEE_ACTION_CATEGORY + 0.31, // Soul Reaper
-	[114867]: MELEE_ACTION_CATEGORY + 0.32, // Soul Reaper (Tick)
-	[51271]: MELEE_ACTION_CATEGORY + 0.35, // UA
-	[45529]: MELEE_ACTION_CATEGORY + 0.35, // BT
-	[47568]: MELEE_ACTION_CATEGORY + 0.35, // ERW
-	[49206]: MELEE_ACTION_CATEGORY + 0.35, // Summon Gargoyle
-	[46584]: MELEE_ACTION_CATEGORY + 0.35, // Raise Dead
-	[55095]: MELEE_ACTION_CATEGORY + 0.4, // Frost Fever
-	[55078]: MELEE_ACTION_CATEGORY + 0.4, // Blood Plague
-	[50401]: MELEE_ACTION_CATEGORY + 0.5, // Razor Frost
-	[50689]: DEFAULT_ACTION_CATEGORY + 0.1, // Blood Presence
-	[48263]: DEFAULT_ACTION_CATEGORY + 0.1, // Frost Presence
-	[48265]: DEFAULT_ACTION_CATEGORY + 0.1, // Unholy Presence
-
-	// Monk
-	[120274]: 0.02, // Tiger Strikes (Main Hand)
-	[120278]: 0.03, // Tiger Strikes (Off Hand)
-	[100780]: MELEE_ACTION_CATEGORY + 0.01, // Jab
-	[100787]: MELEE_ACTION_CATEGORY + 0.02, // Tiger Palm
-	[100784]: MELEE_ACTION_CATEGORY + 0.03, // Blackout Kick
-	[130320]: MELEE_ACTION_CATEGORY + 0.04, // Rising Sun Kick
-	[113656]: MELEE_ACTION_CATEGORY + 0.05, // Fists of Fury (Cast)
-	[117418]: MELEE_ACTION_CATEGORY + 0.06, // Fists of Fury (Hit)
-	[101546]: MELEE_ACTION_CATEGORY + 0.07, // Spinning Crane Kick (Cast)
-	[107270]: MELEE_ACTION_CATEGORY + 0.08, // Spinning Crane Kick (Hit)
-	[116847]: MELEE_ACTION_CATEGORY + 0.07, // Rushing Jade Wind (Cast)
-	[148187]: MELEE_ACTION_CATEGORY + 0.08, // Rushing Jade Wind (Hit)
-	[115098]: SPELL_ACTION_CATEGORY + 0.01, // Chi Wave
-	[132467]: SPELL_ACTION_CATEGORY + 0.011, // Chi Wave (Damage)
-	[132463]: SPELL_ACTION_CATEGORY + 0.012, // Chi Wave (Heal)
-	[124098]: SPELL_ACTION_CATEGORY + 0.01, // Zen Sphere (Damage)
-	[124081]: SPELL_ACTION_CATEGORY + 0.011, // Zen Sphere (Heal)
-	[125033]: SPELL_ACTION_CATEGORY + 0.011, // Zen Sphere: Detonate (Damage)
-	[124101]: SPELL_ACTION_CATEGORY + 0.011, // Zen Sphere: Detonate (Heal)
-	[123986]: SPELL_ACTION_CATEGORY + 0.01, // Chi Burst
-	[148135]: SPELL_ACTION_CATEGORY + 0.011, // Chi Burst (Damage)
-	[130654]: SPELL_ACTION_CATEGORY + 0.012, // Chi Burst (Heal)
-	[1247275]: SPELL_ACTION_CATEGORY + 0.02, // Tigereye Brew
-	[115399]: SPELL_ACTION_CATEGORY + 0.03, // Chi Brew
-	[115288]: SPELL_ACTION_CATEGORY + 0.04, // Energizing Brew
-	[123402]: SPELL_ACTION_CATEGORY + 0.04, // Guard
-	[115295]: SPELL_ACTION_CATEGORY + 0.04, // Guard
-	[126456]: SPELL_ACTION_CATEGORY + 0.05, // Fortifying Brew
-	[123904]: SPELL_ACTION_CATEGORY + 0.06, // Invoke Xuen, the White Tiger
-	[115008]: SPELL_ACTION_CATEGORY + 0.06, // Chi Torpedo
 
 	// Generic
 	[53307]: SPELL_ACTION_CATEGORY + 0.931, // Thorns

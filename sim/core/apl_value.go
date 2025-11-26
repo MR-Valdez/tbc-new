@@ -126,8 +126,6 @@ func (rot *APLRotation) newAPLValueWithContext(config *proto.APLValue, groupVari
 		value = rot.newValueCurrentFocus(config.GetCurrentFocus(), config.Uuid)
 	case *proto.APLValue_CurrentComboPoints:
 		value = rot.newValueCurrentComboPoints(config.GetCurrentComboPoints(), config.Uuid)
-	case *proto.APLValue_CurrentRunicPower:
-		value = rot.newValueCurrentRunicPower(config.GetCurrentRunicPower(), config.Uuid)
 	case *proto.APLValue_MaxHealth:
 		value = rot.newValueMaxHealth(config.GetMaxHealth(), config.Uuid)
 	case *proto.APLValue_MaxComboPoints:
@@ -138,8 +136,6 @@ func (rot *APLRotation) newAPLValueWithContext(config *proto.APLValue, groupVari
 		value = rot.newValueMaxFocus(config.GetMaxFocus(), config.Uuid)
 	case *proto.APLValue_MaxRage:
 		value = rot.newValueMaxRage(config.GetMaxRage(), config.Uuid)
-	case *proto.APLValue_MaxRunicPower:
-		value = rot.newValueMaxRunicPower(config.GetMaxRunicPower(), config.Uuid)
 	case *proto.APLValue_EnergyRegenPerSecond:
 		value = rot.newValueEnergyRegenPerSecond(config.GetEnergyRegenPerSecond(), config.Uuid)
 	case *proto.APLValue_FocusRegenPerSecond:
@@ -150,24 +146,6 @@ func (rot *APLRotation) newAPLValueWithContext(config *proto.APLValue, groupVari
 		value = rot.newValueFocusTimeToTarget(config.GetFocusTimeToTarget(), config.Uuid)
 	case *proto.APLValue_CurrentGenericResource:
 		value = rot.newValueCurrentGenericResource(config.GetCurrentGenericResource(), config.Uuid)
-
-	// Resources Runes
-	case *proto.APLValue_CurrentRuneCount:
-		value = rot.newValueCurrentRuneCount(config.GetCurrentRuneCount(), config.Uuid)
-	case *proto.APLValue_CurrentNonDeathRuneCount:
-		value = rot.newValueCurrentNonDeathRuneCount(config.GetCurrentNonDeathRuneCount(), config.Uuid)
-	case *proto.APLValue_CurrentRuneActive:
-		value = rot.newValueCurrentRuneActive(config.GetCurrentRuneActive(), config.Uuid)
-	case *proto.APLValue_CurrentRuneDeath:
-		value = rot.newValueCurrentRuneDeath(config.GetCurrentRuneDeath(), config.Uuid)
-	case *proto.APLValue_RuneCooldown:
-		value = rot.newValueRuneCooldown(config.GetRuneCooldown(), config.Uuid)
-	case *proto.APLValue_NextRuneCooldown:
-		value = rot.newValueNextRuneCooldown(config.GetNextRuneCooldown(), config.Uuid)
-	case *proto.APLValue_RuneSlotCooldown:
-		value = rot.newValueRuneSlotCooldown(config.GetRuneSlotCooldown(), config.Uuid)
-	case *proto.APLValue_FullRuneCooldown:
-		value = rot.newValueFullRuneCooldown(config.GetFullRuneCooldown(), config.Uuid)
 
 	// Unit
 	case *proto.APLValue_UnitIsMoving:

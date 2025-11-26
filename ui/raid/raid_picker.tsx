@@ -11,7 +11,6 @@ import { PlayerClasses } from '../core/player_classes/index.js';
 import { PlayerSpecs } from '../core/player_specs/index.js';
 import { Player as PlayerProto } from '../core/proto/api.js';
 import { Class, Faction, Glyphs, Profession, Spec } from '../core/proto/common.js';
-import { UnholyDeathKnight_Options } from '../core/proto/death_knight.js';
 import { BalanceDruid_Options as BalanceDruidOptions } from '../core/proto/druid.js';
 import { ArcaneMage_Options } from '../core/proto/mage.js';
 import { getPlayerSpecFromPlayer, newUnitReference } from '../core/proto_utils/utils.js';
@@ -770,10 +769,6 @@ function applyNewPlayerAssignments(eventID: EventID, newPlayer: Player<any>, rai
 	if (newPlayer.getSpec() == Spec.SpecBalanceDruid) {
 		const newOptions = newPlayer.getSpecOptions() as BalanceDruidOptions;
 		newOptions.classOptions!.innervateTarget = newUnitReference(newPlayer.getRaidIndex());
-		newPlayer.setSpecOptions(eventID, newOptions);
-	} else if (newPlayer.getSpec() == Spec.SpecUnholyDeathKnight) {
-		const newOptions = newPlayer.getSpecOptions() as UnholyDeathKnight_Options;
-		newOptions.unholyFrenzyTarget = newUnitReference(newPlayer.getRaidIndex());
 		newPlayer.setSpecOptions(eventID, newOptions);
 	}
 }

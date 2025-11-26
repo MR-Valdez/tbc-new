@@ -2,7 +2,6 @@ import { Component } from '../core/components/component';
 import { UnitReferencePicker } from '../core/components/pickers/raid_target_picker';
 import { Player } from '../core/player';
 import { Class, Spec, UnitReference } from '../core/proto/common';
-import { DeathKnightTalents } from '../core/proto/death_knight';
 import { PriestTalents } from '../core/proto/priest';
 import { emptyUnitReference, RogueSpecs } from '../core/proto_utils/utils';
 import { EventID, TypedEvent } from '../core/typed_event';
@@ -14,7 +13,6 @@ export class AssignmentsPicker extends Component {
 
 	private readonly innervatesPicker: InnervatesPicker;
 	private readonly tricksOfTheTradesPicker: TricksOfTheTradesPicker;
-	private readonly unholyFrenzyPicker: UnholyFrenzyPicker;
 
 	constructor(parentElem: HTMLElement, raidSimUI: RaidSimUI) {
 		super(parentElem, 'assignments-picker-root');
@@ -22,7 +20,6 @@ export class AssignmentsPicker extends Component {
 
 		this.innervatesPicker = new InnervatesPicker(this.rootElem, raidSimUI);
 		this.tricksOfTheTradesPicker = new TricksOfTheTradesPicker(this.rootElem, raidSimUI);
-		this.unholyFrenzyPicker = new UnholyFrenzyPicker(this.rootElem, raidSimUI);
 	}
 }
 
@@ -146,24 +143,3 @@ class TricksOfTheTradesPicker extends AssignedBuffPicker {
 		player.setSpecOptions(eventID, newOptions);
 	}
 }
-
-class UnholyFrenzyPicker extends AssignedBuffPicker {
-	getTitle(): string {
-		return 'Unholy Frenzy';
-	}
-
-	getSourcePlayers(): Array<Player<any>> {
-		return this.raidSimUI.getActivePlayers().filter(player => player.isSpec(Spec.SpecUnholyDeathKnight) && false);
-	}
-
-	getPlayerValue(player: Player<any>): UnitReference {
-		return (player as Player<Spec.SpecUnholyDeathKnight>).getSpecOptions().unholyFrenzyTarget || emptyUnitReference();
-	}
-
-	setPlayerValue(eventID: EventID, player: Player<any>, newValue: UnitReference) {
-		const newOptions = (player as Player<Spec.SpecUnholyDeathKnight>).getSpecOptions();
-		newOptions.unholyFrenzyTarget = newValue;
-		player.setSpecOptions(eventID, newOptions);
-	}
-}
-

@@ -510,7 +510,6 @@ func init() {
 				character.Class == proto.Class_ClassPriest,
 				character.Spec == proto.Spec_SpecBalanceDruid,
 				character.Spec == proto.Spec_SpecElementalShaman,
-				character.Spec == proto.Spec_SpecMistweaverMonk,
 				character.Spec == proto.Spec_SpecHolyPaladin:
 				// These are valid
 			default:
@@ -575,8 +574,7 @@ func init() {
 				character.Spec == proto.Spec_SpecRestorationDruid ||
 				character.Spec == proto.Spec_SpecElementalShaman ||
 				character.Spec == proto.Spec_SpecRestorationShaman ||
-				character.Spec == proto.Spec_SpecHolyPaladin ||
-				character.Spec == proto.Spec_SpecMistweaverMonk
+				character.Spec == proto.Spec_SpecHolyPaladin
 
 			duration := time.Second * 10
 			masteryRaidBuffs := character.GetExclusiveEffectCategory("MasteryRatingBuff")

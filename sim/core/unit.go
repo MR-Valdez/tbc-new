@@ -119,7 +119,6 @@ type Unit struct {
 	rageBar
 	energyBar
 	focusBar
-	runicPowerBar
 
 	secondaryResourceBar SecondaryResourceBar
 
@@ -379,7 +378,6 @@ func (unit *Unit) processDynamicBonus(sim *Simulation, bonus stats.Stats) {
 		unit.updateAttackSpeed()
 		unit.updateMeleeAndRangedHaste()
 		unit.AutoAttacks.UpdateSwingTimers(sim)
-		unit.runicPowerBar.updateRegenTimes(sim)
 		unit.energyBar.processDynamicHasteRatingChange(sim)
 		unit.focusBar.processDynamicHasteRatingChange(sim)
 		unit.updateCastSpeed()
@@ -654,9 +652,7 @@ func (unit *Unit) MultiplyAttackSpeed(sim *Simulation, amount float64) {
 
 // Helper for multiplying resource generation speed
 func (unit *Unit) MultiplyResourceRegenSpeed(sim *Simulation, amount float64) {
-	if unit.HasRunicPowerBar() {
-		unit.MultiplyRuneRegenSpeed(sim, amount)
-	} else if unit.HasFocusBar() {
+	if unit.HasFocusBar() {
 		unit.MultiplyFocusRegenSpeed(sim, amount)
 	} else if unit.HasEnergyBar() {
 		unit.MultiplyEnergyRegenSpeed(sim, amount)
@@ -775,7 +771,6 @@ func (unit *Unit) reset(sim *Simulation, _ Agent) {
 
 	unit.energyBar.reset(sim)
 	unit.rageBar.reset(sim)
-	unit.runicPowerBar.reset(sim)
 
 	if unit.secondaryResourceBar != nil {
 		unit.secondaryResourceBar.Reset(sim)

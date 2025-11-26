@@ -28,11 +28,6 @@ Priest:
     - sim/priest/**/*
     - proto/priest.proto
 
-Death Knight:
-    - ui/death_knight/**/*
-    - sim/deat_hknight/**/*
-    - proto/death_knight.proto
-
 Shaman:
     - ui/shaman/**/*
     - sim/shaman/**/*
@@ -47,8 +42,3 @@ Druid:
     - ui/druid/**/*
     - sim/druid/**/*
     - proto/druid.proto
-
-Monk:
-    - ui/monk/**/*
-    - sim/monk/**/*
-    - proto/monk.proto

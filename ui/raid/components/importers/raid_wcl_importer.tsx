@@ -148,9 +148,6 @@ class WCLSimPlayer {
 }
 
 const fullTypeToSpec: Record<string, Spec> = {
-	DeathKnightBlood: Spec.SpecBloodDeathKnight,
-	DeathKnightFrost: Spec.SpecFrostDeathKnight,
-	DeathKnightUnholy: Spec.SpecUnholyDeathKnight,
 	DruidBalance: Spec.SpecBalanceDruid,
 	DruidFeral: Spec.SpecFeralDruid,
 	// TOCO: Cata - Verify tank druid
@@ -228,16 +225,6 @@ const externalCDSpells: Array<{ id: number; name: string; class: Class; applyFun
 		applyFunc: (player: Player<any>, raidTarget: UnitReference) => {
 			const options = player.getSpecOptions() as SpecOptions<RogueSpecs>;
 			options.classOptions!.tricksOfTheTradeTarget = raidTarget;
-			return options;
-		},
-	},
-	{
-		id: 49016,
-		name: 'Unholy Frenzy',
-		class: Class.ClassDeathKnight,
-		applyFunc: (player: Player<any>, raidTarget: UnitReference) => {
-			const options = player.getSpecOptions() as SpecOptions<Spec.SpecUnholyDeathKnight>;
-			options.unholyFrenzyTarget = raidTarget;
 			return options;
 		},
 	},

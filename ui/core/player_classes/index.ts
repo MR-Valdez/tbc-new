@@ -1,10 +1,8 @@
 import { PlayerClass } from '../player_class';
 import { Class } from '../proto/common';
-import { DeathKnight } from './death_knight';
 import { Druid } from './druid';
 import { Hunter } from './hunter';
 import { Mage } from './mage';
-import { Monk } from './monk';
 import { Paladin } from './paladin';
 import { Priest } from './priest';
 import { Rogue } from './rogue';
@@ -20,11 +18,9 @@ const protoToPlayerClass: Record<Class, PlayerClass<Class> | undefined> = {
 	[Class.ClassExtra4]: undefined,
 	[Class.ClassExtra5]: undefined,
 	[Class.ClassExtra6]: undefined,
-	[Class.ClassDeathKnight]: DeathKnight,
 	[Class.ClassDruid]: Druid,
 	[Class.ClassHunter]: Hunter,
 	[Class.ClassMage]: Mage,
-	[Class.ClassMonk]: Monk,
 	[Class.ClassPaladin]: Paladin,
 	[Class.ClassPriest]: Priest,
 	[Class.ClassRogue]: Rogue,
@@ -34,11 +30,9 @@ const protoToPlayerClass: Record<Class, PlayerClass<Class> | undefined> = {
 };
 
 export const PlayerClasses = {
-	DeathKnight,
 	Druid,
 	Hunter,
 	Mage,
-	Monk,
 	Paladin,
 	Priest,
 	Rogue,
@@ -55,5 +49,5 @@ export const PlayerClasses = {
 
 		return protoToPlayerClass[protoId] as PlayerClass<ClassType>;
 	},
-	naturalOrder: [DeathKnight, Druid, Hunter, Mage, Monk, Paladin, Priest, Rogue, Shaman, Warlock, Warrior],
+	naturalOrder: [Druid, Hunter, Mage, Paladin, Priest, Rogue, Shaman, Warlock, Warrior],
 };

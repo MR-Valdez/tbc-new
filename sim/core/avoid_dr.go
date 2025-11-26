@@ -11,17 +11,15 @@ type DiminishingReturnsConstants struct {
 
 // https://github.com/raethkcj/MistsDiminishingReturns
 var AvoidanceDRByClass = map[proto.Class]DiminishingReturnsConstants{
-	proto.Class_ClassWarrior:     {0.956, 237.186, 90.6425, 150.376},
-	proto.Class_ClassPaladin:     {0.886, 237.186, 66.5675, 150.376},
-	proto.Class_ClassHunter:      {0.988, 0, 145.560, 0},
-	proto.Class_ClassRogue:       {0.988, 145.560, 145.560, 0},
-	proto.Class_ClassPriest:      {0.983, 0, 150.376, 0},
-	proto.Class_ClassDeathKnight: {0.956, 237.186, 90.6425, 0},
-	proto.Class_ClassShaman:      {0.988, 145.560, 145.560, 0},
-	proto.Class_ClassMonk:        {1.422, 90.6425, 501.253, 0},
-	proto.Class_ClassMage:        {0.983, 0, 150.376, 0},
-	proto.Class_ClassWarlock:     {0.983, 0, 150.376, 0},
-	proto.Class_ClassDruid:       {1.222, 0, 150.376, 0},
+	proto.Class_ClassWarrior: {0.956, 237.186, 90.6425, 150.376},
+	proto.Class_ClassPaladin: {0.886, 237.186, 66.5675, 150.376},
+	proto.Class_ClassHunter:  {0.988, 0, 145.560, 0},
+	proto.Class_ClassRogue:   {0.988, 145.560, 145.560, 0},
+	proto.Class_ClassPriest:  {0.983, 0, 150.376, 0},
+	proto.Class_ClassShaman:  {0.988, 145.560, 145.560, 0},
+	proto.Class_ClassMage:    {0.983, 0, 150.376, 0},
+	proto.Class_ClassWarlock: {0.983, 0, 150.376, 0},
+	proto.Class_ClassDruid:   {1.222, 0, 150.376, 0},
 }
 
 // Diminishing Returns for tank avoidance

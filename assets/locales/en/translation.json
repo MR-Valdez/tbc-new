@@ -121,8 +121,6 @@
 			"energy": "Energy",
 			"rage": "Rage",
 			"focus": "Focus",
-			"runic_power": "Runic Power",
-			"chi": "Chi",
 			"holy_power": "Holy Power",
 			"shadow_orbs": "Shadow Orbs",
 			"combo_points": "Combo Points",
@@ -1261,22 +1259,6 @@
 					"label": "Max Combo Points",
 					"tooltip": "Amount of maximum available Combo Points."
 				},
-				"current_chi": {
-					"label": "Current Chi",
-					"tooltip": "Amount of currently available Chi."
-				},
-				"max_chi": {
-					"label": "Max Chi",
-					"tooltip": "Amount of maximum available Chi."
-				},
-				"current_runic_power": {
-					"label": "Current Runic Power",
-					"tooltip": "Amount of currently available Runic Power."
-				},
-				"max_runic_power": {
-					"label": "Max Runic Power",
-					"tooltip": "Amount of maximum available Runic Power."
-				},
 				"solar_energy": {
 					"label": "Solar Energy",
 					"tooltip": "Amount of currently available Solar Energy."
@@ -1292,38 +1274,6 @@
 				"generic_resource": {
 					"label": "{GENERIC_RESOURCE}",
 					"tooltip": "Amount of currently available {GENERIC_RESOURCE}."
-				},
-				"num_runes": {
-					"label": "Num Runes",
-					"tooltip": "Amount of currently available Runes of certain type including Death."
-				},
-				"num_non_death_runes": {
-					"label": "Num Non Death Runes",
-					"tooltip": "Amount of currently available Runes of certain type ignoring Death"
-				},
-				"rune_is_ready": {
-					"label": "Rune Is Ready",
-					"tooltip": "Is the rune of a certain slot currently available."
-				},
-				"rune_is_death": {
-					"label": "Rune Is Death",
-					"tooltip": "Is the rune of a certain slot currently converted to Death."
-				},
-				"rune_cooldown": {
-					"label": "Rune Cooldown",
-					"tooltip": "Amount of time until a rune of certain type is ready to use.<br><b>NOTE:</b> Returns 0 if there is a rune available"
-				},
-				"next_rune_cooldown": {
-					"label": "Next Rune Cooldown",
-					"tooltip": "Amount of time until a 2nd rune of certain type is ready to use.<br><b>NOTE:</b> Returns 0 if there are 2 runes available"
-				},
-				"rune_slot_cooldown": {
-					"label": "Rune Slot Cooldown",
-					"tooltip": "Amount of time until a rune of certain slot is ready to use.<br><b>NOTE:</b> Returns 0 if rune is ready"
-				},
-				"full_rune_cooldown": {
-					"label": "Full Rune Cooldown",
-					"tooltip": "Amount of time a rune would take to recharge if you used it now."
 				},
 				"gcd_is_ready": {
 					"label": "GCD Is Ready",
@@ -1555,10 +1505,6 @@
 					"label": "Combustion Dot Value",
 					"tooltip": "Returns the current estimated size of your Combustion Dot."
 				},
-				"brewmaster_monk_current_stagger_percent": {
-					"label": "Current Stagger (%)",
-					"tooltip": "Amount of current Stagger, as a percentage."
-				},
 				"protection_paladin_damage_taken_last_global": {
 					"label": "Damage Taken Last Global",
 					"tooltip": "Amount of damage taken in the last 1.5s."
@@ -1634,10 +1580,7 @@
 				"focus": "Focus",
 				"energy": "Energy",
 				"combo_points": "Combo Points",
-				"chi": "Chi",
-				"runic_power": "Runic Power",
 				"eclipse": "Eclipse",
-				"runes": "Runes",
 				"cooldowns": "Cooldowns",
 				"placeholders": "Placeholders"
 			},
@@ -1678,20 +1621,6 @@
 					"lunar": "Lunar",
 					"solar": "Solar",
 					"neutral": "Neutral"
-				},
-				"rune_types": {
-					"blood": "Blood",
-					"frost": "Frost",
-					"unholy": "Unholy",
-					"death": "Death"
-				},
-				"rune_slots": {
-					"blood_left": "Blood Left",
-					"blood_right": "Blood Right",
-					"frost_left": "Frost Left",
-					"frost_right": "Frost Right",
-					"unholy_left": "Unholy Left",
-					"unholy_right": "Unholy Right"
 				},
 				"rotation_types": {
 					"single_target": "Single Target",
@@ -1989,10 +1918,6 @@
 				"energy_cost": "Energy Cost",
 				"focus_gain": "Focus Gain",
 				"focus_cost": "Focus Cost",
-				"runic_power_gain": "Runic Power Gain",
-				"runic_power_cost": "Runic Power Cost",
-				"chi_gain": "Chi Gain",
-				"chi_cost": "Chi Cost",
 				"holy_power_gain": "Holy Power Gain",
 				"holy_power_cost": "Holy Power Cost",
 				"shadow_orbs_gain": "Shadow Orbs Gain",

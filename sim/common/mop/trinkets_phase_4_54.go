@@ -129,11 +129,6 @@ func init() {
 			// Missing: Mana Tide Totem, Spirit Link Totem
 			proto.Spec_SpecEnhancementShaman: 145986,
 			proto.Spec_SpecRestorationShaman: 145988,
-			// Monk
-			// Missing: Zen Meditation, Life Cocoon, Revival, Thunder Focus Tea, Flying Serpent Kick
-			proto.Spec_SpecBrewmasterMonk: 145967,
-			proto.Spec_SpecMistweaverMonk: 145968,
-			proto.Spec_SpecWindwalkerMonk: 145969,
 		},
 	})
 
@@ -159,10 +154,6 @@ func init() {
 		buffDuration:     time.Second * 10,
 		icd:              time.Second * 55,
 		cdrAuraIDs: map[proto.Spec]int32{
-			// Death Knight
-			proto.Spec_SpecBloodDeathKnight:  145958,
-			proto.Spec_SpecFrostDeathKnight:  145959,
-			proto.Spec_SpecUnholyDeathKnight: 145960,
 			// Paladin
 			// Missing: Divine Plea, Hand Of Protection, Divine Shield, Hand Of Purity
 			proto.Spec_SpecHolyPaladin:        145978,
@@ -213,8 +204,6 @@ func init() {
 				school = core.SpellSchoolFrostfire
 			}
 			magicSpell = getMultistrikeSpell(character, magicSpellID, school)
-		case proto.Class_ClassMonk:
-			magicSpell = getMultistrikeSpell(character, 146075, core.SpellSchoolNature)
 		case proto.Class_ClassPriest:
 			var magicSpellID int32
 			var school core.SpellSchool

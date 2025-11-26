@@ -91,11 +91,9 @@ export const classI18nKeys: Record<Class, string> = {
 	[Class.ClassHunter]: 'hunter',
 	[Class.ClassRogue]: 'rogue',
 	[Class.ClassPriest]: 'priest',
-	[Class.ClassDeathKnight]: 'death_knight',
 	[Class.ClassShaman]: 'shaman',
 	[Class.ClassMage]: 'mage',
 	[Class.ClassWarlock]: 'warlock',
-	[Class.ClassMonk]: 'monk',
 	[Class.ClassDruid]: 'druid',
 	[Class.ClassExtra1]: 'extra1',
 	[Class.ClassExtra2]: 'extra2',
@@ -117,14 +115,8 @@ export const resourceTypeI18nKeys: Record<ResourceType, string> = {
 	[ResourceType.ResourceTypeMana]: 'mana',
 	[ResourceType.ResourceTypeEnergy]: 'energy',
 	[ResourceType.ResourceTypeRage]: 'rage',
-	[ResourceType.ResourceTypeChi]: 'chi',
 	[ResourceType.ResourceTypeComboPoints]: 'combo_points',
 	[ResourceType.ResourceTypeFocus]: 'focus',
-	[ResourceType.ResourceTypeRunicPower]: 'runic_power',
-	[ResourceType.ResourceTypeBloodRune]: 'blood_rune',
-	[ResourceType.ResourceTypeFrostRune]: 'frost_rune',
-	[ResourceType.ResourceTypeUnholyRune]: 'unholy_rune',
-	[ResourceType.ResourceTypeDeathRune]: 'death_rune',
 	[ResourceType.ResourceTypeSolarEnergy]: 'solar_energy',
 	[ResourceType.ResourceTypeLunarEnergy]: 'lunar_energy',
 	[ResourceType.ResourceTypeGenericResource]: 'generic_resource',
@@ -145,10 +137,6 @@ export const backendMetricI18nKeys: Record<string, string> = {
 
 export const specI18nKeys: Record<Spec, string> = {
 	[Spec.SpecUnknown]: 'unknown',
-	// Death Knight
-	[Spec.SpecBloodDeathKnight]: 'blood',
-	[Spec.SpecFrostDeathKnight]: 'frost',
-	[Spec.SpecUnholyDeathKnight]: 'unholy',
 	// Druid
 	[Spec.SpecBalanceDruid]: 'balance',
 	[Spec.SpecFeralDruid]: 'feral',
@@ -162,10 +150,6 @@ export const specI18nKeys: Record<Spec, string> = {
 	[Spec.SpecArcaneMage]: 'arcane',
 	[Spec.SpecFireMage]: 'fire',
 	[Spec.SpecFrostMage]: 'frost',
-	// Monk
-	[Spec.SpecBrewmasterMonk]: 'brewmaster',
-	[Spec.SpecMistweaverMonk]: 'mistweaver',
-	[Spec.SpecWindwalkerMonk]: 'windwalker',
 	// Paladin
 	[Spec.SpecHolyPaladin]: 'holy',
 	[Spec.SpecProtectionPaladin]: 'protection',
@@ -309,9 +293,6 @@ export const masterySpellNamesI18nKeys: Record<Spec, string> = {
 	[Spec.SpecAssassinationRogue]: 'potent_poisons',
 	[Spec.SpecCombatRogue]: 'main_gauche',
 	[Spec.SpecSubtletyRogue]: 'executioner',
-	[Spec.SpecBloodDeathKnight]: 'blood_shield',
-	[Spec.SpecFrostDeathKnight]: 'frozen_heart',
-	[Spec.SpecUnholyDeathKnight]: 'dreadblade',
 	[Spec.SpecBalanceDruid]: 'total_eclipse',
 	[Spec.SpecFeralDruid]: 'razor_claws',
 	[Spec.SpecGuardianDruid]: 'natures_guardian',
@@ -337,9 +318,6 @@ export const masterySpellNamesI18nKeys: Record<Spec, string> = {
 	[Spec.SpecAfflictionWarlock]: 'potent_afflictions',
 	[Spec.SpecDemonologyWarlock]: 'master_demonologist',
 	[Spec.SpecDestructionWarlock]: 'emberstorm',
-	[Spec.SpecBrewmasterMonk]: 'elusive_brawler',
-	[Spec.SpecMistweaverMonk]: 'gift_of_the_serpent',
-	[Spec.SpecWindwalkerMonk]: 'bottled_fury',
 };
 
 export const slotNamesI18nKeys: Record<ItemSlot, string> = {
@@ -423,7 +401,5 @@ export const getPresetConfigurationCategoryI18nKey = (category: PresetConfigurat
 	presetConfigurationCategoryI18nKeys[category] || category.toLowerCase();
 
 export const classNameToClassKey = (className: string): string => {
-	const normalizedClassName = className.toLowerCase().replace(/_/g, '');
-	const classKey = normalizedClassName === 'deathknight' ? 'death_knight' : normalizedClassName;
-	return classKey;
+	return className.toLowerCase().replace(/_/g, '');
 };

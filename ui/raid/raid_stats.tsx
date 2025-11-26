@@ -350,11 +350,6 @@ const RAID_STATS_OPTIONS: RaidStatsOptions = {
 							playerData: playerClass(Class.ClassHunter),
 						},
 						{
-							label: 'Horn of Winter',
-							actionId: ActionId.fromSpellId(57330),
-							playerData: playerClass(Class.ClassDeathKnight),
-						},
-						{
 							label: 'Battle Shout',
 							actionId: ActionId.fromSpellId(6673),
 							playerData: playerClass(Class.ClassWarrior),
@@ -364,11 +359,6 @@ const RAID_STATS_OPTIONS: RaidStatsOptions = {
 				{
 					label: 'Attack Speed',
 					effects: [
-						{
-							label: 'Unholy Aura',
-							actionId: ActionId.fromSpellId(55610),
-							playerData: playerClass(Class.ClassDeathKnight),
-						},
 						{
 							label: "Serpent's Swiftness",
 							actionId: ActionId.fromSpellId(128433),
@@ -453,11 +443,6 @@ const RAID_STATS_OPTIONS: RaidStatsOptions = {
 							label: 'Terrifying Roar',
 							actionId: ActionId.fromSpellId(90309),
 							playerData: playerClass(Class.ClassHunter),
-						},
-						{
-							label: 'Legacy of the White Tiger',
-							actionId: ActionId.fromSpellId(116781),
-							playerData: playerClass(Class.ClassMonk),
 						},
 					],
 				},
@@ -561,36 +546,6 @@ const RAID_STATS_OPTIONS: RaidStatsOptions = {
 						},
 					],
 				},
-				// {
-				// 	label: 'Unholy Frenzy',
-				// 	effects: [
-				// 		{
-				// 			label: 'Unholy Frenzy',
-				// 			actionId: ActionId.fromSpellId(49016),
-				// 			playerData: playerClassAndTalent(Class.ClassDeathKnight, 'unholyFrenzy'),
-				// 		},
-				// 	],
-				// },
-				// {
-				// 	label: 'Pain Suppression',
-				// 	effects: [
-				// 		{
-				// 			label: 'Pain Suppression',
-				// 			actionId: ActionId.fromSpellId(33206),
-				// 			playerData: playerClassAndTalent(Class.ClassPriest, 'painSuppression'),
-				// 		},
-				// 	],
-				// },
-				// {
-				// 	label: 'Mana Tide',
-				// 	effects: [
-				// 		{
-				// 			label: 'Mana Tide Totem',
-				// 			actionId: ActionId.fromSpellId(16190),
-				// 			playerData: playerClassAndTalent(Class.ClassShaman, 'manaTideTotem'),
-				// 		},
-				// 	],
-				// },
 			],
 		},
 		{
@@ -624,21 +579,6 @@ const RAID_STATS_OPTIONS: RaidStatsOptions = {
 				{
 					label: 'Phys Vuln',
 					effects: [
-						// {
-						// 	label: 'Blood Frenzy',
-						// 	actionId: ActionId.fromSpellId(29859),
-						// 	playerData: playerClassAndTalent(Class.ClassWarrior, 'bloodFrenzy'),
-						// },
-						// {
-						// 	label: 'Savage Combat',
-						// 	actionId: ActionId.fromSpellId(58413),
-						// 	playerData: playerClassAndTalent(Class.ClassRogue, 'savageCombat'),
-						// },
-						// {
-						// 	label: 'Brittle Bones',
-						// 	actionId: ActionId.fromSpellId(81328),
-						// 	playerData: playerClassAndTalent(Class.ClassDeathKnight, 'brittleBones'),
-						// },
 						{
 							label: 'Acid Spit',
 							actionId: ActionId.fromSpellId(55749),
@@ -689,16 +629,6 @@ const RAID_STATS_OPTIONS: RaidStatsOptions = {
 				{
 					label: 'Spell Dmg',
 					effects: [
-						// {
-						// 	label: 'Ebon Plaguebringer',
-						// 	actionId: ActionId.fromSpellId(51160),
-						// 	playerData: playerClassAndTalent(Class.ClassDeathKnight, 'ebonPlaguebringer'),
-						// },
-						// {
-						// 	label: 'Earth and Moon',
-						// 	actionId: ActionId.fromSpellId(60433),
-						// 	playerData: playerSpecAndTalent(Spec.SpecBalanceDruid, 'earthAndMoon'),
-						// },
 						{
 							label: 'Curse of Elements',
 							actionId: ActionId.fromSpellId(1490),
@@ -746,11 +676,6 @@ const RAID_STATS_OPTIONS: RaidStatsOptions = {
 							actionId: ActionId.fromSpellId(99),
 							playerData: playerClass(Class.ClassDruid, player => player.isSpec(Spec.SpecFeralDruid)),
 						},
-						// {
-						// 	label: 'Scarlet Fever',
-						// 	actionId: ActionId.fromSpellId(81130),
-						// 	playerData: playerClassAndTalent(Class.ClassDeathKnight, 'scarletFever'),
-						// },
 						{
 							label: 'Demoralizing Shout',
 							actionId: ActionId.fromSpellId(1160),
@@ -765,11 +690,6 @@ const RAID_STATS_OPTIONS: RaidStatsOptions = {
 							label: 'Thunder Clap',
 							actionId: ActionId.fromSpellId(6343),
 							playerData: playerClass(Class.ClassWarrior),
-						},
-						{
-							label: 'Frost Fever',
-							actionId: ActionId.fromSpellId(59921),
-							playerData: playerClass(Class.ClassDeathKnight),
 						},
 						// {
 						// 	label: 'Judgements of the Just',

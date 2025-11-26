@@ -4,9 +4,6 @@
     "classes": {
       "type": "object",
       "properties": {
-        "death_knight": {
-          "type": "string"
-        },
         "druid": {
           "type": "string"
         },
@@ -14,9 +11,6 @@
           "type": "string"
         },
         "mage": {
-          "type": "string"
-        },
-        "monk": {
           "type": "string"
         },
         "paladin": {
@@ -40,11 +34,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "death_knight",
         "druid",
         "hunter",
         "mage",
-        "monk",
         "paladin",
         "priest",
         "rogue",
@@ -56,26 +48,6 @@
     "specs": {
       "type": "object",
       "properties": {
-        "death_knight": {
-          "type": "object",
-          "properties": {
-            "blood": {
-              "type": "string"
-            },
-            "frost": {
-              "type": "string"
-            },
-            "unholy": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "blood",
-            "frost",
-            "unholy"
-          ]
-        },
         "druid": {
           "type": "object",
           "properties": {
@@ -138,26 +110,6 @@
             "arcane",
             "fire",
             "frost"
-          ]
-        },
-        "monk": {
-          "type": "object",
-          "properties": {
-            "brewmaster": {
-              "type": "string"
-            },
-            "mistweaver": {
-              "type": "string"
-            },
-            "windwalker": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "brewmaster",
-            "mistweaver",
-            "windwalker"
           ]
         },
         "paladin": {
@@ -283,11 +235,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "death_knight",
         "druid",
         "hunter",
         "mage",
-        "monk",
         "paladin",
         "priest",
         "rogue",

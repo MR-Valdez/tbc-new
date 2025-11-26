@@ -6,7 +6,6 @@ import (
 
 	"github.com/wowsims/mop/sim/core"
 	"github.com/wowsims/mop/sim/core/proto"
-	"github.com/wowsims/mop/sim/death_knight/blood"
 	"github.com/wowsims/mop/sim/druid/feral"
 	"github.com/wowsims/mop/sim/hunter/marksmanship"
 )
@@ -50,45 +49,6 @@ func getTestPlayerMM() *proto.Player {
 		Spec:           PlayerOptionsBasic,
 		Glyphs:         MMGlyphs,
 		TalentsString:  MMTalents,
-		Buffs:          core.FullIndividualBuffs,
-		ReactionTimeMs: 100,
-	}
-}
-
-func getTestPlayerBloodDk() *proto.Player {
-	var BloodTalents = "03323203132212311321--003"
-	var BloodDefaultGlyphs = &proto.Glyphs{
-		Major1: int32(proto.DeathKnightMajorGlyph_GlyphOfVampiricBlood),
-		Major2: int32(proto.DeathKnightMajorGlyph_GlyphOfDancingRuneWeapon),
-		Major3: int32(proto.DeathKnightMajorGlyph_GlyphOfBoneShield),
-	}
-
-	var PlayerOptionsUnholy = &proto.Player_BloodDeathKnight{
-		BloodDeathKnight: &proto.BloodDeathKnight{
-			Options: &proto.BloodDeathKnight_Options{
-				ClassOptions: &proto.DeathKnightOptions{},
-			},
-		},
-	}
-
-	var FullConsumes = &proto.Consumes{
-		Flask:         proto.Flask_FlaskOfTitanicStrength,
-		DefaultPotion: proto.Potions_GolembloodPotion,
-		PrepopPotion:  proto.Potions_GolembloodPotion,
-		Food:          proto.Food_FoodBeerBasedCrocolisk,
-	}
-
-	blood.RegisterBloodDeathKnight()
-
-	return &proto.Player{
-		Race:           proto.Race_RaceWorgen,
-		Class:          proto.Class_ClassDeathKnight,
-		Equipment:      core.GetGearSet("../../ui/death_knight/blood/gear_sets", "p1").GearSet,
-		Rotation:       core.GetAplRotation("../../ui/death_knight/blood/apls", "simple").Rotation,
-		Consumes:       FullConsumes,
-		Spec:           PlayerOptionsUnholy,
-		Glyphs:         BloodDefaultGlyphs,
-		TalentsString:  BloodTalents,
 		Buffs:          core.FullIndividualBuffs,
 		ReactionTimeMs: 100,
 	}

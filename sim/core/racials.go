@@ -18,13 +18,7 @@ func applyRaceEffects(agent Agent) {
 
 		var resourceMetrics *ResourceMetrics = nil
 		if resourceMetrics == nil {
-			if character.HasRunicPowerBar() {
-				actionID = ActionID{SpellID: 50613}
-				resourceMetrics = character.NewRunicPowerMetrics(actionID)
-			} else if character.Class == proto.Class_ClassMonk {
-				actionID = ActionID{SpellID: 129597}
-				resourceMetrics = character.NewChiMetrics(actionID)
-			} else if character.HasEnergyBar() {
+			if character.HasEnergyBar() {
 				actionID = ActionID{SpellID: 25046}
 				resourceMetrics = character.NewEnergyMetrics(actionID)
 			} else if character.HasManaBar() {
@@ -49,11 +43,7 @@ func applyRaceEffects(agent Agent) {
 				},
 			},
 			ApplyEffects: func(sim *Simulation, _ *Unit, spell *Spell) {
-				if spell.Unit.HasRunicPowerBar() {
-					spell.Unit.AddRunicPower(sim, 15.0, resourceMetrics)
-				} else if character.Class == proto.Class_ClassMonk {
-					spell.Unit.AddComboPoints(sim, 1, resourceMetrics)
-				} else if spell.Unit.HasEnergyBar() {
+				if spell.Unit.HasEnergyBar() {
 					spell.Unit.AddEnergy(sim, 15.0, resourceMetrics)
 				} else if spell.Unit.HasManaBar() {
 					spell.Unit.AddMana(sim, spell.Unit.MaxMana()*0.02, resourceMetrics)
@@ -70,11 +60,7 @@ func applyRaceEffects(agent Agent) {
 			Type:     CooldownTypeDPS,
 			Priority: CooldownPriorityLow,
 			ShouldActivate: func(sim *Simulation, character *Character) bool {
-				if spell.Unit.HasRunicPowerBar() {
-					return character.CurrentRunicPower() <= character.maxRunicPower-15
-				} else if character.Class == proto.Class_ClassMonk {
-					return character.ComboPoints() <= character.maxComboPoints-1
-				} else if spell.Unit.HasEnergyBar() {
+				if spell.Unit.HasEnergyBar() {
 					return character.CurrentEnergy() <= character.maxEnergy-15
 				} else if spell.Unit.HasRageBar() {
 					return character.CurrentRage() <= character.maxRage-15
@@ -89,14 +75,12 @@ func applyRaceEffects(agent Agent) {
 		character.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexShadow] *= 0.99
 
 		classSpellIDs := map[proto.Class]ActionID{
-			proto.Class_ClassHunter:      {SpellID: 59543},
-			proto.Class_ClassMage:        {SpellID: 59548},
-			proto.Class_ClassPaladin:     {SpellID: 59542},
-			proto.Class_ClassShaman:      {SpellID: 59547},
-			proto.Class_ClassWarrior:     {SpellID: 28880},
-			proto.Class_ClassDeathKnight: {SpellID: 59545},
-			proto.Class_ClassMonk:        {SpellID: 121093},
-			proto.Class_ClassPriest:      {SpellID: 121093},
+			proto.Class_ClassHunter:  {SpellID: 59543},
+			proto.Class_ClassMage:    {SpellID: 59548},
+			proto.Class_ClassPaladin: {SpellID: 59542},
+			proto.Class_ClassShaman:  {SpellID: 59547},
+			proto.Class_ClassWarrior: {SpellID: 28880},
+			proto.Class_ClassPriest:  {SpellID: 121093},
 		}
 
 		var actionID ActionID
@@ -265,8 +249,7 @@ func applyRaceEffects(agent Agent) {
 		case proto.Class_ClassMage,
 			proto.Class_ClassWarlock:
 			spBonus = 2257.0
-		case proto.Class_ClassShaman,
-			proto.Class_ClassMonk:
+		case proto.Class_ClassShaman:
 			spBonus = 2257.0
 			apBonus = 4514.0
 		default:

@@ -32,7 +32,7 @@ const EnemyAutoAttackAPCoefficient = 1.0 / (14.0 * 177.0)
 const StrengthToParryPercent = 1 / 95115.8596
 const StrengthToParryRating = StrengthToParryPercent * 100 * ParryRatingPerParryPercent
 
-// Used by Monks and Druids
+// Used by Druids
 const AgilityToDodgePercent = 1 / 95115.8596
 const AgilityToDodgeRating = AgilityToDodgePercent * 100 * DodgeRatingPerDodgePercent
 

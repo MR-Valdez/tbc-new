@@ -206,10 +206,6 @@ func (d DBCTooltipDataProvider) GetClass(spellId int64) proto.Class {
 	}
 
 	switch spellEntry.SpellClassSet {
-	case 53:
-		return proto.Class_ClassMonk
-	case 15:
-		return proto.Class_ClassDeathKnight
 	case 11:
 		return proto.Class_ClassShaman
 	case 10:
