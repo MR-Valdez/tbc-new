@@ -4,14 +4,12 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 )
 
 func (druid *Druid) registerMightOfUrsocCD() {
 	actionID := core.ActionID{SpellID: 106922}
 	healthMetrics := druid.NewHealthMetrics(actionID)
-	isGlyphed := druid.HasMajorGlyph(proto.DruidMajorGlyph_GlyphOfMightOfUrsoc)
-	bonusHealthFrac := core.TernaryFloat64(isGlyphed, 0.5, 0.3)
+	bonusHealthFrac := 0.3
 
 	var bonusHealth float64
 
@@ -38,7 +36,7 @@ func (druid *Druid) registerMightOfUrsocCD() {
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
 				Timer:    druid.NewTimer(),
-				Duration: core.TernaryDuration(isGlyphed, time.Minute*5, time.Minute*3),
+				Duration: time.Minute * 3,
 			},
 		},
 

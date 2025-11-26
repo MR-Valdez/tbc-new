@@ -28,54 +28,6 @@ message HunterTalents {
     bool barrage = 18;
 }
 
-enum HunterMajorGlyph {
-    HunterMajorGlyphNone = 0;
-    GlyphOfCamouflage = 42898;
-    GlyphOfLiberation = 42899;
-    GlyphOfMending = 42900;
-    GlyphOfDistractingShot = 42901;
-    GlyphOfEndlessWrath = 42902;
-    GlyphOfDeterrence = 42903;
-    GlyphOfDisengage = 42904;
-    GlyphOfFreezingTrap = 42905;
-    GlyphOfIceTrap = 42906;
-    GlyphOfMisdirection = 42907;
-    GlyphOfExplosiveTrap = 42908;
-    GlyphOfAnimalBond = 42909;
-    GlyphOfNoEscape = 42910;
-    GlyphOfPathfinding = 42911;
-    GlyphOfSnakeTrap = 42913;
-    GlyphOfAimedShot = 42914;
-    GlyphOfMendPet = 42915;
-    GlyphOfSolace = 42917;
-    GlyphOfChimeraShot = 45625;
-    GlyphOfTranquilizingShot = 45731;
-    GlyphOfMastersCall = 45733;
-    GlyphOfScatterShot = 45734;
-    GlyphOfMirroredBlades = 45735;
-    GlyphOfBlackIce = 85684;
-    GlyphOfTheLeanPack = 104270;
-    GlyphOfEnduringDeceit = 104276;
-}
-
-enum HunterMinorGlyph {
-    HunterMinorGlyphNone = 0;
-    GlyphOfAspects = 42897;
-    GlyphOfTameBeast = 42912;
-    GlyphOfRevivePet = 43338;
-    GlyphOfLesserProportion = 43350;
-    GlyphOfFireworks = 43351;
-    GlyphOfAspectOfThePack = 43355;
-    GlyphOfStampedeHunter = 43356;
-    GlyphOfAspectOfTheCheetah = 45732;
-    GlyphOfAspectOfTheBeast = 85683;
-    GlyphOfDirection = 87278;
-    GlyphOfMarking = 87279;
-    GlyphOfFetch = 87393;
-    GlyphOfFocusedFire = 104274;
-    GlyphOfChameleon = 104278;
-}
-
 // END GENERATED
 
 enum PetSpec {

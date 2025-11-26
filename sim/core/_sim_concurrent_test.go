@@ -4,16 +4,15 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
-	"github.com/wowsims/tbc/sim/druid/feral"
-	"github.com/wowsims/tbc/sim/hunter/marksmanship"
+	"github.com/wowsims/mop/sim/core"
+	"github.com/wowsims/mop/sim/core/proto"
+	"github.com/wowsims/mop/sim/druid/feral"
+	"github.com/wowsims/mop/sim/hunter/marksmanship"
 )
 
 func getTestPlayerMM() *proto.Player {
 	var MMTalents = "032002-2302320032120231221-03"
 
-	var MMGlyphs = &proto.Glyphs{}
 	var FerocityTalents = &proto.HunterPetTalents{
 		SerpentSwiftness: 2,
 		Dive:             true,
@@ -47,7 +46,6 @@ func getTestPlayerMM() *proto.Player {
 		Equipment:      core.GetGearSet("../../ui/hunter/marksmanship/gear_sets", "preraid_mm").GearSet,
 		Rotation:       core.GetAplRotation("../../ui/hunter/marksmanship/apls", "mm").Rotation,
 		Spec:           PlayerOptionsBasic,
-		Glyphs:         MMGlyphs,
 		TalentsString:  MMTalents,
 		Buffs:          core.FullIndividualBuffs,
 		ReactionTimeMs: 100,
@@ -56,11 +54,6 @@ func getTestPlayerMM() *proto.Player {
 
 func getTestPlayerFeralCat() *proto.Player {
 	var StandardTalents = "-2320322312012121202301-020301"
-	var StandardGlyphs = &proto.Glyphs{
-		Major1: int32(proto.DruidMajorGlyph_GlyphOfThorns),
-		Major2: int32(proto.DruidMajorGlyph_GlyphOfFeralCharge),
-		Major3: int32(proto.DruidMajorGlyph_GlyphOfRebirth),
-	}
 
 	var PlayerOptionsMonoCat = &proto.Player_FeralDruid{
 		FeralDruid: &proto.FeralDruid{
@@ -86,7 +79,6 @@ func getTestPlayerFeralCat() *proto.Player {
 		Rotation:       core.GetAplRotation("../../ui/druid/feral/apls", "default").Rotation,
 		Consumes:       FullConsumes,
 		Spec:           PlayerOptionsMonoCat,
-		Glyphs:         StandardGlyphs,
 		TalentsString:  StandardTalents,
 		Buffs:          core.FullIndividualBuffs,
 		ReactionTimeMs: 100,

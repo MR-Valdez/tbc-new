@@ -25,7 +25,6 @@ message UIDatabase {
 	repeated IconData item_icons = 4;
 	repeated IconData spell_icons = 5;
 
-	repeated GlyphID glyph_ids = 7;
 	repeated ReforgeStat reforge_stats = 12;
 	repeated ItemEffectRandPropPoints item_effect_rand_prop_points = 15;
 
@@ -260,11 +259,6 @@ message IconData {
 	bool has_buff = 4;
 }
 
-message GlyphID {
-	int32 item_id = 1;
-	int32 spell_id = 2;
-}
-
 enum SourceFilterOption {
 	SourceUnknown = 0;
 	SourceCrafting = 1;
@@ -470,7 +464,6 @@ message SavedSettings {
 
 message SavedTalents {
 	string talents_string = 1;
-	Glyphs glyphs = 2;
 }
 
 message SavedRotation {

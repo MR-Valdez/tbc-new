@@ -247,11 +247,11 @@ func GetItemSwapGearSet(dir string, file string) ItemSwapSetCombo {
 	return ItemSwapSetCombo{Label: file, ItemSwap: ItemSwapFromJsonString(string(data))}
 }
 
-func GenerateTalentVariations(baseTalents string, baseGlyphs *proto.Glyphs) []TalentsCombo {
-	return GenerateTalentVariationsForRows(baseTalents, baseGlyphs, []int{0, 1, 2, 3, 4, 5})
+func GenerateTalentVariations(baseTalents string) []TalentsCombo {
+	return GenerateTalentVariationsForRows(baseTalents, []int{0, 1, 2, 3, 4, 5})
 }
 
-func GenerateTalentVariationsForRows(baseTalents string, baseGlyphs *proto.Glyphs, rowsToVary []int) []TalentsCombo {
+func GenerateTalentVariationsForRows(baseTalents string, rowsToVary []int) []TalentsCombo {
 	if len(baseTalents) != 6 {
 		log.Fatalf("Expected 6-digit talent string, got: %s", baseTalents)
 	}
@@ -276,7 +276,6 @@ func GenerateTalentVariationsForRows(baseTalents string, baseGlyphs *proto.Glyph
 			combinations = append(combinations, TalentsCombo{
 				Label:   fmt.Sprintf("Row%d_Talent%d", row+1, choice),
 				Talents: string(variation),
-				Glyphs:  baseGlyphs,
 			})
 		}
 	}
@@ -310,7 +309,6 @@ func GetTestBuildFromJSON(class proto.Class, dir string, file string, itemFilter
 			SpecOptions: getPlayerSpecOptions(simSettings.Player),
 		},
 		Talents: simSettings.Player.TalentsString,
-		Glyphs:  simSettings.Player.Glyphs,
 		Rotation: RotationCombo{
 			Label:    file,
 			Rotation: simSettings.Player.Rotation,

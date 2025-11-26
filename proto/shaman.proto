@@ -26,60 +26,6 @@ message ShamanTalents {
     bool elemental_blast = 18;
 }
 
-enum ShamanMajorGlyph {
-    ShamanMajorGlyphNone = 0;
-    GlyphOfUnstableEarth = 41517;
-    GlyphOfChainLightning = 41518;
-    GlyphOfSpiritWalk = 41524;
-    GlyphOfCapacitorTotem = 41526;
-    GlyphOfPurge = 41527;
-    GlyphOfFireElementalTotem = 41529;
-    GlyphOfFireNova = 41530;
-    GlyphOfFlameShock = 41531;
-    GlyphOfWindShear = 41532;
-    GlyphOfHealingStreamTotem = 41533;
-    GlyphOfHealingWave = 41534;
-    GlyphOfTotemicRecall = 41535;
-    GlyphOfTelluricCurrents = 41536;
-    GlyphOfGroundingTotem = 41538;
-    GlyphOfSpiritwalkersGrace = 41539;
-    GlyphOfWaterShield = 41541;
-    GlyphOfCleansingWaters = 41542;
-    GlyphOfFrostShock = 41547;
-    GlyphOfChaining = 41552;
-    GlyphOfHealingStorm = 43344;
-    GlyphOfGhostWolf = 43725;
-    GlyphOfThunder = 45770;
-    GlyphOfFeralSpirit = 45771;
-    GlyphOfRiptide = 45772;
-    GlyphOfShamanisticRage = 45776;
-    GlyphOfHex = 45777;
-    GlyphOfTotemicVigor = 45778;
-    GlyphOfLightningShield = 71155;
-    GlyphOfPurging = 104052;
-    GlyphOfEternalEarth = 104053;
-}
-
-enum ShamanMinorGlyph {
-    ShamanMinorGlyphNone = 0;
-    GlyphOfTheLakestrider = 41537;
-    GlyphOfLavaLash = 41540;
-    GlyphOfAstralRecall = 43381;
-    GlyphOfFarSight = 43385;
-    GlyphOfTheSpectralWolf = 43386;
-    GlyphOfTotemicEncirclement = 43388;
-    GlyphOfThunderstorm = 44923;
-    GlyphOfDeluge = 45775;
-    GlyphOfSpiritRaptors = 104126;
-    GlyphOfLingeringAncestors = 104127;
-    GlyphOfSpiritWolf = 104128;
-    GlyphOfFlamingSerpent = 104129;
-    GlyphOfTheCompy = 104130;
-    GlyphOfElementalFamiliars = 104131;
-    GlyphOfAstralFixation = 104133;
-    GlyphOfRainOfFrogs = 104134;
-}
-
 // END GENERATED
 
 enum EarthTotem {
@@ -119,7 +65,7 @@ message ShamanTotems {
 	    Fire = 3;
 	    Water = 4;
     }
-    
+
 	EarthTotem earth = 1;
 	AirTotem air = 2;
 	FireTotem fire = 3;

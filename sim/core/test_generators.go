@@ -85,7 +85,6 @@ type ItemSwapSetCombo struct {
 type TalentsCombo struct {
 	Label   string
 	Talents string
-	Glyphs  *proto.Glyphs
 }
 type SpecOptionsCombo struct {
 	Label       string
@@ -195,7 +194,6 @@ func (combos *SettingsCombos) GetTest(testIdx int) (string, *proto.ComputeStatsR
 				Class:              combos.Class,
 				Equipment:          gearSetCombo.GearSet,
 				TalentsString:      talentSetCombo.Talents,
-				Glyphs:             talentSetCombo.Glyphs,
 				Consumables:        buffsCombo.Consumables,
 				Buffs:              buffsCombo.Player,
 				Profession1:        proto.Profession_Engineering,
@@ -494,7 +492,6 @@ type CharacterSuiteConfig struct {
 	GearSet            GearSetCombo
 	SpecOptions        SpecOptionsCombo
 	Talents            string
-	Glyphs             *proto.Glyphs
 	Rotation           RotationCombo
 	Encounter          EncounterCombo
 	ItemSwapSet        ItemSwapSetCombo
@@ -543,7 +540,6 @@ func FullCharacterTestSuiteGenerator(configs []CharacterSuiteConfig) []TestGener
 		allTalentSets := append(config.OtherTalentSets, TalentsCombo{
 			Label:   "DefaultTalents",
 			Talents: config.Talents,
-			Glyphs:  config.Glyphs,
 		})
 		allSpecOptions := append(config.OtherSpecOptions, config.SpecOptions)
 		allRotations := append(config.OtherRotations, config.Rotation)
@@ -563,7 +559,6 @@ func FullCharacterTestSuiteGenerator(configs []CharacterSuiteConfig) []TestGener
 				Consumables:    config.Consumables,
 				Buffs:          individualBuffs,
 				TalentsString:  config.Talents,
-				Glyphs:         config.Glyphs,
 				Profession1:    Ternary(config.Profession1 != proto.Profession_ProfessionUnknown, config.Profession1, proto.Profession_Engineering),
 				Profession2:    config.Profession2,
 				Rotation:       config.Rotation.Rotation,

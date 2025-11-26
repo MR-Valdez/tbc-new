@@ -86,7 +86,6 @@ func (paladin *Paladin) AddPartyBuffs(_ *proto.PartyBuffs) {
 }
 
 func (paladin *Paladin) Initialize() {
-	paladin.registerGlyphs()
 	paladin.registerSpells()
 	paladin.addMistsPvpGloves()
 }

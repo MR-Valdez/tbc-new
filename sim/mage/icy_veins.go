@@ -12,8 +12,6 @@ func (mage *Mage) registerIcyVeinsCD() {
 		return
 	}
 
-	hasGlyph := mage.HasMajorGlyph(proto.MageMajorGlyph_GlyphOfIcyVeins)
-
 	icyVeinsMod := mage.AddDynamicMod(core.SpellModConfig{
 		ClassMask:  MageSpellsAll,
 		FloatValue: -0.2,
@@ -26,14 +24,10 @@ func (mage *Mage) registerIcyVeinsCD() {
 		ActionID: actionID,
 		Duration: time.Second * 20,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			if !hasGlyph {
-				icyVeinsMod.Activate()
-			}
+			icyVeinsMod.Activate()
 		},
 		OnExpire: func(_ *core.Aura, sim *core.Simulation) {
-			if !hasGlyph {
-				icyVeinsMod.Deactivate()
-			}
+			icyVeinsMod.Deactivate()
 		},
 	})
 

@@ -27,7 +27,6 @@ func TestAbort(t *testing.T) {
 				},
 			},
 		},
-		Glyphs:        &proto.Glyphs{},
 		TalentsString: "000000",
 		Buffs:         &proto.IndividualBuffs{},
 	}

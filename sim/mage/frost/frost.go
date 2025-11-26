@@ -54,7 +54,6 @@ func (frost *FrostMage) Reset(sim *core.Simulation) {
 func (frost *FrostMage) Initialize() {
 	frost.Mage.Initialize()
 
-	frost.registerGlyphs()
 	frost.registerPassives()
 	frost.registerSpells()
 	frost.registerHotfixes()

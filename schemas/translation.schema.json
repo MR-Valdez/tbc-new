@@ -3115,39 +3115,6 @@
             "tooltip"
           ]
         },
-        "glyphs": {
-          "type": "object",
-          "properties": {
-            "major": {
-              "type": "string"
-            },
-            "minor": {
-              "type": "string"
-            },
-            "modal": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string"
-                }
-              },
-              "additionalProperties": false,
-              "required": [
-                "title"
-              ]
-            },
-            "empty": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "major",
-            "minor",
-            "modal",
-            "empty"
-          ]
-        },
         "saved_talents": {
           "type": "object",
           "properties": {
@@ -3212,7 +3179,6 @@
         "title",
         "copy_button",
         "reset_button",
-        "glyphs",
         "saved_talents"
       ]
     },

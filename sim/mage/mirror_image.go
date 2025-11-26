@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 	"github.com/wowsims/tbc/sim/core/stats"
 )
 
@@ -56,13 +55,9 @@ type MirrorImage struct {
 	ArcaneBlast *core.Spell
 
 	arcaneChargesAura *core.Aura
-
-	hasGlyph bool
 }
 
 func (mage *Mage) NewMirrorImage() *MirrorImage {
-	hasGlyph := mage.HasMinorGlyph(proto.MageMinorGlyph_GlyphOfMirrorImage)
-
 	mirrorImageStatInheritance := func(ownerStats stats.Stats) stats.Stats {
 		return stats.Stats{
 			stats.Stamina:          ownerStats[stats.Stamina],
@@ -87,7 +82,6 @@ func (mage *Mage) NewMirrorImage() *MirrorImage {
 			HasDynamicCastSpeedInheritance: true,
 		}),
 		mageOwner: mage,
-		hasGlyph:  hasGlyph,
 	}
 
 	mirrorImage.EnableManaBar()
@@ -107,14 +101,6 @@ func (mi *MirrorImage) Initialize() {
 	mi.registerFireballSpell()
 
 	mi.mainSpell = mi.Frostbolt
-	if mi.hasGlyph {
-		if mi.mageOwner.Spec == proto.Spec_SpecArcaneMage {
-			mi.mainSpell = mi.ArcaneBlast
-		} else if mi.mageOwner.Spec == proto.Spec_SpecFireMage {
-			mi.mainSpell = mi.Fireball
-		}
-	}
-
 }
 
 func (mi *MirrorImage) Reset(_ *core.Simulation) {

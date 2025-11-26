@@ -9,7 +9,6 @@ import (
 
 func (druid *Druid) registerBarkskinCD() {
 	actionId := core.ActionID{SpellID: 22812}
-	hasGlyph := druid.HasMajorGlyph(proto.DruidMajorGlyph_GlyphOfBarkskin)
 
 	druid.BarkskinAura = druid.RegisterAura(core.Aura{
 		Label:    "Barkskin",
@@ -17,15 +16,9 @@ func (druid *Druid) registerBarkskinCD() {
 		Duration: time.Second * 12,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			druid.PseudoStats.DamageTakenMultiplier *= 0.8
-			if hasGlyph {
-				druid.PseudoStats.ReducedCritTakenChance += 0.25
-			}
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			druid.PseudoStats.DamageTakenMultiplier /= 0.8
-			if hasGlyph {
-				druid.PseudoStats.ReducedCritTakenChance -= 0.25
-			}
 		},
 	})
 
