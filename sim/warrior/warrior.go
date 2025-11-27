@@ -32,7 +32,6 @@ const (
 	SpellMaskSweepingStrikesHit
 	SpellMaskSweepingStrikesNormalizedHit
 	SpellMaskCleave
-	SpellMaskColossusSmash
 	SpellMaskExecute
 	SpellMaskHeroicStrike
 	SpellMaskOverpower
@@ -56,7 +55,6 @@ const (
 	SpellMaskBladestorm
 	SpellMaskBladestormMH
 	SpellMaskBladestormOH
-	SpellMaskDragonRoar
 
 	SpellMaskShouts = SpellMaskCommandingShout | SpellMaskBattleShout
 )
