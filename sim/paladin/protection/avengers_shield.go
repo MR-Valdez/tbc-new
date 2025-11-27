@@ -15,7 +15,7 @@ silencing and interrupting spellcasting for 3 sec, and then jumping to additiona
 Affects 3 total targets.
 */
 func (prot *ProtectionPaladin) registerAvengersShieldSpell() {
-	maxTargets := 3
+	maxTargets := int32(3)
 
 	prot.AvengersShield = prot.RegisterSpell(core.SpellConfig{
 		ActionID:       core.ActionID{SpellID: 31935},
