@@ -968,60 +968,6 @@ func LoadAndWriteItemEffects(dbHelper *DBHelper, inputsDir string) ([]dbc.ItemEf
 	return effects, nil
 }
 
-type RawGlyph struct {
-	ItemId      int32
-	Name        string
-	SpellId     int32
-	Description string
-	GlyphType   int32
-	ClassMask   int32
-	FDID        int32
-}
-
-func ScanGlyphs(rows *sql.Rows) (RawGlyph, error) {
-	var glyph RawGlyph
-
-	err := rows.Scan(
-		&glyph.ItemId,
-		&glyph.SpellId,
-		&glyph.Name,
-		&glyph.Description,
-		&glyph.GlyphType,
-		&glyph.ClassMask,
-		&glyph.FDID,
-	)
-	if err != nil {
-		return glyph, fmt.Errorf("scanning glyph data: %w", err)
-	}
-
-	return glyph, nil
-}
-
-func LoadGlyphs(dbHelper *DBHelper) ([]RawGlyph, error) {
-	query := `
-SELECT DISTINCT i.ID, gp.SpellID, is2.Display_lang, glyphSpell.Description_lang, gp.GlyphType, i.SubclassID, sm.SpellIconFileDataID
-FROM Item i
-LEFT JOIN ItemSparse is2 ON i.ID = is2.ID
-LEFT JOIN ItemEffect ie ON ie.ParentItemID  = i.ID
-JOIN SpellEffect se ON se.SpellID = ie.SpellID AND se.Effect=74
-LEFT JOIN GlyphProperties gp ON gp.ID = se.EffectMiscValue_0
-LEFT JOIN Spell glyphSpell ON glyphSpell.ID = gp.SpellID
-LEFT JOIN SpellEffect gse ON gse.SpellID = glyphSpell.ID
-LEFT JOIN SpellMisc sm ON sm.SpellID = glyphSpell.ID
-WHERE i.ClassID = 16
-GROUP BY i.ID
-
-	`
-
-	effects, err := LoadRows(dbHelper.db, query, ScanGlyphs)
-	if err != nil {
-		return nil, fmt.Errorf("error loading glyphs : %w", err)
-	}
-
-	fmt.Println("Loaded glyphs:", len(effects))
-	return effects, nil
-}
-
 type RawTalent struct {
 	TierID      int
 	TalentName  string

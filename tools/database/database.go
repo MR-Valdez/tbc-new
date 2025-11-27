@@ -28,7 +28,6 @@ type WowDatabase struct {
 	ItemEffectRandPropPoints map[int32]*proto.ItemEffectRandPropPoints
 
 	Encounters []*proto.PresetEncounter
-	GlyphIDs   []*proto.GlyphID
 
 	Consumables map[int32]*proto.Consumable
 	Effects     map[int32]*proto.SpellEffect
@@ -247,7 +246,6 @@ func (db *WowDatabase) ToUIProto() *proto.UIDatabase {
 		Npcs:                     mapToSlice(db.Npcs),
 		ItemIcons:                mapToSlice(db.ItemIcons),
 		SpellIcons:               mapToSlice(db.SpellIcons),
-		GlyphIds:                 db.GlyphIDs,
 		ReforgeStats:             mapToSlice(db.ReforgeStats),
 		ItemEffectRandPropPoints: mapToSliceByIlvl(db.ItemEffectRandPropPoints),
 		Consumables:              mapToSlice(db.Consumables),
@@ -341,8 +339,6 @@ func (db *WowDatabase) WriteJson(jsonFilePath string) {
 	tools.WriteProtoArrayToBuffer(uidb.SpellIcons, buffer, "spellIcons")
 	buffer.WriteString(",\n")
 	tools.WriteProtoArrayToBuffer(uidb.Encounters, buffer, "encounters")
-	buffer.WriteString(",\n")
-	tools.WriteProtoArrayToBuffer(uidb.GlyphIds, buffer, "glyphIds")
 	buffer.WriteString(",\n")
 	tools.WriteProtoArrayToBuffer(uidb.Consumables, buffer, "consumables")
 	buffer.WriteString(",\n")

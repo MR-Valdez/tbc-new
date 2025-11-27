@@ -104,7 +104,6 @@ const (
 	E_PICKPOCKET                                               SpellEffectType = 71
 	E_ADD_FARSIGHT                                             SpellEffectType = 72
 	E_UNTRAIN_TALENTS                                          SpellEffectType = 73
-	E_APPLY_GLYPH                                              SpellEffectType = 74
 	E_HEAL_MECHANICAL                                          SpellEffectType = 75
 	E_SUMMON_OBJECT_WILD                                       SpellEffectType = 76
 	E_SCRIPT_EFFECT                                            SpellEffectType = 77
@@ -379,7 +378,6 @@ const (
 	ITEM_CLASS_KEY
 	ITEM_CLASS_PERMANENT
 	ITEM_CLASS_MISC
-	ITEM_CLASS_GLYPH
 )
 
 const (
