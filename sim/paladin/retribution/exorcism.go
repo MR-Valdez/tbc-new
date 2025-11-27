@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 	"github.com/wowsims/tbc/sim/paladin"
 )
 
@@ -12,17 +11,11 @@ import (
 Forcefully attempt to expel the evil from the target with a blast of Holy Light.
 Causes (<6577-7343> + 0.677 * <AP>) Holy damage
 
--- Glyph of Mass Exorcism --
-to the target and 25% of that to other enemies within 8 yards
--- /Glyph of Mass Exorcism --
-
 and generates a charge of Holy Power.
 */
 func (ret *RetributionPaladin) registerExorcism() {
 	exoHpActionID := core.ActionID{SpellID: 147715}
 	ret.CanTriggerHolyAvengerHpGain(exoHpActionID)
-
-	hasGlyphOfMassExorcism := ret.HasMajorGlyph(proto.PaladinMajorGlyph_GlyphOfMassExorcism)
 
 	ret.Exorcism = ret.RegisterSpell(core.SpellConfig{
 		ActionID:       core.ActionID{SpellID: 879},
@@ -31,7 +24,7 @@ func (ret *RetributionPaladin) registerExorcism() {
 		Flags:          core.SpellFlagAPL,
 		ClassSpellMask: paladin.SpellMaskExorcism,
 
-		MaxRange: core.TernaryFloat64(hasGlyphOfMassExorcism, core.MaxMeleeRange, 30),
+		MaxRange: 30,
 
 		ManaCost: core.ManaCostOptions{
 			BaseCostPercent: 4,

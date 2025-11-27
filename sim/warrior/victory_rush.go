@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 )
 
 func (war *Warrior) registerVictoryRush() {
@@ -25,7 +24,6 @@ func (war *Warrior) registerVictoryRush() {
 
 	actionID := core.ActionID{SpellID: 34428}
 	healthMetrics := war.NewHealthMetrics(actionID)
-	hasGlyph := war.HasMajorGlyph(proto.WarriorMajorGlyph_GlyphOfVictoryRush)
 
 	war.RegisterSpell(core.SpellConfig{
 		ActionID:       actionID,
@@ -53,7 +51,7 @@ func (war *Warrior) registerVictoryRush() {
 			baseDamage := 56 + spell.MeleeAttackPower()*0.56
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 
-			healthMultiplier := core.TernaryFloat64(hasGlyph, 0.3, 0.2)
+			healthMultiplier := 0.2
 
 			if result.Landed() {
 				war.GainHealth(sim, war.MaxHealth()*healthMultiplier, healthMetrics)

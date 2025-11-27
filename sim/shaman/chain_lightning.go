@@ -4,11 +4,10 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 )
 
 func (shaman *Shaman) registerChainLightningSpell() {
-	maxHits := min(core.TernaryInt32(shaman.HasMajorGlyph(proto.ShamanMajorGlyph_GlyphOfChainLightning), 5, 3), shaman.Env.TotalTargetCount())
+	maxHits := min(3, shaman.Env.TotalTargetCount())
 	shaman.ChainLightning = shaman.newChainLightningSpell(false)
 	shaman.ChainLightningOverloads = [2][]*core.Spell{}
 	for range maxHits {
@@ -28,7 +27,7 @@ func (shaman *Shaman) NewChainSpellConfig(config ShamSpellConfig) core.SpellConf
 	}
 	spellConfig.SpellSchool = config.SpellSchool
 
-	maxHits := core.TernaryInt32((spellConfig.ClassSpellMask&(SpellMaskLavaBeam|SpellMaskLavaBeamOverload) > 0) || shaman.HasMajorGlyph(proto.ShamanMajorGlyph_GlyphOfChainLightning), 5, 3)
+	maxHits := int32(3)
 	maxHits = min(maxHits, shaman.Env.TotalTargetCount())
 
 	spellConfig.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {

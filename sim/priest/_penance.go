@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 )
 
 func (priest *Priest) registerPenanceHealSpell() {
@@ -47,7 +46,7 @@ func (priest *Priest) makePenanceSpell(isHeal bool) *core.Spell {
 			},
 			CD: core.Cooldown{
 				Timer:    priest.NewTimer(),
-				Duration: time.Duration(float64(time.Second*12-core.TernaryDuration(priest.HasMajorGlyph(proto.PriestMajorGlyph_GlyphOfPenance), time.Second*2, 0)) * (1 - .1*float64(priest.Talents.Aspiration))),
+				Duration: time.Duration(float64(time.Second*12) * (1 - .1*float64(priest.Talents.Aspiration))),
 			},
 		},
 

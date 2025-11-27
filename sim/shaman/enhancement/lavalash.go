@@ -53,37 +53,35 @@ func (enh *EnhancementShaman) registerLavaLashSpell() {
 				return
 			}
 
-			if !enh.HasMinorGlyph(proto.ShamanMinorGlyph_GlyphOfLavaLash) {
-				flameShockDot := enh.FlameShock.Dot(target)
+			flameShockDot := enh.FlameShock.Dot(target)
 
-				if flameShockDot != nil && flameShockDot.IsActive() {
-					numberSpread := 0
-					maxTargets := min(4, len(sim.Encounter.ActiveTargetUnits))
-					sortedTargets := make([]*core.Unit, len(sim.Encounter.ActiveTargetUnits))
-					copy(sortedTargets, sim.Encounter.ActiveTargetUnits)
-					slices.SortFunc(sortedTargets, func(a *core.Unit, b *core.Unit) int {
-						aDot := enh.FlameShock.Dot(a)
-						if aDot == nil || !aDot.IsActive() {
-							return -1
-						}
-						bDot := enh.FlameShock.Dot(b)
-						if bDot == nil || !bDot.IsActive() {
-							return 1
-						}
-						return int(aDot.RemainingDuration(sim) - bDot.RemainingDuration(sim))
-					})
+			if flameShockDot != nil && flameShockDot.IsActive() {
+				numberSpread := 0
+				maxTargets := min(4, len(sim.Encounter.ActiveTargetUnits))
+				sortedTargets := make([]*core.Unit, len(sim.Encounter.ActiveTargetUnits))
+				copy(sortedTargets, sim.Encounter.ActiveTargetUnits)
+				slices.SortFunc(sortedTargets, func(a *core.Unit, b *core.Unit) int {
+					aDot := enh.FlameShock.Dot(a)
+					if aDot == nil || !aDot.IsActive() {
+						return -1
+					}
+					bDot := enh.FlameShock.Dot(b)
+					if bDot == nil || !bDot.IsActive() {
+						return 1
+					}
+					return int(aDot.RemainingDuration(sim) - bDot.RemainingDuration(sim))
+				})
 
-					for _, otherTarget := range sortedTargets {
-						if otherTarget == target {
-							return
-						}
+				for _, otherTarget := range sortedTargets {
+					if otherTarget == target {
+						return
+					}
 
-						enh.FlameShock.RelatedDotSpell.Dot(otherTarget).CopyDotAndApply(sim, flameShockDot)
-						numberSpread++
+					enh.FlameShock.RelatedDotSpell.Dot(otherTarget).CopyDotAndApply(sim, flameShockDot)
+					numberSpread++
 
-						if numberSpread >= maxTargets {
-							return
-						}
+					if numberSpread >= maxTargets {
+						return
 					}
 				}
 			}

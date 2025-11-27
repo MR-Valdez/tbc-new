@@ -4,12 +4,10 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 )
 
 func (rogue *Rogue) registerTricksOfTheTradeSpell() {
-	hasGlyph := rogue.HasMinorGlyph(proto.RogueMinorGlyph_GlyphOfTricksOfTheTrade)
-	damageMult := core.TernaryFloat64(hasGlyph, 1.0, 1.15)
+	damageMult := 1.15
 	actionID := core.ActionID{SpellID: 57934}
 
 	var tottTarget *core.Unit

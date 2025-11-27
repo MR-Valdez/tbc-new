@@ -13,7 +13,6 @@ func (war *Warrior) registerColossusSmash() {
 	}
 
 	actionID := core.ActionID{SpellID: 86346}
-	hasGlyph := war.HasMajorGlyph(proto.WarriorMajorGlyph_GlyphOfColossusSmash)
 
 	war.ColossusSmashAuras = war.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
 		return target.GetOrRegisterAura(core.Aura{
@@ -64,10 +63,6 @@ func (war *Warrior) registerColossusSmash() {
 
 				physVulnAura := physVulnerabilityAuras.Get(target)
 				physVulnAura.Activate(sim)
-
-				if hasGlyph {
-					war.TryApplySunderArmorEffect(sim, target)
-				}
 			}
 		},
 

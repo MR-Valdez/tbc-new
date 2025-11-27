@@ -246,11 +246,6 @@ func (shaman *Shaman) registerEarthShieldSpell() {
 	actionID := core.ActionID{SpellID: 49284}
 	spCoeff := 0.286
 
-	bonusHeal := 0.0
-	if shaman.HasMajorGlyph(proto.ShamanMajorGlyph_GlyphOfEarthShield) {
-		bonusHeal = 0.2
-	}
-
 	icd := core.Cooldown{
 		Timer:    shaman.NewTimer(),
 		Duration: time.Millisecond * 3500,
@@ -269,7 +264,7 @@ func (shaman *Shaman) registerEarthShieldSpell() {
 		},
 
 		BonusCritRating:  core.CritRatingPerCritChance,
-		DamageMultiplier: 1 + 0.05*float64(shaman.Talents.ImprovedEarthShield) + bonusHeal,
+		DamageMultiplier: 1 + 0.05*float64(shaman.Talents.ImprovedEarthShield),
 		ThreatMultiplier: 1,
 		Hot: core.DotConfig{
 			Aura: core.Aura{
@@ -309,9 +304,7 @@ func (shaman *Shaman) registerChainHealSpell() {
 	impShieldChance := 0.1 * float64(shaman.Talents.ImprovedWaterShield)
 	impShieldManaGain := 428.0 * (1 + 0.05*float64(shaman.Talents.ImprovedShields))
 
-	hasGlyph := shaman.HasMajorGlyph(proto.ShamanMajorGlyph_GlyphOfChainHeal)
-
-	numHits := min(core.TernaryInt32(hasGlyph, 4, 3), int32(len(shaman.Env.Raid.AllUnits)))
+	numHits := min(3, int32(len(shaman.Env.Raid.AllUnits)))
 
 	bonusHeal := 0 +
 		core.TernaryFloat64(shaman.Ranged().ID == 28523, 87, 0) +

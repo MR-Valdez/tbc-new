@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 )
 
 func (priest *Priest) registerPowerWordShieldSpell() {
@@ -21,8 +20,6 @@ func (priest *Priest) registerPowerWordShieldSpell() {
 			Duration: time.Second * 4,
 		}
 	}
-
-	var glyphHeal *core.Spell
 
 	priest.PowerWordShield = priest.RegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: 48066},
@@ -70,10 +67,6 @@ func (priest *Priest) registerPowerWordShieldSpell() {
 			weakenedSoul := priest.WeakenedSouls.Get(target)
 			weakenedSoul.Duration = wsDuration
 			weakenedSoul.Activate(sim)
-
-			if glyphHeal != nil {
-				glyphHeal.Cast(sim, target)
-			}
 		},
 	})
 
@@ -84,28 +77,4 @@ func (priest *Priest) registerPowerWordShieldSpell() {
 			Duration: time.Second * 15,
 		})
 	})
-
-	if priest.HasMajorGlyph(proto.PriestMajorGlyph_GlyphOfPowerWordShield) {
-		glyphHeal = priest.RegisterSpell(core.SpellConfig{
-			ActionID:    core.ActionID{ItemID: 42408},
-			SpellSchool: core.SpellSchoolHoly,
-			ProcMask:    core.ProcMaskSpellHealing,
-			Flags:       core.SpellFlagHelpful,
-
-			// Talent effects are combined differently in this spell compared to PWS, for some reason.
-			DamageMultiplier: 0.2 *
-				(1 + .01*float64(priest.Talents.BlessedResilience)) *
-				(1 + .02*float64(priest.Talents.FocusedPower)) *
-				(1 +
-					.05*float64(priest.Talents.ImprovedPowerWordShield) +
-					.01*float64(priest.Talents.TwinDisciplines)) *
-				core.TernaryFloat64(priest.CouldHaveSetBonus(ItemSetCrimsonAcolytesRaiment, 4), 1.05, 1),
-			ThreatMultiplier: 1 - []float64{0, .07, .14, .20}[priest.Talents.SilentResolve],
-
-			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				baseHealing := 2230 + coeff*spell.HealingPower(target)
-				spell.CalcAndDealHealing(sim, target, baseHealing, spell.OutcomeAlwaysHit)
-			},
-		})
-	}
 }

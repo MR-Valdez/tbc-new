@@ -19,8 +19,7 @@ func (priest *Priest) registerFlashHealSpell() {
 		ManaCost: core.ManaCostOptions{
 			BaseCost: 0.18,
 			Multiplier: 1 -
-				.05*float64(priest.Talents.ImprovedFlashHeal) -
-				core.TernaryFloat64(priest.HasMajorGlyph(proto.PriestMajorGlyph_GlyphOfFlashHeal), .1, 0),
+				.05*float64(priest.Talents.ImprovedFlashHeal)
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{

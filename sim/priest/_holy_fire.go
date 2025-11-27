@@ -4,12 +4,9 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 )
 
 func (priest *Priest) RegisterHolyFireSpell() {
-	hasGlyph := priest.HasMajorGlyph(proto.PriestMajorGlyph_GlyphOfSmite)
-
 	priest.HolyFire = priest.RegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: 48135},
 		SpellSchool: core.SpellSchoolHoly,
@@ -38,16 +35,6 @@ func (priest *Priest) RegisterHolyFireSpell() {
 		Dot: core.DotConfig{
 			Aura: core.Aura{
 				Label: "HolyFire",
-				OnGain: func(aura *core.Aura, sim *core.Simulation) {
-					if hasGlyph {
-						priest.Smite.DamageMultiplier *= 1.2
-					}
-				},
-				OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-					if hasGlyph {
-						priest.Smite.DamageMultiplier /= 1.2
-					}
-				},
 			},
 			NumberOfTicks: 7,
 			TickLength:    time.Second * 1,

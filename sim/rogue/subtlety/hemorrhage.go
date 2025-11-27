@@ -11,7 +11,6 @@ import (
 func (subRogue *SubtletyRogue) registerHemorrhageSpell() {
 	hemoActionID := core.ActionID{SpellID: 16511, Tag: 1}
 	hemoDotActionID := core.ActionID{SpellID: 16511}
-	hasMinorGlyph := subRogue.HasMinorGlyph(proto.RogueMinorGlyph_GlyphOfHemorrhage)
 	var lastHemoDamage float64
 
 	weaponDamage := 1.6
@@ -85,14 +84,7 @@ func (subRogue *SubtletyRogue) registerHemorrhageSpell() {
 			if result.Landed() {
 				subRogue.AddComboPointsOrAnticipation(sim, 1, spell.ComboPointMetrics())
 				lastHemoDamage = result.Damage
-
-				if hasMinorGlyph { // Prevents triggering the DoT unless Garrote/Rupture/Crimson Tempest are active
-					if target.HasAuraWithTag(rogue.RogueBleedTag) {
-						hemoDot.Cast(sim, target)
-					}
-				} else {
-					hemoDot.Cast(sim, target)
-				}
+				hemoDot.Cast(sim, target)
 			} else {
 				spell.IssueRefund(sim)
 			}

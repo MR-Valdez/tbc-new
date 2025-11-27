@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 )
 
 // TODO: This currently only affects the caster, not other raid members.
@@ -12,7 +11,7 @@ func (priest *Priest) RegisterHymnOfHopeCD() {
 	actionID := core.ActionID{SpellID: 64901}
 	manaMetrics := priest.NewManaMetrics(actionID)
 
-	numTicks := 4 + core.TernaryInt32(priest.HasMajorGlyph(proto.PriestMajorGlyph_GlyphOfHymnOfHope), 1, 0)
+	numTicks := 4
 
 	hymnOfHopeSpell := priest.RegisterSpell(core.SpellConfig{
 		ActionID: actionID,

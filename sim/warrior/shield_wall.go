@@ -4,13 +4,11 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 )
 
 func (war *Warrior) registerShieldWall() {
-	hasGlyph := war.HasMajorGlyph(proto.WarriorMajorGlyph_GlyphOfShieldWall)
-	damageReductionMulti := 1 - core.TernaryFloat64(hasGlyph, 0.6, 0.4)
-	cooldownDuration := core.TernaryDuration(hasGlyph, time.Minute*5, time.Minute*3)
+	damageReductionMulti := 0.60
+	cooldownDuration := time.Minute * 3
 
 	actionID := core.ActionID{SpellID: 871}
 	aura := war.RegisterAura(core.Aura{

@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 	"github.com/wowsims/tbc/sim/warlock"
 )
 
@@ -52,10 +51,6 @@ func (destruction *DestructionWarlock) registerHavoc() {
 
 	var havocCharges int32 = 3
 	var cooldown = 25
-	if destruction.HasMajorGlyph(proto.WarlockMajorGlyph_GlyphOfHavoc) {
-		havocCharges = 6
-		cooldown = 60
-	}
 
 	actionID := core.ActionID{SpellID: 80240}
 	destruction.HavocChargesAura = destruction.RegisterAura(core.Aura{

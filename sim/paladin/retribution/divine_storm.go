@@ -7,10 +7,6 @@ import (
 
 /*
 An area attack that consumes 3 charges of Holy Power to cause 100% weapon damage as Holy damage to all enemies within 8 yards.
-
--- Glyph of Divine Storm --
-Using Divine Storm will also heal you for 5% of your maximum health.
--- /Glyph of Divine Storm --
 */
 func (ret *RetributionPaladin) registerDivineStorm() {
 	actionID := core.ActionID{SpellID: 53385}

@@ -14,12 +14,9 @@ func (war *Warrior) registerCharge() {
 	metrics := war.NewRageMetrics(actionID)
 	var chargeRageGenCD time.Duration
 
-	hasRageGlyph := war.HasMajorGlyph(proto.WarriorMajorGlyph_GlyphOfBullRush)
-	hasRangeGlyph := war.HasMajorGlyph(proto.WarriorMajorGlyph_GlyphOfLongCharge)
-
-	chargeRageGain := core.TernaryFloat64(isProtection, 20, 10) + core.TernaryFloat64(hasRageGlyph, 15, 0) // 2025-07-01 - Charge now grants 10 Rage (was 20)
+	chargeRageGain := core.TernaryFloat64(isProtection, 20, 10) // 2025-07-01 - Charge now grants 10 Rage (was 20)
 	chargeMinRange := core.MaxMeleeRange - 3.5
-	chargeRange := 25 + core.TernaryFloat64(hasRangeGlyph, 5, 0)
+	chargeRange := 25.0
 	chargeDistanceRageGain := 0.0 // 2025-07-01 - Charge now grants 1 Rage per yard traveled up to 10 yards.
 
 	aura := war.RegisterAura(core.Aura{
