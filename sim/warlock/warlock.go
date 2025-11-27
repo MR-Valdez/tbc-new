@@ -68,7 +68,6 @@ func (warlock *Warlock) Initialize() {
 	warlock.registerSummonDoomguard(doomguardInfernalTimer)
 	warlock.registerSummonInfernal(doomguardInfernalTimer)
 	warlock.registerLifeTap()
-	warlock.registerGlyphs()
 
 	// Fel Armor 10% Stamina
 	core.MakePermanent(
@@ -116,14 +115,6 @@ func NewWarlock(character *core.Character, options *proto.Player, warlockOptions
 // Agent is a generic way to access underlying warlock on any of the agents.
 type WarlockAgent interface {
 	GetWarlock() *Warlock
-}
-
-func (warlock *Warlock) HasMajorGlyph(glyph proto.WarlockMajorGlyph) bool {
-	return warlock.HasGlyph(int32(glyph))
-}
-
-func (warlock *Warlock) HasMinorGlyph(glyph proto.WarlockMinorGlyph) bool {
-	return warlock.HasGlyph(int32(glyph))
 }
 
 const (

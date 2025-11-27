@@ -72,11 +72,6 @@
 			}
 		},
 		"talentsString": "312111",
-		"glyphs": {
-			"major1": 42909,
-			"major2": 42903,
-			"major3": 42914
-		},
 		"profession1": "Engineering",
 		"profession2": "Tailoring",
 		"cooldowns": {},

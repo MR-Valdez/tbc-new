@@ -1,6 +1,6 @@
 import * as PresetUtils from '../../core/preset_utils.js';
 import { ConsumesSpec, Stat } from '../../core/proto/common.js';
-import { RestorationShaman_Options as RestorationShamanOptions, ShamanMajorGlyph, ShamanMinorGlyph, ShamanShield } from '../../core/proto/shaman.js';
+import { RestorationShaman_Options as RestorationShamanOptions, ShamanShield } from '../../core/proto/shaman.js';
 import { SavedTalents } from '../../core/proto/ui.js';
 import { Stats } from '../../core/proto_utils/stats';
 import P1Gear from './gear_sets/p1.gear.json';
@@ -38,28 +38,12 @@ export const TankHealingTalents = {
 	name: 'Tank Healing',
 	data: SavedTalents.create({
 		// talentsString: '-30205033-05005331335010501122331251',
-		// glyphs: Glyphs.create({
-		// 	major1: ShamanMajorGlyph.GlyphOfEarthlivingWeapon,
-		// 	major2: ShamanMajorGlyph.GlyphOfEarthShield,
-		// 	major3: ShamanMajorGlyph.GlyphOfLesserHealingWave,
-		// 	minor2: ShamanMinorGlyph.GlyphOfWaterShield,
-		// 	minor1: ShamanMinorGlyph.GlyphOfRenewedLife,
-		// 	minor3: ShamanMinorGlyph.GlyphOfGhostWolf,
-		// }),
 	}),
 };
 export const RaidHealingTalents = {
 	name: 'Raid Healing',
 	data: SavedTalents.create({
 		// talentsString: '-3020503-50005331335310501122331251',
-		// glyphs: Glyphs.create({
-		// 	major1: ShamanMajorGlyph.GlyphOfChainHeal,
-		// 	major2: ShamanMajorGlyph.GlyphOfEarthShield,
-		// 	major3: ShamanMajorGlyph.GlyphOfEarthlivingWeapon,
-		// 	minor2: ShamanMinorGlyph.GlyphOfWaterShield,
-		// 	minor1: ShamanMinorGlyph.GlyphOfRenewedLife,
-		// 	minor3: ShamanMinorGlyph.GlyphOfGhostWolf,
-		// }),
 	}),
 };
 

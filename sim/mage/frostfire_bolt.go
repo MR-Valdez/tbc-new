@@ -34,10 +34,8 @@ func (mage *Mage) frostfireBoltConfig(config core.SpellConfig) core.SpellConfig 
 
 func (mage *Mage) registerFrostfireBoltSpell() {
 	actionID := core.ActionID{SpellID: 44614}
-	hasGlyph := mage.HasMajorGlyph(proto.MageMajorGlyph_GlyphOfIcyVeins)
 	mageSpecFrost := mage.Spec == proto.Spec_SpecFrostMage
 	mageSpecFire := mage.Spec == proto.Spec_SpecFireMage
-	var icyVeinsFrostfireBolt *core.Spell
 
 	mage.RegisterSpell(mage.frostfireBoltConfig(core.SpellConfig{
 		ActionID: actionID,
@@ -60,8 +58,7 @@ func (mage *Mage) registerFrostfireBoltSpell() {
 			if (mage.BrainFreezeAura == nil || !mage.BrainFreezeAura.IsActive()) && mage.PresenceOfMindAura != nil {
 				mage.PresenceOfMindAura.Deactivate(sim)
 			}
-			hasSplitBolts := mage.IcyVeinsAura.IsActive() && hasGlyph
-			damageMultiplier := core.TernaryFloat64(hasSplitBolts, 0.4, 1.0)
+			damageMultiplier := 1.0
 
 			spell.DamageMultiplier *= damageMultiplier
 			baseDamage := mage.CalcAndRollDamageRange(sim, frostfireBoltScaling, frostfireBoltVariance)
@@ -70,10 +67,6 @@ func (mage *Mage) registerFrostfireBoltSpell() {
 
 			if result.Landed() && mageSpecFrost {
 				mage.ProcFingersOfFrost(sim, spell)
-			}
-
-			if hasSplitBolts {
-				icyVeinsFrostfireBolt.Cast(sim, target)
 			}
 
 			if mage.BrainFreezeAura != nil {
@@ -99,34 +92,6 @@ func (mage *Mage) registerFrostfireBoltSpell() {
 					}
 					if mageSpecFire {
 						mage.HandleHeatingUp(sim, spell, result)
-					}
-				})
-			}
-		},
-	}))
-
-	icyVeinsFrostfireBolt = mage.RegisterSpell(mage.frostfireBoltConfig(core.SpellConfig{
-		ActionID: actionID.WithTag(1), // Real SpellID: 131081
-		Flags:    core.SpellFlagPassiveSpell,
-
-		DamageMultiplier: 0.4,
-
-		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			results := make([]*core.SpellResult, 2)
-
-			for idx := range results {
-				baseDamage := mage.CalcAndRollDamageRange(sim, frostfireBoltScaling, frostfireBoltVariance)
-				results[idx] = spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
-				if results[idx].Landed() {
-					mage.ProcFingersOfFrost(sim, spell)
-				}
-			}
-
-			for _, result := range results {
-				spell.WaitTravelTime(sim, func(sim *core.Simulation) {
-					spell.DealDamage(sim, result)
-					if result.Landed() {
-						mage.GainIcicle(sim, target, result.Damage)
 					}
 				})
 			}

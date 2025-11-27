@@ -97,8 +97,6 @@ func (affliction *AfflictionWarlock) Initialize() {
 	affliction.registerSeed()
 	affliction.registerSoulSwap()
 
-	affliction.registerGlyphs()
-
 	affliction.registerHotfixes()
 }
 

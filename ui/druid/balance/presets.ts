@@ -1,6 +1,6 @@
 import * as PresetUtils from '../../core/preset_utils.js';
-import { ConsumesSpec, Debuffs, Glyphs, IndividualBuffs, PartyBuffs, Profession, PseudoStat, RaidBuffs, Stat, UnitReference } from '../../core/proto/common.js';
-import { BalanceDruid_Options as BalanceDruidOptions, DruidMajorGlyph } from '../../core/proto/druid.js';
+import { ConsumesSpec, Debuffs, IndividualBuffs, PartyBuffs, Profession, PseudoStat, RaidBuffs, Stat, UnitReference } from '../../core/proto/common.js';
+import { BalanceDruid_Options as BalanceDruidOptions } from '../../core/proto/druid.js';
 import { SavedTalents } from '../../core/proto/ui.js';
 import { Stats, UnitStat, UnitStatPresets } from '../../core/proto_utils/stats';
 import { defaultRaidBuffMajorDamageCooldowns } from '../../core/proto_utils/utils';
@@ -38,11 +38,6 @@ export const StandardTalents = {
 	name: 'Standard',
 	data: SavedTalents.create({
 		talentsString: '113222',
-		glyphs: Glyphs.create({
-			major1: DruidMajorGlyph.GlyphOfHealingTouch,
-			major2: DruidMajorGlyph.GlyphOfStampede,
-			major3: DruidMajorGlyph.GlyphOfRebirth,
-		}),
 	}),
 };
 

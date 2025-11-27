@@ -26,58 +26,6 @@ message WarriorTalents {
     bool storm_bolt = 18;
 }
 
-enum WarriorMajorGlyph {
-    WarriorMajorGlyphNone = 0;
-    GlyphOfLongCharge = 43397;
-    GlyphOfUnendingRage = 43399;
-    GlyphOfEnragedSpeed = 43413;
-    GlyphOfHinderingStrikes = 43414;
-    GlyphOfHeavyRepercussions = 43415;
-    GlyphOfBloodthirst = 43416;
-    GlyphOfRudeInterruption = 43417;
-    GlyphOfGagOrder = 43418;
-    GlyphOfBlitz = 43419;
-    GlyphOfMortalStrike = 43421;
-    GlyphOfDieByTheSword = 43422;
-    GlyphOfHamstring = 43423;
-    GlyphOfHoldTheLine = 43424;
-    GlyphOfShieldSlam = 43425;
-    GlyphOfHoarseVoice = 43427;
-    GlyphOfSweepingStrikes = 43428;
-    GlyphOfResonatingPower = 43430;
-    GlyphOfVictoryRush = 43431;
-    GlyphOfRagingWind = 43432;
-    GlyphOfWhirlwind = 45790;
-    GlyphOfDeathFromAbove = 45792;
-    GlyphOfVictoriousThrow = 45793;
-    GlyphOfSpellReflection = 45795;
-    GlyphOfShieldWall = 45797;
-    GlyphOfColossusSmash = 63481;
-    GlyphOfBullRush = 67482;
-    GlyphOfRecklessness = 67483;
-    GlyphOfIncite = 83096;
-    GlyphOfImpalingThrows = 104055;
-    GlyphOfTheExecutor = 104056;
-}
-
-enum WarriorMinorGlyph {
-    WarriorMinorGlyphNone = 0;
-    GlyphOfMysticShout = 43395;
-    GlyphOfBloodcurdlingShout = 43396;
-    GlyphOfGushingWound = 43398;
-    GlyphOfMightyVictory = 43400;
-    GlyphOfBloodyHealing = 43412;
-    GlyphOfIntimidatingShout = 45794;
-    GlyphOfThunderStrike = 49084;
-    GlyphOfCrowFeast = 80587;
-    GlyphOfBurningAnger = 80588;
-    GlyphOfTheBlazingTrail = 85221;
-    GlyphOfTheRagingWhirlwind = 104135;
-    GlyphOfTheSubtleDefender = 104136;
-    GlyphOfTheWatchfulEye = 104137;
-    GlyphOfTheWeaponmaster = 104138;
-}
-
 // END GENERATED
 
 message WarriorOptions {

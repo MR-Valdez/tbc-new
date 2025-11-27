@@ -4,13 +4,11 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 	"github.com/wowsims/tbc/sim/druid"
 )
 
 func (cat *FeralDruid) registerShredSpell() {
 	flatDamageBonus := 0.07100000232 * cat.ClassSpellScaling // ~77.7265
-	hasGlyph := cat.HasMajorGlyph(proto.DruidMajorGlyph_GlyphOfShred)
 
 	cat.Shred = cat.RegisterSpell(druid.Cat, core.SpellConfig{
 		ActionID:       core.ActionID{SpellID: 5221},
@@ -33,7 +31,7 @@ func (cat *FeralDruid) registerShredSpell() {
 		},
 
 		ExtraCastCondition: func(_ *core.Simulation, _ *core.Unit) bool {
-			return (!cat.PseudoStats.InFrontOfTarget && !cat.CannotShredTarget) || (hasGlyph && (cat.BerserkCatAura.IsActive() || cat.TigersFuryAura.IsActive()))
+			return (!cat.PseudoStats.InFrontOfTarget && !cat.CannotShredTarget)
 		},
 
 		DamageMultiplier: 5,

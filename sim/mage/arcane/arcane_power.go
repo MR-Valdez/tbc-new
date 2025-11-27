@@ -4,13 +4,10 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 	"github.com/wowsims/tbc/sim/mage"
 )
 
 func (arcane *ArcaneMage) registerArcanePowerCD() {
-	hasGlyph := arcane.HasMajorGlyph(proto.MageMajorGlyph_GlyphOfArcanePower)
-
 	arcane.ArcanePowerDamageMod = arcane.AddDynamicMod(core.SpellModConfig{
 		FloatValue: 0.20,
 		Kind:       core.SpellMod_DamageDone_Pct,
@@ -36,19 +33,6 @@ func (arcane *ArcaneMage) registerArcanePowerCD() {
 			arcanePowerCostMod.Deactivate()
 		},
 	})
-
-	if hasGlyph {
-		arcane.AddStaticMod(core.SpellModConfig{
-			ClassMask: mage.MageSpellArcanePower,
-			TimeValue: time.Second * 15,
-			Kind:      core.SpellMod_BuffDuration_Flat,
-		})
-		arcane.AddStaticMod(core.SpellModConfig{
-			ClassMask:  mage.MageSpellArcanePower,
-			FloatValue: 2.0,
-			Kind:       core.SpellMod_Cooldown_Multiplier,
-		})
-	}
 
 	arcane.arcanePower = arcane.RegisterSpell(core.SpellConfig{
 		ActionID:        actionID,

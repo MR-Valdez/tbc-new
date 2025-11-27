@@ -1,6 +1,6 @@
 import { SimSettingCategories } from '../../../constants/sim_settings';
 import { IndividualSimUI } from '../../../individual_sim_ui';
-import { Class, EquipmentSpec, Glyphs, Profession, Race, Spec } from '../../../proto/common';
+import { Class, EquipmentSpec, Profession, Race, Spec } from '../../../proto/common';
 import { Database } from '../../../proto_utils/database';
 import { classNames } from '../../../proto_utils/names';
 import { TypedEvent } from '../../../typed_event';
@@ -28,7 +28,6 @@ export abstract class IndividualImporter<SpecType extends Spec> extends Importer
 			race,
 			equipmentSpec,
 			talentsStr,
-			glyphs,
 			professions,
 			missingEnchants = [],
 			missingItems = [],
@@ -37,7 +36,6 @@ export abstract class IndividualImporter<SpecType extends Spec> extends Importer
 			race: Race;
 			equipmentSpec: EquipmentSpec;
 			talentsStr: string;
-			glyphs: Glyphs | null;
 			professions: Profession[];
 			missingEnchants?: number[];
 			missingItems?: number[];
@@ -58,9 +56,6 @@ export abstract class IndividualImporter<SpecType extends Spec> extends Importer
 			simUI.player.setGear(eventID, gear);
 			if (talentsStr && talentsStr != '--') {
 				simUI.player.setTalentsString(eventID, talentsStr);
-			}
-			if (glyphs) {
-				simUI.player.setGlyphs(eventID, glyphs);
 			}
 			if (professions.length > 0) {
 				simUI.player.setProfessions(eventID, professions);

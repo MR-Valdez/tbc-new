@@ -1,8 +1,6 @@
-import * as Mechanics from '../../core/constants/mechanics.js';
 import * as PresetUtils from '../../core/preset_utils.js';
-import { APLRotation_Type as APLRotationType } from '../../core/proto/apl.js';
-import { ConsumesSpec, Glyphs, Profession, PseudoStat, Spec, Stat } from '../../core/proto/common.js';
-import { PaladinMajorGlyph, PaladinMinorGlyph, PaladinSeal, ProtectionPaladin_Options as ProtectionPaladinOptions } from '../../core/proto/paladin.js';
+import { ConsumesSpec, Profession, PseudoStat, Spec, Stat } from '../../core/proto/common.js';
+import { PaladinSeal, ProtectionPaladin_Options as ProtectionPaladinOptions } from '../../core/proto/paladin.js';
 import { SavedTalents } from '../../core/proto/ui.js';
 import { Stats } from '../../core/proto_utils/stats';
 import DefaultApl from './apls/default.apl.json';
@@ -51,13 +49,6 @@ export const DefaultTalents = {
 	name: 'Default',
 	data: SavedTalents.create({
 		talentsString: '313213',
-		glyphs: Glyphs.create({
-			major1: PaladinMajorGlyph.GlyphOfFocusedShield,
-			major2: PaladinMajorGlyph.GlyphOfTheAlabasterShield,
-			major3: PaladinMajorGlyph.GlyphOfDivineProtection,
-
-			minor1: PaladinMinorGlyph.GlyphOfFocusedWrath,
-		}),
 	}),
 };
 

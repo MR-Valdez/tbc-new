@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 	"github.com/wowsims/tbc/sim/paladin"
 )
 
@@ -13,29 +12,15 @@ import (
 
 Sends bolts of power in all directions, causing ((8127 + 9075) / 2) / 2 + <AP> * 0.91 Holy damage
 
--- Glyph of Focused Wrath --
-divided among all enemies within 10 yards
--- else --
 to your target
 ----------
 
 , stunning Demons
 
--- Glyph of Holy Wrath --
-, Aberrations, Dragonkin, Elementals
--- /Glyph of Holy Wrath --
-
 and Undead for 3 sec.
-
--- Glyph of Final Wrath --
-Causes 50% additional damage to targets with less than 20% health.
--- /Glyph of Final Wrath --
 */
 func (prot *ProtectionPaladin) registerHolyWrath() {
-	hasGlyphOfFinalWrath := prot.HasMajorGlyph(proto.PaladinMajorGlyph_GlyphOfFinalWrath)
-	hasGlyphOfFocusedWrath := prot.HasMinorGlyph(proto.PaladinMinorGlyph_GlyphOfFocusedWrath)
-
-	maxTargets := core.TernaryInt32(hasGlyphOfFocusedWrath, 1, prot.Env.TotalTargetCount())
+	maxTargets := prot.Env.TotalTargetCount()
 
 	prot.RegisterSpell(core.SpellConfig{
 		ActionID:       core.ActionID{SpellID: 119072},
@@ -74,10 +59,6 @@ func (prot *ProtectionPaladin) registerHolyWrath() {
 			baseDamage /= float64(numTargets)
 
 			multiplier := spell.DamageMultiplier
-
-			if hasGlyphOfFinalWrath && sim.IsExecutePhase20() {
-				spell.DamageMultiplier *= 1.5
-			}
 
 			spell.CalcCleaveDamage(sim, target, numTargets, baseDamage, spell.OutcomeMagicHitAndCrit)
 			spell.DamageMultiplier = multiplier

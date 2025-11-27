@@ -301,13 +301,6 @@ export class ActionId {
 				if (tag == 1) name += ' (DoT)';
 				if (tag == 2) name += ' (Cleave)';
 				break;
-			case 'Ice Lance':
-			case 'Frostbolt':
-			case 'Frostfire Bolt':
-				if (tag == 1) {
-					name += ' (Glyph)';
-				}
-				break;
 			case 'Evocation':
 				if (tag == 1) {
 					name += ' (1 Tick)';
@@ -532,11 +525,6 @@ export class ActionId {
 			case 'Eternal Flame':
 				if (tag > 0) {
 					name += `(${tag} HP)`;
-				}
-				break;
-			case 'Exorcism':
-				if (tag === 2) {
-					name = 'Glyph of Mass Exorcism';
 				}
 				break;
 			case "Templar's Verdict":
@@ -1067,7 +1055,6 @@ const spellIdIconOverrides: Map<string, ActionIdOverride> = new Map([
 
 const spellIdTooltipOverrides: Map<string, ActionIdOverride> = new Map([
 	[JSON.stringify({ spellId: 85256, tag: 2 }), { spellId: 138165 }], // Paladin - T15 4P Ret Templar's Verdict
-	[JSON.stringify({ spellId: 879, tag: 2 }), { spellId: 122032 }], // Paladin - Glyph of Mass Exorcism
 	[JSON.stringify({ spellId: 2818, tag: 2 }), { spellId: 113780 }], // Rogue - Deadly Poison - Hit
 	[JSON.stringify({ spellId: 121411, tag: 7 }), { spellId: 122233 }], // Rogue - Crimson Tempest - DoT
 	[JSON.stringify({ spellId: 121471, tag: 1 }), { spellId: 121473 }], // Rogue - Shadow Blade
@@ -1090,9 +1077,6 @@ const spellIdTooltipOverrides: Map<string, ActionIdOverride> = new Map([
 	// Mage - Living Bomb
 	[JSON.stringify({ spellId: 44457, tag: 2 }), { spellId: 44461 }], // Living Bomb Explosion
 	[JSON.stringify({ spellId: 114923, tag: 2 }), { spellId: 114954 }], // Nether Tempest (Cleave)
-	[JSON.stringify({ spellId: 30455, tag: 1 }), { spellId: 131080 }], // Ice Lance - Glyph
-	[JSON.stringify({ spellId: 116, tag: 1 }), { spellId: 131079 }], // Frostbolt - Glyph
-	[JSON.stringify({ spellId: 44614, tag: 1 }), { spellId: 131081 }], // Frostfire bolt - Glyph
 
 	// Warlock - Immolation Aura
 	[JSON.stringify({ spellId: 104025, tag: 2 }), { spellId: 129476 }],

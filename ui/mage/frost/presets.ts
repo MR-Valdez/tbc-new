@@ -1,7 +1,7 @@
 import { Encounter } from '../../core/encounter';
 import * as PresetUtils from '../../core/preset_utils';
-import { ConsumesSpec, Glyphs, Profession, Race, Stat } from '../../core/proto/common';
-import { FrostMage_Options as MageOptions, MageMajorGlyph, MageMinorGlyph, MageArmor } from '../../core/proto/mage';
+import { ConsumesSpec, Profession, Race, Stat } from '../../core/proto/common';
+import { FrostMage_Options as MageOptions, MageArmor } from '../../core/proto/mage';
 import { SavedTalents } from '../../core/proto/ui';
 import { Stats } from '../../core/proto_utils/stats';
 import FrostApl from './apls/frost.apl.json';
@@ -67,14 +67,6 @@ export const FrostDefaultTalents = {
 	name: 'Default',
 	data: SavedTalents.create({
 		talentsString: '311122',
-		glyphs: Glyphs.create({
-			major1: MageMajorGlyph.GlyphOfSplittingIce,
-			major2: MageMajorGlyph.GlyphOfIcyVeins,
-			major3: MageMajorGlyph.GlyphOfWaterElemental,
-			minor1: MageMinorGlyph.GlyphOfMomentum,
-			minor2: MageMinorGlyph.GlyphOfLooseMana,
-			minor3: MageMinorGlyph.GlyphOfTheUnboundElemental,
-		}),
 	}),
 };
 
@@ -89,14 +81,6 @@ export const FrostTalentsCleave = {
 	name: 'Cleave',
 	data: SavedTalents.create({
 		talentsString: '311122',
-		glyphs: Glyphs.create({
-			major1: MageMajorGlyph.GlyphOfSplittingIce,
-			major2: MageMajorGlyph.GlyphOfIcyVeins,
-			major3: MageMajorGlyph.GlyphOfWaterElemental,
-			minor1: MageMinorGlyph.GlyphOfMomentum,
-			minor2: MageMinorGlyph.GlyphOfLooseMana,
-			minor3: MageMinorGlyph.GlyphOfTheUnboundElemental,
-		}),
 	}),
 };
 
@@ -104,14 +88,6 @@ export const FrostTalentsAoE = {
 	name: 'AoE (5+)',
 	data: SavedTalents.create({
 		talentsString: '311112',
-		glyphs: Glyphs.create({
-			major1: MageMajorGlyph.GlyphOfSplittingIce,
-			major2: MageMajorGlyph.GlyphOfIcyVeins,
-			major3: MageMajorGlyph.GlyphOfWaterElemental,
-			minor1: MageMinorGlyph.GlyphOfMomentum,
-			minor2: MageMinorGlyph.GlyphOfLooseMana,
-			minor3: MageMinorGlyph.GlyphOfTheUnboundElemental,
-		}),
 	}),
 };
 

@@ -1,7 +1,7 @@
 import { ref } from 'tsx-vanilla';
 
 import { IndividualSimUI } from '../../../individual_sim_ui';
-import { Class, EquipmentSpec, Glyphs, ItemLevelState, ItemSlot, ItemSpec, Profession, Race, Spec } from '../../../proto/common';
+import { Class, EquipmentSpec, ItemLevelState, ItemSlot, ItemSpec, Profession, Race, Spec } from '../../../proto/common';
 import { nameToClass, nameToRace } from '../../../proto_utils/names';
 import Toast from '../../toast';
 import { IndividualImporter } from './individual_importer';
@@ -36,7 +36,6 @@ interface WowheadGearPlannerImportJSON {
 	level: number;
 	specIndex: number;
 	talentString: string;
-	glyphs: number[];
 	items: {
 		slotId: number;
 		itemId: number;
@@ -57,7 +56,6 @@ function readHash(e: string): WowheadGearPlannerImportJSON {
 		level: 0,
 		specIndex: 0,
 		talentString: '',
-		glyphs: [],
 		items: [],
 	};
 	const s = /^([a-z-]+)\/([a-z-]+)(?:\/([a-zA-Z0-9_-]+))?$/.exec(e);
@@ -97,9 +95,8 @@ function readHash(e: string): WowheadGearPlannerImportJSON {
 					.join(''),
 			);
 		}
-		const [talentString, glyphs] = e;
+		const [talentString] = e;
 		t.talentString = talentString;
-		t.glyphs = parseGlyphs(glyphs);
 	}
 	{
 		let e = readBits(f);
@@ -139,37 +136,6 @@ function readHash(e: string): WowheadGearPlannerImportJSON {
 		}
 	}
 	return t;
-}
-
-// Function to parse glyphs from the glyph string
-function parseGlyphs(glyphStr: string): number[] {
-	const glyphIds = Array(6).fill(0);
-	if (!glyphStr) {
-		return glyphIds;
-	}
-	const t = i.indexOf(glyphStr.substring(0, 1));
-	const s = glyphStr.substring(1);
-	if (!s.length) {
-		return glyphIds;
-	}
-	if (t !== 0) {
-		return glyphIds;
-	}
-	const a = [];
-	for (let e = 0; e < s.length; e++) {
-		a.push(i.indexOf(s.substring(e, e + 1)));
-	}
-	const l = 3 * i.length - 1;
-	while (a.length > 1) {
-		const e = readBits(a);
-		const t = readBits(a);
-		if (e > l) {
-			continue;
-		}
-		glyphIds[e] = t
-	}
-
-	return glyphIds;
 }
 
 function parseTalentString(e: number[]) {
@@ -236,7 +202,6 @@ export class IndividualWowheadGearPlannerImporter<SpecType extends Spec> extends
 		const professions: Profession[] = [];
 
 		const parsed = parseWowheadGearLink(url);
-		const glyphIds = parsed.glyphs;
 		const charClass = nameToClass(parsed.classId.replaceAll('-', ''));
 		if (charClass == Class.ClassUnknown) {
 			throw new Error(i18n.t('import.wowhead.error_cannot_parse_class', { classId: parsed.classId }));
@@ -303,21 +268,11 @@ export class IndividualWowheadGearPlannerImporter<SpecType extends Spec> extends
 			}
 		});
 
-		const glyphs = Glyphs.create({
-			major1: this.simUI.sim.db.glyphSpellToItemId(glyphIds[0]),
-			major2: this.simUI.sim.db.glyphSpellToItemId(glyphIds[1]),
-			major3: this.simUI.sim.db.glyphSpellToItemId(glyphIds[2]),
-			minor1: this.simUI.sim.db.glyphSpellToItemId(glyphIds[3]),
-			minor2: this.simUI.sim.db.glyphSpellToItemId(glyphIds[4]),
-			minor3: this.simUI.sim.db.glyphSpellToItemId(glyphIds[5]),
-		});
-
 		this.finishIndividualImport(this.simUI, {
 			charClass,
 			race,
 			equipmentSpec,
 			talentsStr: parsed.talentString ?? '',
-			glyphs,
 			professions,
 			missingEnchants,
 			missingItems,

@@ -176,14 +176,6 @@ func (druid *Druid) GetCharacter() *core.Character {
 // 	raidBuffs.MarkOfTheWild = true
 // }
 
-func (druid *Druid) HasMajorGlyph(glyph proto.DruidMajorGlyph) bool {
-	return druid.HasGlyph(int32(glyph))
-}
-
-func (druid *Druid) HasMinorGlyph(glyph proto.DruidMinorGlyph) bool {
-	return druid.HasGlyph(int32(glyph))
-}
-
 func (druid *Druid) RegisterSpell(formMask DruidForm, config core.SpellConfig) *DruidSpell {
 	prev := config.ExtraCastCondition
 	prevModify := config.Cast.ModifyCast
@@ -235,8 +227,6 @@ func (druid *Druid) Initialize() {
 	})
 
 	druid.RegisterBaselineSpells()
-
-	druid.ApplyGlyphs()
 }
 
 func (druid *Druid) RegisterBaselineSpells() {

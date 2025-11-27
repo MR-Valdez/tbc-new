@@ -315,10 +315,10 @@ export const makePresetBuildFromJSON = (
 			buildConfig.gear = makePresetGear(name, simSettings.player.equipment, options);
 		}
 
-		if (simSettings.player?.talentsString || simSettings.player?.glyphs) {
+		if (simSettings.player?.talentsString) {
 			buildConfig.talents = makePresetTalents(
 				name,
-				SavedTalents.create({ talentsString: simSettings.player?.talentsString, glyphs: simSettings.player?.glyphs }),
+				SavedTalents.create({ talentsString: simSettings.player?.talentsString }),
 				options,
 			);
 		}

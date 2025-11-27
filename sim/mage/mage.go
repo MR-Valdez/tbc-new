@@ -68,13 +68,6 @@ func (mage *Mage) GetMage() *Mage {
 	return mage
 }
 
-func (mage *Mage) HasMajorGlyph(glyph proto.MageMajorGlyph) bool {
-	return mage.HasGlyph(int32(glyph))
-}
-func (mage *Mage) HasMinorGlyph(glyph proto.MageMinorGlyph) bool {
-	return mage.HasGlyph(int32(glyph))
-}
-
 func (mage *Mage) AddRaidBuffs(raidBuffs *proto.RaidBuffs) {
 	raidBuffs.ArcaneBrilliance = true
 }
@@ -104,7 +97,6 @@ func (mage *Mage) ProcFingersOfFrost(sim *core.Simulation, spell *core.Spell) {
 }
 
 func (mage *Mage) Initialize() {
-	mage.registerGlyphs()
 	mage.registerPassives()
 	mage.registerSpells()
 }

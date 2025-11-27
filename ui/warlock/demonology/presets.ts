@@ -1,10 +1,8 @@
 import * as PresetUtils from '../../core/preset_utils';
-import { ConsumesSpec, Debuffs, Glyphs, IndividualBuffs, Profession, PseudoStat, Race, RaidBuffs, Stat } from '../../core/proto/common';
+import { ConsumesSpec, Debuffs, IndividualBuffs, Profession, PseudoStat, Race, RaidBuffs, Stat } from '../../core/proto/common';
 import { SavedTalents } from '../../core/proto/ui';
 import {
 	DemonologyWarlock_Options as WarlockOptions,
-	WarlockMajorGlyph as MajorGlyph,
-	WarlockMinorGlyph as MinorGlyph,
 	WarlockOptions_Summon as Summon,
 } from '../../core/proto/warlock';
 import { Stats, UnitStat } from '../../core/proto_utils/stats';
@@ -44,12 +42,6 @@ export const DemonologyTalentsDefaultP1 = {
 	name: 'Default P1',
 	data: SavedTalents.create({
 		talentsString: '231221',
-		glyphs: Glyphs.create({
-			major1: MajorGlyph.GlyphOfSoulstone,
-			major2: MajorGlyph.GlyphOfSiphonLife,
-			major3: MajorGlyph.GlyphOfImpSwarm,
-			minor3: MinorGlyph.GlyphOfUnendingBreath,
-		}),
 	}),
 };
 

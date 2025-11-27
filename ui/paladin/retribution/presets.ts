@@ -1,7 +1,7 @@
 import * as PresetUtils from '../../core/preset_utils.js';
 import { APLRotation_Type as APLRotationType } from '../../core/proto/apl.js';
-import { ConsumesSpec, Glyphs, Profession, PseudoStat, Race, Spec, Stat } from '../../core/proto/common.js';
-import { PaladinMajorGlyph, PaladinSeal, RetributionPaladin_Options as RetributionPaladinOptions } from '../../core/proto/paladin.js';
+import { ConsumesSpec, Profession, PseudoStat, Race, Spec, Stat } from '../../core/proto/common.js';
+import { PaladinSeal, RetributionPaladin_Options as RetributionPaladinOptions } from '../../core/proto/paladin.js';
 import { SavedTalents } from '../../core/proto/ui.js';
 import { Stats } from '../../core/proto_utils/stats';
 import DefaultApl from './apls/default.apl.json';
@@ -76,11 +76,6 @@ export const DefaultTalents = {
 	name: 'Default',
 	data: SavedTalents.create({
 		talentsString: '221223',
-		glyphs: Glyphs.create({
-			major1: PaladinMajorGlyph.GlyphOfTemplarsVerdict,
-			major2: PaladinMajorGlyph.GlyphOfDoubleJeopardy,
-			major3: PaladinMajorGlyph.GlyphOfMassExorcism,
-		}),
 	}),
 };
 

@@ -64,8 +64,6 @@ type Character struct {
 
 	professions [2]proto.Profession
 
-	glyphs [6]int32
-
 	// Used for effects like "Increased Armor Value from Items"
 	*EquipScalingManager
 
@@ -127,17 +125,6 @@ func NewCharacter(party *Party, partyIndex int, player *proto.Player) Character 
 	character.RotationTimer = character.NewTimer()
 
 	character.Label = fmt.Sprintf("%s (#%d)", character.Name, character.Index+1)
-
-	if player.Glyphs != nil {
-		character.glyphs = [6]int32{
-			player.Glyphs.Major1,
-			player.Glyphs.Major2,
-			player.Glyphs.Major3,
-			player.Glyphs.Minor1,
-			player.Glyphs.Minor2,
-			player.Glyphs.Minor3,
-		}
-	}
 
 	character.Consumables = &proto.ConsumesSpec{}
 	if player.Consumables != nil {
@@ -483,15 +470,6 @@ func (character *Character) reset(sim *Simulation, agent Agent) {
 
 func (character *Character) HasProfession(prof proto.Profession) bool {
 	return prof == character.professions[0] || prof == character.professions[1]
-}
-
-func (character *Character) HasGlyph(glyphID int32) bool {
-	for _, g := range character.glyphs {
-		if g == glyphID {
-			return true
-		}
-	}
-	return false
 }
 
 func (character *Character) HasTrinketEquipped(itemID int32) bool {

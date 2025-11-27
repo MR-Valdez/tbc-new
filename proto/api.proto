@@ -83,7 +83,6 @@ message Player {
 
 	// Talents in wowhead format, e.g. '000000'
 	string talents_string = 39;
-	Glyphs glyphs = 40;
 	Profession profession1 = 41;
 	Profession profession2 = 42;
 	Cooldowns cooldowns = 43;

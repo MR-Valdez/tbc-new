@@ -26,49 +26,6 @@ message WarlockTalents {
     bool mannoroths_fury = 18;
 }
 
-enum WarlockMajorGlyph {
-    WarlockMajorGlyphNone = 0;
-    GlyphOfConflagrate = 42454;
-    GlyphOfSiphonLife = 42455;
-    GlyphOfFear = 42458;
-    GlyphOfDemonTraining = 42460;
-    GlyphOfHealthstone = 42462;
-    GlyphOfCurseOfTheElements = 42464;
-    GlyphOfImpSwarm = 42465;
-    GlyphOfHavoc = 42466;
-    GlyphOfSoulstone = 42470;
-    GlyphOfUnstableAffliction = 42472;
-    GlyphOfSoulConsumption = 43390;
-    GlyphOfCurseOfExhaustion = 43392;
-    GlyphOfDrainLife = 45779;
-    GlyphOfDemonHunting = 45780;
-    GlyphOfEmberTap = 45781;
-    GlyphOfDemonicCircle = 45782;
-    GlyphOfUnendingResolve = 45783;
-    GlyphOfLifeTap = 45785;
-    GlyphOfEternalResolve = 50077;
-    GlyphOfSupernova = 93197;
-}
-
-enum WarlockMinorGlyph {
-    WarlockMinorGlyphNone = 0;
-    GlyphOfHandOfGuldan = 42453;
-    GlyphOfVerdantSpheres = 42456;
-    GlyphOfNightmares = 42457;
-    GlyphOfFelguard = 42459;
-    GlyphOfHealthFunnel = 42461;
-    GlyphOfSubtlety = 42463;
-    GlyphOfShadowBolt = 42467;
-    GlyphOfCarrionSwarm = 42471;
-    GlyphOfFallingMeteor = 42473;
-    GlyphOfUnendingBreath = 43389;
-    GlyphOfEyeOfKilrogg = 43391;
-    GlyphOfSubjugateDemon = 43393;
-    GlyphOfSoulwell = 43394;
-    GlyphOfCrimsonBanish = 45789;
-    GlyphOfGatewayAttunement = 93202;
-}
-
 // END GENERATED
 
 message WarlockOptions {

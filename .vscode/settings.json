@@ -39,10 +39,6 @@
 			"url": "./schemas/talents.schema.json"
 		},
 		{
-			"fileMatch": ["assets/locales/**/glyphs.json"],
-			"url": "./schemas/glyphs.schema.json"
-		},
-		{
 			"fileMatch": ["assets/locales/**/character.json"],
 			"url": "./schemas/character.schema.json"
 		},

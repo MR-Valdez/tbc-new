@@ -8,8 +8,6 @@ import (
 /*
 Fills you with Holy Light, increasing your casting speed by 10%, improving healing spells by 5% and giving melee attacks a chance to heal
 
--- Glyph of the Battle Healer --
-
 the most wounded member of your party or raid
 
 -- else --
@@ -32,7 +30,6 @@ and restore 4% of base mana when striking a target outside of an Arena or Battle
 ----------
 */
 func (paladin *Paladin) registerSealOfInsight() {
-	hasGlyphOfTheBattleHealer := paladin.HasMajorGlyph(proto.PaladinMajorGlyph_GlyphOfTheBattleHealer)
 	isHoly := paladin.Spec == proto.Spec_SpecHolyPaladin
 	actionID := core.ActionID{SpellID: 20167}
 	manaMetrics := paladin.NewManaMetrics(actionID)
@@ -84,11 +81,7 @@ func (paladin *Paladin) registerSealOfInsight() {
 				return
 			}
 
-			if hasGlyphOfTheBattleHealer {
-				onSpecialOrSwingProc.Cast(sim, sim.Raid.GetLowestHealthAllyUnit())
-			} else {
-				onSpecialOrSwingProc.Cast(sim, &paladin.Unit)
-			}
+			onSpecialOrSwingProc.Cast(sim, &paladin.Unit)
 		},
 	}).AttachSpellMod(core.SpellModConfig{
 		Kind:       core.SpellMod_DamageDone_Pct,

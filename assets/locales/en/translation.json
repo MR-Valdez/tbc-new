@@ -747,14 +747,6 @@
 		"reset_button": {
 			"tooltip": "Reset talent points"
 		},
-		"glyphs": {
-			"major": "Major Glyphs",
-			"minor": "Minor Glyphs",
-			"modal": {
-				"title": "Glyphs"
-			},
-			"empty": "Empty"
-		},
 		"saved_talents": {
 			"title": "Saved Talents",
 			"label": "Talents",
@@ -2002,7 +1994,7 @@
 			"title": "Addon Import",
 			"description": "Import settings from the",
 			"addon_link": "WoWSims Exporter In-Game Addon",
-			"feature_description": "This feature imports gear, race, talents, glyphs, and professions. It does NOT import buffs, debuffs, consumes, rotation, or custom stats.",
+			"feature_description": "This feature imports gear, race, talents, and professions. It does NOT import buffs, debuffs, consumes, rotation, or custom stats.",
 			"instructions": "To import, paste the output from the addon below and click, 'Import'.",
 			"upload_button": "Upload File",
 			"import_button": "Import",
@@ -2057,7 +2049,7 @@
 			},
 			"talents": {
 				"label": "Talents",
-				"tooltip": "Talents and Glyphs."
+				"tooltip": "Talents."
 			},
 			"rotation": {
 				"label": "Rotation",

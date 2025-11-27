@@ -4,26 +4,16 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 	"github.com/wowsims/tbc/sim/core/stats"
 )
 
 /*
 Reduces magical damage taken by
-
--- Glyph of Divine Protection --
-20% and physical damage taken by 20%
--- else --
-40%
--- /Glyph of Divine Protection --
-
 for 10 sec.
 */
 func (paladin *Paladin) registerDivineProtection() {
-	hasGlyphOfDivineProtection := paladin.HasMajorGlyph(proto.PaladinMajorGlyph_GlyphOfDivineProtection)
-
-	spellDamageMultiplier := core.TernaryFloat64(hasGlyphOfDivineProtection, 0.8, 0.6)
-	physDamageMultiplier := core.TernaryFloat64(hasGlyphOfDivineProtection, 0.8, 1.0)
+	spellDamageMultiplier := 0.6
+	physDamageMultiplier := 1.0
 
 	actionID := core.ActionID{SpellID: 498}
 	paladin.DivineProtectionAura = paladin.RegisterAura(core.Aura{
@@ -51,7 +41,7 @@ func (paladin *Paladin) registerDivineProtection() {
 		},
 	})
 
-	divineProtection := paladin.RegisterSpell(core.SpellConfig{
+	paladin.RegisterSpell(core.SpellConfig{
 		ActionID:       actionID,
 		Flags:          core.SpellFlagAPL | core.SpellFlagHelpful | core.SpellFlagReadinessTrinket,
 		ClassSpellMask: SpellMaskDivineProtection,
@@ -74,16 +64,4 @@ func (paladin *Paladin) registerDivineProtection() {
 		},
 		RelatedSelfBuff: paladin.DivineProtectionAura,
 	})
-
-	if paladin.Spec == proto.Spec_SpecProtectionPaladin && hasGlyphOfDivineProtection {
-		paladin.AddDefensiveCooldownAura(paladin.DivineProtectionAura)
-		paladin.AddMajorCooldown(core.MajorCooldown{
-			Spell:    divineProtection,
-			Type:     core.CooldownTypeSurvival,
-			Priority: core.CooldownPriorityLow + 30,
-			ShouldActivate: func(sim *core.Simulation, character *core.Character) bool {
-				return !paladin.AnyActiveDefensiveCooldown()
-			},
-		})
-	}
 }

@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 )
 
 func (priest *Priest) registerCircleOfHealingSpell() {
@@ -12,7 +11,7 @@ func (priest *Priest) registerCircleOfHealingSpell() {
 		return
 	}
 
-	numTargets := 5 + core.TernaryInt32(priest.HasMajorGlyph(proto.PriestMajorGlyph_GlyphOfCircleOfHealing), 1, 0)
+	numTargets := 5
 	targets := priest.Env.Raid.GetFirstNPlayersOrPets(numTargets)
 
 	priest.CircleOfHealing = priest.RegisterSpell(core.SpellConfig{

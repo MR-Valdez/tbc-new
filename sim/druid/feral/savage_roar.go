@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 	"github.com/wowsims/tbc/sim/core/stats"
 	"github.com/wowsims/tbc/sim/druid"
 )
@@ -12,10 +11,8 @@ import (
 const SavageRoarMultiplier = 1.45 // including buff from class balancing
 
 func (cat *FeralDruid) registerSavageRoarSpell() {
-	isGlyphed := cat.HasMajorGlyph(proto.DruidMajorGlyph_GlyphOfSavagery)
-
 	cat.SavageRoarDurationTable = [6]time.Duration{
-		core.TernaryDuration(isGlyphed, time.Second*12, 0),
+		0,
 		time.Second * 18,
 		time.Second * 24,
 		time.Second * 30,
@@ -41,7 +38,7 @@ func (cat *FeralDruid) registerSavageRoarSpell() {
 		},
 
 		ExtraCastCondition: func(_ *core.Simulation, _ *core.Unit) bool {
-			return isGlyphed || (cat.ComboPoints() > 0)
+			return cat.ComboPoints() > 0
 		},
 
 		// Despite being a self-buff, MoP SR maintains a hidden 3s tick
@@ -76,11 +73,7 @@ func (cat *FeralDruid) registerSavageRoarSpell() {
 						return
 					}
 
-					if !isGlyphed {
-						aura.Deactivate(sim)
-					} else if aura.RemainingDuration(sim) > time.Second*12 {
-						aura.UpdateExpires(sim.CurrentTime + time.Second*12)
-					}
+					aura.Deactivate(sim)
 				},
 			},
 

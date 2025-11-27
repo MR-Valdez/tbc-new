@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 )
 
 func (rogue *Rogue) registerExposeArmorSpell() {
@@ -13,7 +12,6 @@ func (rogue *Rogue) registerExposeArmorSpell() {
 	})
 
 	cpMetric := rogue.NewComboPointMetrics(core.ActionID{SpellID: 8647})
-	hasGlyph := rogue.HasMajorGlyph(proto.RogueMajorGlyph_GlyphOfExposeArmor)
 
 	rogue.ExposeArmor = rogue.RegisterSpell(core.SpellConfig{
 		ActionID:       core.ActionID{SpellID: 8647},
@@ -42,12 +40,7 @@ func (rogue *Rogue) registerExposeArmorSpell() {
 			if result.Landed() {
 				debuffAura := rogue.ExposeArmorAuras.Get(target)
 				debuffAura.Activate(sim)
-				if hasGlyph {
-					// just set the stacks to 3
-					debuffAura.SetStacks(sim, 3)
-				} else {
-					debuffAura.AddStack(sim)
-				}
+				debuffAura.AddStack(sim)
 
 				rogue.AddComboPointsOrAnticipation(sim, 1, cpMetric)
 			} else {

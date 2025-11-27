@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 	"github.com/wowsims/tbc/sim/core/stats"
 	"github.com/wowsims/tbc/sim/warlock"
 )
@@ -193,10 +192,7 @@ func (demonology *DemonologyWarlock) registerWildImpPassive() {
 	})
 
 	getCD := func() time.Duration {
-		return time.Duration(
-			core.TernaryFloat64(
-				demonology.HasMajorGlyph(proto.WarlockMajorGlyph_GlyphOfImpSwarm), 24, 20)/
-				demonology.TotalSpellHasteMultiplier()) * time.Second
+		return time.Duration(20/demonology.TotalSpellHasteMultiplier()) * time.Second
 	}
 
 	var triggerAction *core.PendingAction

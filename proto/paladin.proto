@@ -26,59 +26,6 @@ message PaladinTalents {
     bool execution_sentence = 18;
 }
 
-enum PaladinMajorGlyph {
-    PaladinMajorGlyphNone = 0;
-    GlyphOfDoubleJeopardy = 41092;
-    GlyphOfDevotionAura = 41094;
-    GlyphOfHolyWrath = 41095;
-    GlyphOfDivineProtection = 41096;
-    GlyphOfTemplarsVerdict = 41097;
-    GlyphOfAvengingWrath = 41098;
-    GlyphOfConsecration = 41099;
-    GlyphOfFocusedShield = 41101;
-    GlyphOfBurdenOfGuilt = 41102;
-    GlyphOfBlindingLight = 41103;
-    GlyphOfFinalWrath = 41104;
-    GlyphOfWordOfGlory = 41105;
-    GlyphOfIllumination = 41106;
-    GlyphOfHarshWords = 41107;
-    GlyphOfDivinity = 41108;
-    GlyphOfLightOfDawn = 41109;
-    GlyphOfBlessedLife = 41110;
-    GlyphOfFlashOfLight = 43367;
-    GlyphOfDenounce = 43867;
-    GlyphOfDazingShield = 43868;
-    GlyphOfImmediateTruth = 43869;
-    GlyphOfBeaconOfLight = 45741;
-    GlyphOfHammerOfTheRighteous = 45742;
-    GlyphOfDivineStorm = 45743;
-    GlyphOfTheAlabasterShield = 45744;
-    GlyphOfDivinePlea = 45745;
-    GlyphOfHolyShock = 45746;
-    GlyphOfInquisition = 45747;
-    GlyphOfProtectorOfTheInnocent = 66918;
-    GlyphOfTheBattleHealer = 81956;
-    GlyphOfMassExorcism = 83107;
-    GlyphOfDivineShield = 104050;
-    GlyphOfHandOfSacrifice = 104051;
-}
-
-enum PaladinMinorGlyph {
-    PaladinMinorGlyphNone = 0;
-    GlyphOfTheLuminousCharger = 41100;
-    GlyphOfTheMountedKing = 43340;
-    GlyphOfContemplation = 43365;
-    GlyphOfWingedVengeance = 43366;
-    GlyphOfSealOfBlood = 43368;
-    GlyphOfFireFromTheHeavens = 43369;
-    GlyphOfFocusedWrath = 80581;
-    GlyphOfTheFallingAvenger = 80584;
-    GlyphOfTheRighteousRetreat = 80585;
-    GlyphOfBladedJudgment = 80586;
-    GlyphOfTheExorcist = 104107;
-    GlyphOfPillarOfLight = 104108;
-}
-
 // END GENERATED
 
 enum Blessings {

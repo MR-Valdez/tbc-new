@@ -747,14 +747,6 @@
         "reset_button": {
             "tooltip": "Réinitialiser les points de talent"
         },
-        "glyphs": {
-            "major": "Glyphes Majeurs",
-            "minor": "Glyphes Mineurs",
-            "modal": {
-                "title": "Glyphes"
-            },
-            "empty": "Vide"
-        },
         "saved_talents": {
             "title": "Talents sauvegardés",
             "label": "Talents",
@@ -2002,7 +1994,7 @@
             "title": "Import Addon",
             "description": "Importer les paramètres depuis l'",
             "addon_link": "Addon WoWSims Exporter In-Game",
-            "feature_description": "Cette fonctionnalité importe l'équipement, la race, les talents, les glyphes et les professions. Elle n'importe PAS les buffs, debuffs, consommables, rotation ou stats personnalisées.",
+            "feature_description": "Cette fonctionnalité importe l'équipement, la race, les talents, et les professions. Elle n'importe PAS les buffs, debuffs, consommables, rotation ou stats personnalisées.",
             "instructions": "Pour importer, collez la sortie de l'addon ci-dessous et cliquez sur 'Importer'.",
             "upload_button": "Télécharger le fichier",
             "import_button": "Importer",
@@ -2057,7 +2049,7 @@
             },
             "talents": {
                 "label": "Talents",
-                "tooltip": "Talents et Glyphes."
+                "tooltip": "Talents."
             },
             "rotation": {
                 "label": "Rotation",

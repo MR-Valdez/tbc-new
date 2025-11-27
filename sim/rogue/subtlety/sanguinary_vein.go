@@ -4,13 +4,11 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 	"github.com/wowsims/tbc/sim/rogue"
 )
 
 func (subRogue *SubtletyRogue) registerSanguinaryVein() {
 	svBonus := 1.4
-	hasHemoGlyph := subRogue.HasMajorGlyph(proto.RogueMajorGlyph_GlyphOfHemorraghingVeins)
 
 	svDebuffArray := subRogue.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
 		return target.GetOrRegisterAura(core.Aura{
@@ -38,9 +36,6 @@ func (subRogue *SubtletyRogue) registerSanguinaryVein() {
 		if subRogue.Garrote != nil {
 			subRogue.Garrote.RelatedAuraArrays = subRogue.Garrote.RelatedAuraArrays.Append(svDebuffArray)
 		}
-		if subRogue.Hemorrhage != nil && hasHemoGlyph {
-			subRogue.Hemorrhage.RelatedAuraArrays = subRogue.Hemorrhage.RelatedAuraArrays.Append(svDebuffArray)
-		}
 		if subRogue.CrimsonTempest != nil {
 			subRogue.CrimsonTempestDoT.RelatedAuraArrays = subRogue.CrimsonTempestDoT.RelatedAuraArrays.Append(svDebuffArray)
 		}
@@ -61,10 +56,6 @@ func (subRogue *SubtletyRogue) registerSanguinaryVein() {
 				aura := svDebuffArray.Get(result.Target)
 				dot := spell.Dot(result.Target)
 				aura.Duration = dot.BaseTickLength * time.Duration(dot.BaseTickCount)
-				aura.Activate(sim)
-			} else if spell == subRogue.Hemorrhage && hasHemoGlyph {
-				aura := svDebuffArray.Get(result.Target)
-				aura.Duration = 24 * time.Second
 				aura.Activate(sim)
 			}
 		},

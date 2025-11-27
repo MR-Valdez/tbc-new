@@ -12,9 +12,6 @@ func (druid *Druid) registerTyphoonSpell() {
 		return
 	}
 
-	hasTyphoonGlyph := druid.HasMinorGlyph(proto.DruidMinorGlyph_GlyphOfTyphoon)
-	hasMonsoonGlyph := druid.HasMajorGlyph(proto.DruidMajorGlyph_GlyphOfMonsoon)
-
 	druid.Typhoon = druid.RegisterSpell(Humanoid|Moonkin, core.SpellConfig{
 		ActionID:       core.ActionID{SpellID: 61391},
 		SpellSchool:    core.SpellSchoolNature,
@@ -24,7 +21,7 @@ func (druid *Druid) registerTyphoonSpell() {
 
 		ManaCost: core.ManaCostOptions{
 			BaseCostPercent: 16,
-			PercentModifier: 100 - (8 * core.TernaryInt32(hasTyphoonGlyph, 1, 0)),
+			PercentModifier: 100,
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
@@ -32,7 +29,7 @@ func (druid *Druid) registerTyphoonSpell() {
 			},
 			CD: core.Cooldown{
 				Timer:    druid.NewTimer(),
-				Duration: time.Second * (20 - core.TernaryDuration(hasMonsoonGlyph, 3, 0)),
+				Duration: time.Second * 20,
 			},
 		},
 

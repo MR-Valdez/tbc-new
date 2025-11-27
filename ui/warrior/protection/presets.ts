@@ -1,7 +1,7 @@
 import * as PresetUtils from '../../core/preset_utils.js';
-import { ConsumesSpec, Glyphs, Profession, PseudoStat, Spec, Stat } from '../../core/proto/common.js';
+import { ConsumesSpec, Profession, PseudoStat, Spec, Stat } from '../../core/proto/common.js';
 import { SavedTalents } from '../../core/proto/ui.js';
-import { ProtectionWarrior_Options as ProtectionWarriorOptions, WarriorMajorGlyph } from '../../core/proto/warrior.js';
+import { ProtectionWarrior_Options as ProtectionWarriorOptions } from '../../core/proto/warrior.js';
 import { Stats } from '../../core/proto_utils/stats';
 import GenericApl from './apls/default.apl.json';
 import GarajalApl from './apls/garajal.apl.json';
@@ -137,11 +137,6 @@ export const StandardTalents = {
 	name: 'Standard',
 	data: SavedTalents.create({
 		talentsString: '213332',
-		glyphs: Glyphs.create({
-			major1: WarriorMajorGlyph.GlyphOfHeavyRepercussions,
-			major2: WarriorMajorGlyph.GlyphOfIncite,
-			major3: WarriorMajorGlyph.GlyphOfHoldTheLine,
-		}),
 	}),
 };
 

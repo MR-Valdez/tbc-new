@@ -9,9 +9,7 @@ import (
 	"text/template"
 	"unicode"
 
-	"github.com/wowsims/tbc/sim/core/proto"
 	"github.com/wowsims/tbc/tools/database/dbc"
-	"github.com/wowsims/tbc/tools/tooltip"
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
 )
@@ -39,16 +37,6 @@ type ClassData struct {
 	FileName           string
 	Talents            []TalentConfig
 	TalentTab          TalentTabConfig
-	GlyphsMajor        []Glyph
-	GlyphsMinor        []Glyph
-}
-
-type Glyph struct {
-	EnumName    string
-	Name        string
-	Description string
-	IconUrl     string
-	ID          int
 }
 
 const staticHeader = `syntax = "proto3";
@@ -64,49 +52,13 @@ message {{$class}}Talents {
     bool {{ final $talent.FancyName $class }} = {{ $talent.ProtoFieldNumber }};
 {{- end }}
 }
-
-enum {{.ClassName}}MajorGlyph {
-    {{.ClassName}}MajorGlyphNone = 0;
-    {{- range .GlyphsMajor }}
-    {{ protoOverride .EnumName $class }} = {{ .ID }};
-    {{- end }}
-}
-
-enum {{.ClassName}}MinorGlyph {
-    {{.ClassName}}MinorGlyphNone = 0;
-    {{- range .GlyphsMinor }}
-    {{ protoOverride .EnumName $class }} = {{ .ID }};
-    {{- end }}
-}
 `
 
-const tsTemplateStr = `import { {{.ClassName}}MajorGlyph, {{.ClassName}}MinorGlyph, {{.ClassName}}Talents } from '../proto/{{.FileName}}.js';
-import { GlyphsConfig } from './glyphs_picker.js';
+const tsTemplateStr = `import { {{.ClassName}}Talents } from '../proto/{{.FileName}}.js';
 import { newTalentsConfig, TalentsConfig } from './talents_picker.js';
 import {{.ClassName}}TalentJson from './trees/{{.FileName}}.json';
 {{- $class := .ClassName -}}
 export const {{.LowerCaseClassName}}TalentsConfig: TalentsConfig<{{.ClassName}}Talents> = newTalentsConfig({{.ClassName}}TalentJson);
-
-export const {{.LowerCaseClassName}}GlyphsConfig: GlyphsConfig = {
-	majorGlyphs: {
-		{{- range .GlyphsMajor }}
-		[{{$.ClassName}}MajorGlyph.{{protoOverride .EnumName $class}}]: {
-			name: "{{.Name}}",
-			description: "{{.Description}}",
-			iconUrl: "{{.IconUrl}}",
-		},
-		{{- end }}
-	},
-	minorGlyphs: {
-		{{- range .GlyphsMinor }}
-		[{{$.ClassName}}MinorGlyph.{{protoOverride .EnumName $class}}]: {
-			name: "{{.Name}}",
-			description: "{{.Description}}",
-			iconUrl: "{{.IconUrl}}",
-		},
-		{{- end }}
-	},
-};
 `
 
 const talentJsonTemplate = `
@@ -152,13 +104,6 @@ func generateTemplateContent(data ClassData) (string, error) {
 	}
 
 	data.ClassName = strings.ReplaceAll(data.ClassName, "_", "")
-
-	slices.SortFunc(data.GlyphsMajor, func(a, b Glyph) int {
-		return a.ID - b.ID
-	})
-	slices.SortFunc(data.GlyphsMinor, func(a, b Glyph) int {
-		return a.ID - b.ID
-	})
 
 	tmpl, err := template.New("protoTemplate").Funcs(funcMap).Parse(protoTemplateStr)
 	if err != nil {
@@ -223,12 +168,6 @@ func updateGeneratedProtoSection(fileContent, newContent string) (string, error)
 }
 
 func protoOverride(name string, className string) string {
-	if name == "GlyphOfDeathCoil" && className == "Warlock" {
-		return "GlyphOfDeathCoilWarlock"
-	}
-	if name == "GlyphOfStampede" && className == "Hunter" {
-		return "GlyphOfStampedeHunter"
-	}
 	if name == "Tnt" || name == "tnt" {
 		return "TNT"
 	}
@@ -405,28 +344,9 @@ func GenerateTalentJsonFromDB(dbHelper *DBHelper) error {
 	return nil
 }
 
-func glyphBelongsToClass(r RawGlyph, dbc dbc.DbcClass) bool {
-	return r.ClassMask == int32(dbc.ID)
-}
 func properTitle(s string) string {
 	caser := cases.Title(language.English)
 	return caser.String(s)
-}
-func convertRawGlyphToGlyph(r RawGlyph, dbc *dbc.DBC) Glyph {
-	tooltip, _ := tooltip.ParseTooltip(r.Description, tooltip.DBCTooltipDataProvider{DBC: dbc}, int64(r.SpellId))
-	return Glyph{
-		EnumName: strings.ReplaceAll(
-			strings.ReplaceAll(
-				strings.ReplaceAll(
-					strings.ReplaceAll(properTitle(r.Name), ":", ""),
-					"'", ""),
-				"-", ""),
-			" ", ""),
-		Name:        r.Name,
-		Description: template.JSEscapeString(tooltip.String()),
-		IconUrl:     "",
-		ID:          int(r.ItemId),
-	}
 }
 
 func GenerateProtos(dbcData *dbc.DBC, db *WowDatabase) {
@@ -437,22 +357,13 @@ func GenerateProtos(dbcData *dbc.DBC, db *WowDatabase) {
 	}
 	defer helper.Close()
 
-	var ignoredGlyphs = []int32{85716, 102153, 104054}
-	rawGlyphs, err := LoadGlyphs(helper)
-	if err != nil {
-		fmt.Printf("Error loading glyphs: %v\n", err)
-		return
-	}
-
 	rawTalents, err := LoadTalents(helper)
 	if err != nil {
 		fmt.Printf("Error loading talents: %v\n", err)
 		return
 	}
 
-	allGlyphSpellIds := []*proto.GlyphID{}
 	var classesData []ClassData
-	iconsMap, _ := LoadArtTexturePaths("./tools/DB2ToSqlite/listfile.csv")
 	for _, dbcClass := range dbc.Classes {
 		className := dbc.ClassNameFromDBC(dbcClass)
 		data := ClassData{
@@ -460,30 +371,8 @@ func GenerateProtos(dbcData *dbc.DBC, db *WowDatabase) {
 			LowerCaseClassName: strings.ToLower(className),
 			Talents:            []TalentConfig{},
 			TalentTab:          TalentTabConfig{},
-			GlyphsMajor:        []Glyph{},
-			GlyphsMinor:        []Glyph{},
 		}
 
-		// Process glyphs
-		for _, raw := range rawGlyphs {
-			if slices.Contains(ignoredGlyphs, raw.ItemId) || strings.Contains(raw.Name, "Deprecated") || strings.Contains(raw.Name, "zzz") || (len(raw.Name) > 2 && raw.Name[:2] == "zz") {
-				continue
-			}
-			if glyphBelongsToClass(raw, dbcClass) {
-				g := convertRawGlyphToGlyph(raw, dbcData)
-				g.IconUrl = "https://wow.zamimg.com/images/wow/icons/large/" + strings.ToLower(GetIconName(iconsMap, int(raw.FDID))) + ".jpg"
-				switch raw.GlyphType {
-				case 0: // major
-					data.GlyphsMajor = append(data.GlyphsMajor, g)
-				case 1: // minor
-					data.GlyphsMinor = append(data.GlyphsMinor, g)
-				default:
-					fmt.Printf("Unknown glyph type %d in raw glyph %+v\n", raw.GlyphType, raw)
-					continue
-				}
-				allGlyphSpellIds = append(allGlyphSpellIds, &proto.GlyphID{ItemId: raw.ItemId, SpellId: raw.SpellId})
-			}
-		}
 		classTalents := []RawTalent{}
 		for _, rt := range rawTalents {
 			if dbcClass.ID == rt.ClassMask {
@@ -523,11 +412,6 @@ func GenerateProtos(dbcData *dbc.DBC, db *WowDatabase) {
 	if err := GenerateTalentJsonFromDB(helper); err != nil {
 		fmt.Printf("Error generating talent json files: %v\n", err)
 	}
-
-	slices.SortFunc(allGlyphSpellIds, func(a, b *proto.GlyphID) int {
-		return cmp.Compare(a.ItemId, b.ItemId)
-	})
-	db.GlyphIDs = allGlyphSpellIds
 }
 
 func toSnakeCase(s string) string {

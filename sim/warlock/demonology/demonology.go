@@ -86,7 +86,6 @@ func (demonology *DemonologyWarlock) Initialize() {
 	demonology.registerTouchOfChaos()
 	demonology.registerVoidRay()
 	demonology.registerDarksoulKnowledge()
-	demonology.registerImpSwarm()
 
 	demonology.registerHotfixes()
 }

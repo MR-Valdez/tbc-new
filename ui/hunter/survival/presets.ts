@@ -1,7 +1,7 @@
 import * as PresetUtils from '../../core/preset_utils';
 import { APLRotation_Type as APLRotationType } from '../../core/proto/apl.js';
-import { ConsumesSpec, Glyphs, Profession, PseudoStat, Spec, Stat } from '../../core/proto/common';
-import { HunterMajorGlyph as MajorGlyph, HunterOptions_PetType as PetType, SurvivalHunter_Options as HunterOptions } from '../../core/proto/hunter';
+import { ConsumesSpec, Profession, PseudoStat, Spec, Stat } from '../../core/proto/common';
+import { HunterOptions_PetType as PetType, SurvivalHunter_Options as HunterOptions } from '../../core/proto/hunter';
 import { SavedTalents } from '../../core/proto/ui';
 import { Stats } from '../../core/proto_utils/stats';
 import P2Build from './builds/p2.build.json';
@@ -22,11 +22,6 @@ export const DefaultTalents = {
 	name: 'Default',
 	data: SavedTalents.create({
 		talentsString: '312111',
-		glyphs: Glyphs.create({
-			major1: MajorGlyph.GlyphOfAnimalBond,
-			major2: MajorGlyph.GlyphOfDeterrence,
-			major3: MajorGlyph.GlyphOfLiberation,
-		}),
 	}),
 };
 

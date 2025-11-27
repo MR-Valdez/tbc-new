@@ -1,11 +1,10 @@
 import * as Mechanics from '../../core/constants/mechanics';
 import * as PresetUtils from '../../core/preset_utils.js';
-import { Class, ConsumesSpec, Debuffs, Glyphs, Profession, PseudoStat, Race, RaidBuffs, Stat } from '../../core/proto/common.js';
+import { Class, ConsumesSpec, Debuffs, Profession, PseudoStat, Race, RaidBuffs, Stat } from '../../core/proto/common.js';
 import {
 	EnhancementShaman_Options as EnhancementShamanOptions,
 	FeleAutocastSettings,
 	ShamanImbue,
-	ShamanMajorGlyph,
 	ShamanShield,
 	ShamanSyncType,
 } from '../../core/proto/shaman.js';
@@ -83,11 +82,6 @@ export const StandardTalents = {
 	name: 'Standard',
 	data: SavedTalents.create({
 		talentsString: '313133',
-		glyphs: Glyphs.create({
-			major1: ShamanMajorGlyph.GlyphOfLightningShield,
-			major2: ShamanMajorGlyph.GlyphOfFireElementalTotem,
-			major3: ShamanMajorGlyph.GlyphOfFireNova,
-		}),
 	}),
 };
 
@@ -95,11 +89,6 @@ export const P3Talents = {
 	name: 'P3 (WiP)',
 	data: SavedTalents.create({
 		talentsString: '313122',
-		glyphs: Glyphs.create({
-			major1: ShamanMajorGlyph.GlyphOfLightningShield,
-			major2: ShamanMajorGlyph.GlyphOfFireElementalTotem,
-			major3: ShamanMajorGlyph.GlyphOfFireNova,
-		}),
 	}),
 };
 

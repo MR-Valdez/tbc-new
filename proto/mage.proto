@@ -28,52 +28,6 @@ message MageTalents {
     bool incanters_ward = 18;
 }
 
-enum MageMajorGlyph {
-    MageMajorGlyphNone = 0;
-    GlyphOfArcaneExplosion = 42736;
-    GlyphOfBlink = 42737;
-    GlyphOfEvocation = 42738;
-    GlyphOfCombustion = 42739;
-    GlyphOfFrostNova = 42741;
-    GlyphOfIceBlock = 42744;
-    GlyphOfSplittingIce = 42745;
-    GlyphOfConeOfCold = 42746;
-    GlyphOfRapidDisplacement = 42748;
-    GlyphOfManaGem = 42749;
-    GlyphOfPolymorph = 42752;
-    GlyphOfIcyVeins = 42753;
-    GlyphOfSpellsteal = 42754;
-    GlyphOfFrostfireBolt = 44684;
-    GlyphOfRemoveCurse = 44920;
-    GlyphOfArcanePower = 44955;
-    GlyphOfWaterElemental = 45736;
-    GlyphOfSlow = 45737;
-    GlyphOfDeepFreeze = 45740;
-    GlyphOfCounterspell = 50045;
-    GlyphOfInfernoBlast = 63539;
-    GlyphOfArmors = 69773;
-}
-
-enum MageMinorGlyph {
-    MageMinorGlyphNone = 0;
-    GlyphOfLooseMana = 42735;
-    GlyphOfMomentum = 42743;
-    GlyphOfCrittermorph = 42751;
-    GlyphOfThePorcupine = 43339;
-    GlyphOfConjureFamiliar = 43359;
-    GlyphOfTheMonkey = 43360;
-    GlyphOfThePenguin = 43361;
-    GlyphOfTheBearCub = 43362;
-    GlyphOfArcaneLanguage = 43364;
-    GlyphOfIllusion = 45738;
-    GlyphOfMirrorImage = 45739;
-    GlyphOfRapidTeleportation = 63416;
-    GlyphOfDiscreetMagic = 92727;
-    GlyphOfTheUnboundElemental = 104104;
-    GlyphOfEvaporation = 104105;
-    GlyphOfCondensation = 104106;
-}
-
 // END GENERATED
 
 enum MageArmor{

@@ -1,7 +1,7 @@
 import * as Mechanics from '../../core/constants/mechanics.js';
 import * as PresetUtils from '../../core/preset_utils.js';
-import { ConsumesSpec, Glyphs, Profession, PseudoStat, Spec, Stat } from '../../core/proto/common';
-import { DruidMajorGlyph, GuardianDruid_Options as DruidOptions, GuardianDruid_Rotation as DruidRotation } from '../../core/proto/druid.js';
+import { ConsumesSpec, Profession, PseudoStat, Stat } from '../../core/proto/common';
+import { GuardianDruid_Options as DruidOptions, GuardianDruid_Rotation as DruidRotation } from '../../core/proto/druid.js';
 import { SavedTalents } from '../../core/proto/ui.js';
 // Preset options for this spec.
 // Eventually we will import these values for the raid sim too, so its good to
@@ -132,11 +132,6 @@ export const DefaultTalents = {
 	name: 'Default',
 	data: SavedTalents.create({
 		talentsString: '010101',
-		glyphs: Glyphs.create({
-			major1: DruidMajorGlyph.GlyphOfMightOfUrsoc,
-			major2: DruidMajorGlyph.GlyphOfMaul,
-			major3: DruidMajorGlyph.GlyphOfStampedingRoar,
-		}),
 	}),
 };
 

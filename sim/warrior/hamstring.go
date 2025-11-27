@@ -35,15 +35,7 @@ func (war *Warrior) registerHamstring() {
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			result := spell.CalcAndDealOutcome(sim, target, spell.OutcomeMeleeSpecialHit)
 
-			if result.Landed() {
-				if war.GlyphOfHamstring != nil {
-					if war.GlyphOfHamstring.IsActive() {
-						war.GlyphOfHamstring.Deactivate(sim)
-					} else {
-						war.GlyphOfHamstring.Activate(sim)
-					}
-				}
-			} else {
+			if !result.Landed() {
 				spell.IssueRefund(sim)
 			}
 		},

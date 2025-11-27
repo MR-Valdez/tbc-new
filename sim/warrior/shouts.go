@@ -4,16 +4,14 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 )
 
 const ShoutExpirationThreshold = time.Second * 3
 
 func (warrior *Warrior) MakeShoutSpellHelper(actionID core.ActionID, spellMask int64, allyAuras core.AuraArray) *core.Spell {
-	hasGlyph := warrior.HasMajorGlyph(proto.WarriorMajorGlyph_GlyphOfHoarseVoice)
 	shoutMetrics := warrior.NewRageMetrics(actionID)
-	rageGen := core.TernaryFloat64(hasGlyph, 10, 20)
-	duration := core.TernaryDuration(hasGlyph, time.Second*30, time.Minute*1)
+	rageGen := 20.0
+	duration := time.Minute * 1
 
 	return warrior.RegisterSpell(core.SpellConfig{
 		ActionID:       actionID,

@@ -8,7 +8,7 @@ import (
 )
 
 func (druid *Druid) registerMaulSpell() {
-	maxHits := core.TernaryInt32(druid.HasMajorGlyph(proto.DruidMajorGlyph_GlyphOfMaul), 2, 1)
+	maxHits := int32(1)
 
 	druid.Maul = druid.RegisterSpell(Bear, core.SpellConfig{
 		ActionID:       core.ActionID{SpellID: 6807},

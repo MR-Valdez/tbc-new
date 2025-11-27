@@ -47,9 +47,6 @@ const (
 	SpellMaskHolyShockDamage
 	SpellMaskHolyShockHeal
 	SpellMaskLightOfDawn
-
-	// Glyphs
-	SpellMaskHarshWords
 )
 
 const SpellMaskBuilderBase = SpellMaskCrusaderStrike |
@@ -71,7 +68,6 @@ const SpellMaskBuilderHoly = SpellMaskBuilderBase |
 
 const SpellMaskSpender = SpellMaskTemplarsVerdict |
 	SpellMaskDivineStorm |
-	SpellMaskHarshWords |
 	SpellMaskInquisition |
 	SpellMaskShieldOfTheRighteous |
 	SpellMaskWordOfGlory
@@ -79,13 +75,11 @@ const SpellMaskSpender = SpellMaskTemplarsVerdict |
 const SpellMaskSanctityOfBattleBase = SpellMaskCrusaderStrike |
 	SpellMaskJudgment |
 	SpellMaskHammerOfWrath |
-	SpellMaskHarshWords |
 	SpellMaskWordOfGlory
 
 const SpellMaskSanctityOfBattleBaseGcd = SpellMaskCrusaderStrike |
 	SpellMaskHammerOfWrath |
 	SpellMaskJudgment |
-	SpellMaskHarshWords |
 	SpellMaskWordOfGlory
 
 const SpellMaskSanctityOfBattleRet = SpellMaskSanctityOfBattleBase |

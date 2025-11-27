@@ -1,8 +1,7 @@
 import * as PresetUtils from '../../core/preset_utils.js';
-import { ConsumesSpec, Debuffs, Glyphs, Profession, RaidBuffs, Stat } from '../../core/proto/common.js';
+import { ConsumesSpec, Debuffs, Profession, RaidBuffs, Stat } from '../../core/proto/common.js';
 import {
 	HolyPaladin_Options as Paladin_Options,
-	PaladinMajorGlyph as MajorGlyph,
 	PaladinSeal,
 } from '../../core/proto/paladin.js';
 import { SavedTalents } from '../../core/proto/ui.js';
@@ -36,10 +35,6 @@ export const StandardTalents = {
 	name: 'Standard',
 	data: SavedTalents.create({
 		talentsString: '',
-		glyphs: Glyphs.create({
-			major1: MajorGlyph.GlyphOfDivinePlea,
-			major2: MajorGlyph.GlyphOfDivinity,
-		}),
 	}),
 };
 

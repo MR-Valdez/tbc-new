@@ -2,11 +2,9 @@ import { JsonObject } from '@protobuf-ts/runtime';
 import { ref } from 'tsx-vanilla';
 
 import { IndividualSimUI } from '../../../individual_sim_ui';
-import { Class, EquipmentSpec, Glyphs, Profession, Race, Spec } from '../../../proto/common';
+import { Class, EquipmentSpec, Profession, Race, Spec } from '../../../proto/common';
 import { Database } from '../../../proto_utils/database';
 import { nameToClass, nameToProfession, nameToRace } from '../../../proto_utils/names';
-import { classGlyphsConfig } from '../../../talents/factory';
-import { GlyphConfig } from '../../../talents/glyphs_picker';
 import Toast from '../../toast';
 import { IndividualImporter } from './individual_importer';
 import i18n from '../../../../i18n/config';
@@ -81,20 +79,8 @@ export class IndividualAddonImporter<SpecType extends Spec> extends IndividualIm
 		});
 
 		const talentsStr = (importJson['talents'] as string) || '';
-		const glyphsConfig = classGlyphsConfig[charClass];
 
 		const db = await Database.get();
-		const majorGlyphIDs = (importJson['glyphs']['major'] as Array<string | JsonObject>).map(g => glyphToID(g, db, glyphsConfig.majorGlyphs));
-		const minorGlyphIDs = (importJson['glyphs']['minor'] as Array<string | JsonObject>).map(g => glyphToID(g, db, glyphsConfig.minorGlyphs));
-
-		const glyphs = Glyphs.create({
-			major1: majorGlyphIDs[0] || 0,
-			major2: majorGlyphIDs[1] || 0,
-			major3: majorGlyphIDs[2] || 0,
-			minor1: minorGlyphIDs[0] || 0,
-			minor2: minorGlyphIDs[1] || 0,
-			minor3: minorGlyphIDs[2] || 0,
-		});
 
 		const gearJson = importJson['gear'];
 		gearJson.items = (gearJson.items as Array<any>).filter(item => item != null);
@@ -112,33 +98,9 @@ export class IndividualAddonImporter<SpecType extends Spec> extends IndividualIm
 			race,
 			equipmentSpec,
 			talentsStr,
-			glyphs,
 			professions,
 		});
 	}
-}
-
-function glyphNameToID(glyphName: string, glyphsConfig: Record<number, GlyphConfig>): number {
-	if (!glyphName) {
-		return 0;
-	}
-
-	for (const glyphIDStr in glyphsConfig) {
-		if (glyphsConfig[glyphIDStr].name == glyphName) {
-			return parseInt(glyphIDStr);
-		}
-	}
-	throw new Error(`Unknown glyph name '${glyphName}'`);
-}
-
-function glyphToID(glyph: string | JsonObject, db: Database, glyphsConfig: Record<number, GlyphConfig>): number {
-	if (typeof glyph === 'string') {
-		// Legacy version: AddOn exports Glyphs by name (string) only. Names must be in English.
-		return glyphNameToID(glyph, glyphsConfig);
-	}
-
-	// Cata version exports glyph information in a table that includes the name and the glyph spell ID.
-	return db.glyphSpellToItemId(glyph.spellID as number);
 }
 
 function getWSEVersion(): Promise<string|null> {

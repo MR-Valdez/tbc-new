@@ -10,9 +10,8 @@ import { Player } from '../core/player.js';
 import { PlayerClasses } from '../core/player_classes/index.js';
 import { PlayerSpecs } from '../core/player_specs/index.js';
 import { Player as PlayerProto } from '../core/proto/api.js';
-import { Class, Faction, Glyphs, Profession, Spec } from '../core/proto/common.js';
+import { Class, Faction, Profession, Spec } from '../core/proto/common.js';
 import { BalanceDruid_Options as BalanceDruidOptions } from '../core/proto/druid.js';
-import { ArcaneMage_Options } from '../core/proto/mage.js';
 import { getPlayerSpecFromPlayer, newUnitReference } from '../core/proto_utils/utils.js';
 import { Raid } from '../core/raid.js';
 import { EventID, TypedEvent } from '../core/typed_event.js';
@@ -723,7 +722,6 @@ class NewPlayerPicker extends Component {
 									newPlayer.applySharedDefaults(eventID);
 									newPlayer.setRace(eventID, matchingPreset.defaultFactionRaces[this.raidPicker.getCurrentFaction()]);
 									newPlayer.setTalentsString(eventID, matchingPreset.talents.talentsString);
-									newPlayer.setGlyphs(eventID, matchingPreset.talents.glyphs || Glyphs.create());
 									newPlayer.setSpecOptions(eventID, matchingPreset.specOptions);
 									newPlayer.setConsumes(eventID, matchingPreset.consumables);
 									newPlayer.setName(eventID, matchingPreset.defaultName ?? playerSpec.friendlyName);

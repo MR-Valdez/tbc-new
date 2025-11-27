@@ -4,12 +4,11 @@ import (
 	"time"
 
 	"github.com/wowsims/tbc/sim/core"
-	"github.com/wowsims/tbc/sim/core/proto"
 )
 
 func (druid *Druid) registerProwlSpell() {
 	actionID := core.ActionID{SpellID: 5215}
-	movementSpeedMultiplier := core.TernaryFloat64(druid.HasMajorGlyph(proto.DruidMajorGlyph_GlyphOfProwl), 1.0, 0.7)
+	movementSpeedMultiplier := 0.7
 
 	icd := core.Cooldown{
 		Timer:    druid.NewTimer(),

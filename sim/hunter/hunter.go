@@ -110,11 +110,6 @@ func NewHunter(character *core.Character, options *proto.Player, hunterOptions *
 
 func (hunter *Hunter) Initialize() {
 	hunter.AutoAttacks.RangedConfig().CritMultiplier = hunter.DefaultCritMultiplier()
-	// hunter.addBloodthirstyGloves()
-	// Add Stampede pets
-
-	// Add Dire Beast pet
-	// hunter.ApplyGlyphs()
 
 	hunter.RegisterSpells()
 
@@ -213,13 +208,6 @@ func (hunter *Hunter) AddRaidBuffs(raidBuffs *proto.RaidBuffs) {
 }
 
 func (hunter *Hunter) AddPartyBuffs(_ *proto.PartyBuffs) {
-}
-
-func (hunter *Hunter) HasMajorGlyph(glyph proto.HunterMajorGlyph) bool {
-	return hunter.HasGlyph(int32(glyph))
-}
-func (hunter *Hunter) HasMinorGlyph(glyph proto.HunterMinorGlyph) bool {
-	return hunter.HasGlyph(int32(glyph))
 }
 
 func (hunter *Hunter) Reset(_ *core.Simulation) {

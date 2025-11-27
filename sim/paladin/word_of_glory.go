@@ -12,19 +12,7 @@ Word of Glory:
 
 Consumes up to 3 Holy Power to heal a friendly target for (<5239-5838> + 0.49 * <SP>)
 
--- Glyph of Harsh Words --
-or harm an enemy target for (<4029-4490> + 0.377 * <SP>)
--- /Glyph of Harsh Words --
-
 per charge of Holy Power.
-
--- Glyph of Protector of the Innocent --
-If used to heal another target, you will be healed for 20% of the amount healed
--- /Glyph of Protector of the Innocent --
-
--- Glyph of Word of Glory --
-Your damage is increased by 3% per Holy Power spent for 6 sec after you cast Word of Glory
--- /Glyph of Word of Glory --
 
 Eternal Flame:
 

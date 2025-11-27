@@ -8,9 +8,6 @@ import (
 /*
 Inspire
 
--- Glyph of Devotion Aura --
-yourself, granting you
--- else --
 all party and raid members within 40 yards, granting them
 ----------
 
