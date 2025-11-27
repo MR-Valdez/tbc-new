@@ -82,7 +82,7 @@ func (item *Item) ToScaledUIItem(itemLevel int) *proto.UIItem {
 	}
 
 	// Append base itemlevel stats
-	scalingProperties[int32(proto.ItemLevelState_Base)] = &proto.ScalingItemProperties{
+	scalingProperties[int32(0)] = &proto.ScalingItemProperties{
 		WeaponDamageMin: item.WeaponDmgMin(item.ItemLevel),
 		WeaponDamageMax: item.WeaponDmgMax(item.ItemLevel),
 		Stats:           item.GetStats(item.ItemLevel).ToProtoMap(),
@@ -90,30 +90,6 @@ func (item *Item) ToScaledUIItem(itemLevel int) *proto.UIItem {
 		Ilvl:            int32(item.ItemLevel),
 	}
 
-	// In P2 of MoP it is expected to be 2 steps
-	if item.CanUpgrade() {
-		for step, ilvl := range item.UpgradePath[1:] {
-			upgradedIlvl := item.ItemLevel + ilvl
-			upgradeStep := proto.ItemLevelState(step + 1)
-			scalingProperties[int32(upgradeStep)] = &proto.ScalingItemProperties{
-				WeaponDamageMin: item.WeaponDmgMin(upgradedIlvl),
-				WeaponDamageMax: item.WeaponDmgMax(upgradedIlvl),
-				Stats:           item.GetStats(upgradedIlvl).ToProtoMap(),
-				RandPropPoints:  item.GetRandPropPoints(upgradedIlvl),
-				Ilvl:            int32(upgradedIlvl),
-			}
-		}
-	}
-
-	if item.GetMaxIlvl() > core.MaxChallengeModeIlvl {
-		scalingProperties[int32(proto.ItemLevelState_ChallengeMode)] = &proto.ScalingItemProperties{
-			WeaponDamageMin: item.WeaponDmgMin(core.MaxChallengeModeIlvl),
-			WeaponDamageMax: item.WeaponDmgMax(core.MaxChallengeModeIlvl),
-			Stats:           item.GetStats(core.MaxChallengeModeIlvl).ToProtoMap(),
-			RandPropPoints:  item.GetRandPropPoints(core.MaxChallengeModeIlvl),
-			Ilvl:            core.MaxChallengeModeIlvl,
-		}
-	}
 	uiItem.ScalingOptions = scalingProperties
 	return uiItem
 }

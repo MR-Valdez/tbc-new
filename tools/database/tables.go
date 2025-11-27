@@ -1107,7 +1107,6 @@ func ScanSpells(rows *sql.Rows) (dbc.Spell, error) {
 		&spell.ProcCharges,
 		&stringProcType,
 		&spell.ProcCategoryRecovery,
-		&spell.SpellProcsPerMinute,
 		&spell.EquippedItemClass,
 		&spell.EquippedItemInvTypes,
 		&spell.EquippedItemSubclass,
@@ -1152,12 +1151,6 @@ func ScanSpells(rows *sql.Rows) (dbc.Spell, error) {
 	spell.ShapeshiftMask, err = parseIntArrayField(stringShapeShift, 2)
 	if err != nil {
 		return spell, fmt.Errorf("parsing stringShapeShift args for spell %d (%s): %w", spell.ID, stringShapeShift, err)
-	}
-	if err := json.Unmarshal([]byte(rppmModsJSON), &spell.RppmModifiers); err != nil {
-		return spell, fmt.Errorf(
-			"parsing RPPM modifiers for spell %d (%s): %w",
-			spell.ID, rppmModsJSON, err,
-		)
 	}
 	spell.IconPath = iconsMap[iconId]
 	return spell, nil

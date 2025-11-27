@@ -29,7 +29,6 @@ type Spell struct {
 	ProcCharges           int32
 	ProcTypeMask          []int
 	ProcCategoryRecovery  int32
-	SpellProcsPerMinute   float32
 	EquippedItemClass     int32
 	EquippedItemInvTypes  int32
 	EquippedItemSubclass  int32
@@ -44,7 +43,6 @@ type Spell struct {
 	MaxCumulativeStacks   int32
 	MaxTargets            int32
 	IconPath              string
-	RppmModifiers         []RPPMModifier
 }
 
 type RPPMModifier struct {

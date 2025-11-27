@@ -143,12 +143,8 @@ func main() {
 	//Todo: See if we cant get rid of these as well
 	atlaslootDB := database.ReadDatabaseFromJson(tools.ReadFile(fmt.Sprintf("%s/atlasloot_db.json", inputsDir)))
 
-	// Todo: https://web.archive.org/web/20120201045249js_/http://www.wowhead.com/data=item-scaling
-	reforgeStats := database.ParseWowheadReforgeStats(tools.ReadFile(fmt.Sprintf("%s/wowhead_reforge_stats.json", inputsDir)))
-
 	db := database.NewWowDatabase()
 	db.Encounters = core.PresetEncounters
-	db.ReforgeStats = reforgeStats.ToProto()
 
 	iconsMap, err := database.LoadArtTexturePaths("./tools/DB2ToSqlite/listfile.csv")
 	if err != nil {
@@ -311,12 +307,6 @@ func main() {
 		// Infer the drop difficulty for the item
 		if item.NameDescription == "Flexible" {
 			item.Sources = database.InferFlexibleRaidItemSource(item)
-		}
-
-		// 1. Add Belt Buckle gem socket to Waist.
-		// 2. Add Eye Of The Black Prince gem socket to Sha-touched items.
-		if item.Type == proto.ItemType_ItemTypeWaist || slices.Contains(item.GemSockets, proto.GemColor_GemColorShaTouched) {
-			item.GemSockets = append(item.GemSockets, proto.GemColor_GemColorPrismatic)
 		}
 
 		for _, source := range item.Sources {
