@@ -584,7 +584,7 @@ func (paladin *Paladin) divinePurposeFactory(label string, spellID int32, durati
 				hpSpent = 3
 			} else if spell.Matches(SpellMaskDivineStorm | SpellMaskTemplarsVerdict | SpellMaskShieldOfTheRighteous) {
 				hpSpent = 3
-			} else if spell.Matches(SpellMaskInquisition | SpellMaskWordOfGlory | SpellMaskHarshWords) {
+			} else if spell.Matches(SpellMaskInquisition | SpellMaskWordOfGlory) {
 				hpSpent = paladin.DynamicHolyPowerSpent
 			} else {
 				return

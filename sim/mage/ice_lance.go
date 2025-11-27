@@ -33,21 +33,6 @@ func (mage *Mage) registerIceLanceSpell() {
 		}
 	}
 
-	splittingIceSpell := mage.RegisterSpell(getIceLanceSpellBaseConfig(core.SpellConfig{
-		ActionID: actionID.WithTag(1), // Real SpellID: 131080
-		Flags:    core.SpellFlagPassiveSpell,
-
-		DamageMultiplier: 0.4,
-
-		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := mage.CalcAndRollDamageRange(sim, iceLanceScaling, iceLanceVariance)
-			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
-			spell.WaitTravelTime(sim, func(sim *core.Simulation) {
-				spell.DealDamage(sim, result)
-			})
-		},
-	}))
-
 	castIceLance := func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 		baseDamage := mage.CalcAndRollDamageRange(sim, iceLanceScaling, iceLanceVariance)
 		result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
@@ -72,7 +57,6 @@ func (mage *Mage) registerIceLanceSpell() {
 		DamageMultiplier: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			randomTarget := mage.Env.NextActiveTargetUnit(target)
 			icyVeinsDamageMultiplier := 1.0
 
 			// Secondary Target hit
