@@ -784,35 +784,3 @@ func (versions ItemVersionMap) RegisterAll(fac ItemVersionFactory) {
 
 	core.AddEffectsToTest = true
 }
-
-func RegisterRiposteEffect(character *core.Character, auraSpellID int32, triggerSpellID int32) {
-	riposteAura := core.BlockPrepull(character.RegisterAura(core.Aura{
-		Label:     "Riposte" + character.Label,
-		ActionID:  core.ActionID{SpellID: auraSpellID},
-		Duration:  time.Second * 20,
-		MaxStacks: math.MaxInt32,
-
-		OnStacksChange: func(aura *core.Aura, sim *core.Simulation, oldStacks, newStacks int32) {
-			character.AddStatDynamic(sim, stats.CritRating, float64(newStacks-oldStacks))
-		},
-	}))
-
-	var bonusCrit float64
-	character.MakeProcTriggerAura(core.ProcTrigger{
-		Name:     "Riposte Trigger" + character.Label,
-		ActionID: core.ActionID{SpellID: triggerSpellID},
-		Callback: core.CallbackOnSpellHitTaken,
-		Outcome:  core.OutcomeDodge | core.OutcomeParry,
-		ICD:      time.Second * 1,
-
-		ExtraCondition: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) bool {
-			bonusCrit = max(0, math.Round((character.GetStat(stats.DodgeRating)+character.GetParryRatingWithoutStrength())*0.75))
-			return bonusCrit > 0
-		},
-
-		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			riposteAura.Activate(sim)
-			riposteAura.SetStacks(sim, int32(bonusCrit))
-		},
-	})
-}

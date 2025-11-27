@@ -370,8 +370,12 @@ enum RangedWeaponType {
 	RangedWeaponTypeBow = 1;
 	RangedWeaponTypeCrossbow = 2;
 	RangedWeaponTypeGun = 3;
-	RangedWeaponTypeThrown = 5;
-	RangedWeaponTypeWand = 6;
+	RangedWeaponTypeThrown = 4;
+	RangedWeaponTypeWand = 5;
+	RangedWeaponTypeIdol = 6;
+	RangedWeaponTypeLibram = 7;
+	RangedWeaponTypeTotem = 8;
+	RangedWeaponTypeSigil = 9;
 }
 
 // All slots on the gear menu where a single item can be worn.

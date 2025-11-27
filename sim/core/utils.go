@@ -235,10 +235,6 @@ func SetToSortedSlice[K cmp.Ordered](src map[K]bool) []K {
 	return dst
 }
 
-func MasteryRatingToMasteryPoints(masteryRating float64) float64 {
-	return masteryRating / MasteryRatingPerMasteryPoint
-}
-
 func Clamp(val float64, min float64, max float64) float64 {
 	return math.Max(min, math.Min(val, max))
 }
