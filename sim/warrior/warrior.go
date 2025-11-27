@@ -23,12 +23,8 @@ const (
 	SpellMaskRallyingCry
 	SpellMaskRecklessness
 	SpellMaskShieldWall
-	SpellMaskEnragedRegeneration
 	SpellMaskLastStand
 	SpellMaskCharge
-	SpellMaskSkullBanner
-	SpellMaskDemoralizingBanner
-	SpellMaskAvatar
 	SpellMaskDemoralizingShout
 
 	// Special attacks
@@ -39,25 +35,17 @@ const (
 	SpellMaskColossusSmash
 	SpellMaskExecute
 	SpellMaskHeroicStrike
-	SpellMaskHeroicThrow
 	SpellMaskOverpower
 	SpellMaskRevenge
-	SpellMaskShatteringThrow
 	SpellMaskSlam
 	SpellMaskSweepingSlam
 	SpellMaskSunderArmor
 	SpellMaskThunderClap
 	SpellMaskWhirlwind
 	SpellMaskWhirlwindOh
-	SpellMaskShieldBarrier
 	SpellMaskShieldSlam
-	SpellMaskDevastate
 	SpellMaskBloodthirst
-	SpellMaskRagingBlow
-	SpellMaskRagingBlowMH
-	SpellMaskRagingBlowOH
 	SpellMaskMortalStrike
-	SpellMaskHeroicLeap
 	SpellMaskWildStrike
 	SpellMaskShieldBlock
 	SpellMaskHamstring
@@ -69,11 +57,6 @@ const (
 	SpellMaskBladestormMH
 	SpellMaskBladestormOH
 	SpellMaskDragonRoar
-	SpellMaskBloodbath
-	SpellMaskBloodbathDot
-	SpellMaskStormBolt
-	SpellMaskStormBoltOH
-	SpellMaskShockwave
 
 	SpellMaskShouts = SpellMaskCommandingShout | SpellMaskBattleShout
 )
@@ -102,7 +85,6 @@ type Warrior struct {
 	DefensiveStance *core.Spell
 	BerserkerStance *core.Spell
 
-	ColossusSmash                   *core.Spell
 	MortalStrike                    *core.Spell
 	DeepWounds                      *core.Spell
 	ShieldSlam                      *core.Spell
@@ -132,14 +114,7 @@ type Warrior struct {
 	DemoralizingShoutAuras core.AuraArray
 	SunderArmorAuras       core.AuraArray
 	ThunderClapAuras       core.AuraArray
-	ColossusSmashAuras     core.AuraArray
 	WeakenedArmorAuras     core.AuraArray
-
-	// Set Bonuses
-	T14Tank2P *core.Aura
-	T15Tank2P *core.Aura
-	T15Tank4P *core.Aura
-	T16Dps4P  *core.Aura
 }
 
 func (warrior *Warrior) GetCharacter() *core.Character {
@@ -159,40 +134,34 @@ func (warrior *Warrior) Initialize() {
 
 	warrior.WeakenedArmorAuras = warrior.NewEnemyAuraArray(core.WeakenedArmorAura)
 
-	warrior.registerStances()
-	warrior.registerShouts()
+	// warrior.registerStances()
+	// warrior.registerShouts()
 	warrior.registerPassives()
-	warrior.registerBanners()
 
-	warrior.registerBerserkerRage()
-	warrior.registerEnragedRegeneration()
-	warrior.registerRallyingCry()
-	warrior.registerColossusSmash()
-	warrior.registerExecuteSpell()
-	warrior.registerHeroicStrikeSpell()
-	warrior.registerCleaveSpell()
-	warrior.registerHeroicLeap()
-	warrior.registerHeroicThrow()
-	warrior.registerRecklessness()
-	warrior.registerVictoryRush()
-	warrior.registerShatteringThrow()
-	warrior.registerShieldWall()
-	warrior.registerSunderArmor()
-	warrior.registerHamstring()
-	warrior.registerThunderClap()
-	warrior.registerWhirlwind()
-	warrior.registerCharge()
-	warrior.registerPummel()
+	// warrior.registerBerserkerRage()
+	// warrior.registerRallyingCry()
+	// warrior.registerExecuteSpell()
+	// warrior.registerHeroicStrikeSpell()
+	// warrior.registerCleaveSpell()
+	// warrior.registerRecklessness()
+	// warrior.registerVictoryRush()
+	// warrior.registerShieldWall()
+	// warrior.registerSunderArmor()
+	// warrior.registerHamstring()
+	// warrior.registerThunderClap()
+	// warrior.registerWhirlwind()
+	// warrior.registerCharge()
+	// warrior.registerPummel()
 }
 
 func (warrior *Warrior) registerPassives() {
-	warrior.registerEnrage()
-	warrior.registerDeepWounds()
-	warrior.registerBloodAndThunder()
+	// warrior.registerEnrage()
+	// warrior.registerDeepWounds()
+	// warrior.registerBloodAndThunder()
 }
 
 func (warrior *Warrior) Reset(_ *core.Simulation) {
-	warrior.Stance = StanceNone
+	// warrior.Stance = StanceNone
 }
 
 func (warrior *Warrior) OnEncounterStart(sim *core.Simulation) {
@@ -250,20 +219,6 @@ func NewWarrior(character *core.Character, options *proto.WarriorOptions, talent
 
 func (warrior *Warrior) GetCriticalBlockChance() float64 {
 	return warrior.CriticalBlockChance[0] + warrior.CriticalBlockChance[1]
-}
-
-// Used for T15 Protection 4P bonus.
-func (warrior *Warrior) GetRageMultiplier(target *core.Unit) float64 {
-	// At the moment only protection warriors use this bonus.
-	if warrior.Spec != proto.Spec_SpecProtectionWarrior {
-		return 1.0
-	}
-
-	if warrior.T15Tank4P != nil && warrior.T15Tank4P.IsActive() && warrior.DemoralizingShoutAuras.Get(target).IsActive() {
-		return 1.5
-	}
-
-	return 1.0
 }
 
 func (warrior *Warrior) CastNormalizedSweepingStrikesAttack(results core.SpellResultSlice, sim *core.Simulation) {

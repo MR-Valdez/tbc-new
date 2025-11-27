@@ -49,10 +49,6 @@ const (
 	StrikesOfOpportunityHitID int32 = 76858
 )
 
-func (war *ArmsWarrior) GetMasteryProcChance() float64 {
-	return (2.2 * (8 + war.GetMasteryPoints())) / 100
-}
-
 func (war *ArmsWarrior) GetWarrior() *warrior.Warrior {
 	return war.Warrior
 }
@@ -61,19 +57,18 @@ func (war *ArmsWarrior) Initialize() {
 	war.Warrior.Initialize()
 	war.registerPassives()
 
-	war.registerMortalStrike()
-	war.registerOverpower()
-	war.registerSlam()
-	war.registerSweepingStrikes()
+	// war.registerMortalStrike()
+	// war.registerOverpower()
+	// war.registerSlam()
+	// war.registerSweepingStrikes()
 }
 
 func (war *ArmsWarrior) registerPassives() {
 	war.ApplyArmorSpecializationEffect(stats.Strength, proto.ArmorType_ArmorTypePlate, 86526)
 
-	war.registerMastery()
-	war.registerSeasonedSoldier()
-	war.registerSuddenDeath()
-	war.registerTasteForBlood()
+	// war.registerSeasonedSoldier()
+	// war.registerSuddenDeath()
+	// war.registerTasteForBlood()
 }
 
 func (war *ArmsWarrior) Reset(sim *core.Simulation) {
