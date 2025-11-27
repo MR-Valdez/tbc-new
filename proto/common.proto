@@ -294,7 +294,7 @@ enum PseudoStat {
 	PseudoStatSchoolHitNature = 11;
 	PseudoStatSchoolHitShadow = 12;
 
-	PseudoStatPhysicalHitPercent = 13
+	PseudoStatPhysicalHitPercent = 13;
 	PseudoStatSpellHitPercent = 14;
 	PseudoStatPhysicalCritPercent = 15;
 	PseudoStatSpellCritPercent = 16;
