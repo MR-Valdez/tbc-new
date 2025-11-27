@@ -1311,11 +1311,6 @@ const SPELL_ACTION_CATEGORY = 2;
 const DEFAULT_ACTION_CATEGORY = 3;
 
 const auraAsResource = [
-	// Vengeance
-	84840, // Druid
-	84839, // Paladin
-	93098, // Warrior
-
 	// Mage
 	148022, // Icicle
 ];

@@ -81,9 +81,6 @@ func (war *ProtectionWarrior) registerPassives() {
 	war.registerSwordAndBoard()
 	war.registerUltimatum()
 	war.registerRiposte()
-
-	// Vengeance
-	war.RegisterVengeance(93098, war.DefensiveStanceAura)
 }
 
 func (war *ProtectionWarrior) registerMastery() {

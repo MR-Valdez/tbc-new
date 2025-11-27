@@ -60,9 +60,6 @@ func (prot *ProtectionPaladin) Initialize() {
 	prot.registerSanctuary()
 	prot.registerShieldOfTheRighteous()
 
-	// Vengeance
-	prot.RegisterVengeance(84839, nil)
-
 	prot.AddStaticMod(core.SpellModConfig{
 		Kind:       core.SpellMod_DamageDone_Pct,
 		ClassMask:  paladin.SpellMaskSealOfTruth | paladin.SpellMaskCensure,
