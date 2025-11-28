@@ -62,10 +62,8 @@ func (war *ArmsWarrior) registerSweepingStrikes() {
 					warrior.SpellMaskThunderClap|
 					warrior.SpellMaskWhirlwind|
 					warrior.SpellMaskCleave|
-					warrior.SpellMaskBladestormMH|
-					warrior.SpellMaskHeroicLeap|
-					warrior.SpellMaskShockwave|
-					warrior.SpellMaskDragonRoar) {
+					warrior.SpellMaskBladestormMH
+					) {
 				return
 			}
 

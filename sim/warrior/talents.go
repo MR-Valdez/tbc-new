@@ -3,31 +3,13 @@ package warrior
 import (
 	"time"
 
-	"github.com/wowsims/tbc/sim/common/shared"
 	"github.com/wowsims/tbc/sim/core"
 	"github.com/wowsims/tbc/sim/core/proto"
 )
 
 func (warrior *Warrior) ApplyTalents() {
-	// Level 15
-	warrior.registerJuggernaut()
-
-	// Level 30
-	warrior.registerImpendingVictory()
-
-	// Level 45
-
-	// Level 60
-	warrior.registerBladestorm()
-	warrior.registerShockwave()
-	warrior.registerDragonRoar()
-
-	// Level 75
-
-	// Level 90
-	warrior.registerAvatar()
-	warrior.registerBloodbath()
-	warrior.registerStormBolt()
+	// warrior.registerJuggernaut()
+	// warrior.registerBladestorm()
 }
 
 func (war *Warrior) registerJuggernaut() {
@@ -42,106 +24,55 @@ func (war *Warrior) registerJuggernaut() {
 	})
 }
 
-func (war *Warrior) registerImpendingVictory() {
-	if !war.Talents.ImpendingVictory {
-		return
-	}
+// func (war *Warrior) registerImpendingVictory() {
+// 	if !war.Talents.ImpendingVictory {
+// 		return
+// 	}
 
-	actionID := core.ActionID{SpellID: 103840}
-	healthMetrics := war.NewHealthMetrics(actionID)
+// 	actionID := core.ActionID{SpellID: 103840}
+// 	healthMetrics := war.NewHealthMetrics(actionID)
 
-	war.RegisterSpell(core.SpellConfig{
-		ActionID:       actionID,
-		SpellSchool:    core.SpellSchoolPhysical,
-		ProcMask:       core.ProcMaskMeleeMHSpecial,
-		Flags:          core.SpellFlagAPL | core.SpellFlagMeleeMetrics,
-		ClassSpellMask: SpellMaskImpendingVictory,
+// 	war.RegisterSpell(core.SpellConfig{
+// 		ActionID:       actionID,
+// 		SpellSchool:    core.SpellSchoolPhysical,
+// 		ProcMask:       core.ProcMaskMeleeMHSpecial,
+// 		Flags:          core.SpellFlagAPL | core.SpellFlagMeleeMetrics,
+// 		ClassSpellMask: SpellMaskImpendingVictory,
 
-		RageCost: core.RageCostOptions{
-			Cost:   10,
-			Refund: 0.8,
-		},
-		Cast: core.CastConfig{
-			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
-			},
-			IgnoreHaste: true,
-			CD: core.Cooldown{
-				Timer:    war.NewTimer(),
-				Duration: time.Second * 30,
-			},
-		},
+// 		RageCost: core.RageCostOptions{
+// 			Cost:   10,
+// 			Refund: 0.8,
+// 		},
+// 		Cast: core.CastConfig{
+// 			DefaultCast: core.Cast{
+// 				GCD: core.GCDDefault,
+// 			},
+// 			IgnoreHaste: true,
+// 			CD: core.Cooldown{
+// 				Timer:    war.NewTimer(),
+// 				Duration: time.Second * 30,
+// 			},
+// 		},
 
-		DamageMultiplier: 1,
-		CritMultiplier:   war.DefaultCritMultiplier(),
+// 		DamageMultiplier: 1,
+// 		CritMultiplier:   war.DefaultCritMultiplier(),
 
-		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			war.VictoryRushAura.Deactivate(sim)
+// 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+// 			war.VictoryRushAura.Deactivate(sim)
 
-			baseDamage := 56 + spell.MeleeAttackPower()*0.56
-			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
+// 			baseDamage := 56 + spell.MeleeAttackPower()*0.56
+// 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 
-			healthMultiplier := core.TernaryFloat64(war.T15Tank2P != nil && war.T15Tank2P.IsActive(), 0.4, 0.2)
+// 			healthMultiplier := core.TernaryFloat64(war.T15Tank2P != nil && war.T15Tank2P.IsActive(), 0.4, 0.2)
 
-			if result.Landed() {
-				war.GainHealth(sim, war.MaxHealth()*healthMultiplier, healthMetrics)
-			} else {
-				spell.IssueRefund(sim)
-			}
-		},
-	})
-}
-
-func (war *Warrior) registerDragonRoar() {
-	if !war.Talents.DragonRoar {
-		return
-	}
-
-	actionID := core.ActionID{SpellID: 118000}
-
-	damageMultipliers := []float64{1, 0.75, 0.65, 0.55, 0.50}
-
-	flags := core.SpellFlagAPL | core.SpellFlagMeleeMetrics | core.SpellFlagIgnoreArmor
-	if war.Spec != proto.Spec_SpecProtectionWarrior {
-		flags |= core.SpellFlagReadinessTrinket
-	}
-
-	spell := war.RegisterSpell(core.SpellConfig{
-		ActionID:       actionID,
-		SpellSchool:    core.SpellSchoolPhysical,
-		ClassSpellMask: SpellMaskDragonRoar,
-		ProcMask:       core.ProcMaskMeleeMHSpecial,
-		Flags:          flags,
-
-		Cast: core.CastConfig{
-			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
-			},
-			IgnoreHaste: true,
-			CD: core.Cooldown{
-				Timer:    war.NewTimer(),
-				Duration: time.Minute * 1,
-			},
-		},
-
-		DamageMultiplier: 1,
-		CritMultiplier:   war.DefaultCritMultiplier(),
-		BonusCritPercent: 100,
-
-		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			damageMultiplier := damageMultipliers[min(war.Env.ActiveTargetCount()-1, 4)]
-			baseDamage := 126 + spell.MeleeAttackPower()*1.39999997616
-			spell.DamageMultiplier *= damageMultiplier
-			spell.CalcAndDealAoeDamage(sim, baseDamage, spell.OutcomeMeleeSpecialCritOnly)
-			spell.DamageMultiplier /= damageMultiplier
-		},
-	})
-
-	war.AddMajorCooldown(core.MajorCooldown{
-		Spell: spell,
-		Type:  core.CooldownTypeDPS,
-	})
-}
+// 			if result.Landed() {
+// 				war.GainHealth(sim, war.MaxHealth()*healthMultiplier, healthMetrics)
+// 			} else {
+// 				spell.IssueRefund(sim)
+// 			}
+// 		},
+// 	})
+// }
 
 func (war *Warrior) registerBladestorm() {
 	if !war.Talents.Bladestorm {
@@ -253,233 +184,5 @@ func (war *Warrior) registerBladestorm() {
 	war.AddMajorCooldown(core.MajorCooldown{
 		Spell: spell,
 		Type:  core.CooldownTypeDPS,
-	})
-}
-
-func (war *Warrior) registerShockwave() {
-	if !war.Talents.Shockwave {
-		return
-	}
-
-	flags := core.SpellFlagAoE | core.SpellFlagMeleeMetrics | core.SpellFlagAPL
-	if war.Spec != proto.Spec_SpecProtectionWarrior {
-		flags |= core.SpellFlagReadinessTrinket
-	}
-
-	war.RegisterSpell(core.SpellConfig{
-		ActionID:       core.ActionID{SpellID: 46968},
-		SpellSchool:    core.SpellSchoolPhysical,
-		ProcMask:       core.ProcMaskMeleeMHSpecial,
-		ClassSpellMask: SpellMaskShockwave,
-		Flags:          flags,
-
-		Cast: core.CastConfig{
-			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
-			},
-			IgnoreHaste: true,
-			CD: core.Cooldown{
-				Timer:    war.NewTimer(),
-				Duration: 40 * time.Second,
-			},
-		},
-
-		DamageMultiplier: 1,
-		CritMultiplier:   war.DefaultCritMultiplier(),
-		ThreatMultiplier: 1,
-
-		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := spell.MeleeAttackPower() * 1.2
-			results := spell.CalcAndDealAoeDamage(sim, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
-
-			if results.NumLandedHits() >= 3 {
-				spell.CD.Reduce(time.Second * 20)
-			}
-		},
-	})
-}
-
-func (war *Warrior) registerAvatar() {
-	if !war.Talents.Avatar {
-		return
-	}
-
-	actionId := core.ActionID{SpellID: 107574}
-	avatarAura := war.RegisterAura(core.Aura{
-		Label:    "Avatar",
-		ActionID: actionId,
-		Duration: 24 * time.Second,
-	}).AttachMultiplicativePseudoStatBuff(&war.Unit.PseudoStats.DamageDealtMultiplier, 1.2)
-
-	flags := core.SpellFlagAPL
-	if war.Spec != proto.Spec_SpecProtectionWarrior {
-		flags |= core.SpellFlagReadinessTrinket
-	}
-
-	avatar := war.RegisterSpell(core.SpellConfig{
-		ActionID:       actionId,
-		SpellSchool:    core.SpellSchoolPhysical,
-		ProcMask:       core.ProcMaskEmpty,
-		Flags:          flags,
-		ClassSpellMask: SpellMaskAvatar,
-
-		Cast: core.CastConfig{
-			DefaultCast: core.Cast{
-				NonEmpty: true,
-			},
-			CD: core.Cooldown{
-				Timer:    war.NewTimer(),
-				Duration: 3 * time.Minute,
-			},
-		},
-
-		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			avatarAura.Activate(sim)
-		},
-	})
-
-	war.AddMajorCooldown(core.MajorCooldown{
-		Spell: avatar,
-		Type:  core.CooldownTypeDPS,
-	})
-}
-
-func (war *Warrior) registerBloodbath() {
-	if !war.Talents.Bloodbath {
-		return
-	}
-
-	spellActionID := core.ActionID{SpellID: 12292}
-	dotActionID := core.ActionID{SpellID: 113344}
-
-	aura := war.RegisterAura(core.Aura{
-		Label:    "Bloodbath",
-		ActionID: spellActionID,
-		Duration: 12 * time.Second,
-	})
-
-	shared.RegisterIgniteEffect(&war.Unit, shared.IgniteConfig{
-		ActionID:       dotActionID,
-		ClassSpellMask: SpellMaskBloodbathDot,
-		SpellSchool:    core.SpellSchoolPhysical,
-		DotAuraLabel:   "Bloodbath Dot",
-		DotAuraTag:     "BloodbathDot",
-		TickLength:     1 * time.Second,
-		NumberOfTicks:  6,
-		ParentAura:     aura,
-
-		ProcTrigger: core.ProcTrigger{
-			Name:               "Bloodbath - Trigger",
-			Callback:           core.CallbackOnSpellHitDealt,
-			ProcMask:           core.ProcMaskMeleeSpecial,
-			Outcome:            core.OutcomeLanded,
-			RequireDamageDealt: true,
-		},
-
-		DamageCalculator: func(result *core.SpellResult) float64 {
-			return result.Damage * 0.3
-		},
-	})
-
-	flags := core.SpellFlagAPL
-	if war.Spec != proto.Spec_SpecProtectionWarrior {
-		flags |= core.SpellFlagReadinessTrinket
-	}
-
-	spell := war.RegisterSpell(core.SpellConfig{
-		ActionID:       spellActionID,
-		SpellSchool:    core.SpellSchoolPhysical,
-		ClassSpellMask: SpellMaskBloodbath,
-		Flags:          flags,
-		ProcMask:       core.ProcMaskEmpty,
-
-		Cast: core.CastConfig{
-			DefaultCast: core.Cast{
-				NonEmpty: true,
-			},
-			CD: core.Cooldown{
-				Timer:    war.NewTimer(),
-				Duration: time.Minute * 1,
-			},
-		},
-
-		DamageMultiplier: 1,
-		CritMultiplier:   war.DefaultCritMultiplier(),
-
-		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			aura.Activate(sim)
-		},
-	})
-
-	war.AddMajorCooldown(core.MajorCooldown{
-		Spell: spell,
-		Type:  core.CooldownTypeDPS,
-	})
-}
-
-func (war *Warrior) registerStormBolt() {
-	if !war.Talents.StormBolt {
-		return
-	}
-
-	actionID := core.ActionID{SpellID: 107570}
-
-	stormBoltOH := war.RegisterSpell(core.SpellConfig{
-		ActionID:       actionID.WithTag(2),
-		SpellSchool:    core.SpellSchoolPhysical,
-		ProcMask:       core.ProcMaskMeleeOHSpecial,
-		ClassSpellMask: SpellMaskStormBoltOH,
-		MaxRange:       30,
-
-		DamageMultiplier: 5,
-		ThreatMultiplier: 1,
-		CritMultiplier:   war.DefaultCritMultiplier(),
-
-		BonusCoefficient: 1,
-
-		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := spell.Unit.OHWeaponDamage(sim, spell.MeleeAttackPower())
-			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialNoBlockDodgeParry)
-		},
-	})
-
-	flags := core.SpellFlagMeleeMetrics | core.SpellFlagAPL
-	if war.Spec != proto.Spec_SpecProtectionWarrior {
-		flags |= core.SpellFlagReadinessTrinket
-	}
-
-	war.RegisterSpell(core.SpellConfig{
-		ActionID:       actionID.WithTag(1),
-		SpellSchool:    core.SpellSchoolPhysical,
-		ProcMask:       core.ProcMaskMeleeMHSpecial,
-		Flags:          flags,
-		ClassSpellMask: SpellMaskStormBolt,
-		MaxRange:       30,
-
-		Cast: core.CastConfig{
-			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
-			},
-			IgnoreHaste: true,
-			CD: core.Cooldown{
-				Timer:    war.NewTimer(),
-				Duration: 30 * time.Second,
-			},
-		},
-
-		DamageMultiplier: 5,
-		ThreatMultiplier: 1,
-		CritMultiplier:   war.DefaultCritMultiplier(),
-
-		BonusCoefficient: 1,
-
-		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower())
-			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialNoBlockDodgeParry)
-
-			if result.Landed() && war.Spec == proto.Spec_SpecFuryWarrior && war.OffHand() != nil && war.OffHand().WeaponType != proto.WeaponType_WeaponTypeUnknown {
-				stormBoltOH.Cast(sim, target)
-			}
-		},
 	})
 }
