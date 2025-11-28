@@ -1493,7 +1493,6 @@ const idToCategoryMap: Record<number, number> = {
 	[23881]: MELEE_ACTION_CATEGORY + 0.1, // Bloodthirst
 	[47486]: MELEE_ACTION_CATEGORY + 0.1, // Mortal Strike
 	[30356]: MELEE_ACTION_CATEGORY + 0.1, // Shield Slam
-	[47498]: MELEE_ACTION_CATEGORY + 0.21, // Devastate
 	[47467]: MELEE_ACTION_CATEGORY + 0.22, // Sunder Armor
 	[57823]: MELEE_ACTION_CATEGORY + 0.23, // Revenge
 	[1680]: MELEE_ACTION_CATEGORY + 0.24, // Whirlwind
@@ -1503,12 +1502,8 @@ const idToCategoryMap: Record<number, number> = {
 	[58874]: SPELL_ACTION_CATEGORY + 0.52, // Damage Shield
 	[47296]: SPELL_ACTION_CATEGORY + 0.53, // Critical Block
 	[46924]: MELEE_ACTION_CATEGORY + 0.61, // Bladestorm
-	[46968]: MELEE_ACTION_CATEGORY + 0.61, // Shockwave
-	[118000]: MELEE_ACTION_CATEGORY + 0.61, // Dragon Roar
 	[2565]: SPELL_ACTION_CATEGORY + 0.62, // Shield Block
-	[112048]: SPELL_ACTION_CATEGORY + 0.63, // Shield Barrier
 	[76857]: SPELL_ACTION_CATEGORY + 0.64, // Mastery: Critical Block
-	[1249459]: SPELL_ACTION_CATEGORY + 0.65, // Shattering Throw
 	[71]: DEFAULT_ACTION_CATEGORY + 0.1, // Defensive Stance
 	[2457]: DEFAULT_ACTION_CATEGORY + 0.1, // Battle Stance
 	[6673]: DEFAULT_ACTION_CATEGORY + 0.1, // Battle Shout

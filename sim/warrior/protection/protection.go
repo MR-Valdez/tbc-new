@@ -1,8 +1,6 @@
 package protection
 
 import (
-	"time"
-
 	"github.com/wowsims/tbc/sim/core"
 	"github.com/wowsims/tbc/sim/core/proto"
 	"github.com/wowsims/tbc/sim/core/stats"
@@ -45,14 +43,6 @@ func NewProtectionWarrior(character *core.Character, options *proto.Player) *Pro
 	return war
 }
 
-func (war *ProtectionWarrior) CalculateMasteryBlockChance(masteryRating float64, includeBasePoints bool) float64 {
-	return 0.5 * (core.Ternary(includeBasePoints, 8.0, 0) + core.MasteryRatingToMasteryPoints(masteryRating))
-}
-
-func (war *ProtectionWarrior) CalculateMasteryCriticalBlockChance() float64 {
-	return 2.2 * (8.0 + war.GetMasteryPoints()) / 100.0
-}
-
 func (war *ProtectionWarrior) GetWarrior() *warrior.Warrior {
 	return war.Warrior
 }
@@ -61,63 +51,21 @@ func (war *ProtectionWarrior) Initialize() {
 	war.Warrior.Initialize()
 	war.registerPassives()
 
-	war.registerDevastate()
-	war.registerRevenge()
-	war.registerShieldSlam()
-	war.registerShieldBlock()
-	war.registerShieldBarrier()
-	war.registerDemoralizingShout()
-	war.registerLastStand()
+	// war.registerRevenge()
+	// war.registerShieldSlam()
+	// war.registerShieldBlock()
+	// war.registerDemoralizingShout()
+	// war.registerLastStand()
 }
 
 func (war *ProtectionWarrior) registerPassives() {
 	war.ApplyArmorSpecializationEffect(stats.Stamina, proto.ArmorType_ArmorTypePlate, 86526)
 
-	// Critical block
-	war.registerMastery()
-
-	war.registerUnwaveringSentinel()
-	war.registerBastionOfDefense()
-	war.registerSwordAndBoard()
-	war.registerUltimatum()
-	war.registerRiposte()
-}
-
-func (war *ProtectionWarrior) registerMastery() {
-
-	dummyCriticalBlockSpell := war.RegisterSpell(core.SpellConfig{
-		ActionID: core.ActionID{SpellID: 76857}, // Doesn't seem like there's an actual spell ID for the block itself, so use the mastery ID
-		Flags:    core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete,
-		Cast: core.CastConfig{
-			CD: core.Cooldown{
-				Timer:    war.NewTimer(),
-				Duration: time.Second * 3,
-			},
-		},
-		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			war.EnrageAura.Deactivate(sim)
-			war.EnrageAura.Activate(sim)
-		},
-	})
-
-	war.Blockhandler = func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-		procChance := war.GetCriticalBlockChance()
-		if dummyCriticalBlockSpell.CD.IsReady(sim) && sim.Proc(procChance, "Critical Block Roll") {
-			result.Damage = result.Damage * (1 - war.BlockDamageReduction()*2)
-			dummyCriticalBlockSpell.Cast(sim, spell.Unit)
-			return
-		}
-		result.Damage = result.Damage * (1 - war.BlockDamageReduction())
-	}
-
-	war.CriticalBlockChance[0] = war.CalculateMasteryCriticalBlockChance()
-	war.AddStat(stats.BlockPercent, war.CalculateMasteryBlockChance(war.GetStat(stats.MasteryRating), true))
-
-	war.AddOnMasteryStatChanged(func(sim *core.Simulation, oldMasteryRating float64, newMasteryRating float64) {
-		masteryBlockStat := war.CalculateMasteryBlockChance(newMasteryRating-oldMasteryRating, false)
-		war.AddStatDynamic(sim, stats.BlockPercent, masteryBlockStat)
-		war.CriticalBlockChance[0] = war.CalculateMasteryCriticalBlockChance()
-	})
+	// war.registerUnwaveringSentinel()
+	// war.registerBastionOfDefense()
+	// war.registerSwordAndBoard()
+	// war.registerUltimatum()
+	// war.registerRiposte()
 }
 
 func (war *ProtectionWarrior) Reset(sim *core.Simulation) {

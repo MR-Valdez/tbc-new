@@ -48,10 +48,6 @@ func NewFuryWarrior(character *core.Character, options *proto.Player) *FuryWarri
 	return war
 }
 
-func (war *FuryWarrior) GetMasteryBonusMultiplier() float64 {
-	return (1.4 * (8 + war.GetMasteryPoints())) / 100
-}
-
 func (war *FuryWarrior) GetWarrior() *warrior.Warrior {
 	return war.Warrior
 }
@@ -59,20 +55,18 @@ func (war *FuryWarrior) GetWarrior() *warrior.Warrior {
 func (war *FuryWarrior) Initialize() {
 	war.Warrior.Initialize()
 	war.registerPassives()
-	war.registerBloodthirst()
-	war.registerRagingBlow()
-	war.registerWildStrike()
+	// war.registerBloodthirst()
 }
 
 func (war *FuryWarrior) registerPassives() {
 	war.ApplyArmorSpecializationEffect(stats.Strength, proto.ArmorType_ArmorTypePlate, 86526)
 
-	war.registerCrazedBerserker()
-	war.registerFlurry()
-	war.registerBloodsurge()
-	war.registerMeatCleaver()
-	war.registerSingleMindedFuryOrTitansGrip()
-	war.registerUnshackledFury()
+	// war.registerCrazedBerserker()
+	// war.registerFlurry()
+	// war.registerBloodsurge()
+	// war.registerMeatCleaver()
+	// war.registerSingleMindedFuryOrTitansGrip()
+	// war.registerUnshackledFury()
 }
 
 func (war *FuryWarrior) Reset(sim *core.Simulation) {
