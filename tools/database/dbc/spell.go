@@ -45,12 +45,6 @@ type Spell struct {
 	IconPath              string
 }
 
-type RPPMModifier struct {
-	ModifierType RPPMModifierType
-	Coeff        float64
-	Param        int32
-}
-
 func (s *Spell) HasAttributeAt(index int, flag int) bool {
 	if index < 0 || index >= len(s.Attributes) {
 		return false
