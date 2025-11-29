@@ -150,7 +150,7 @@ func GenerateEnchantEffects(instance *dbc.DBC, db *WowDatabase) {
 	for _, grp := range groupMapProc {
 		procGroups = append(procGroups, &grp)
 	}
-	GenerateEffectsFile(procGroups, "sim/common/tbc/enchants_auto_gen.go", TmplStrEnchant)
+	//GenerateEffectsFile(procGroups, "sim/common/tbc/enchants_auto_gen.go", TmplStrEnchant)
 }
 
 func GenerateItemEffects(instance *dbc.DBC, db *WowDatabase, itemSources map[int][]*proto.DropSource) {
@@ -164,11 +164,9 @@ func GenerateItemEffects(instance *dbc.DBC, db *WowDatabase, itemSources map[int
 		for _, itemEffect := range dbc.GetAllStaticItemEffects(parsed) {
 			spellEffects := instance.SpellEffects[itemEffect.SpellID]
 			for _, spellEffect := range spellEffects {
-				switch spellEffect.EffectAura {
-				case 99: // MOD_ATTACK_POWER
-					parsed.ScalingOptions[0].Stats[int32(proto.Stat_StatAttackPower)] = float64(spellEffect.EffectBasePoints)
-				case 124: // MOD_RANGED_ATTACK_POWER
-					parsed.ScalingOptions[0].Stats[int32(proto.Stat_StatRangedAttackPower)] = float64(spellEffect.EffectBasePoints)
+				stat := dbc.ConvertEffectAuraToStatIndex(int(spellEffect.EffectAura))
+				if stat >= 0 {
+					parsed.ScalingOptions[0].Stats[int32(stat)] += float64(spellEffect.EffectBasePoints)
 				}
 			}
 		}

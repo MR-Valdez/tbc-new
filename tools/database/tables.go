@@ -402,8 +402,8 @@ func LoadAndWriteRawGems(dbHelper *DBHelper, inputsDir string) ([]dbc.Gem, error
 		FROM ItemSparse s
 		JOIN Item i ON s.ID = i.ID
 		JOIN GemProperties gp ON s.Gem_properties = gp.ID
-		JOIN SpellItemEnchantment sie ON gp.Enchant_ID = sie.ID
-		WHERE i.ClassID = 3 AND s.ItemLevel > 85 AND s.OverallQualityId > 2`
+		JOIN SpellItemEnchantment sie ON i.ID = sie.Field_1_15_3_55112_012
+		WHERE i.ClassID = 3`
 	items, err := LoadRows(dbHelper.db, query, ScanGemTable)
 	if err != nil {
 		return nil, fmt.Errorf("error loading items for GemTables: %w", err)
@@ -419,6 +419,7 @@ func ScanEnchantsTable(rows *sql.Rows) (dbc.Enchant, error) {
 	var raw dbc.Enchant
 	var effectsString string
 	var effectPointsString string
+	var spellEffectPointsString sql.NullString
 	var effectArgsString string
 	err := rows.Scan(
 		&raw.EffectId,
@@ -428,6 +429,7 @@ func ScanEnchantsTable(rows *sql.Rows) (dbc.Enchant, error) {
 		&raw.ProfessionId,
 		&effectsString,
 		&effectPointsString,
+		&spellEffectPointsString,
 		&effectArgsString,
 		&raw.IsWeaponEnchant,
 		&raw.InventoryType,
@@ -445,6 +447,11 @@ func ScanEnchantsTable(rows *sql.Rows) (dbc.Enchant, error) {
 	raw.EffectPoints, err = parseIntArrayField(effectPointsString, 3)
 	if err != nil {
 		return raw, fmt.Errorf("parsing effect points for enchant %d (%s): %w", raw.EffectId, effectPointsString, err)
+	}
+
+	raw.SpellEffectPoints, err = PraseEnchantEffectPoints(spellEffectPointsString)
+	if err != nil {
+		return raw, fmt.Errorf("parsing effect points for enchant %d (%s): %w", raw.EffectId, spellEffectPointsString.String, err)
 	}
 
 	raw.EffectArgs, err = parseIntArrayField(effectArgsString, 3)
@@ -480,6 +487,7 @@ func LoadAndWriteRawEnchants(dbHelper *DBHelper, inputsDir string) ([]dbc.Enchan
 		sie.Field_1_15_3_55112_014 as professionId,
 		sie.Effect as Effect,
 		sie.EffectPointsMin as EffectPoints,
+		group_concat(ese.EffectBasePoints+1) as SpellEffectPoints,
 		sie.EffectArg as EffectArgs,
 		CASE
 			WHEN sei.EquippedItemClass = 4 THEN false
@@ -494,7 +502,6 @@ func LoadAndWriteRawEnchants(dbHelper *DBHelper, inputsDir string) ([]dbc.Enchan
 		COALESCE(sie.Name_lang, "")
 		FROM SpellEffect se
 		JOIN Spell s ON se.SpellID = s.ID
-		LEFT JOIN SpellScaling ss ON se.SpellID = ss.SpellID
 		JOIN SpellName sn ON se.SpellID = sn.ID
 		JOIN SpellItemEnchantment sie ON se.EffectMiscValue_0 = sie.ID
 		LEFT JOIN ItemEffect ie ON se.SpellID = ie.SpellID
@@ -502,8 +509,8 @@ func LoadAndWriteRawEnchants(dbHelper *DBHelper, inputsDir string) ([]dbc.Enchan
 		LEFT JOIN SkillLineAbility sla ON se.SpellID = sla.Spell
 		LEFT JOIN Item it ON ie.ParentItemId = it.ID
 		LEFT JOIN ItemSparse isp ON ie.ParentItemId = isp.ID
+		LEFT JOIN SpellEffect ese ON ese.SpellID = sie.ID
 WHERE se.Effect = 53
-  AND (ss.MaxScalingLevel > 84 or ss.MaxScalingLevel is null)
   AND (
        ( sie.Field_1_15_3_55112_014 > 0
          AND sla.ID               IS NOT NULL
@@ -517,7 +524,7 @@ WHERE se.Effect = 53
 		GROUP BY name `
 	items, err := LoadRows(dbHelper.db, query, ScanEnchantsTable)
 	if err != nil {
-		return nil, fmt.Errorf("error loading items for GemTables: %w", err)
+		return nil, fmt.Errorf("error loading items for EnchantTables: %w", err)
 	}
 	json, _ := json.Marshal(items)
 	if err := dbc.WriteGzipFile(fmt.Sprintf("%s/dbc/enchants.json", inputsDir), json); err != nil {

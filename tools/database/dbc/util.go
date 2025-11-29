@@ -107,6 +107,7 @@ func processEnchantmentEffects(
 	effects []int,
 	effectArgs []int,
 	effectPoints []int,
+	spellEffectPoints []int,
 	outStats *stats.Stats,
 	addRanged bool,
 ) {
@@ -123,7 +124,12 @@ func processEnchantmentEffects(
 			if !success {
 				continue
 			}
-			outStats[stat] = float64(effectPoints[i])
+			if effectPoints[i] == 0 && spellEffectPoints != nil {
+				// This might be stored in a SpellEffect row
+				outStats[stat] = float64(spellEffectPoints[i])
+			} else {
+				outStats[stat] = float64(effectPoints[i])
+			}
 			// If the bonus stat is attack power, copy it to ranged attack power
 			if addRanged && stat == proto.Stat_StatAttackPower {
 				outStats[proto.Stat_StatRangedAttackPower] = float64(effectPoints[i])
@@ -144,6 +150,11 @@ func processEnchantmentEffects(
 				}
 				if spellEffect.EffectType == E_APPLY_AURA && spellEffect.EffectAura == A_MOD_STAT {
 					outStats[spellEffect.EffectMiscValues[0]] += float64(spellEffect.EffectBasePoints)
+				} else {
+					stat := ConvertEffectAuraToStatIndex(int(spellEffect.EffectAura))
+					if stat >= 0 {
+						outStats[stat] += float64(spellEffect.EffectBasePoints)
+					}
 				}
 			}
 		case ITEM_ENCHANTMENT_COMBAT_SPELL:
@@ -151,5 +162,22 @@ func processEnchantmentEffects(
 		case ITEM_ENCHANTMENT_USE_SPELL:
 			// Not processed
 		}
+	}
+}
+
+func ConvertEffectAuraToStatIndex(effectAura int) proto.Stat {
+	switch effectAura {
+	case 99: // MOD_ATTACK_POWER
+		return proto.Stat_StatAttackPower
+	case 124: // MOD_RANGED_ATTACK_POWER
+		return proto.Stat_StatRangedAttackPower
+	case 13: // MOD_DAMAGE_DONE
+		return proto.Stat_StatSpellDamage
+	case 135: // MOD_HEALING_DONE
+		return proto.Stat_StatHealingPower
+	case 34: // MOD_INCREASE_HEALTH
+		return proto.Stat_StatHealth
+	default:
+		return -1
 	}
 }
