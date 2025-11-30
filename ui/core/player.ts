@@ -27,14 +27,12 @@ import {
 	HandType,
 	HealingModel,
 	IndividualBuffs,
-	ItemLevelState,
 	ItemRandomSuffix,
 	ItemSlot,
 	Profession,
 	PseudoStat,
 	Race,
 	RangedWeaponType,
-	ReforgeStat,
 	Spec,
 	Stat,
 	UnitReference,
@@ -482,11 +480,6 @@ export class Player<SpecType extends Spec> {
 		return this.sim.db.getAvailableReforges(equippedItem.item).map(reforge => equippedItem.getReforgeData(reforge)!);
 	}
 
-	// Returns reforge given an id
-	getReforge(id: number): ReforgeStat | undefined {
-		return this.sim.db.getReforgeById(id);
-	}
-
 	// Returns all enchants that this player can wear in the given slot.
 	getEnchants(slot: ItemSlot): Array<Enchant> {
 		return this.sim.db.getEnchants(slot).filter(enchant => canEquipEnchant(enchant, this.playerSpec));
@@ -698,7 +691,7 @@ export class Player<SpecType extends Spec> {
 	}
 
 	canDualWield2H(): boolean {
-		return this.getSpec() == Spec.SpecFuryWarrior;
+		return false;
 	}
 
 	equipItem(eventID: EventID, slot: ItemSlot, newItem: EquippedItem | null) {
@@ -744,7 +737,7 @@ export class Player<SpecType extends Spec> {
 	getMeleeCritCapInfo(): MeleeCritCapInfo {
 		const meleeCrit = this.currentStats.finalStats?.pseudoStats[PseudoStat.PseudoStatPhysicalCritPercent] || 0.0;
 		const meleeHit = this.currentStats.finalStats?.pseudoStats[PseudoStat.PseudoStatPhysicalHitPercent] || 0.0;
-		const expertise = (this.currentStats.finalStats?.stats[Stat.StatExpertiseRating] || 0.0) / Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION / 4;
+		const expertise = (this.currentStats.finalStats?.stats[Stat.StatExpertise] || 0.0) / Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION / 4;
 		//const agility = (this.currentStats.finalStats?.stats[Stat.StatAgility] || 0.0) / this.getClass();
 		const suppression = 4.8;
 		const glancing = 24.0;
@@ -1079,19 +1072,6 @@ export class Player<SpecType extends Spec> {
 		return this.computeStatsEP(stats);
 	}
 
-	computeUpgradeEP(equippedItem: EquippedItem, upgradeLevel: ItemLevelState, slot: ItemSlot): number {
-		const cacheKey = `${equippedItem.id}-${JSON.stringify(this.epWeights)}-${slot}-${equippedItem.randomSuffix?.id}-${upgradeLevel}`;
-		if (this.upgradeEPCache.has(cacheKey)) {
-			return this.upgradeEPCache.get(cacheKey)!;
-		}
-
-		const stats = equippedItem.withUpgrade(upgradeLevel).withDynamicStats().calcStats(slot);
-		const ep = this.computeStatsEP(stats);
-		this.upgradeEPCache.set(cacheKey, ep);
-
-		return ep;
-	}
-
 	computeItemEP(item: Item, slot: ItemSlot): number {
 		if (item == null) return 0;
 
@@ -1253,10 +1233,10 @@ export class Player<SpecType extends Spec> {
 		};
 
 		if (filters.minIlvl != 0) {
-			itemData = filterItems(itemData, item => (item.scalingOptions?.[ItemLevelState.Base].ilvl || item.ilvl) >= filters.minIlvl);
+			itemData = filterItems(itemData, item => (item.scalingOptions?.[0].ilvl || item.ilvl) >= filters.minIlvl);
 		}
 		if (filters.maxIlvl != 0) {
-			itemData = filterItems(itemData, item => (item.scalingOptions?.[ItemLevelState.Base].ilvl || item.ilvl) <= filters.maxIlvl);
+			itemData = filterItems(itemData, item => (item.scalingOptions?.[0].ilvl || item.ilvl) <= filters.maxIlvl);
 		}
 
 		if (filters.factionRestriction != UIItem_FactionRestriction.UNSPECIFIED) {

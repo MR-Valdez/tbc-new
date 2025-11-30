@@ -11,13 +11,6 @@ import { defaultRaidBuffMajorDamageCooldowns } from '../../core/proto_utils/util
 import * as PaladinInputs from '../inputs.js';
 import * as Presets from './presets.js';
 
-const getStatCaps = () => {
-	const hitCap = new Stats().withPseudoStat(PseudoStat.PseudoStatPhysicalHitPercent, 7.5);
-	const expCap = new Stats().withStat(Stat.StatExpertiseRating, 7.5 * 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION);
-
-	return hitCap.add(expCap);
-};
-
 const SPEC_CONFIG = registerSpecConfig(Spec.SpecRetributionPaladin, {
 	cssClass: 'retribution-paladin-sim-ui',
 	cssScheme: PlayerClasses.getCssClass(PlayerClasses.Paladin),
@@ -55,20 +48,10 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecRetributionPaladin, {
 	epStats: [
 		Stat.StatStrength,
 		Stat.StatAttackPower,
-		Stat.StatHitRating,
-		Stat.StatCritRating,
-		Stat.StatHasteRating,
-		Stat.StatExpertiseRating,
-		Stat.StatMasteryRating,
 	],
 	gemStats: [
 		Stat.StatStamina,
 		Stat.StatStrength,
-		Stat.StatHitRating,
-		Stat.StatCritRating,
-		Stat.StatHasteRating,
-		Stat.StatExpertiseRating,
-		Stat.StatMasteryRating,
 	],
 	epPseudoStats: [PseudoStat.PseudoStatMainHandDps],
 	// Reference stat against which to calculate EP. I think all classes use either spell power or attack power.
@@ -80,12 +63,10 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecRetributionPaladin, {
 			Stat.StatAgility,
 			Stat.StatIntellect,
 			Stat.StatAttackPower,
-			Stat.StatExpertiseRating,
 			Stat.StatSpellPower,
 			Stat.StatMana,
 			Stat.StatHealth,
 			Stat.StatStamina,
-			Stat.StatMasteryRating,
 		],
 		[
 			PseudoStat.PseudoStatPhysicalHitPercent,
@@ -102,8 +83,6 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecRetributionPaladin, {
 		gear: Presets.P2_GEAR_PRESET.gear,
 		// Default EP weights for sorting gear in the gear picker.
 		epWeights: Presets.P1_P2_EP_PRESET.epWeights,
-		// Default stat caps for the Reforge Optimizer
-		statCaps: getStatCaps(),
 		// Default consumes settings.
 		consumables: Presets.DefaultConsumables,
 		// Default talents.
@@ -114,22 +93,11 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecRetributionPaladin, {
 		// Default raid/party buffs settings.
 		raidBuffs: RaidBuffs.create({
 			...defaultRaidBuffMajorDamageCooldowns(),
-			arcaneBrilliance: true,
-			blessingOfKings: true,
-			blessingOfMight: true,
-			bloodlust: true,
-			elementalOath: true,
-			powerWordFortitude: true,
-			serpentsSwiftness: true,
-			trueshotAura: true,
 		}),
 		partyBuffs: PartyBuffs.create({}),
 		individualBuffs: IndividualBuffs.create({}),
 		debuffs: Debuffs.create({
-			curseOfElements: true,
-			physicalVulnerability: true,
-			weakenedArmor: true,
-			weakenedBlows: true,
+
 		}),
 		rotationType: APLRotation_Type.TypeAuto,
 	},
