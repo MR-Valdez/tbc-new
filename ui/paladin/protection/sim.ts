@@ -49,15 +49,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecProtectionPaladin, {
 		Stat.StatStrength,
 		Stat.StatAgility,
 		Stat.StatAttackPower,
-		Stat.StatHitRating,
-		Stat.StatCritRating,
-		Stat.StatExpertiseRating,
-		Stat.StatHasteRating,
 		Stat.StatArmor,
 		Stat.StatBonusArmor,
-		Stat.StatDodgeRating,
-		Stat.StatParryRating,
-		Stat.StatMasteryRating,
 	],
 	epPseudoStats: [PseudoStat.PseudoStatMainHandDps],
 	// Reference stat against which to calculate EP. I think all classes use either spell power or attack power.
@@ -72,12 +65,10 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecProtectionPaladin, {
 			Stat.StatStrength,
 			Stat.StatAgility,
 			Stat.StatAttackPower,
-			Stat.StatExpertiseRating,
-			Stat.StatMasteryRating,
 		],
 		[
-			PseudoStat.PseudoStatPhysicalHitPercent,
-			PseudoStat.PseudoStatPhysicalCritPercent,
+			PseudoStat.PseudoStatMeleeHitPercent,
+			PseudoStat.PseudoStatMeleeCritPercent,
 			PseudoStat.PseudoStatMeleeHastePercent,
 			PseudoStat.PseudoStatSpellHitPercent,
 			PseudoStat.PseudoStatSpellCritPercent,
@@ -93,22 +84,6 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecProtectionPaladin, {
 		// Default EP weights for sorting gear in the gear picker.
 		// Values for now are pre-Cata initial WAG
 		epWeights: Presets.P1_BALANCED_EP_PRESET.epWeights,
-		// Default stat caps for the Reforge Optimizer
-		statCaps: (() => {
-			const hitCap = new Stats().withPseudoStat(PseudoStat.PseudoStatPhysicalHitPercent, 7.5);
-			const expCap = new Stats().withStat(Stat.StatExpertiseRating, 15 * 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION);
-
-			return hitCap.add(expCap);
-		})(),
-		softCapBreakpoints: (() => {
-			return [
-				StatCap.fromStat(Stat.StatExpertiseRating, {
-					breakpoints: [7.5 * 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION, 15 * 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION],
-					capType: StatCapType.TypeSoftCap,
-					postCapEPs: [0.57, 0],
-				}),
-			];
-		})(),
 		// Default consumes settings.
 		consumables: Presets.DefaultConsumables,
 		// Default talents.
@@ -119,22 +94,12 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecProtectionPaladin, {
 		// Default raid/party buffs settings.
 		raidBuffs: RaidBuffs.create({
 			...defaultRaidBuffMajorDamageCooldowns(),
-			arcaneBrilliance: true,
-			blessingOfKings: true,
-			blessingOfMight: true,
-			bloodlust: true,
-			elementalOath: true,
-			powerWordFortitude: true,
-			serpentsSwiftness: true,
-			trueshotAura: true,
+
 		}),
 		partyBuffs: PartyBuffs.create({}),
 		individualBuffs: IndividualBuffs.create({}),
 		debuffs: Debuffs.create({
-			curseOfElements: true,
-			physicalVulnerability: true,
-			weakenedArmor: true,
-			weakenedBlows: true,
+
 		}),
 		rotationType: APLRotation_Type.TypeAuto,
 	},
@@ -206,12 +171,5 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecProtectionPaladin, {
 export class ProtectionPaladinSimUI extends IndividualSimUI<Spec.SpecProtectionPaladin> {
 	constructor(parentElem: HTMLElement, player: Player<Spec.SpecProtectionPaladin>) {
 		super(parentElem, player, SPEC_CONFIG);
-
-		this.reforger = new ReforgeOptimizer(this, {
-			updateSoftCaps: softCaps => {
-				softCaps[0].postCapEPs[0] = player.getEpWeights().getStat(Stat.StatExpertiseRating) * 0.9;
-				return softCaps;
-			},
-		});
 	}
 }

@@ -68,16 +68,11 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecEnhancementShaman, {
 		Stat.StatAgility,
 		Stat.StatIntellect,
 		Stat.StatAttackPower,
-		Stat.StatHitRating,
-		Stat.StatCritRating,
-		Stat.StatHasteRating,
-		Stat.StatExpertiseRating,
-		Stat.StatMasteryRating,
 	],
 	epPseudoStats: [
 		PseudoStat.PseudoStatMainHandDps,
 		PseudoStat.PseudoStatOffHandDps,
-		PseudoStat.PseudoStatPhysicalHitPercent,
+		PseudoStat.PseudoStatMeleeHitPercent,
 		PseudoStat.PseudoStatSpellHitPercent,
 	],
 	// Reference stat against which to calculate EP.
@@ -91,13 +86,11 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecEnhancementShaman, {
 			Stat.StatAgility,
 			Stat.StatIntellect,
 			Stat.StatAttackPower,
-			Stat.StatExpertiseRating,
 			Stat.StatSpellPower,
-			Stat.StatMasteryRating,
 		],
 		[
-			PseudoStat.PseudoStatPhysicalHitPercent,
-			PseudoStat.PseudoStatPhysicalCritPercent,
+			PseudoStat.PseudoStatMeleeHitPercent,
+			PseudoStat.PseudoStatMeleeCritPercent,
 			PseudoStat.PseudoStatMeleeHastePercent,
 			PseudoStat.PseudoStatSpellHitPercent,
 			PseudoStat.PseudoStatSpellCritPercent,
@@ -110,14 +103,6 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecEnhancementShaman, {
 		gear: Presets.P3_PRESET.gear,
 		// Default EP weights for sorting gear in the gear picker.
 		epWeights: Presets.P3_EP_PRESET.epWeights,
-		// Default stat caps for the Reforge optimizer
-		statCaps: (() => {
-			const physHitCap = new Stats().withPseudoStat(PseudoStat.PseudoStatPhysicalHitPercent, 7.5);
-			const spellHitCap = new Stats().withPseudoStat(PseudoStat.PseudoStatSpellHitPercent, 15);
-			const expCap = new Stats().withStat(Stat.StatExpertiseRating, 7.5 * 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION);
-
-			return physHitCap.add(spellHitCap.add(expCap));
-		})(),
 		other: Presets.OtherDefaults,
 		// Default consumes settings.
 		consumables: Presets.DefaultConsumables,
@@ -196,7 +181,5 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecEnhancementShaman, {
 export class EnhancementShamanSimUI extends IndividualSimUI<Spec.SpecEnhancementShaman> {
 	constructor(parentElem: HTMLElement, player: Player<Spec.SpecEnhancementShaman>) {
 		super(parentElem, player, SPEC_CONFIG);
-
-		this.reforger = new ReforgeOptimizer(this);
 	}
 }
