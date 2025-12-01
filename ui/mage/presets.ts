@@ -1,61 +1,62 @@
-import { Debuffs,  PseudoStat, RaidBuffs } from '../core/proto/common';
-import { UnitStat, UnitStatPresets } from '../core/proto_utils/stats';
+import * as PresetUtils from '../core/preset_utils';
+import { Debuffs, PseudoStat, RaidBuffs, Stat, ConsumesSpec } from '../core/proto/common';
 import { defaultRaidBuffMajorDamageCooldowns } from '../core/proto_utils/utils';
+import { Stats } from '../core/proto_utils/stats';
+import { SavedTalents } from '../core/proto/ui';
+import { Mage_Options as MageOptions } from '../core/proto/mage';
+import BlankAPL from './apls/blank.apl.json'
+import BlankGear from './gear_sets/blank.gear.json';
 
-export const LIVING_BOMB_BREAKPOINTS: UnitStatPresets = {
-	unitStat: UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent),
-	presets: new Map([
-		['5-tick - Living Bomb', 12.507036],
-		['6-tick - Living Bomb', 37.520061],
-		['7-tick - Living Bomb', 62.469546],
-		['8-tick - Living Bomb', 87.441436],
-		['9-tick - Living Bomb', 112.539866],
-		['10-tick - Living Bomb', 137.435713],
-		['11-tick - Living Bomb', 162.58208],
-		['12-tick - Living Bomb', 187.494038],
-	]),
+// Preset options for this spec.
+// Eventually we will import these values for the raid sim too, so its good to
+// keep them in a separate file.
+
+export const BLANK_APL = PresetUtils.makePresetAPLRotation('Blank', BlankAPL)
+
+export const BLANK_GEARSET = PresetUtils.makePresetGear('Blank', BlankGear);
+
+// Preset options for EP weights
+export const P1_EP_PRESET = PresetUtils.makePresetEpWeights(
+	'A',
+	Stats.fromMap(
+		{
+			[Stat.StatAgility]: 1.0,
+		},
+		{
+			[PseudoStat.PseudoStatMainHandDps]: 1.43,
+			[PseudoStat.PseudoStatOffHandDps]: 0.26,
+		},
+	),
+);
+
+export const Talents = {
+	name: 'A',
+	data: SavedTalents.create({
+		talentsString: '',
+	}),
 };
 
-export const NETHER_TEMPEST_BREAKPOINTS: UnitStatPresets = {
-	unitStat: UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent),
-	presets: new Map([
-		['13-tick - Nether Tempest', 4.220959],
-		['14-tick - Nether Tempest', 12.549253],
-		['15-tick - Nether Tempest', 20.845936],
-		['16-tick - Nether Tempest', 29.115575],
-		['17-tick - Nether Tempest', 37.457064],
-		['18-tick - Nether Tempest', 45.878942],
-		['19-tick - Nether Tempest', 54.202028],
-		['20-tick - Nether Tempest', 62.469563],
-		['21-tick - Nether Tempest', 70.794222],
-		['22-tick - Nether Tempest', 79.051062],
-		['23-tick - Nether Tempest', 87.44146],
-		['24-tick - Nether Tempest', 95.886424],
-		['25-tick - Nether Tempest', 104.290134],
-		['26-tick - Nether Tempest', 112.539896],
-		['27-tick - Nether Tempest', 120.994524],
-		['28-tick - Nether Tempest', 129.095127],
-		['29-tick - Nether Tempest', 137.24798],
-		['30-tick - Nether Tempest', 146.002521],
-	]),
+export const DefaultOptions = MageOptions.create({
+	classOptions: {
+
+	},
+});
+
+export const OtherDefaults = {
+	distanceFromTarget: 20,
 };
 
-export const MAGE_BREAKPOINTS: UnitStatPresets = {
-	unitStat: UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent),
-	presets: new Map([...LIVING_BOMB_BREAKPOINTS.presets, ...NETHER_TEMPEST_BREAKPOINTS.presets].sort((a, b) => a[1] - b[1])),
-};
+export const DefaultConsumables = ConsumesSpec.create({
+	flaskId: 76084, // Flask of the Winds
+	foodId: 74648, // Skewered Eel
+	potId: 76089, // Potion of the Tol'vir
+	prepotId: 76089, // Potion of the Tol'vir
+});
 
 export const DefaultRaidBuffs = RaidBuffs.create({
 	...defaultRaidBuffMajorDamageCooldowns(),
-	arcaneBrilliance: true,
-	blessingOfKings: true,
-	mindQuickening: true,
-	leaderOfThePack: true,
-	blessingOfMight: true,
-	unholyAura: true,
-	bloodlust: true,
 });
 
 export const DefaultDebuffs = Debuffs.create({
-	curseOfElements: true,
+
 });

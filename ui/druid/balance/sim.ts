@@ -21,7 +21,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBalanceDruid, {
 	knownIssues: [],
 
 	// All stats for which EP should be calculated.
-	epStats: [Stat.StatIntellect, Stat.StatSpirit, Stat.StatSpellPower, Stat.StatHitRating, Stat.StatCritRating, Stat.StatHasteRating, Stat.StatMasteryRating],
+	epStats: [Stat.StatIntellect, Stat.StatSpirit, Stat.StatSpellPower],
 	// Reference stat against which to calculate EP. I think all classes use either spell power or attack power.
 	epReferenceStat: Stat.StatIntellect,
 	// Which stats to display in the Character Stats section, at the bottom of the left-hand sidebar.
@@ -33,8 +33,6 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBalanceDruid, {
 			Stat.StatIntellect,
 			Stat.StatSpirit,
 			Stat.StatSpellPower,
-			Stat.StatMasteryRating,
-			Stat.StatExpertiseRating,
 		],
 		[PseudoStat.PseudoStatSpellHitPercent, PseudoStat.PseudoStatSpellCritPercent, PseudoStat.PseudoStatSpellHastePercent],
 	),
@@ -46,7 +44,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBalanceDruid, {
 		const talentsStats = Stats.fromProto(playerStats.talentsStats);
 		const talentsDelta = talentsStats.subtract(gearStats);
 		const talentsMod = new Stats().withStat(
-			Stat.StatHitRating,
+			Stat.StatSpellHitRating,
 			talentsDelta.getPseudoStat(PseudoStat.PseudoStatSpellHitPercent) * Mechanics.SPELL_HIT_RATING_PER_HIT_PERCENT,
 		);
 
@@ -60,10 +58,6 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBalanceDruid, {
 		gear: Presets.T14PresetGear.gear,
 		// Default EP weights for sorting gear in the gear picker.
 		epWeights: Presets.StandardEPWeights.epWeights,
-		// Default stat caps for the Reforge optimizer
-		statCaps: (() => {
-			return new Stats().withPseudoStat(PseudoStat.PseudoStatSpellHitPercent, 15);
-		})(),
 		// Default breakpoint limits - set 12T MF/SF with 4P
 		breakpointLimits: (() => {
 			return new Stats().withPseudoStat(PseudoStat.PseudoStatSpellHastePercent, Presets.BALANCE_T14_4P_BREAKPOINTS!.presets.get('12-tick MF/SF')!);
@@ -130,7 +124,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBalanceDruid, {
 			otherDefaults: Presets.OtherDefaults,
 			defaultFactionRaces: {
 				[Faction.Unknown]: Race.RaceUnknown,
-				[Faction.Alliance]: Race.RaceWorgen,
+				[Faction.Alliance]: Race.RaceTauren,
 				[Faction.Horde]: Race.RaceTroll,
 			},
 			defaultGear: {

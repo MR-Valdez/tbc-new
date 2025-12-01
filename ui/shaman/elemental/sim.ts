@@ -38,7 +38,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecElementalShaman, {
 	],
 
 	// All stats for which EP should be calculated.
-	epStats: [Stat.StatIntellect, Stat.StatSpirit, Stat.StatSpellPower, Stat.StatHitRating, Stat.StatCritRating, Stat.StatHasteRating, Stat.StatMasteryRating],
+	epStats: [Stat.StatIntellect, Stat.StatSpirit, Stat.StatSpellPower],
 	// Reference stat against which to calculate EP.
 	epReferenceStat: Stat.StatIntellect,
 	// Which stats to display in the Character Stats section, at the bottom of the left-hand sidebar.
@@ -50,8 +50,6 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecElementalShaman, {
 			Stat.StatIntellect,
 			Stat.StatSpirit,
 			Stat.StatSpellPower,
-			Stat.StatExpertiseRating,
-			Stat.StatMasteryRating,
 		],
 		[PseudoStat.PseudoStatSpellHitPercent, PseudoStat.PseudoStatSpellCritPercent, PseudoStat.PseudoStatSpellHastePercent],
 	),
@@ -61,10 +59,6 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecElementalShaman, {
 		gear: Presets.P3_PRESET.gear,
 		// Default EP weights for sorting gear in the gear picker.
 		epWeights: Presets.EP_PRESET_P3.epWeights,
-		// Default stat caps for the Reforge optimizer
-		statCaps: (() => {
-			return new Stats().withPseudoStat(PseudoStat.PseudoStatSpellHitPercent, 15);
-		})(),
 		// Default consumes settings.
 		consumables: Presets.DefaultConsumables,
 		// Default talents.
@@ -143,6 +137,5 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecElementalShaman, {
 export class ElementalShamanSimUI extends IndividualSimUI<Spec.SpecElementalShaman> {
 	constructor(parentElem: HTMLElement, player: Player<Spec.SpecElementalShaman>) {
 		super(parentElem, player, SPEC_CONFIG);
-		this.reforger = new ReforgeOptimizer(this);
 	}
 }

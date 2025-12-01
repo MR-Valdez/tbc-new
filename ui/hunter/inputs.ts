@@ -1,6 +1,7 @@
 import * as InputHelpers from '../core/components/input_helpers';
 import { HunterSpecs } from '../core/proto_utils/utils';
 import { makePetTypeInputConfig } from '../core/talents/hunter_pet';
+import { RotationType, Spec } from '../core/proto/common';
 import i18n from '../i18n/config.js';
 // import { makePetTypeInputConfig } from '../core/talents/hunter_pet';
 
@@ -25,3 +26,15 @@ export const GlaiveTossChance = <SpecType extends HunterSpecs>() =>
 		labelTooltip: i18n.t('settings_tab.other.glaive_toss_chance.tooltip'),
 		percent: true,
 	});
+
+export const MMRotationConfig = {
+	inputs: [
+		InputHelpers.makeRotationEnumInput<Spec.SpecHunter, RotationType>({
+			fieldName: 'type',
+			label: i18n.t('rotation_tab.common.rotation_type.label'),
+			values: [
+				{ name: i18n.t('rotation_tab.common.rotation_type.single_target'), value: RotationType.SingleTarget },
+				{ name: i18n.t('rotation_tab.common.rotation_type.aoe'), value: RotationType.Aoe },
+			],
+		}),
+	]};
