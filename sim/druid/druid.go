@@ -6,6 +6,8 @@ import (
 	"github.com/wowsims/tbc/sim/core/stats"
 )
 
+var TalentTreeSizes = [3]int{21, 21, 20}
+
 type Druid struct {
 	core.Character
 	SelfBuffs
@@ -307,7 +309,7 @@ func New(char *core.Character, form DruidForm, selfBuffs SelfBuffs, talents stri
 
 	druid.RipMaxNumTicks = druid.RipBaseNumTicks + 3
 
-	core.FillTalentsProto(druid.Talents.ProtoReflect(), talents)
+	core.FillTalentsProto(druid.Talents.ProtoReflect(), talents, TalentTreeSizes)
 	druid.EnableManaBar()
 
 	druid.AddStatDependency(stats.Strength, stats.AttackPower, 1)

@@ -912,8 +912,8 @@ export class BulkTab extends SimTab {
 				labelTooltip: i18n.t('bulk_tab.settings.freeze_ring.tooltip'),
 				values: [
 					{ name: i18n.t('common.none'), value: -1 },
-					{ name: i18n.t('gear_tab.slots.finger_1'), value: ItemSlot.ItemSlotFinger1 },
-					{ name: i18n.t('gear_tab.slots.finger_2'), value: ItemSlot.ItemSlotFinger2 },
+					//{ name: i18n.t('gear_tab.slots.finger_1'), value: ItemSlot.ItemSlotFinger1 },
+					//{ name: i18n.t('gear_tab.slots.finger_2'), value: ItemSlot.ItemSlotFinger2 },
 				],
 				changedEvent: _modObj => TypedEvent.onAny([this.settingsChangedEmitter, this.itemsChangedEmitter]),
 				getValue: _modObj => {
@@ -956,8 +956,8 @@ export class BulkTab extends SimTab {
 				labelTooltip: i18n.t('bulk_tab.settings.freeze_trinket.tooltip'),
 				values: [
 					{ name: i18n.t('common.none'), value: -1 },
-					{ name: i18n.t('gear_tab.slots.trinket_1'), value: ItemSlot.ItemSlotTrinket1 },
-					{ name: i18n.t('gear_tab.slots.trinket_2'), value: ItemSlot.ItemSlotTrinket2 },
+					// { name: i18n.t('gear_tab.slots.trinket_1'), value: ItemSlot.ItemSlotTrinket1 },
+					// { name: i18n.t('gear_tab.slots.trinket_2'), value: ItemSlot.ItemSlotTrinket2 },
 				],
 				changedEvent: _modObj => TypedEvent.onAny([this.settingsChangedEmitter, this.itemsChangedEmitter]),
 				getValue: _modObj => {

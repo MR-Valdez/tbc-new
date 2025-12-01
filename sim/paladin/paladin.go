@@ -6,6 +6,8 @@ import (
 	"github.com/wowsims/tbc/sim/core/stats"
 )
 
+var TalentTreeSizes = [3]int{20, 23, 22}
+
 type Paladin struct {
 	core.Character
 
@@ -129,7 +131,7 @@ func NewPaladin(character *core.Character, talentsStr string, options *proto.Pal
 		Seal:      options.Seal,
 	}
 
-	core.FillTalentsProto(paladin.Talents.ProtoReflect(), talentsStr)
+	core.FillTalentsProto(paladin.Talents.ProtoReflect(), talentsStr, TalentTreeSizes)
 
 	paladin.PseudoStats.CanParry = true
 

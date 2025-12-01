@@ -6,6 +6,8 @@ import (
 	"github.com/wowsims/tbc/sim/core/stats"
 )
 
+var TalentTreeSizes = [3]int{23, 21, 22}
+
 type WarriorInputs struct {
 	StanceSnapshot bool
 }
@@ -173,7 +175,7 @@ func NewWarrior(character *core.Character, options *proto.WarriorOptions, talent
 		WarriorInputs:     inputs,
 		ClassSpellScaling: core.GetClassSpellScalingCoefficient(proto.Class_ClassWarrior),
 	}
-	core.FillTalentsProto(warrior.Talents.ProtoReflect(), talents)
+	core.FillTalentsProto(warrior.Talents.ProtoReflect(), talents, TalentTreeSizes)
 
 	warrior.EnableRageBar(core.RageBarOptions{
 		MaxRage:            100,
