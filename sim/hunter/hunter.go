@@ -10,6 +10,8 @@ import (
 
 const ThoridalTheStarsFuryItemID = 34334
 
+var TalentTreeSizes = [3]int{21, 20, 24}
+
 type Hunter struct {
 	core.Character
 
@@ -61,7 +63,7 @@ func NewHunter(character *core.Character, options *proto.Player, hunterOptions *
 		ClassSpellScaling: core.GetClassSpellScalingCoefficient(proto.Class_ClassHunter),
 	}
 
-	core.FillTalentsProto(hunter.Talents.ProtoReflect(), options.TalentsString)
+	core.FillTalentsProto(hunter.Talents.ProtoReflect(), options.TalentsString, TalentTreeSizes)
 	// focusPerSecond := 4.0
 
 	// kindredSpritsBonusFocus := core.TernaryFloat64(hunter.Spec == proto.Spec_SpecBeastMasteryHunter, 20, 0)

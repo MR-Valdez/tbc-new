@@ -8,6 +8,8 @@ import (
 	"github.com/wowsims/tbc/sim/core/stats"
 )
 
+var TalentTreeSizes = [3]int{23, 22, 22}
+
 type Mage struct {
 	core.Character
 
@@ -143,7 +145,7 @@ func NewMage(character *core.Character, options *proto.Player, mageOptions *prot
 		ClassSpellScaling: core.GetClassSpellScalingCoefficient(proto.Class_ClassMage),
 	}
 
-	core.FillTalentsProto(mage.Talents.ProtoReflect(), options.TalentsString)
+	core.FillTalentsProto(mage.Talents.ProtoReflect(), options.TalentsString, TalentTreeSizes)
 
 	//mage.mirrorImages = []*MirrorImage{mage.NewMirrorImage(), mage.NewMirrorImage(), mage.NewMirrorImage()}
 	mage.EnableManaBar()

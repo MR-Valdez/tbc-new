@@ -433,7 +433,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 		label: i18n.t('rotation_tab.apl.actions.channel.label'),
 		submenu: ['casting'],
 		shortDescription: i18n.t('rotation_tab.apl.actions.channel.tooltip'),
-		fullDescription: i18n.t('rotation_tab.apl.actions.channel.full'),
+		// fullDescription: i18n.t('rotation_tab.apl.actions.channel.full'),
 		newValue: () => APLActionChannelSpell.create({
 			interruptIf: {
 				value: {
@@ -458,7 +458,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 		label: i18n.t('rotation_tab.apl.actions.cast_all_stat_buff_cooldowns.label'),
 		submenu: ['casting'],
 		shortDescription: i18n.t('rotation_tab.apl.actions.cast_all_stat_buff_cooldowns.tooltip'),
-		fullDescription: i18n.t('rotation_tab.apl.actions.cast_all_stat_buff_cooldowns.full'),
+		// fullDescription: i18n.t('rotation_tab.apl.actions.cast_all_stat_buff_cooldowns.full'),
 		newValue: () => APLActionCastAllStatBuffCooldowns.create({
 			statType1: -1,
 			statType2: -1,
@@ -470,7 +470,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 		label: i18n.t('rotation_tab.apl.actions.autocast_other_cooldowns.label'),
 		submenu: ['casting'],
 		shortDescription: i18n.t('rotation_tab.apl.actions.autocast_other_cooldowns.tooltip'),
-		fullDescription: i18n.t('rotation_tab.apl.actions.autocast_other_cooldowns.full'),
+		// fullDescription: i18n.t('rotation_tab.apl.actions.autocast_other_cooldowns.full'),
 		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull,
 		newValue: APLActionAutocastOtherCooldowns.create,
 		fields: [],
@@ -523,7 +523,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 		label: i18n.t('rotation_tab.apl.actions.sequence.label'),
 		submenu: ['sequences'],
 		shortDescription: i18n.t('rotation_tab.apl.actions.sequence.tooltip'),
-		fullDescription: i18n.t('rotation_tab.apl.actions.sequence.full'),
+		// fullDescription: i18n.t('rotation_tab.apl.actions.sequence.full'),
 		includeIf: (_, isPrepull: boolean) => !isPrepull,
 		newValue: APLActionSequence.create,
 		fields: [AplHelpers.stringFieldConfig('name'), actionListFieldConfig('actions')],
@@ -532,7 +532,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 		label: i18n.t('rotation_tab.apl.actions.reset_sequence.label'),
 		submenu: ['sequences'],
 		shortDescription: i18n.t('rotation_tab.apl.actions.reset_sequence.tooltip'),
-		fullDescription: i18n.t('rotation_tab.apl.actions.reset_sequence.full'),
+		// fullDescription: i18n.t('rotation_tab.apl.actions.reset_sequence.full'),
 		includeIf: (_, isPrepull: boolean) => !isPrepull,
 		newValue: APLActionResetSequence.create,
 		fields: [AplHelpers.stringFieldConfig('sequenceName')],
@@ -541,7 +541,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 		label: i18n.t('rotation_tab.apl.actions.strict_sequence.label'),
 		submenu: ['sequences'],
 		shortDescription: i18n.t('rotation_tab.apl.actions.strict_sequence.tooltip'),
-		fullDescription: i18n.t('rotation_tab.apl.actions.strict_sequence.full'),
+		// fullDescription: i18n.t('rotation_tab.apl.actions.strict_sequence.full'),
 		includeIf: (_, isPrepull: boolean) => !isPrepull,
 		newValue: APLActionStrictSequence.create,
 		fields: [actionListFieldConfig('actions')],

@@ -203,7 +203,7 @@ class TalentTreePicker<TalentsProto> extends Component {
 		this.rootElem.appendChild(
 			<>
 				<div className="talent-tree-header">
-					<img src={this.getTreeIcon(klass, specNumber)} className="talent-tree-icon" />
+					{/* <img src={this.getTreeIcon(klass, specNumber)} className="talent-tree-icon" /> */}
 					<span className="talent-tree-title" />
 					<label className="talent-tree-points" />
 					<button className="talent-tree-reset btn link-danger">

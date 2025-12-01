@@ -13,15 +13,15 @@
 	"specs": {
 		"druid": {
 			"balance": "Balance",
-			"feralcat": "Feral",
-			"feralbear": "Guardian",
+			"feralcat": "Feral Cat",
+			"feralbear": "Feral Bear",
 			"restoration": "Restoration"
 		},
 		"hunter": {
-			"hunter": "Hunter"
+			"hunter": ""
 		},
 		"mage": {
-			"mage": "Mage"
+			"mage": ""
 		},
 		"paladin": {
 			"holy": "Holy",
@@ -34,7 +34,7 @@
 			"shadow": "Shadow"
 		},
 		"rogue": {
-			"rogue": "Rogue"
+			"rogue": ""
 		},
 		"shaman": {
 			"elemental": "Elemental",
@@ -42,7 +42,7 @@
 			"restoration": "Restoration"
 		},
 		"warlock": {
-			"warlock": "Warlock"
+			"warlock": ""
 		},
 		"warrior": {
 			"dps": "DPS",

@@ -8,6 +8,8 @@ import (
 	"github.com/wowsims/tbc/sim/core/stats"
 )
 
+var TalentTreeSizes = [3]int{22, 21, 21}
+
 type Priest struct {
 	core.Character
 	SelfBuffs
@@ -136,7 +138,7 @@ func New(char *core.Character, selfBuffs SelfBuffs, talents string) *Priest {
 		Talents:   &proto.PriestTalents{},
 	}
 
-	core.FillTalentsProto(priest.Talents.ProtoReflect(), talents)
+	core.FillTalentsProto(priest.Talents.ProtoReflect(), talents, TalentTreeSizes)
 	priest.EnableManaBar()
 	// priest.ShadowfiendPet = priest.NewShadowfiend()
 
