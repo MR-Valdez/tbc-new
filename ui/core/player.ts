@@ -568,9 +568,6 @@ export class Player<SpecType extends Spec> {
 	}
 
 	setCurrentStats(eventID: EventID, newStats: PlayerStats) {
-		newStats.finalStats?.stats.forEach((element, index) => {
-			console.log("Stat %d - %d", index, element)
-		});
 		this.currentStats = newStats;
 		this.currentStatsEmitter.emit(eventID);
 	}

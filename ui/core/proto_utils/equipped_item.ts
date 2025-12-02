@@ -261,7 +261,6 @@ export class EquippedItem {
 
 	withDynamicStats() {
 		const item = this.item;
-		console.log("ASDF")
 		const scalingOptions = item.scalingOptions[0];
 
 		item.stats = new Stats().asProtoArray().map((_, index) => scalingOptions.stats[index] || 0);
