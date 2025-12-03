@@ -66,6 +66,7 @@ export const bulkSimItemSlotToSingleItemSlot: Map<BulkSimItemSlot, ItemSlot> = n
 	[BulkSimItemSlot.ItemSlotFeet, ItemSlot.ItemSlotFeet],
 	[BulkSimItemSlot.ItemSlotMainHand, ItemSlot.ItemSlotMainHand],
 	[BulkSimItemSlot.ItemSlotOffHand, ItemSlot.ItemSlotOffHand],
+	[BulkSimItemSlot.ItemSlotRanged, ItemSlot.ItemSlotRanged],
 ]);
 
 export const bulkSimItemSlotToItemSlotPairs: Map<BulkSimItemSlot, [ItemSlot, ItemSlot]> = new Map([

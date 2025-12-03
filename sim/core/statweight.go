@@ -172,10 +172,6 @@ func buildStatWeightRequests(swr *proto.StatWeightsRequest) *proto.StatWeightReq
 		statMod := defaultStatMod
 		if stat.EqualsStat(stats.Armor) || stat.EqualsStat(stats.BonusArmor) {
 			statMod = defaultStatMod * 10
-		} else if stat.EqualsStat(stats.ArmorPenetration) || stat.EqualsStat(stats.SpellPenetration) {
-			// Pen stats are stored as negatives
-			statMod = -defaultStatMod
-			println("ASDF")
 		}
 		statModsHigh[stat] = statMod
 		statModsLow[stat] = -statMod
