@@ -51,11 +51,11 @@ func (s *UnitStats) ToProto() *proto.UnitStats {
 // than just stat weights.
 func (s *UnitStats) ExportWeights() *proto.UnitStats {
 	if s.Stats[stats.AllHitRating] == 0 {
-		s.Stats[stats.AllHitRating] = s.PseudoStats[proto.PseudoStat_PseudoStatMeleeHitPercent]/PhysicalHitRatingPerHitPercent + s.PseudoStats[proto.PseudoStat_PseudoStatSpellHitPercent]/SpellHitRatingPerHitPercent
+		s.Stats[stats.AllHitRating] = (s.PseudoStats[proto.PseudoStat_PseudoStatMeleeHitPercent] + +s.PseudoStats[proto.PseudoStat_PseudoStatRangedHitPercent]) / PhysicalHitRatingPerHitPercent
 	}
 
 	if s.Stats[stats.AllCritRating] == 0 {
-		s.Stats[stats.AllCritRating] = (s.PseudoStats[proto.PseudoStat_PseudoStatMeleeCritPercent] + s.PseudoStats[proto.PseudoStat_PseudoStatSpellCritPercent]) / SpellCritRatingPerCritPercent
+		s.Stats[stats.AllCritRating] = (s.PseudoStats[proto.PseudoStat_PseudoStatMeleeCritPercent] + s.PseudoStats[proto.PseudoStat_PseudoStatRangedCritPercent]) / SpellCritRatingPerCritPercent
 	}
 
 	return s.ToProto()

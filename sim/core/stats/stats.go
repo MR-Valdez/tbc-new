@@ -398,7 +398,7 @@ func FromProtoMap(m map[int32]float64) Stats {
 	var stats Stats
 	for k, v := range m {
 		if k == int32(proto.Stat_StatArmorPenetration) || k == int32(proto.Stat_StatSpellPenetration) {
-			stats[k] = -v
+			stats[k] = math.Abs(v)
 			continue
 		}
 		stats[k] = v
