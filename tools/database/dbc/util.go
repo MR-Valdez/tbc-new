@@ -225,7 +225,7 @@ func ConvertSpellDamageFlagToSchoolDamageStat(flag int) proto.Stat {
 	case 64:
 		return proto.Stat_StatArcanePower
 	default:
-		return proto.Stat_StatSpellPower
+		return proto.Stat_StatSpellDamage
 	}
 }
 
