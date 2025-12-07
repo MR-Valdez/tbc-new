@@ -93,15 +93,15 @@ func TestMultipleStatDep(t *testing.T) {
 		SpellPower: 100,
 	}
 
-	sdm.AddStatDependency(Intellect, SpellPower, 0.2)
-	sdm.AddStatDependency(Intellect, SpellPower, 0.2)
+	sdm.AddStatDependency(Intellect, SpellDamage, 0.2)
+	sdm.AddStatDependency(Intellect, SpellDamage, 0.2)
 	sdm.MultiplyStat(Intellect, 1.2)
 	sdm.FinalizeStatDeps()
 	result := sdm.ApplyStatDependencies(baseStat)
 
 	expectedResult := Stats{
-		Intellect:  100 * 1.2,
-		SpellPower: 100 + (100*1.2)*(0.2+0.2),
+		Intellect:   100 * 1.2,
+		SpellDamage: 100 + (100*1.2)*(0.2+0.2),
 	}
 
 	if !result.Equals(expectedResult) {

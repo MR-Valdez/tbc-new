@@ -174,8 +174,8 @@ func (s Stat) StatName() string {
 		return "RangedAttackPower"
 	case FeralAttackPower:
 		return "FeralAttackPower"
-	case SpellPower:
-		return "SpellPower"
+	case SpellDamage:
+		return "SpellDamage"
 	case ResilienceRating:
 		return "ResilienceRating"
 	case Armor:
@@ -441,7 +441,7 @@ type PseudoStats struct {
 	DodgeReduction      float64 // Used by Warrior talent 'Weapon Mastery' and SWP boss auras.
 
 	MobTypeAttackPower float64 // Bonus AP against mobs of the current type.
-	MobTypeSpellPower  float64 // Bonus SP against mobs of the current type.
+	MobTypeSpellDamage float64 // Bonus SP against mobs of the current type.
 
 	ThreatMultiplier float64 // Modulates the threat generated. Affected by things like salv.
 

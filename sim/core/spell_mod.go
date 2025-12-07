@@ -330,7 +330,7 @@ const (
 
 	// Add/subtract bonus spell power
 	// Uses: FloatValue
-	SpellMod_BonusSpellPower_Flat
+	SpellMod_BonusSpellDamage_Flat
 
 	// Add/subtract bonus expertise rating
 	// Uses: FloatValue
@@ -442,9 +442,9 @@ var spellModMap = map[SpellModType]*SpellModFunctions{
 		Remove: removeAllowCastWhileMoving,
 	},
 
-	SpellMod_BonusSpellPower_Flat: {
-		Apply:  applyBonusSpellPowerFlat,
-		Remove: removeBonusSpellPowerFlat,
+	SpellMod_BonusSpellDamage_Flat: {
+		Apply:  applyBonusSpellDamageFlat,
+		Remove: removeBonusSpellDamageFlat,
 	},
 
 	SpellMod_BonusExpertise_Rating: {
@@ -662,12 +662,12 @@ func removeAllowCastWhileMoving(mod *SpellMod, spell *Spell) {
 	spell.Flags ^= SpellFlagCanCastWhileMoving
 }
 
-func applyBonusSpellPowerFlat(mod *SpellMod, spell *Spell) {
-	spell.BonusSpellPower += mod.floatValue
+func applyBonusSpellDamageFlat(mod *SpellMod, spell *Spell) {
+	spell.BonusSpellDamage += mod.floatValue
 }
 
-func removeBonusSpellPowerFlat(mod *SpellMod, spell *Spell) {
-	spell.BonusSpellPower -= mod.floatValue
+func removeBonusSpellDamageFlat(mod *SpellMod, spell *Spell) {
+	spell.BonusSpellDamage -= mod.floatValue
 }
 
 func applyBonusExpertiseRating(mod *SpellMod, spell *Spell) {

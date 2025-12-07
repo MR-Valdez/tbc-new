@@ -252,7 +252,7 @@ func applyRaceEffects(agent Agent) {
 			apBonus = 4514.0
 		}
 
-		buffStats := stats.Stats{stats.AttackPower: apBonus, stats.RangedAttackPower: apBonus, stats.SpellPower: spBonus}
+		buffStats := stats.Stats{stats.AttackPower: apBonus, stats.RangedAttackPower: apBonus, stats.SpellDamage: spBonus}
 		RegisterTemporaryStatsOnUseCD(character, "Blood Fury", buffStats, time.Second*15, SpellConfig{
 			ActionID: actionID,
 
