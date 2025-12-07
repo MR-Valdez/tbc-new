@@ -89,8 +89,8 @@ func TestMultipleStatDep(t *testing.T) {
 	sdm := NewStatDependencyManager()
 
 	baseStat := Stats{
-		Intellect:  100,
-		SpellPower: 100,
+		Intellect:   100,
+		SpellDamage: 100,
 	}
 
 	sdm.AddStatDependency(Intellect, SpellDamage, 0.2)
