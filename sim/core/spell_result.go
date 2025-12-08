@@ -525,7 +525,6 @@ func (dot *Dot) Snapshot(target *Unit, baseDamage float64) {
 		dot.SnapshotBaseDamage += dot.BonusCoefficient * dot.Spell.BonusDamage()
 	}
 	attackTable := dot.Spell.Unit.AttackTables[target.UnitIndex]
-	dot.SnapshotCritChance = dot.Spell.SpellCritChance(target)
 	dot.SnapshotAttackerMultiplier = dot.Spell.AttackerDamageMultiplier(attackTable, true) *
 		dot.PeriodicDamageMultiplier
 }
@@ -534,7 +533,6 @@ func (dot *Dot) SnapshotPhysical(target *Unit, baseDamage float64) {
 	dot.SnapshotBaseDamage = baseDamage
 	// At this time, not aware of any physical-scaling DoTs that need BonusCoefficient
 	attackTable := dot.Spell.Unit.AttackTables[target.UnitIndex]
-	dot.SnapshotCritChance = dot.Spell.PhysicalCritChance(attackTable)
 	dot.SnapshotAttackerMultiplier = dot.Spell.AttackerDamageMultiplier(attackTable, true) *
 		dot.PeriodicDamageMultiplier
 }
@@ -592,7 +590,6 @@ func (dot *Dot) SnapshotHeal(target *Unit, baseHealing float64) {
 	if dot.BonusCoefficient > 0 {
 		dot.SnapshotBaseDamage += dot.BonusCoefficient * dot.Spell.HealingPower(target)
 	}
-	dot.SnapshotCritChance = dot.Spell.SpellCritChance(target)
 	dot.SnapshotAttackerMultiplier = dot.CasterPeriodicHealingMultiplier()
 }
 

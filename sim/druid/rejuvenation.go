@@ -46,12 +46,12 @@ func (druid *Druid) registerRejuvenationSpell() {
 			HasteReducesDuration: false,
 			BonusCoefficient:     RejuvenationBonusCoeff,
 
-			OnSnapshot: func(_ *core.Simulation, target *core.Unit, dot *core.Dot, _ bool) {
+			OnSnapshot: func(_ *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.SnapshotHeal(target, baseTickDamage)
 			},
 
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-				dot.CalcAndDealPeriodicSnapshotHealing(sim, target, dot.OutcomeSnapshotCrit)
+				dot.CalcAndDealPeriodicSnapshotHealing(sim, target, dot.OutcomeTick)
 			},
 		},
 

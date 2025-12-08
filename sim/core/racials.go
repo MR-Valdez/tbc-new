@@ -119,7 +119,7 @@ func applyRaceEffects(agent Agent) {
 				AffectedByCastSpeed: false,
 				OnTick: func(sim *Simulation, target *Unit, dot *Dot) {
 					healValue := character.MaxHealth() * 0.04
-					dot.Spell.CalcAndDealPeriodicHealing(sim, target, healValue, dot.OutcomeTickHealingCrit)
+					dot.Spell.CalcAndDealPeriodicHealing(sim, target, healValue, dot.OutcomeTick)
 				},
 			},
 
