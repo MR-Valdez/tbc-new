@@ -12,7 +12,7 @@ const (
 )
 
 func (druid *Druid) registerRejuvenationSpell() {
-	baseTickDamage := RejuvenationCoeff * druid.ClassSpellScaling
+	baseTickDamage := RejuvenationCoeff
 
 	druid.Rejuvenation = druid.RegisterSpell(Humanoid|Moonkin, core.SpellConfig{
 		ActionID:         core.ActionID{SpellID: 774},

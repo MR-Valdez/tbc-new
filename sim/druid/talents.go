@@ -346,7 +346,7 @@ func (druid *Druid) registerRenewal() {
 func (druid *Druid) registerCenarionWard() {
 
 	// First register the HoT spell that gets triggered when the target takes damage.
-	baseTickDamage := 11.27999973297 * druid.ClassSpellScaling // ~12349
+	baseTickDamage := 11.27999973297 // ~12349
 
 	// SP is snapshot at the time of the original buff cast according to simc
 	var spSnapshot float64

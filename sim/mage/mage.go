@@ -139,10 +139,9 @@ func (mage *Mage) OnEncounterStart(sim *core.Simulation) {
 func NewMage(character *core.Character, options *proto.Player, mageOptions *proto.MageOptions) *Mage {
 
 	mage := &Mage{
-		Character:         *character,
-		Talents:           &proto.MageTalents{},
-		Options:           mageOptions,
-		ClassSpellScaling: core.GetClassSpellScalingCoefficient(proto.Class_ClassMage),
+		Character: *character,
+		Talents:   &proto.MageTalents{},
+		Options:   mageOptions,
 	}
 
 	core.FillTalentsProto(mage.Talents.ProtoReflect(), options.TalentsString, TalentTreeSizes)
