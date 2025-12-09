@@ -45,7 +45,7 @@ func (character *Character) EnableManaBarWithModifier() {
 	if character.Unit.Type == PlayerUnit {
 		// Pets might have different scaling so let them handle their scaling
 		character.AddStatDependency(stats.Intellect, stats.SpellCritPercent, CritPerIntMaxLevel[character.Class])
-		character.AddStatDependency(stats.Intellect, stats.Mana, character.stats[stats.Intellect]*15)
+		character.AddStatDependency(stats.Intellect, stats.Mana, 15)
 	}
 
 	// Not a real spell, just holds metrics from mana gain threat.
