@@ -8,6 +8,7 @@ import { IconEnumValueConfig } from '../pickers/icon_enum_picker';
 import { ActionInputConfig, ItemStatOption } from './stat_options';
 import i18n from '../../../i18n/config.js';
 import { makeBooleanConsumeInput } from '../icon_inputs';
+import { playerPresets } from '../../../raid/presets';
 
 export interface ConsumableInputConfig<T> extends ActionInputConfig<T> {
 	value: T;
@@ -181,6 +182,29 @@ export const RogueDeadlyPoison = {
 	value: 27186,
 	showWhen: (player: Player<any>) => player.getClass() == Class.ClassRogue
 }
+// Shaman Imbues
+export const ShamanImbueWindfury = {
+	actionId: ActionId.fromSpellId(25505),
+	value: 25505,
+	showWhen: (player: Player<any>) => player.getClass() == Class.ClassShaman
+}
+export const ShamanImbueFlametongue = {
+	actionId: ActionId.fromSpellId(25489),
+	value: 25489,
+	showWhen: (player: Player<any>) => player.getClass() == Class.ClassShaman
+}
+
+export const ShamanImbueFrostbrand = {
+	actionId: ActionId.fromSpellId(25500),
+	value: 25500,
+	showWhen: (player: Player<any>) => player.getClass() == Class.ClassShaman
+}
+
+export const ShamanImbueRockbiter = {
+	actionId: ActionId.fromSpellId(25485),
+	value: 25485,
+	showWhen: (player: Player<any>) => player.getClass() == Class.ClassShaman
+}
 
 export const IMBUE_CONFIG_MH = [
 	{ config: ManaOil, stats: [Stat.StatHealingPower] },
@@ -188,8 +212,12 @@ export const IMBUE_CONFIG_MH = [
 	{ config: SupWizardOil, stats: [Stat.StatSpellDamage] },
 	{ config: AdamantiteSharpeningMH, stats: [Stat.StatAttackPower] },
 	{ config: AdamantiteWeightMH, stats: [Stat.StatAttackPower] },
-	{ config: RogueInstantPoison, stats: [Stat.StatAttackPower] },
-	{ config: RogueDeadlyPoison, stats: [Stat.StatAttackPower] },
+	{ config: RogueInstantPoison, stats: [] },
+	{ config: RogueDeadlyPoison, stats: [] },
+	{ config: ShamanImbueRockbiter, stats: [] },
+	{ config: ShamanImbueFrostbrand, stats: [] },
+	{ config: ShamanImbueFlametongue, stats: [] },
+	{ config: ShamanImbueWindfury, stats: [] },
 ] as ConsumableStatOption<number>[];
 
 export const IMBUE_CONFIG_OH = [
@@ -198,8 +226,12 @@ export const IMBUE_CONFIG_OH = [
 	{ config: SupWizardOil, stats: [Stat.StatSpellDamage] },
 	{ config: AdamantiteSharpeningOH, stats: [Stat.StatAttackPower] },
 	{ config: AdamantiteWeightOH, stats: [Stat.StatAttackPower] },
-	{ config: RogueInstantPoison, stats: [Stat.StatAttackPower] },
-	{ config: RogueDeadlyPoison, stats: [Stat.StatAttackPower] },
+	{ config: RogueInstantPoison, stats: [] },
+	{ config: RogueDeadlyPoison, stats: [] },
+	{ config: ShamanImbueRockbiter, stats: [] },
+	{ config: ShamanImbueFrostbrand, stats: [] },
+	{ config: ShamanImbueFlametongue, stats: [] },
+	{ config: ShamanImbueWindfury, stats: [] },
 ] as ConsumableStatOption<number>[];
 
 export const makeMHImbueInput = makeConsumeInputFactory({ consumesFieldName: 'mhImbueId' });
