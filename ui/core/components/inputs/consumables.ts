@@ -170,6 +170,7 @@ export const AdamantiteWeightOH = {
 	value: 34340,
 	showWhen: (player: Player<any>) => player.getGear().hasBluntOHWeapon()
 };
+// Rogue Poisons
 export const RogueInstantPoison = {
 	actionId: ActionId.fromItemId(21927),
 	value: 26891,
@@ -203,6 +204,18 @@ export const IMBUE_CONFIG_OH = [
 
 export const makeMHImbueInput = makeConsumeInputFactory({ consumesFieldName: 'mhImbueId' });
 export const makeOHImbueinput = makeConsumeInputFactory({ consumesFieldName: 'ohImbueId' });
+
+///////////////////////////////////////////////////////////////////////////
+//                               	DRUMS
+///////////////////////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////////////////////////////////////////
+//                                 SCROLLS
+///////////////////////////////////////////////////////////////////////////
+
+
 
 ///////////////////////////////////////////////////////////////////////////
 
