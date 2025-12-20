@@ -70,10 +70,9 @@ func RegisterHunter() {
 
 func NewHunter(character *core.Character, options *proto.Player) *Hunter {
 	hunter := &Hunter{
-		Character:         *character,
-		Talents:           &proto.HunterTalents{},
-		Options:           options.GetHunter().Options.ClassOptions,
-		ClassSpellScaling: core.GetClassSpellScalingCoefficient(proto.Class_ClassHunter),
+		Character: *character,
+		Talents:   &proto.HunterTalents{},
+		Options:   hunterOptions,
 	}
 
 	core.FillTalentsProto(hunter.Talents.ProtoReflect(), options.TalentsString, TalentTreeSizes)
@@ -125,7 +124,7 @@ func NewHunter(character *core.Character, options *proto.Player) *Hunter {
 }
 
 func (hunter *Hunter) Initialize() {
-	hunter.AutoAttacks.RangedConfig().CritMultiplier = hunter.DefaultCritMultiplier()
+	hunter.AutoAttacks.RangedConfig().CritMultiplier = hunter.DefaultMeleeCritMultiplier()
 
 	hunter.RegisterSpells()
 

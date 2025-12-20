@@ -152,10 +152,9 @@ func (mage *Mage) OnEncounterStart(sim *core.Simulation) {
 func NewMage(character *core.Character, options *proto.Player) *Mage {
 	mageOptions := options.GetMage().Options.ClassOptions
 	mage := &Mage{
-		Character:         *character,
-		Talents:           &proto.MageTalents{},
-		Options:           mageOptions,
-		ClassSpellScaling: core.GetClassSpellScalingCoefficient(proto.Class_ClassMage),
+		Character: *character,
+		Talents:   &proto.MageTalents{},
+		Options:   mageOptions,
 	}
 
 	core.FillTalentsProto(mage.Talents.ProtoReflect(), options.TalentsString, TalentTreeSizes)
@@ -164,7 +163,7 @@ func NewMage(character *core.Character, options *proto.Player) *Mage {
 	mage.EnableManaBar()
 	// Nether Attunement
 	// https://www.wowhead.com/mop-classic/spell=117957/nether-attunement
-	mage.HasteEffectsManaRegen()
+	// mage.HasteEffectsManaRegen()
 
 	mage.Icicles = make([]float64, 0)
 	mage.T15_4PC_FrostboltProcChance = 0

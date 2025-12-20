@@ -187,7 +187,7 @@ func ConvertEffectAuraToStatIndex(effectAura int, effectMisc int) proto.Stat {
 	case 124: // MOD_RANGED_ATTACK_POWER
 		return proto.Stat_StatRangedAttackPower
 	case 13: // MOD_DAMAGE_DONE
-		return proto.Stat_StatSpellDamage
+		return ConvertSpellDamageFlagToSchoolDamageStat(effectMisc)
 	case 135: // MOD_HEALING_DONE
 		return proto.Stat_StatHealingPower
 	case 34: // MOD_INCREASE_HEALTH
@@ -210,6 +210,25 @@ func ConvertTargetResistanceFlagToPenetrationStat(flag int) proto.Stat {
 	}
 }
 
+func ConvertSpellDamageFlagToSchoolDamageStat(flag int) proto.Stat {
+	switch flag {
+	case 2:
+		return proto.Stat_StatHolyDamage
+	case 4:
+		return proto.Stat_StatFireDamage
+	case 8:
+		return proto.Stat_StatNatureDamage
+	case 16:
+		return proto.Stat_StatFrostDamage
+	case 32:
+		return proto.Stat_StatShadowDamage
+	case 64:
+		return proto.Stat_StatArcaneDamage
+	default:
+		return proto.Stat_StatSpellDamage
+	}
+}
+
 func ConvertModRatingFlagToRatingStat(flag int) proto.Stat {
 	switch flag {
 	case 2:
@@ -222,14 +241,14 @@ func ConvertModRatingFlagToRatingStat(flag int) proto.Stat {
 		return proto.Stat_StatBlockRating
 	case 64:
 		// The forbidden "Only Ranged Hit". There's a single instance of this (Enchant 2523, SpellID 22780).
-		return proto.Stat_StatRage
+		return -1
 	case 96:
-		return proto.Stat_StatAllHitRating
+		return proto.Stat_StatAllPhysHitRating
 	case 128:
 		return proto.Stat_StatSpellHitRating
 	case 512:
-		// The forbidden "Only Ranged Crit". Only two of these exist, and they're not valid sim items.
-		return proto.Stat_StatRage
+		// The forbidden "Only Ranged Crit". Only two of these exist, one is low level gloves another is an enchant.
+		return -1
 	case 768:
 		return proto.Stat_StatMeleeCritRating
 	case 1024:
@@ -242,6 +261,6 @@ func ConvertModRatingFlagToRatingStat(flag int) proto.Stat {
 		return proto.Stat_StatResilienceRating
 	default:
 		println("UNHANDLED RATING FLAG: " + strconv.Itoa(flag))
-		return proto.Stat_StatRage
+		return -1
 	}
 }

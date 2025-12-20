@@ -6,7 +6,7 @@ import (
 	"github.com/wowsims/tbc/sim/core/proto"
 )
 
-const CharacterLevel = 90
+const CharacterLevel = 70
 const MinIlvl = 60
 const MaxIlvl = 600
 const MinUpgradeIlvl = 458
@@ -54,6 +54,10 @@ func TrinketSlots() []proto.ItemSlot {
 
 func AllWeaponSlots() []proto.ItemSlot {
 	return []proto.ItemSlot{proto.ItemSlot_ItemSlotMainHand, proto.ItemSlot_ItemSlotOffHand, proto.ItemSlot_ItemSlotRanged}
+}
+
+func AllMeleeWeaponSlots() []proto.ItemSlot {
+	return []proto.ItemSlot{proto.ItemSlot_ItemSlotMainHand, proto.ItemSlot_ItemSlotOffHand}
 }
 
 func ArmorSpecializationSlots() []proto.ItemSlot {

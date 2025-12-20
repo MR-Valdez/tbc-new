@@ -19,7 +19,7 @@ func (druid *Druid) registerTranquilityCD() {
 		Flags:            core.SpellFlagHelpful | core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell,
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
-		CritMultiplier:   druid.DefaultCritMultiplier(),
+		CritMultiplier:   druid.DefaultSpellCritMultiplier(),
 		ClassSpellMask:   DruidSpellTranquility,
 
 		// TODO: Healing value calculations are very likely incorrect and will need a closer look if we care about
@@ -36,7 +36,7 @@ func (druid *Druid) registerTranquilityCD() {
 			AffectedByCastSpeed:  true,
 			HasteReducesDuration: true,
 
-			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, _ bool) {
+			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.SnapshotBaseDamage = 0.068 * dot.Spell.HealingPower(target) * float64(dot.Aura.GetStacks())
 				dot.SnapshotAttackerMultiplier = dot.CasterPeriodicHealingMultiplier()
 			},
@@ -54,7 +54,7 @@ func (druid *Druid) registerTranquilityCD() {
 			}
 
 			hot.AddStack(sim)
-			hot.TakeSnapshot(sim, false)
+			hot.TakeSnapshot(sim)
 		},
 	})
 
@@ -83,7 +83,7 @@ func (druid *Druid) registerTranquilityCD() {
 
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
-		CritMultiplier:   druid.DefaultCritMultiplier(),
+		CritMultiplier:   druid.DefaultSpellCritMultiplier(),
 
 		// TODO: Healing value calculations are very likely incorrect and will need a closer look if we
 		// care about modeling the actual healing output from the spell. Right now this is just a
@@ -98,7 +98,7 @@ func (druid *Druid) registerTranquilityCD() {
 			AffectedByCastSpeed:  true,
 			HasteReducesDuration: true,
 
-			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, _ bool) {
+			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.SnapshotBaseDamage = 3882. + 0.398*dot.Spell.HealingPower(target)
 				dot.SnapshotAttackerMultiplier = dot.Spell.CasterHealingMultiplier()
 			},

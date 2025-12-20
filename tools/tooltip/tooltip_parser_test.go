@@ -10,7 +10,7 @@ var db = dbc.GetDBC()
 
 func Test_WhenInvalidTernaryGiven_ThenProperlyApplyFixes(t *testing.T) {
 	tp, error := ParseTooltip("$<dam> damage every ${$16914d3/10}.2 seconds$?$w1!=0[ and movement slowed by $w1%][].",
-		NewTestDataProvider(CharacterConfig{SpellPower: 1000}),
+		NewTestDataProvider(CharacterConfig{SpellDamage: 1000}),
 		16914,
 	)
 
@@ -69,7 +69,7 @@ func NewTestDataProvider(config CharacterConfig) *TestDataProvider {
 
 // add here over time to overwrite fixed values for tests
 type CharacterConfig struct {
-	SpellPower float64
+	SpellDamage float64
 }
 
 type TestDataProvider struct {
@@ -77,6 +77,6 @@ type TestDataProvider struct {
 	Character *CharacterConfig
 }
 
-func (t TestDataProvider) GetSpellPower() float64 {
-	return t.Character.SpellPower
+func (t TestDataProvider) GetSpellDamage() float64 {
+	return t.Character.SpellDamage
 }

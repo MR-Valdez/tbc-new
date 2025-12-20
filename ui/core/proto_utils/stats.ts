@@ -307,11 +307,11 @@ export class UnitStat {
 		} else if (pseudoStatName.includes('MeleeCrit')) {
 			return Stat.StatMeleeCritRating;
 		} else if (pseudoStatName.includes('Haste')) {
-			return Stat.StatAllHasteRating;
+			return Stat.StatAllPhysHasteRating;
 		} else if (pseudoStatName.includes('Hit')) {
-			return Stat.StatAllHitRating;
+			return Stat.StatAllPhysHitRating;
 		} else if (pseudoStatName.includes('Crit')) {
-			return Stat.StatAllCritRating;
+			return Stat.StatAllPhysCritRating;
 		} else {
 			return null;
 		}
@@ -320,19 +320,19 @@ export class UnitStat {
 	// Inverse of the above
 	static getChildren(parentStat: Stat): PseudoStat[] {
 		switch (parentStat) {
-			case Stat.StatAllHitRating:
-				return [PseudoStat.PseudoStatMeleeHitPercent, PseudoStat.PseudoStatRangedHitPercent, PseudoStat.PseudoStatSpellHitPercent];
-			case Stat.StatAllCritRating:
-				return [PseudoStat.PseudoStatMeleeCritPercent, PseudoStat.PseudoStatRangedCritPercent, PseudoStat.PseudoStatSpellCritPercent];
-			case Stat.StatAllHasteRating:
-				return [PseudoStat.PseudoStatMeleeHastePercent, PseudoStat.PseudoStatRangedHastePercent, PseudoStat.PseudoStatSpellHastePercent];
+			case Stat.StatAllPhysHitRating:
+				return [PseudoStat.PseudoStatMeleeHitPercent, PseudoStat.PseudoStatRangedHitPercent];
+			case Stat.StatAllPhysCritRating:
+				return [PseudoStat.PseudoStatMeleeCritPercent, PseudoStat.PseudoStatRangedCritPercent];
+			case Stat.StatAllPhysHasteRating:
+				return [PseudoStat.PseudoStatMeleeHastePercent, PseudoStat.PseudoStatRangedHastePercent];
 			case Stat.StatMeleeHitRating:
 				return [PseudoStat.PseudoStatMeleeHitPercent, PseudoStat.PseudoStatRangedHitPercent];
 			case Stat.StatMeleeCritRating:
 				return [PseudoStat.PseudoStatMeleeCritPercent, PseudoStat.PseudoStatRangedCritPercent];
 			case Stat.StatMeleeHasteRating:
 				return [PseudoStat.PseudoStatMeleeHastePercent, PseudoStat.PseudoStatRangedHastePercent];
-				case Stat.StatSpellHitRating:
+			case Stat.StatSpellHitRating:
 				return [PseudoStat.PseudoStatSpellHitPercent];
 			case Stat.StatSpellCritRating:
 				return [PseudoStat.PseudoStatSpellCritPercent];
@@ -379,7 +379,13 @@ export const displayStatOrder: Array<UnitStat> = [
 	UnitStat.fromStat(Stat.StatAgility),
 	UnitStat.fromStat(Stat.StatIntellect),
 	UnitStat.fromStat(Stat.StatSpirit),
-	UnitStat.fromStat(Stat.StatSpellPower),
+	UnitStat.fromStat(Stat.StatSpellDamage),
+	UnitStat.fromStat(Stat.StatFireDamage),
+	UnitStat.fromStat(Stat.StatFireDamage),
+	UnitStat.fromStat(Stat.StatFrostDamage),
+	UnitStat.fromStat(Stat.StatHolyDamage),
+	UnitStat.fromStat(Stat.StatNatureDamage),
+	UnitStat.fromStat(Stat.StatShadowDamage),
 	UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellHitPercent),
 	UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellCritPercent),
 	UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent),
@@ -435,8 +441,8 @@ export class Stats {
 	}
 
 	getStat(stat: Stat): number {
-		if (stat === Stat.StatMeleeHitRating || stat === Stat.StatSpellHitRating) {
-			return this.stats[stat] + this.stats[Stat.StatAllHitRating]
+		if (stat === Stat.StatMeleeHitRating) {
+			return this.stats[stat] + this.stats[Stat.StatAllPhysHitRating]
 		}
 		return this.stats[stat];
 	}
@@ -727,9 +733,12 @@ export function statIsCapped(stat: Stat, hardCaps: Stats, softCaps: StatCap[]): 
 }
 
 export const DEFAULT_GEM_STATS = [
-	Stat.StatAllHitRating,
-	Stat.StatAllCritRating,
-	Stat.StatAllHasteRating,
+	Stat.StatAllPhysHitRating,
+	Stat.StatAllPhysCritRating,
+	Stat.StatAllPhysHasteRating,
+	Stat.StatSpellHitRating,
+	Stat.StatSpellCritRating,
+	Stat.StatSpellHasteRating,
 ];
-export const DEFAULT_CASTER_GEM_STATS = [...DEFAULT_GEM_STATS, Stat.StatIntellect, Stat.StatSpellPower];
+export const DEFAULT_CASTER_GEM_STATS = [...DEFAULT_GEM_STATS, Stat.StatIntellect, Stat.StatSpellDamage];
 export const DEFAULT_HYBRID_CASTER_GEM_STATS = [...DEFAULT_CASTER_GEM_STATS, Stat.StatSpirit];

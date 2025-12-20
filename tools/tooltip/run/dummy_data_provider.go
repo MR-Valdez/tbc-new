@@ -49,7 +49,7 @@ func (d DummyTooltipDataProvider) GetSpellStacks(spellId int64) int64 {
 }
 
 func (d DummyTooltipDataProvider) GetPlayerLevel() float64 {
-	return 90
+	return 70
 }
 
 func (d DummyTooltipDataProvider) GetSpellProcChance(spellId int64) float64 {
@@ -95,8 +95,8 @@ func (d DummyTooltipDataProvider) GetSpellDuration(spellId int64) time.Duration 
 	return time.Second * 12
 }
 
-// GetSpellPower implements TooltipDataProvider.
-func (d DummyTooltipDataProvider) GetSpellPower() float64 {
+// GetSpellDamage implements TooltipDataProvider.
+func (d DummyTooltipDataProvider) GetSpellDamage() float64 {
 	return 1
 }
 

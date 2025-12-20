@@ -12,7 +12,7 @@ const (
 )
 
 func (druid *Druid) registerRejuvenationSpell() {
-	baseTickDamage := RejuvenationCoeff * druid.ClassSpellScaling
+	baseTickDamage := RejuvenationCoeff
 
 	druid.Rejuvenation = druid.RegisterSpell(Humanoid|Moonkin, core.SpellConfig{
 		ActionID:         core.ActionID{SpellID: 774},
@@ -22,7 +22,7 @@ func (druid *Druid) registerRejuvenationSpell() {
 		Flags:            core.SpellFlagHelpful | core.SpellFlagAPL,
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
-		CritMultiplier:   druid.DefaultCritMultiplier(),
+		CritMultiplier:   druid.DefaultSpellCritMultiplier(),
 		BonusCoefficient: RejuvenationBonusCoeff,
 
 		ManaCost: core.ManaCostOptions{
@@ -46,12 +46,12 @@ func (druid *Druid) registerRejuvenationSpell() {
 			HasteReducesDuration: false,
 			BonusCoefficient:     RejuvenationBonusCoeff,
 
-			OnSnapshot: func(_ *core.Simulation, target *core.Unit, dot *core.Dot, _ bool) {
+			OnSnapshot: func(_ *core.Simulation, target *core.Unit, dot *core.Dot) {
 				dot.SnapshotHeal(target, baseTickDamage)
 			},
 
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-				dot.CalcAndDealPeriodicSnapshotHealing(sim, target, dot.OutcomeSnapshotCrit)
+				dot.CalcAndDealPeriodicSnapshotHealing(sim, target, dot.OutcomeTick)
 			},
 		},
 

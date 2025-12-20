@@ -9,7 +9,7 @@ import (
 func (druid *Druid) registerRavageSpell() {
 	const weaponMultiplier = 9.5
 	const highHpCritPercentBonus = 50.0
-	flatDamageBonus := 0.07100000232 * druid.ClassSpellScaling
+	flatDamageBonus := 0.07100000232
 
 	druid.Ravage = druid.RegisterSpell(Cat, core.SpellConfig{
 		ActionID:         core.ActionID{SpellID: 6785},
@@ -18,7 +18,7 @@ func (druid *Druid) registerRavageSpell() {
 		ClassSpellMask:   DruidSpellRavage,
 		Flags:            core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
 		DamageMultiplier: weaponMultiplier,
-		CritMultiplier:   druid.DefaultCritMultiplier(),
+		CritMultiplier:   druid.DefaultMeleeCritMultiplier(),
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1,
 		MaxRange:         core.MaxMeleeRange,

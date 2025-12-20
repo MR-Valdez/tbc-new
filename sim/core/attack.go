@@ -61,15 +61,14 @@ func getWeaponMaxRange(item *Item) float64 {
 }
 
 func getWeaponMinRange(item *Item) float64 {
-	// TBC ANNI: Deadzone will disable MH swings right now
-	// switch item.RangedWeaponType {
-	// case proto.RangedWeaponType_RangedWeaponTypeThrown:
-	// case proto.RangedWeaponType_RangedWeaponTypeUnknown:
-	// case proto.RangedWeaponType_RangedWeaponTypeWand:
-	// 	return 0.
-	// default:
-	// 	return 5
-	// }
+	switch item.RangedWeaponType {
+	case proto.RangedWeaponType_RangedWeaponTypeThrown:
+	case proto.RangedWeaponType_RangedWeaponTypeUnknown:
+	case proto.RangedWeaponType_RangedWeaponTypeWand:
+		return 0.
+	default:
+		return 8
+	}
 
 	return 0
 }
@@ -116,8 +115,7 @@ func (character *Character) WeaponFromOffHand(critMultiplier float64) Weapon {
 
 // Returns weapon stats using the ranged equipped weapon.
 func (character *Character) WeaponFromRanged(critMultiplier float64) Weapon {
-	weapon := character.Ranged()
-	if weapon != nil {
+	if weapon := character.GetRangedWeapon(); weapon != nil {
 		return newWeaponFromItem(weapon, critMultiplier, character.PseudoStats.BonusRangedDps)
 	} else {
 		return Weapon{}
@@ -418,7 +416,7 @@ func (unit *Unit) EnableAutoAttacks(agent Agent, options AutoAttackOptions) {
 		ActionID:    ActionID{OtherID: proto.OtherAction_OtherActionAttack, Tag: 1},
 		SpellSchool: options.MainHand.GetSpellSchool(),
 		ProcMask:    Ternary(options.ProcMask == ProcMaskUnknown, ProcMaskMeleeMHAuto, options.ProcMask),
-		Flags:       SpellFlagMeleeMetrics | SpellFlagNoOnCastComplete,
+		Flags:       SpellFlagMeleeMetrics | SpellFlagIncludeTargetBonusDamage | SpellFlagNoOnCastComplete,
 
 		DamageMultiplier:         1,
 		DamageMultiplierAdditive: 1,

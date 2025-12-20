@@ -22,16 +22,15 @@ const (
 	Agility
 	Stamina
 	Intellect
-	Rage
 	SpellPower
 	HealingPower
 	SpellDamage
-	ArcanePower
-	FirePower
-	FrostPower
-	HolyPower
-	NaturePower
-	ShadowPower
+	ArcaneDamage
+	FireDamage
+	FrostDamage
+	HolyDamage
+	NatureDamage
+	ShadowDamage
 	SpellHitRating
 	SpellCritRating
 	SpellHasteRating
@@ -45,9 +44,9 @@ const (
 	MeleeHasteRating
 	ArmorPenetration
 	ExpertiseRating
-	AllHitRating
-	AllCritRating
-	AllHasteRating
+	AllPhysHitRating
+	AllPhysCritRating
+	AllPhysHasteRating
 	DefenseRating
 	BlockRating
 	BlockValue
@@ -157,11 +156,11 @@ func (s Stat) StatName() string {
 		return "MeleeHasteRating"
 	case ExpertiseRating:
 		return "ExpertiseRating"
-	case AllHitRating:
+	case AllPhysHitRating:
 		return "HitRating"
-	case AllCritRating:
+	case AllPhysCritRating:
 		return "CritRating"
-	case AllHasteRating:
+	case AllPhysHasteRating:
 		return "HasteRating"
 	case ArmorPenetration:
 		return "ArmorPenetration"
@@ -175,8 +174,20 @@ func (s Stat) StatName() string {
 		return "RangedAttackPower"
 	case FeralAttackPower:
 		return "FeralAttackPower"
-	case SpellPower:
-		return "SpellPower"
+	case SpellDamage:
+		return "SpellDamage"
+	case ArcaneDamage:
+		return "ArcaneDamage"
+	case FireDamage:
+		return "FireDamage"
+	case FrostDamage:
+		return "FrostDamage"
+	case HolyDamage:
+		return "HolyDamage"
+	case NatureDamage:
+		return "NatureDamage"
+	case ShadowDamage:
+		return "ShadowDamage"
 	case ResilienceRating:
 		return "ResilienceRating"
 	case Armor:
@@ -398,7 +409,7 @@ func FromProtoMap(m map[int32]float64) Stats {
 	var stats Stats
 	for k, v := range m {
 		if k == int32(proto.Stat_StatArmorPenetration) || k == int32(proto.Stat_StatSpellPenetration) {
-			stats[k] = -v
+			stats[k] = math.Abs(v)
 			continue
 		}
 		stats[k] = v
@@ -442,7 +453,7 @@ type PseudoStats struct {
 	DodgeReduction      float64 // Used by Warrior talent 'Weapon Mastery' and SWP boss auras.
 
 	MobTypeAttackPower float64 // Bonus AP against mobs of the current type.
-	MobTypeSpellPower  float64 // Bonus SP against mobs of the current type.
+	MobTypeSpellDamage float64 // Bonus SP against mobs of the current type.
 
 	ThreatMultiplier float64 // Modulates the threat generated. Affected by things like salv.
 

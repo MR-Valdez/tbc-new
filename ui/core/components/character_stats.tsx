@@ -103,7 +103,13 @@ export class CharacterStats extends Component {
 			[
 				StatGroup.Spell,
 				[
-					UnitStat.fromStat(Stat.StatSpellPower),
+					UnitStat.fromStat(Stat.StatSpellDamage),
+					UnitStat.fromStat(Stat.StatFireDamage),
+					UnitStat.fromStat(Stat.StatFireDamage),
+					UnitStat.fromStat(Stat.StatFrostDamage),
+					UnitStat.fromStat(Stat.StatHolyDamage),
+					UnitStat.fromStat(Stat.StatNatureDamage),
+					UnitStat.fromStat(Stat.StatShadowDamage),
 					UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent),
 					UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellHitPercent),
 					UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellCritPercent),
@@ -115,7 +121,7 @@ export class CharacterStats extends Component {
 			const hitIndex = statGroups.get(StatGroup.Physical)!.findIndex(stat => stat.equalsPseudoStat(PseudoStat.PseudoStatMeleeHitPercent));
 			statGroups.get(StatGroup.Physical)!.splice(hitIndex+1, 0, UnitStat.fromStat(Stat.StatExpertiseRating));
 			// statGroups.get(StatGroup.Defense)!.push(UnitStat.fromStat(Stat.StatDefenseRating));
-		} else if ([Stat.StatIntellect, Stat.StatSpellPower].includes(simUI.individualConfig.epReferenceStat)) {
+		} else if ([Stat.StatIntellect, Stat.StatSpellDamage].includes(simUI.individualConfig.epReferenceStat)) {
 			const hitIndex = statGroups.get(StatGroup.Spell)!.findIndex(stat => stat.equalsPseudoStat(PseudoStat.PseudoStatSpellHitPercent));
 			// statGroups.get(StatGroup.Spell)!.splice(hitIndex+1, 0, UnitStat.fromStat(Stat.StatExpertiseRating));
 		} else {
@@ -359,7 +365,7 @@ export class CharacterStats extends Component {
 
 		if (false && includeBase) {
 			derivedPercentOrPointsValue = derivedPercentOrPointsValue! + this.player.getBaseMastery();
-		} else if ((rootStat === Stat.StatMeleeHitRating || rootStat === Stat.StatAllHitRating) && includeBase && this.hasRacialHitBonus) {
+		} else if ((rootStat === Stat.StatMeleeHitRating || rootStat === Stat.StatAllPhysHitRating) && includeBase && this.hasRacialHitBonus) {
 			// Remove the rating display and only show %
 			if (rootRatingValue !== null && rootRatingValue > 0) {
 				rootRatingValue -= Mechanics.PHYSICAL_HIT_RATING_PER_HIT_PERCENT;

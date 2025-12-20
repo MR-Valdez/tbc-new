@@ -72,7 +72,7 @@ func NewFakeElementalShaman(char *Character, _ *proto.Player) Agent {
 				AffectedByCastSpeed: true,
 				BonusCoefficient:    1,
 
-				OnSnapshot: func(sim *Simulation, target *Unit, dot *Dot, isRollover bool) {
+				OnSnapshot: func(sim *Simulation, target *Unit, dot *Dot) {
 					dot.Snapshot(target, 100)
 				},
 				OnTick: func(sim *Simulation, target *Unit, dot *Dot) {
@@ -117,7 +117,7 @@ func SetupFakeSim() *Simulation {
 		},
 		Encounter: &proto.Encounter{
 			Targets: []*proto.Target{
-				{Name: "target", Level: 90, MobType: proto.MobType_MobTypeDemon},
+				{Name: "target", Level: 70, MobType: proto.MobType_MobTypeDemon},
 			},
 			Duration: 180,
 		},
@@ -146,7 +146,7 @@ func TestDotSnapshot(t *testing.T) {
 	expectDotTickDamage(t, sim, fa.Dot, 150) // (100) * 1.5
 }
 
-func TestDotSnapshotSpellPower(t *testing.T) {
+func TestDotSnapshotSpellDamage(t *testing.T) {
 	sim := SetupFakeSim()
 	fa := sim.Raid.Parties[0].Players[0].(*FakeAgent)
 
@@ -154,7 +154,7 @@ func TestDotSnapshotSpellPower(t *testing.T) {
 	expectDotTickDamage(t, sim, fa.Dot, 150) // (100) * 1.5
 
 	// Spell power shouldn't get applied because dot was already snapshot.
-	fa.GetCharacter().AddStatDynamic(sim, stats.SpellPower, 100)
+	fa.GetCharacter().AddStatDynamic(sim, stats.SpellDamage, 100)
 	expectDotTickDamage(t, sim, fa.Dot, 150) // (100) * 1.5
 
 	fa.Dot.Deactivate(sim)

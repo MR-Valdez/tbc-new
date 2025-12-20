@@ -716,9 +716,6 @@
             },
             "shadow_resistance": {
               "type": "string"
-            },
-            "rage": {
-              "type": "string"
             }
           },
           "additionalProperties": false,
@@ -787,8 +784,7 @@
             "frost_resistance",
             "fire_resistance",
             "nature_resistance",
-            "shadow_resistance",
-            "rage"
+            "shadow_resistance"
           ]
         },
         "mastery_spell_names": {
@@ -2525,6 +2521,26 @@
               "required": [
                 "title"
               ]
+            },
+            "imbue": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "mhImbue": {
+                  "type": "string"
+                },
+                "ohImbue": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "title",
+                "mhImbue",
+                "ohImbue"
+              ]
             }
           },
           "additionalProperties": false,
@@ -2534,7 +2550,8 @@
             "elixirs",
             "food",
             "engineering",
-            "pet"
+            "pet",
+            "imbue"
           ]
         },
         "encounter": {

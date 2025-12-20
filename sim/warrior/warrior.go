@@ -170,10 +170,9 @@ func (warrior *Warrior) OnEncounterStart(sim *core.Simulation) {
 
 func NewWarrior(character *core.Character, options *proto.WarriorOptions, talents string, inputs WarriorInputs) *Warrior {
 	warrior := &Warrior{
-		Character:         *character,
-		Talents:           &proto.WarriorTalents{},
-		WarriorInputs:     inputs,
-		ClassSpellScaling: core.GetClassSpellScalingCoefficient(proto.Class_ClassWarrior),
+		Character:     *character,
+		Talents:       &proto.WarriorTalents{},
+		WarriorInputs: inputs,
 	}
 	core.FillTalentsProto(warrior.Talents.ProtoReflect(), talents, TalentTreeSizes)
 
@@ -183,8 +182,8 @@ func NewWarrior(character *core.Character, options *proto.WarriorOptions, talent
 	})
 
 	warrior.EnableAutoAttacks(warrior, core.AutoAttackOptions{
-		MainHand:       warrior.WeaponFromMainHand(warrior.DefaultCritMultiplier()),
-		OffHand:        warrior.WeaponFromOffHand(warrior.DefaultCritMultiplier()),
+		MainHand:       warrior.WeaponFromMainHand(warrior.DefaultMeleeCritMultiplier()),
+		OffHand:        warrior.WeaponFromOffHand(warrior.DefaultMeleeCritMultiplier()),
 		AutoSwingMelee: true,
 	})
 

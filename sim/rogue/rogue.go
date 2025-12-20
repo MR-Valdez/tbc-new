@@ -193,16 +193,15 @@ func (rogue *Rogue) OnEncounterStart(sim *core.Simulation) {
 
 func (rogue *Rogue) CritMultiplier(applyLethality bool) float64 {
 	secondaryModifier := 0.0
-	return rogue.GetCharacter().CritMultiplier(1.0, secondaryModifier)
+	return rogue.GetCharacter().MeleeCritMultiplier(1.0, secondaryModifier)
 }
 
 func NewRogue(character *core.Character, options *proto.Player, talents string) *Rogue {
 	rogueOptions := options.GetRogue()
 	rogue := &Rogue{
-		Character:         *character,
-		Talents:           &proto.RogueTalents{},
-		Options:           rogueOptions.Options.ClassOptions,
-		ClassSpellScaling: core.GetClassSpellScalingCoefficient(proto.Class_ClassRogue),
+		Character: *character,
+		Talents:   &proto.RogueTalents{},
+		Options:   rogueOptions.Options.ClassOptions,
 	}
 
 	core.FillTalentsProto(rogue.Talents.ProtoReflect(), talents, TalentTreeSizes)
@@ -227,7 +226,6 @@ func NewRogue(character *core.Character, options *proto.Player, talents string) 
 	rogue.EnableAutoAttacks(rogue, core.AutoAttackOptions{
 		MainHand:       rogue.WeaponFromMainHand(0), // Set crit multiplier later when we have targets.
 		OffHand:        rogue.WeaponFromOffHand(0),  // Set crit multiplier later when we have targets.
-		Ranged:         rogue.WeaponFromRanged(0),
 		AutoSwingMelee: true,
 	})
 

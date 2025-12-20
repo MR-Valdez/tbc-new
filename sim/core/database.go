@@ -247,12 +247,7 @@ func (equipment *Equipment) OffHand() *Item {
 }
 
 func (equipment *Equipment) Ranged() *Item {
-	mh := equipment.MainHand()
-	if mh.RangedWeaponType == proto.RangedWeaponType_RangedWeaponTypeUnknown {
-		return nil
-	}
-
-	return mh
+	return &equipment[proto.ItemSlot_ItemSlotRanged]
 }
 
 func (equipment *Equipment) Head() *Item {
@@ -604,7 +599,7 @@ func ItemTypeToSlot(it proto.ItemType) proto.ItemSlot {
 	case proto.ItemType_ItemTypeWeapon:
 		return proto.ItemSlot_ItemSlotMainHand
 	case proto.ItemType_ItemTypeRanged:
-		return proto.ItemSlot_ItemSlotMainHand
+		return proto.ItemSlot_ItemSlotRanged
 	}
 
 	return 255

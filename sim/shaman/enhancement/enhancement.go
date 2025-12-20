@@ -43,8 +43,8 @@ func NewEnhancementShaman(character *core.Character, options *proto.Player) *Enh
 
 	// Enable Auto Attacks for this spec
 	enh.EnableAutoAttacks(enh, core.AutoAttackOptions{
-		MainHand:       enh.WeaponFromMainHand(enh.DefaultCritMultiplier()),
-		OffHand:        enh.WeaponFromOffHand(enh.DefaultCritMultiplier()),
+		MainHand:       enh.WeaponFromMainHand(enh.DefaultMeleeCritMultiplier()),
+		OffHand:        enh.WeaponFromOffHand(enh.DefaultMeleeCritMultiplier()),
 		AutoSwingMelee: true,
 	})
 
@@ -97,7 +97,7 @@ func (enh *EnhancementShaman) Initialize() {
 	}
 
 	//Mental Quickness
-	enh.GetSpellPowerValue = func(spell *core.Spell) float64 {
+	enh.GetSpellDamageValue = func(spell *core.Spell) float64 {
 		if spell.SpellID == 8024 {
 			// Flametongue weapon damage scales with AP for enh
 			return spell.MeleeAttackPower()

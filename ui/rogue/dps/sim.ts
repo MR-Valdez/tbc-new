@@ -23,9 +23,6 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecRogue, {
 	epStats: [
 		Stat.StatStamina,
 		Stat.StatAgility,
-		Stat.StatAllCritRating,
-		Stat.StatAllHasteRating,
-		Stat.StatAllHitRating,
 		Stat.StatMeleeCritRating,
 		Stat.StatMeleeHasteRating,
 		Stat.StatMeleeHitRating,
