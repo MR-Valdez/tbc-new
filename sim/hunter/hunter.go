@@ -56,7 +56,7 @@ func RegisterHunter() {
 		proto.Player_Hunter{},
 		proto.Spec_SpecHunter,
 		func(character *core.Character, options *proto.Player) core.Agent {
-			return NewHunter(character, options)
+			return NewHunter(character, options, options.GetHunter().Options.ClassOptions)
 		},
 		func(player *proto.Player, spec interface{}) {
 			playerSpec, ok := spec.(*proto.Player_Hunter)
@@ -68,7 +68,7 @@ func RegisterHunter() {
 	)
 }
 
-func NewHunter(character *core.Character, options *proto.Player) *Hunter {
+func NewHunter(character *core.Character, options *proto.Player, hunterOptions *proto.HunterOptions) *Hunter {
 	hunter := &Hunter{
 		Character: *character,
 		Talents:   &proto.HunterTalents{},
