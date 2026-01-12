@@ -8,7 +8,7 @@ import (
 )
 
 func (arcane *ArcaneMage) registerArcaneBlastSpell() {
-
+	//mage TBC comment
 	//https://wago.tools/db2/SpellEffect?build=5.5.0.60802&filter%5BSpellID%5D=30451
 	arcaneBlastVariance := 0.15000000596
 	arcaneBlastCoefficient := 0.77700001001
